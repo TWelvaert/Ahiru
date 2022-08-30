@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Category;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -23,9 +24,7 @@ class freelance_adsFactory extends Factory
             'category_id' => Category::factory(),
             'slug' => $this->faker->slug(),
             'title' => $this->faker->sentence(),
-            's' => $this->faker->slug(),
-            'body' => '<p>' . implode('</p><p>', $this->faker->paragraphs(6)) . '</p>',
-            
+            'discription' => '<p>' . implode('</p><p>', $this->faker->paragraphs(6)) . '</p>',
             
         ];
     }

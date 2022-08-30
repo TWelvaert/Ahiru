@@ -16,13 +16,12 @@ return new class extends Migration
         //
           Schema::create('freelance_ads', function (Blueprint $table) {
             $table->id();
-            $table->string('slug');
             $table->foreignId('user_id')->constrained()->cascadeOnDelete();
             $table->foreignId('category_id');
             $table->string('type');
             $table->string('title');
             $table->string('description');
-            $table->decimal('price', 9, 2);
+            $table->decimal('price', 9, 2)->nullable();
             $table->timestamps();
         });
     }
