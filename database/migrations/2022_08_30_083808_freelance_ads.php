@@ -14,13 +14,14 @@ return new class extends Migration
     public function up()
     {
         //
-          Schema::create('freelance_ads', function (Blueprint $table) {
+          Schema::create('freelance_advertisements', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained()->cascadeOnDelete();
             $table->foreignId('category_id');
-            $table->string('type');
+            $table->string('type')->nullable();
+            $table->string('slug')->unique();
             $table->string('title');
-            $table->string('description');
+            $table->text('description');
             $table->decimal('price', 9, 2)->nullable();
             $table->timestamps();
         });
