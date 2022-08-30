@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Advertisement extends Model
+class FreelanceAdvertisement extends Model
 {
     use HasFactory;
 
@@ -18,7 +18,7 @@ class Advertisement extends Model
     ];
     public function category()
     {
-        return $this->belongsTo(Category::class);
+        return $this->belongsTo(FreelanceCategory::class);
     }
     // checks if post belongs to wich author
     public function user()
