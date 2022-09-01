@@ -24,6 +24,13 @@ Route::get('/', function () {
     ]);
 });
 
+Route::get('/Landing', function () {
+    return Inertia::render('Landing');
+})->name('Landing');
+
+require __DIR__.'/auth.php';
+
+
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
