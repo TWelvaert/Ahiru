@@ -1,3 +1,10 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@font-face {
+    font-family: 'monument';
+    src: url('/resources/assets/fonts/MonumentExtended-Regular.otf');
+}
+
+
