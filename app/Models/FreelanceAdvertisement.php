@@ -12,9 +12,10 @@ class FreelanceAdvertisement extends Model
     protected $fillable = [
         'user_id',
         'category_id',
-        'title',
+        'type',
         'slug',
-        'discription'
+        'title',
+        'description'
     ];
     public function category()
     {
