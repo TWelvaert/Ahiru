@@ -7,4 +7,9 @@
     src: url('/resources/assets/fonts/MonumentExtended-Regular.otf');
 }
 
+html {
+    scroll-behavior: smooth;
+    background-color: black;
+  }
+
 

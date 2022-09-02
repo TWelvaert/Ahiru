@@ -1,11 +1,15 @@
 import './bootstrap';
 import '../css/app.css';
 
+import Vue from 'vue';
 import { createApp, h } from 'vue';
 import { createInertiaApp } from '@inertiajs/inertia-vue3';
 import { InertiaProgress } from '@inertiajs/progress';
 import { resolvePageComponent } from 'laravel-vite-plugin/inertia-helpers';
 import { ZiggyVue } from '../../vendor/tightenco/ziggy/dist/vue.m';
+import VueSmoothScroll from 'vue2-smooth-scroll'
+
+// Vue.use(VueSmoothScroll)
 
 const appName = window.document.getElementsByTagName('title')[0]?.innerText || 'Laravel';
 
