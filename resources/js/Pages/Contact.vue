@@ -6,7 +6,7 @@
 <template>
     <Layout>
         <div>
-            <h2>Landing</h2>
+            <h2>Contact</h2>
         </div>
     </Layout>
 </template>  
