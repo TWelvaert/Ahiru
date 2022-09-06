@@ -1,5 +1,5 @@
 <template>
-    <footer class=" fixed bottom-0 left-0 w-full text-center lg:text-left bg-black text-white">
+    <footer class=" bottom-0 left-0 w-full text-center lg:text-left bg-black text-white">
   <div class="flex justify-between items-center mx-10 p-1 sm:items-center">
     <div class="text-right p-6 hidden md:block">
     <span>© 2022 Copyright:</span>

@@ -1,6 +1,10 @@
+<script setup>
+    import Layout from '@/Layouts/Layout.vue';
+</script>
 <!-- TEMPLATE ================================================= -->
 
 <template>
+    <Layout>
     <!-- LANDING PAGE HEADER ================================================ -->
 
     <div class="bg-black min-h-screen z-0">
@@ -230,5 +234,5 @@
     </div>
 
 
-
+</Layout>
 </template>
