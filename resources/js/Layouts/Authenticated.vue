@@ -15,7 +15,7 @@ const showingNavigationDropdown = ref(false);
 
     <!-- Notification Flash Message -->
     <div v-if="$page.props.flash.message" class="absolute top-8 right-10 z-10">
-        <Notification :message="$page.props.flash.message" />
+        <Notification :message="$page.props.flash.message" :flashtype="$page.props.flash.flashtype" />
     </div>
 
     <div>
