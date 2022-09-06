@@ -5,12 +5,19 @@ import BreezeDropdown from '@/Components/Dropdown.vue';
 import BreezeDropdownLink from '@/Components/DropdownLink.vue';
 import BreezeNavLink from '@/Components/NavLink.vue';
 import BreezeResponsiveNavLink from '@/Components/ResponsiveNavLink.vue';
+import Notification from '@/Components/Notification.vue';
 import { Link } from '@inertiajs/inertia-vue3';
 
 const showingNavigationDropdown = ref(false);
 </script>
 
 <template>
+
+    <!-- Notification Flash Message -->
+    <div v-if="$page.props.flash.message" class="absolute top-8 right-10 z-10">
+        <Notification :message="$page.props.flash.message" :flashtype="$page.props.flash.flashtype" />
+    </div>
+
     <div>
         <div class="min-h-screen bg-gray-100">
             <nav class="bg-white border-b border-gray-100">
@@ -30,6 +37,9 @@ const showingNavigationDropdown = ref(false);
                                 <BreezeNavLink :href="route('dashboard')" :active="route().current('dashboard')">
                                     Dashboard
                                 </BreezeNavLink>
+                                <!-- <BreezeNavLink :href="route('landing')" :active="route().current('landing')">
+                                    Landing
+                                </BreezeNavLink> -->
                             </div>
                         </div>
 

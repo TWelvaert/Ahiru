@@ -1,5 +1,8 @@
 <script setup>
 import { Head, Link } from '@inertiajs/inertia-vue3';
+import Navbar from '@/Components/Navbar.vue';
+import Footer from '@/Components/Footer.vue';
+
 
 defineProps({
     canLogin: Boolean,

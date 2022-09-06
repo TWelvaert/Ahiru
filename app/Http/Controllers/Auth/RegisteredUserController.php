@@ -10,7 +10,10 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
+use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\Validator;
 use Inertia\Inertia;
+use Session;
 
 class RegisteredUserController extends Controller
 {
@@ -52,4 +55,72 @@ class RegisteredUserController extends Controller
 
         return redirect(RouteServiceProvider::HOME);
     }
+
+    public function edit() 
+    {
+        $user = Auth::user();
+        return Inertia::render('Settings/Account', [
+            'name' => $user->name,
+            'email' => $user->email,
+        ]);
+    } 
+       
+    public function update(Request $request) 
+    {
+        $user = Auth::user();
+
+        Validator::make($request->all(), [
+            'name' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'string', 'email', 'max:255', Rule::unique('users', 'email')->ignore($user)],
+        ])->validate();
+
+        $user->update([
+            'name' => $request->name,
+            'email' =>  $request->email,
+        ]);
+
+        Session::flash('message', 'Your personal info has been updated!');
+        Session::flash('flashtype', 'success');
+
+        return Inertia::render('Settings/Account', [
+            'name' => $user->name,
+            'email' => $user->email,
+        ]);
+    } 
+
+    public function update_password(Request $request) 
+    {
+        $user = Auth::user();
+
+        Validator::make($request->all(), [
+            'current_password' => ['required'],
+            'new_password' => ['required', 'confirmed', Rules\Password::defaults()],
+        ])->validate(); 
+
+        $hasher = app('hash');
+        if ($hasher->check($request->old_password, $user->password)) 
+        {
+            $user->update([
+                'password' => Hash::make($request->new_password),
+            ]);
+
+            Session::flash('message', 'Your password has been updated!');
+            Session::flash('flashtype', 'success');
+
+            return Inertia::render('Settings/Account', [
+                'name' => $user->name,
+                'email' => $user->email,
+            ]);
+        } 
+        else 
+        {
+            Session::flash('message', 'Invalid current password!');
+            Session::flash('flashtype', 'error');
+
+            return Inertia::render('Settings/Account', [
+                'name' => $user->name,
+                'email' => $user->email,
+            ]);
+        }
+    } 
 }
