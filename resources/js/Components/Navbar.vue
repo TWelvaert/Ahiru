@@ -72,10 +72,10 @@
           <li class="text-sm font-bold text-white p-1 rounded-lg px-5 py-1 text-center mr-3 md:mr-0hover:text-gray-400"><Link href="/Contact" >Contact Us</Link> 
           </li>
           
-          <li class="text-sm font-bold text-white p-1 rounded-lg px-5 py-1 text-center mr-3 md:mr-0hover:text-gray-400"><Link href="#">Register</Link> 
+          <li class="text-sm font-bold text-white p-1 rounded-lg px-5 py-1 text-center mr-3 md:mr-0hover:text-gray-400"><Link :href="route('register')">Register</Link> 
           </li>
           
-          <li class="text-sm font-bold text-black p-1 bg-white rounded-lg  px-5 py-1 text-center mr-3 md:mr-0 hover:text-gray-400 "><Link href="#">Log In</Link> 
+          <li class="text-sm font-bold text-black p-1 bg-white rounded-lg  px-5 py-1 text-center mr-3 md:mr-0 hover:text-gray-400 "><Link :href="route('login')">Log In</Link> 
           </li>
 
           
@@ -87,7 +87,7 @@
 <script>
 import { Link, Head } from '@inertiajs/inertia-vue3';
 export default {
-  components: { Link, Head },
+  components: { Link, Head, route },
 
   data() {
     return {

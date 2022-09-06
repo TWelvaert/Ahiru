@@ -26,9 +26,9 @@ use function PHPSTORM_META\type;
 //     ]);
 // });
 
-// Route::get('/dashboard', function () {
-//     return Inertia::render('Dashboard');
-// })->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('/dashboard', function () {
+    return Inertia::render('Dashboard');
+})->middleware(['auth', 'verified'])->name('dashboard');
 
 require __DIR__.'/auth.php';
 
@@ -37,7 +37,7 @@ Route::get('/', function () {
 });
 
 Route::get('/About', function () {
-    return Inertia::render('About');
+    return Inertia::render('About', );
 });
 
 Route::get('/Artists', function () {
