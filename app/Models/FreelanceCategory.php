@@ -10,7 +10,7 @@ class FreelanceCategory extends Model
     use HasFactory;
 
     public $timestamps = false;
-    protected $fillable = ['name'];
+    protected $fillable = ['name', 'id'];
 
     public function advertisement()
     {

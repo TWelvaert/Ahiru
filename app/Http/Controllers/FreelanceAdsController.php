@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\FreelanceAdvertisement;
+use App\Models\FreelanceCategory;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
 use Illuminate\Http\Request;
@@ -35,18 +36,30 @@ class FreelanceAdsController extends Controller
 
     public function create()
     {
-        return Inertia::render('FreelanceAdvertisement/Create');
+        $freelanceCategory = FreelanceCategory::all();
+
+        return Inertia::render('FreelanceAdvertisement/Create', [
+            'categories' => $freelanceCategory
+        ]);
     }
 
     public function store(Request $request)
     {
         $user = Auth::user();
+        
+
+        
+
+        dd($request);
 
         Validator::make($request->all(), [
             'slug' => ['required', 'string', 'max:255', 'unique:freelance_advertisements'],
             'title' => ['required', 'string', 'max:255'],
             'description' => ['required', 'string', 'max:255'],
+            'category_id' => ['required', Rule::exists('categories', 'id')]
         ])->validate();
+
+        
 
         $atributes = new FreelanceAdvertisement();
         $atributes->user_id = $user->id;
@@ -55,6 +68,7 @@ class FreelanceAdsController extends Controller
         $atributes->slug = $request->slug;
         $atributes->title = $request->title;
         $atributes->description = $request->description;
+        
 
         $atributes->save();
 
@@ -62,14 +76,44 @@ class FreelanceAdsController extends Controller
         return redirect('/dashboard');
     }
 
-    public function edit()
+    public function edit(FreelanceAdvertisement $freelanceAdvertisement)
     {
-        return Inertia::render('FreelanceAdvertisement/Update');
+        return Inertia::render('FreelanceAdvertisement/Update', [
+            'title' => $freelanceAdvertisement->title,
+            'slug' => $freelanceAdvertisement->slug,
+            'description' => $freelanceAdvertisement->description,
+        ]);
     }
+
+    public function update(Request $request, FreelanceAdvertisement $freelanceAdvertisement)
+    {
+
+        $user = Auth::user();
+
+        Validator::make($request->all(), [
+            'slug' => ['required', 'string', 'max:255', Rule::unique('freelance_advertisements', 'slug')->ignore($freelanceAdvertisement->id)],
+            'title' => ['required', 'string', 'max:255'],
+            'description' => ['required', 'string', 'max:255'],
+        ])->validate();
+
+
+        $freelanceAdvertisement->update([
+            "user_id" => $user->id,
+            "category_id" => 1,
+            "type" => "advertisement",
+            "slug" => $request->slug,
+            "title" => $request->title,
+            "description" => $request->description,
+        ]);
+
+        return redirect('/dashboard');
+
+    }
+
 
     public function destroy(FreelanceAdvertisement $freelanceAdvertisement)
     {
-         
+
         $freelanceAdvertisement->delete();
         return redirect('/dashboard');
     }

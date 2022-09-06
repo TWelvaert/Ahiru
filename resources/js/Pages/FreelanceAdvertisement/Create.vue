@@ -4,6 +4,7 @@ import BreezeButton from "@/Components/Button.vue";
 import BreezeInput from "@/Components/Input.vue";
 import BreezeInputError from "@/Components/InputError.vue";
 import BreezeLabel from "@/Components/Label.vue";
+import BreezeCheckbox from "@/Components/Checkbox.vue";
 import TextareaVue from "@/Components/textarea.vue";
 
 import { Head, useForm } from "@inertiajs/inertia-vue3";
@@ -12,15 +13,18 @@ let data = defineProps({
     title: String,
     slug: String,
     description: String,
+    categories: String,
 });
+
 const form = useForm({
     title: data["title"],
     slug: data["slug"],
     description: data["description"],
+    categories: data["categories"],
 });
+console.log(form["categories"]);
 
 const submit = () => {
-
     form.post(route("advertisement/create"));
 };
 </script>
@@ -103,6 +107,20 @@ const submit = () => {
                             :message="form.errors.description"
                         />
                     </div>
+                    
+                        <div v-for="category in categories" class="inline mx-2">
+                            <BreezeCheckbox
+                                :id="category.name"
+                                v-model="form.category"
+                            />
+                            <BreezeLabel
+                                :for="category.name"
+                                :value="category.name"
+                                class="inline-block mb-2 ml-2 uppercase font-bold text-xs text-gray-700"
+                            />
+                        </div>
+                    
+
                     <div class="flex items-center justify-end mt-4">
                         <BreezeButton
                             name="form"

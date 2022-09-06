@@ -64,14 +64,16 @@ let data = defineProps({
                                     Published
                                 </span>
                             </td>
-                            <td
-                                class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium"
-                            >
+                            <td class="text-blue-500 hover:text-blue-600">
                                 <a
-                                    href="/advertisement/update"
-                                    class="text-blue-500 hover:text-blue-600"
-                                    >Update</a
+                                    v-bind:href="
+                                        '/advertisement/' +
+                                         advertisement.slug +
+                                        '/edit'
+                                    "
                                 >
+                                    Update
+                                </a>
                             </td>
                             <td
                                 class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium"
@@ -92,7 +94,6 @@ let data = defineProps({
                                     >
                                         Delete
                                     </a>
-                                    
                                 </button>
                                 <!-- </form> -->
                             </td>
