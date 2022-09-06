@@ -7,6 +7,8 @@ use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
+use function PHPSTORM_META\type;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -18,14 +20,14 @@ use Inertia\Inertia;
 |
 */
 
-Route::get('/', function () {
-    return Inertia::render('Welcome', [
-        'canLogin' => Route::has('login'),
-        'canRegister' => Route::has('register'),
-        'laravelVersion' => Application::VERSION,
-        'phpVersion' => PHP_VERSION,
-    ]);
-});
+// Route::get('/', function () {
+//     return Inertia::render('Welcome', [
+//         'canLogin' => Route::has('login'),
+//         'canRegister' => Route::has('register'),
+//         'laravelVersion' => Application::VERSION,
+//         'phpVersion' => PHP_VERSION,
+//     ]);
+// });
 
 // Route::get('/dashboard', function () {
 //     return Inertia::render('Dashboard');
@@ -50,3 +52,19 @@ Route::get('settings/account', [\App\Http\Controllers\Auth\RegisteredUserControl
 Route::post('settings/account', [\App\Http\Controllers\Auth\RegisteredUserController::class, 'update'])->name('settings/account'); 
 
 require __DIR__.'/auth.php';
+
+Route::get('/', function () {
+    return Inertia::render('Landing');
+});
+
+Route::get('/About', function () {
+    return Inertia::render('About', );
+});
+
+Route::get('/Artists', function () {
+    return Inertia::render('Artists');
+});
+
+Route::get('/Contact', function () {
+    return Inertia::render('Contact');
+});
