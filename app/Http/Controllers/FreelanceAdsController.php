@@ -53,8 +53,18 @@ class FreelanceAdsController extends Controller
     {
         $user = Auth::user();
         
-        dd($request->all());
 
+        $categories_checked = [];
+        $categories = $request->categories;
+
+        foreach ($categories as $category) {
+            if($category['checked'] === true) {
+                array_push($categories_checked, $category);
+            }  
+        }
+
+        $categories = $categories_checked;
+  
         Validator::make($request->all(), [
             'slug' => ['required', 'string', 'max:255', 'unique:freelance_advertisements'],
             'title' => ['required', 'string', 'max:255'],
