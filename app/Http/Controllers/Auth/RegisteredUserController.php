@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
+use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Validator;
 use Inertia\Inertia;
 use Session;
@@ -70,7 +71,7 @@ class RegisteredUserController extends Controller
 
         Validator::make($request->all(), [
             'name' => ['required', 'string', 'max:255'],
-           // 'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'email' => ['required', 'string', 'email', 'max:255', Rule::unique('users', 'email')->ignore($user)],
         ])->validate();
 
         $user->update([
@@ -79,7 +80,7 @@ class RegisteredUserController extends Controller
         ]);
 
         Session::flash('message', 'Your personal info has been updated!');
-        Session::flash('type', 'success');
+        Session::flash('flashtype', 'success');
 
         return Inertia::render('Settings/Account', [
             'name' => $user->name,
@@ -104,7 +105,7 @@ class RegisteredUserController extends Controller
             ]);
 
             Session::flash('message', 'Your password has been updated!');
-            Session::flash('alert-class', 'alert-success');
+            Session::flash('flashtype', 'success');
 
             return Inertia::render('Settings/Account', [
                 'name' => $user->name,
@@ -114,7 +115,7 @@ class RegisteredUserController extends Controller
         else 
         {
             Session::flash('message', 'Invalid current password!');
-            Session::flash('alert-class', 'alert-error');
+            Session::flash('flashtype', 'error');
 
             return Inertia::render('Settings/Account', [
                 'name' => $user->name,
