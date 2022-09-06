@@ -13,7 +13,7 @@ let data = defineProps({
     title: String,
     slug: String,
     description: String,
-    categories: String,
+    categories: Array,
 });
 
 const form = useForm({
@@ -22,7 +22,6 @@ const form = useForm({
     description: data["description"],
     categories: data["categories"],
 });
-console.log(form["categories"]);
 
 const submit = () => {
     form.post(route("advertisement/create"));
@@ -109,10 +108,7 @@ const submit = () => {
                     </div>
                     
                         <div v-for="category in categories" class="inline mx-2">
-                            <BreezeCheckbox
-                                :id="category.name"
-                                v-model="form.category"
-                            />
+                            <BreezeCheckbox :name="category.name" :id="category.id" v-model:checked="category.checked" />
                             <BreezeLabel
                                 :for="category.name"
                                 :value="category.name"
@@ -120,7 +116,6 @@ const submit = () => {
                             />
                         </div>
                     
-
                     <div class="flex items-center justify-end mt-4">
                         <BreezeButton
                             name="form"

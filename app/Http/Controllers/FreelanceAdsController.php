@@ -36,10 +36,16 @@ class FreelanceAdsController extends Controller
 
     public function create()
     {
-        $freelanceCategory = FreelanceCategory::all();
+        $freelanceCategories = FreelanceCategory::all();
+        $categories = [];
+
+        foreach ($freelanceCategories as $category) {
+            $categoryObject = ['id' =>$category->id, 'name' =>$category->name, 'slug' =>$category->slug, 'checked' => false];
+            array_push($categories, $categoryObject);
+        }
 
         return Inertia::render('FreelanceAdvertisement/Create', [
-            'categories' => $freelanceCategory
+            'categories' => $categories
         ]);
     }
 
@@ -47,10 +53,7 @@ class FreelanceAdsController extends Controller
     {
         $user = Auth::user();
         
-
-        
-
-        dd($request);
+        dd($request->all());
 
         Validator::make($request->all(), [
             'slug' => ['required', 'string', 'max:255', 'unique:freelance_advertisements'],
@@ -59,8 +62,6 @@ class FreelanceAdsController extends Controller
             'category_id' => ['required', Rule::exists('categories', 'id')]
         ])->validate();
 
-        
-
         $atributes = new FreelanceAdvertisement();
         $atributes->user_id = $user->id;
         $atributes->category_id = 1;
@@ -68,10 +69,8 @@ class FreelanceAdsController extends Controller
         $atributes->slug = $request->slug;
         $atributes->title = $request->title;
         $atributes->description = $request->description;
-        
 
         $atributes->save();
-
 
         return redirect('/dashboard');
     }
