@@ -81,7 +81,7 @@ class FreelanceAdsController extends Controller
             'description' => $request->description,
         ]);
 
-        Session::flash('message', 'Your personal info has been updated!');
+        Session::flash('message', 'Your Advertisement is successfully made!');
         Session::flash('flashtype', 'success');
 
         return redirect('/dashboard');
@@ -126,6 +126,16 @@ class FreelanceAdsController extends Controller
     {
 
         $user = Auth::user();
+        $categories_checked = [];
+        $categories = $request->categories;
+
+        foreach ($categories as $category) {
+            if($category['checked'] === true) {
+                array_push($categories_checked, $category['id']);
+            }  
+        }
+  
+        $categories = implode(",", $categories_checked);
 
         Validator::make($request->all(), [
             'slug' => ['required', 'string', 'max:255', Rule::unique('freelance_advertisements', 'slug')->ignore($freelanceAdvertisement->id)],
@@ -136,12 +146,15 @@ class FreelanceAdsController extends Controller
 
         $freelanceAdvertisement->update([
             "user_id" => $user->id,
-            "category_id" => 1,
+            "category_id" => $categories,
             "type" => "advertisement",
             "slug" => $request->slug,
             "title" => $request->title,
             "description" => $request->description,
         ]);
+
+        Session::flash('message', 'Your Advertisement was Updated successfully!');
+        Session::flash('flashtype', 'success');
 
         return redirect('/dashboard');
 
