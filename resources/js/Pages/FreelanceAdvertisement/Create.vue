@@ -110,7 +110,7 @@ const submit = () => {
                         <div v-for="category in categories" class="inline mx-2">
                             <BreezeCheckbox :name="category.name" :id="category.id" v-model:checked="category.checked" />
                             <BreezeLabel
-                                :for="category.name"
+                                :for="category.id"
                                 :value="category.name"
                                 class="inline-block mb-2 ml-2 uppercase font-bold text-xs text-gray-700"
                             />

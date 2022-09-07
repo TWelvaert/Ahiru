@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use Illuminate\Routing\Route;
 use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
+use Session;
 
 class FreelanceAdsController extends Controller
 {
@@ -59,22 +60,25 @@ class FreelanceAdsController extends Controller
 
         foreach ($categories as $category) {
             if($category['checked'] === true) {
-                array_push($categories_checked, $category);
+                array_push($categories_checked, $category['id']);
             }  
         }
 
-        $categories = $categories_checked;
   
+        $categories = implode(",", $categories_checked);
+        
+        
         Validator::make($request->all(), [
-            'slug' => ['required', 'string', 'max:255', 'unique:freelance_advertisements'],
-            'title' => ['required', 'string', 'max:255'],
-            'description' => ['required', 'string', 'max:255'],
-            'category_id' => ['required', Rule::exists('categories', 'id')]
+            'slug' => ['required', 'string', 'unique:freelance_advertisements'],
+            'title' => ['required', 'string'],
+            'description' => ['required', 'string'],
         ])->validate();
+
+        // dd($categories);
 
         $atributes = new FreelanceAdvertisement();
         $atributes->user_id = $user->id;
-        $atributes->category_id = 1;
+        $atributes->category_id = $categories;
         $atributes->type = "advertisement";
         $atributes->slug = $request->slug;
         $atributes->title = $request->title;
@@ -82,15 +86,28 @@ class FreelanceAdsController extends Controller
 
         $atributes->save();
 
+        Session::flash('message', 'Your personal info has been updated!');
+        Session::flash('flashtype', 'success');
+
         return redirect('/dashboard');
     }
 
     public function edit(FreelanceAdvertisement $freelanceAdvertisement)
     {
+        $freelanceCategories = FreelanceCategory::all();
+        $categories = [];
+
+        foreach ($freelanceCategories as $category) {
+            $categoryObject = ['id' =>$category->id, 'name' =>$category->name, 'slug' =>$category->slug, 'checked' => false];
+            array_push($categories, $categoryObject);
+        }
+
         return Inertia::render('FreelanceAdvertisement/Update', [
             'title' => $freelanceAdvertisement->title,
             'slug' => $freelanceAdvertisement->slug,
             'description' => $freelanceAdvertisement->description,
+            'category_id' => $freelanceAdvertisement->category_id,
+            'categories' => $categories
         ]);
     }
 
