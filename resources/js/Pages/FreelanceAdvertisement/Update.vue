@@ -3,6 +3,7 @@ import BreezeAuthenticatedLayout from "@/Layouts/Authenticated.vue";
 import BreezeButton from "@/Components/Button.vue";
 import BreezeInput from "@/Components/Input.vue";
 import BreezeInputError from "@/Components/InputError.vue";
+import BreezeCheckbox from "@/Components/Checkbox.vue";
 import BreezeLabel from "@/Components/Label.vue";
 import TextareaVue from "@/Components/textarea.vue";
 
@@ -12,17 +13,15 @@ let data = defineProps({
     title: String,
     slug: String,
     description: String,
-    category_id: String,
+    categories: Array,
 });
-
 
 const form = useForm({
     title: data["title"],
     slug: data["slug"],
     description: data["description"],
-    category_id: data["category_id"],
+    categories: data["categories"],
 });
-
 
 const submit = () => {
     form.post(`/advertisement/update/${data["slug"]}`);
@@ -43,7 +42,7 @@ const submit = () => {
                     class="block my-4 uppercase font-bold text-xs text-gray-700"
                 >
                     Update Advertisement for
-                    
+                    {{ category_id }}
                 </h2>
                 <hr />
                 <form @submit.prevent="submit">
@@ -106,6 +105,18 @@ const submit = () => {
                         <BreezeInputError
                             class="mt-2"
                             :message="form.errors.description"
+                        />
+                    </div>
+                    <div v-for="category in categories" class="inline mx-2">
+                        <BreezeCheckbox
+                            :name="category.name"
+                            :id="category.id"
+                            v-model:checked="category.checked"
+                        />
+                        <BreezeLabel
+                            :for="category.id"
+                            :value="category.name"
+                            class="inline-block mb-2 ml-2 uppercase font-bold text-xs text-gray-700"
                         />
                     </div>
                     <div class="flex items-center justify-end mt-4">
