@@ -15,7 +15,9 @@ class FreelanceAdvertisement extends Model
         'type',
         'slug',
         'title',
-        'description'
+        'description',
+        'images',
+        
     ];
     public function category()
     {

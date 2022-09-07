@@ -68,9 +68,9 @@ class FreelanceAdsController extends Controller
             'slug' => ['required', 'string', 'unique:freelance_advertisements'],
             'title' => ['required', 'string'],
             'description' => ['required', 'string'],
+            
         ])->validate();
 
-        // dd($categories);
 
         $freelanceAdvertisement = FreelanceAdvertisement::create([
             'user_id' => $user->id,
@@ -79,6 +79,7 @@ class FreelanceAdsController extends Controller
             'slug' => $request->slug,
             'title' => $request->title,
             'description' => $request->description,
+            'images' => $request->images 
         ]);
 
         Session::flash('message', 'Your Advertisement is successfully made!');
