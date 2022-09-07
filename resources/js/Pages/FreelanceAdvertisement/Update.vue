@@ -13,7 +13,6 @@ let data = defineProps({
     title: String,
     slug: String,
     description: String,
-    category_id: String,
     categories: Array,
 });
 
@@ -21,7 +20,6 @@ const form = useForm({
     title: data["title"],
     slug: data["slug"],
     description: data["description"],
-    category_id: data["category_id"],
     categories: data["categories"],
 });
 
@@ -109,7 +107,6 @@ const submit = () => {
                             :message="form.errors.description"
                         />
                     </div>
-                    {{ form.category_id }}
                     <div v-for="category in categories" class="inline mx-2">
                         <BreezeCheckbox
                             :name="category.name"

@@ -53,8 +53,6 @@ class FreelanceAdsController extends Controller
     public function store(Request $request)
     {
         $user = Auth::user();
-        
-
         $categories_checked = [];
         $categories = $request->categories;
 
@@ -63,10 +61,8 @@ class FreelanceAdsController extends Controller
                 array_push($categories_checked, $category['id']);
             }  
         }
-
   
         $categories = implode(",", $categories_checked);
-        
         
         Validator::make($request->all(), [
             'slug' => ['required', 'string', 'unique:freelance_advertisements'],
@@ -76,15 +72,14 @@ class FreelanceAdsController extends Controller
 
         // dd($categories);
 
-        $atributes = new FreelanceAdvertisement();
-        $atributes->user_id = $user->id;
-        $atributes->category_id = $categories;
-        $atributes->type = "advertisement";
-        $atributes->slug = $request->slug;
-        $atributes->title = $request->title;
-        $atributes->description = $request->description;
-
-        $atributes->save();
+        $freelanceAdvertisement = FreelanceAdvertisement::create([
+            'user_id' => $user->id,
+            'category_id' => $categories,
+            'type' => 'advertisement',
+            'slug' => $request->slug,
+            'title' => $request->title,
+            'description' => $request->description,
+        ]);
 
         Session::flash('message', 'Your personal info has been updated!');
         Session::flash('flashtype', 'success');
@@ -95,18 +90,34 @@ class FreelanceAdsController extends Controller
     public function edit(FreelanceAdvertisement $freelanceAdvertisement)
     {
         $freelanceCategories = FreelanceCategory::all();
-        $categories = [];
+        $all_categories = [];
 
         foreach ($freelanceCategories as $category) {
             $categoryObject = ['id' =>$category->id, 'name' =>$category->name, 'slug' =>$category->slug, 'checked' => false];
-            array_push($categories, $categoryObject);
+            array_push($all_categories, $categoryObject);
+        }
+
+        $current_categories = explode(",", $freelanceAdvertisement->category_id);
+        $categories = [];
+
+        foreach ($all_categories as $all_category) 
+        {
+            foreach ($current_categories as $current_category) 
+            {
+                if($all_category['id'] == $current_category) 
+                {
+                    $categoryObject2 = array('id' => $all_category['id'], 'name' => $all_category['name'], 'slug' => $all_category['slug'], 'checked' => true);
+                    array_push($categories, $categoryObject2);
+                }    
+            }
+            $categoryObject2 = ['id' => $all_category['id'], 'name' => $all_category['name'], 'slug' => $all_category['slug'], 'checked' => false];
+            array_push($categories, $categoryObject2);
         }
 
         return Inertia::render('FreelanceAdvertisement/Update', [
             'title' => $freelanceAdvertisement->title,
             'slug' => $freelanceAdvertisement->slug,
             'description' => $freelanceAdvertisement->description,
-            'category_id' => $freelanceAdvertisement->category_id,
             'categories' => $categories
         ]);
     }
