@@ -15,3 +15,4 @@ class UploadController extends Controller
     {
         // coding ….
     }
+}
