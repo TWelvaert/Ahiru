@@ -53,8 +53,24 @@ class FreelanceAdsController extends Controller
 
     public function store(Request $request)
     {
-        dd($request->all());
         $user = Auth::user();
+
+        if ($request->uploads){
+            foreach($request->uploads as $file)
+            {
+                $fileName = time().rand(1,99).'.'.$file->extension();  
+                $file->move(public_path('uploads'), $fileName);
+
+                Upload::create([
+                    'user_id' => $user->id,
+                    'name' => $fileName,
+                    'path' => "uploads",
+                    'type' => "image",
+                ]);
+
+            }
+        }
+        
         $categories_checked = [];
         $categories = $request->categories;
 
@@ -74,16 +90,15 @@ class FreelanceAdsController extends Controller
         ])->validate();
         
 
-
-        $freelanceAdvertisement = FreelanceAdvertisement::create([
-            'user_id' => $user->id,
-            'category_id' => $categories,
-            'type' => 'advertisement',
-            'slug' => $request->slug,
-            'title' => $request->title,
-            'description' => $request->description,
-            'uploads' => $request->uploads
-        ]);
+        // $freelanceAdvertisement = FreelanceAdvertisement::create([
+        //     'user_id' => $user->id,
+        //     'category_id' => $categories,
+        //     'type' => 'advertisement',
+        //     'slug' => $request->slug,
+        //     'title' => $request->title,
+        //     'description' => $request->description,
+        //     'uploads' => $request->uploads
+        // ]);
 
         Session::flash('message', 'Your Advertisement is successfully made!');
         Session::flash('flashtype', 'success');

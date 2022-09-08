@@ -16,7 +16,7 @@ return new class extends Migration
     {
         Schema::create('uploads', function (Blueprint $table) {
             $table->id();
-            $table->foreignId(FreelanceAdvertisement::class);
+            $table->foreignId('user_id')->constrained();
             $table->string('name');
             $table->string('path');
             $table->string('type');
