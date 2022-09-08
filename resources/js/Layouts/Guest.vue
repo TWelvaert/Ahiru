@@ -1,5 +1,5 @@
 <script setup>
-    import BreezeApplicationLogo from '@/Components/ApplicationLogo.vue';
+    // import BreezeApplicationLogo from '@/Components/ApplicationLogo.vue';
     import { Link } from '@inertiajs/inertia-vue3';
     </script>
 
@@ -8,7 +8,7 @@
         <div class="min-h-screen flex flex-col sm:justify-center items-center pt-6 sm:pt-0 bg-black">
             <div>
                 <Link href="/">
-                    <BreezeApplicationLogo class="w-20 h-20 fill-current text-white" />
+                    <!-- <BreezeApplicationLogo class="w-20 h-20 fill-current text-white" /> -->
                 </Link>
             </div>
 

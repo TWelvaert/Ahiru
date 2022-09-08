@@ -80,12 +80,12 @@
             md:mt-0 m-7">
                     <li
                         class="bg-green-300 hover:bg-white text-black py-3 px-8 rounded-full font-light tracking-widest  transition ease-in-out delay-50 hover:-translate-y-0.5 hover:scale-60 duration-50 antialiased text-center">
-                        <Link :href="route('register')">Register</Link>
+                        <Link :href="route('register')">REGISTER</Link>
                     </li>
 
                     <li
                         class="hover:bg-white text-white hover:text-black border-2 border-solid border-white py-3 px-8 rounded-full font-light tracking-widest transition ease-in-out delay-50 hover:-translate-y-0.5 hover:scale-60 duration-50 text-center antialiased">
-                        <Link :href="route('login')">Log In</Link>
+                        <Link :href="route('login')">LOG IN</Link>
                     </li>
                 </div>
 
