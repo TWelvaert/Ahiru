@@ -14,7 +14,7 @@ let data = defineProps({
     slug: String,
     description: String,
     categories: Array,
-    images: String
+    uploads: String
 });
 
 const form = useForm({
@@ -22,7 +22,7 @@ const form = useForm({
     slug: data["slug"],
     description: data["description"],
     categories: data["categories"],
-    images: data["images"]
+    uploads: data["uploads"]
 });
 
 const submit = () => {
@@ -118,14 +118,16 @@ const submit = () => {
                             id="images"
                             type="file"
                             class="border border-blue-300 p-2 w-full rounded mb-2"
-                            v-model="form.images"
+                            v-model="form.uploads"
                             required
                             autofocus
                             autocomplete="images"
+                            name="photos[]"
+                            multiple
                         />
                         <BreezeInputError
                             class="mt-2"
-                            :message="form.errors.images"
+                            :message="form.errors.uploads"
                         />
                     </div>
 

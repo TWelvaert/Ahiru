@@ -70,6 +70,7 @@ class FreelanceAdsController extends Controller
             'description' => ['required', 'string'],
             
         ])->validate();
+        dd($request->uploads);
 
 
         $freelanceAdvertisement = FreelanceAdvertisement::create([
@@ -79,7 +80,7 @@ class FreelanceAdsController extends Controller
             'slug' => $request->slug,
             'title' => $request->title,
             'description' => $request->description,
-            'images' => $request->images 
+            'uploads' => $request->uploads 
         ]);
 
         Session::flash('message', 'Your Advertisement is successfully made!');
