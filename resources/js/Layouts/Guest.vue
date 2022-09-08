@@ -8,7 +8,7 @@ import { Link } from '@inertiajs/inertia-vue3';
     <div class="min-h-screen flex flex-col sm:justify-center items-center pt-6 sm:pt-0 bg-black">
         <div>
             <Link href="/">
-                <img src="../../assets/images/54520cca8c5613dd95fef5fd6a608def.gif"  class="w-40 h-50" />
+                <BreezeApplicationLogo class="w-20 h-20 fill-current text-white" />
             </Link>
         </div>
 
