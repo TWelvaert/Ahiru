@@ -122,7 +122,6 @@ const submit = () => {
                             class="border border-blue-300 p-2 w-full rounded mb-2"
                             required
                             autofocus
-                            name="uploads[]"
                         />
                         <BreezeInputError
                             class="mt-2"
