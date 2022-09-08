@@ -53,7 +53,7 @@ class FreelanceAdsController extends Controller
 
     public function store(Request $request)
     {
-        dd($request->all());
+        
         $user = Auth::user();
         $categories_checked = [];
         $categories = $request->categories;
