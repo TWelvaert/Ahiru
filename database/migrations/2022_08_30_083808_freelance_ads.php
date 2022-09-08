@@ -17,7 +17,7 @@ return new class extends Migration
           Schema::create('freelance_advertisements', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained()->cascadeOnDelete();
-            $table->foreignId('category_id');
+            $table->string('category_id');
             $table->string('type')->nullable();
             $table->string('slug')->unique();
             $table->string('title');

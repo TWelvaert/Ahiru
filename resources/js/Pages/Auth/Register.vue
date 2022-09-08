@@ -22,9 +22,9 @@ const submit = () => {
 </script>
 
 <template>
+
     <BreezeGuestLayout>
         <Head title="Register" />
-
         <form @submit.prevent="submit">
             <div>
                 <BreezeLabel for="name" value="Name" />
@@ -50,15 +50,24 @@ const submit = () => {
                 <BreezeInputError class="mt-2" :message="form.errors.password_confirmation" />
             </div>
 
+            <div class="text-xs text-center mt-4">
+                When registering, you agree that we may use your provided data for the registration and to send you notifications on our products and services. You can unsubscribe from notifications at any time in your settings. For additional info please refer to our Privacy Policy.
+            </div>
+
+
+
             <div class="flex items-center justify-end mt-4">
-                <Link :href="route('login')" class="underline text-sm text-green-600 hover:text-gray-900">
+                <Link :href="route('login')" class="underline text-sm text-black hover:text-green-300">
                     Already registered?
                 </Link>
 
-                <BreezeButton class="ml-4" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
+                <BreezeButton class="ml-4 first-line:" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
                     Register
                 </BreezeButton>
             </div>
+
         </form>
+
     </BreezeGuestLayout>
+
 </template>
