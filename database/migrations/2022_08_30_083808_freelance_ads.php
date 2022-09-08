@@ -13,7 +13,6 @@ return new class extends Migration
      */
     public function up()
     {
-        //
           Schema::create('freelance_advertisements', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained()->cascadeOnDelete();
@@ -21,8 +20,8 @@ return new class extends Migration
             $table->string('type')->nullable();
             $table->string('slug')->unique();
             $table->string('title');
+            $table->string('uploads')->nullable();
             $table->text('description');
-            $table->string('images')->nullable();
             $table->decimal('price', 9, 2)->nullable();
             $table->timestamps();
         });
