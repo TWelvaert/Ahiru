@@ -1,10 +1,30 @@
 <script setup>
 import BreezeAuthenticatedLayout from "@/Layouts/Authenticated.vue";
 import { Head } from "@inertiajs/inertia-vue3";
+// import { Welcome } from "@/Layouts/Welcome.js";
 
 let data = defineProps({
     advertisements: String,
 });
+
+
+var i = 0;
+var txt = 'Lorem ipsum typing effect!'; /* The text */
+var speed = 50; /* The speed/duration of the effect in milliseconds */
+
+mounted()
+function typeWriter() {
+  if (i < txt.length) {
+    if (document.getElementById("welcome")){
+        document.getElementById("welcome").innerHTML += txt.charAt(i);
+    i++;
+    setTimeout(typeWriter, speed);
+     }
+    }
+
+}
+typeWriter()
+
 </script>
 
 <template>
@@ -16,6 +36,7 @@ let data = defineProps({
             <span class="flex items-center justify-center">
             Hey {{ $page.props.auth.user.name }} how is your day?
             </span>
+            <p id="welcome">hello</p>
 
         </div>
         <span class="flex items-center justify-center">
