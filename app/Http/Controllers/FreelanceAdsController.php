@@ -5,12 +5,15 @@ namespace App\Http\Controllers;
 use App\Models\FreelanceAdvertisement;
 use App\Models\FreelanceCategory;
 use App\Models\Upload;
+
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Route;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 use Inertia\Inertia;
+use File;
 use Session;
 
 class FreelanceAdsController extends Controller
@@ -250,6 +253,23 @@ class FreelanceAdsController extends Controller
 
     public function destroy(FreelanceAdvertisement $freelanceAdvertisement)
     {
+         
+        
+        $freelanceUploads = explode(',', $freelanceAdvertisement->uploads);
+        
+        // dd($uploads[0]->name);
+
+        foreach ($freelanceUploads as $upload) {
+            if($result = Upload::where('id','=',$upload)->get()){
+                //  dd($result[0]->path);
+                $todelete = "${$result[0]['path']}/${$result[0]['name']}";
+                dd($todelete);
+
+                 Storage::disk('public')->delete();
+            };
+            
+        } 
+        
         $freelanceAdvertisement->delete();
         return redirect('/dashboard');
     }
