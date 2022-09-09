@@ -20,7 +20,7 @@ const showingNavigationDropdown = ref(false);
 
     <div>
         <div class="min-h-screen bg-black">
-            <nav class="bg-white border-b border-gray-100">
+            <nav class="bg-black border-b border-gray-100">
                 <!-- Primary Navigation Menu -->
                 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div class="flex justify-between h-16">
@@ -33,10 +33,17 @@ const showingNavigationDropdown = ref(false);
                             </div>
 
                             <!-- Navigation Links -->
-                            <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                            <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex ">
                                 <BreezeNavLink :href="route('dashboard')" :active="route().current('dashboard')">
                                     Home
                                 </BreezeNavLink>
+                                <BreezeNavLink :href="route('dashboard')" :active="route().current('dashboard')">
+                                    Stream
+                                </BreezeNavLink>
+                                <BreezeNavLink :href="route('dashboard')" :active="route().current('dashboard')">
+                                    Library
+                                </BreezeNavLink>
+
                                 <!-- <BreezeNavLink :href="route('landing')" :active="route().current('landing')">
                                     Landing
                                 </BreezeNavLink> -->
