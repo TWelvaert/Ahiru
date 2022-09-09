@@ -14,6 +14,7 @@ let data = defineProps({
     slug: String,
     description: String,
     categories: Array,
+    uploads: [],
 });
 
 const form = useForm({
@@ -21,6 +22,7 @@ const form = useForm({
     slug: data["slug"],
     description: data["description"],
     categories: data["categories"],
+    uploads: data["uploads"],
 });
 
 const submit = () => {
@@ -44,7 +46,7 @@ const submit = () => {
                     Create Advertisement
                 </h2>
                 <hr />
-                <form @submit.prevent="submit">
+                <form @submit.prevent="submit" enctype="multipart/form-data">
                     <div>
                         <BreezeLabel
                             for="title"
@@ -106,16 +108,40 @@ const submit = () => {
                             :message="form.errors.description"
                         />
                     </div>
-                    
-                        <div v-for="category in categories" class="inline mx-2">
-                            <BreezeCheckbox :name="category.name" :id="category.id" v-model:checked="category.checked" />
-                            <BreezeLabel
-                                :for="category.id"
-                                :value="category.name"
-                                class="inline-block mb-2 ml-2 uppercase font-bold text-xs text-gray-700"
-                            />
-                        </div>
-                    
+                    <div>
+                        <BreezeLabel
+                            for="images"
+                            value="upload files"
+                            class="block mb-2 uppercase font-bold text-xs text-gray-700 w-full"
+                        />
+                        <BreezeInput
+                            id="images"
+                            multiple
+                            type="file"
+                            @input="form.uploads = $event.target.files"
+                            class="border border-blue-300 p-2 w-full rounded mb-2"
+                            required
+                            autofocus
+                        />
+                        <BreezeInputError
+                            class="mt-2"
+                            :message="form.errors.uploads"
+                        />
+                    </div>
+
+                    <div v-for="category in categories" class="inline mx-2">
+                        <BreezeCheckbox
+                            :name="category.name"
+                            :id="category.id"
+                            v-model:checked="category.checked"
+                        />
+                        <BreezeLabel
+                            :for="category.id"
+                            :value="category.name"
+                            class="inline-block mb-2 ml-2 uppercase font-bold text-xs text-gray-700"
+                        />
+                    </div>
+
                     <div class="flex items-center justify-end mt-4">
                         <BreezeButton
                             name="form"

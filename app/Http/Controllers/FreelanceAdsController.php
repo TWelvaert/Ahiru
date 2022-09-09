@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\FreelanceAdvertisement;
 use App\Models\FreelanceCategory;
+use App\Models\Upload;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
 use Illuminate\Http\Request;
@@ -26,12 +27,20 @@ class FreelanceAdsController extends Controller
 
     public function show(FreelanceAdvertisement $freelanceAdvertisement)
     {
-        // TODO cash later
-        // Cache::rememberForever('users', function () {
-        // return DB::table('users')->get();
-        // }); 
+        
+        $uploads_matched = [];
+        $uploads = $freelanceAdvertisement->uploads;
+        $uploads = explode(",", $uploads);
+
+        foreach ($uploads as $upload) {
+            $result = Upload::where('id', '=' , $upload)->get();
+            array_push($uploads_matched, $result[0]); 
+        }
+        
+
         return Inertia::render('Advertisement', [
             'advertisement' => $freelanceAdvertisement,
+            'uploads' => $uploads_matched,
         ]);
     }
 
@@ -41,7 +50,7 @@ class FreelanceAdsController extends Controller
         $categories = [];
 
         foreach ($freelanceCategories as $category) {
-            $categoryObject = ['id' =>$category->id, 'name' =>$category->name, 'slug' =>$category->slug, 'checked' => false];
+            $categoryObject = ['id' => $category->id, 'name' => $category->name, 'slug' => $category->slug, 'checked' => false];
             array_push($categories, $categoryObject);
         }
 
@@ -53,24 +62,60 @@ class FreelanceAdsController extends Controller
     public function store(Request $request)
     {
         $user = Auth::user();
+        $files = [];
+        $uploads = [];
+
+        if ($request->uploads){
+            foreach($request->uploads as $file)
+            {
+                $fileName = time().rand(1,99).'.'.$file->extension();  
+                $file->move(public_path('uploads'), $fileName);
+
+                $fileNameParts = parse_url($fileName);
+                $fileExtension = pathinfo($fileNameParts['path'], PATHINFO_EXTENSION);
+
+                if (in_array($fileExtension, array('jpg', 'png', 'jpeg', 'gif'))) {
+                    $fileType = 'image';
+                } else if (in_array($fileExtension, array('mp3', 'wav'))) {
+                    $fileType = 'audio';
+                //} else if (in_array($fileExtension, array('mp4', 'avi', 'mov', 'wmv'))) {
+                //    $fileType = 'video';
+                } else {
+                    dd('unknown file extension');
+                }
+
+                $upload = Upload::create([
+                    'user_id' => $user->id,
+                    'name' => $fileName,
+                    'path' => "uploads",
+                    'type' => $fileType,
+                ]);
+
+                array_push($files, $fileName);
+                array_push($uploads, $upload->id);
+            }
+        }
+
+        $uploads = implode(",", $uploads);
+        
         $categories_checked = [];
         $categories = $request->categories;
 
         foreach ($categories as $category) {
-            if($category['checked'] === true) {
+            if ($category['checked'] === true) {
                 array_push($categories_checked, $category['id']);
-            }  
+            }
         }
-  
+
         $categories = implode(",", $categories_checked);
-        
+
         Validator::make($request->all(), [
             'slug' => ['required', 'string', 'unique:freelance_advertisements'],
             'title' => ['required', 'string'],
             'description' => ['required', 'string'],
-        ])->validate();
 
-        // dd($categories);
+        ])->validate();
+        
 
         $freelanceAdvertisement = FreelanceAdvertisement::create([
             'user_id' => $user->id,
@@ -79,6 +124,7 @@ class FreelanceAdsController extends Controller
             'slug' => $request->slug,
             'title' => $request->title,
             'description' => $request->description,
+            'uploads' => $uploads
         ]);
 
         Session::flash('message', 'Your Advertisement is successfully made!');
@@ -93,22 +139,19 @@ class FreelanceAdsController extends Controller
         $all_categories = [];
 
         foreach ($freelanceCategories as $category) {
-            $categoryObject = ['id' =>$category->id, 'name' =>$category->name, 'slug' =>$category->slug, 'checked' => false];
+            $categoryObject = ['id' => $category->id, 'name' => $category->name, 'slug' => $category->slug, 'checked' => false];
             array_push($all_categories, $categoryObject);
         }
 
         $current_categories = explode(",", $freelanceAdvertisement->category_id);
         $categories = [];
 
-        foreach ($all_categories as $all_category) 
-        {
-            foreach ($current_categories as $current_category) 
-            {
-                if($all_category['id'] == $current_category) 
-                {
+        foreach ($all_categories as $all_category) {
+            foreach ($current_categories as $current_category) {
+                if ($all_category['id'] == $current_category) {
                     $categoryObject2 = array('id' => $all_category['id'], 'name' => $all_category['name'], 'slug' => $all_category['slug'], 'checked' => true);
                     array_push($categories, $categoryObject2);
-                }    
+                }
             }
             $categoryObject2 = ['id' => $all_category['id'], 'name' => $all_category['name'], 'slug' => $all_category['slug'], 'checked' => false];
             array_push($categories, $categoryObject2);
@@ -130,17 +173,17 @@ class FreelanceAdsController extends Controller
         $categories = $request->categories;
 
         foreach ($categories as $category) {
-            if($category['checked'] === true) {
+            if ($category['checked'] === true) {
                 array_push($categories_checked, $category['id']);
-            }  
+            }
         }
-  
+
         $categories = implode(",", $categories_checked);
 
         Validator::make($request->all(), [
             'slug' => ['required', 'string', 'max:255', Rule::unique('freelance_advertisements', 'slug')->ignore($freelanceAdvertisement->id)],
             'title' => ['required', 'string', 'max:255'],
-            'description' => ['required', 'string', 'max:255'],
+            'description' => ['required'],
         ])->validate();
 
 
@@ -157,14 +200,13 @@ class FreelanceAdsController extends Controller
         Session::flash('flashtype', 'success');
 
         return redirect('/dashboard');
-
     }
 
 
     public function destroy(FreelanceAdvertisement $freelanceAdvertisement)
     {
-
         $freelanceAdvertisement->delete();
         return redirect('/dashboard');
     }
+
 }
