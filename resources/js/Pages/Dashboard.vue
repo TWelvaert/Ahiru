@@ -12,14 +12,18 @@ let data = defineProps({
 
     <BreezeAuthenticatedLayout>
         <template #header>
-            <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                Dashboard
-            </h2>
-            You're logged in!
+            <div class="">
+            <span class="flex items-center justify-center">
+            Hey {{ $page.props.auth.user.name }} how is your day?
+            </span>
+        </div>
+        <span class="flex items-center justify-center">
+            You have 14788 plays last 7 days
+            </span>
         </template>
 
-        <div class="py-12">
-            <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+        <div class="py-12 ">
+            <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 ">
                 <div
                     class="bg-gray-600 overflow-hidden shadow-sm sm:rounded-lg"
                 >
@@ -27,13 +31,13 @@ let data = defineProps({
                         <button
                             class="px-3 py-1 mx-2 border border-blue-400 rounded-full text-blue-400 text-xs uppercase font-semibold"
                         >
-                            <a href="/advertisement/create">Create Ads</a>
+                            <a href="/advertisement/create">Colaborate</a>
                         </button>
-                        <button
+                        <!-- <button
                             class="px-3 py-1 border border-blue-400 rounded-full text-blue-400 text-xs uppercase font-semibold"
                         >
                             Create Freelance Task
-                        </button>
+                        </button> -->
                     </div>
                 </div>
 
