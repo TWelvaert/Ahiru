@@ -14,6 +14,7 @@ let data = defineProps({
     slug: String,
     description: String,
     categories: Array,
+    uploads: Array,
 });
 
 const form = useForm({
@@ -21,6 +22,7 @@ const form = useForm({
     slug: data["slug"],
     description: data["description"],
     categories: data["categories"],
+    uploads: data["uploads"],
 });
 
 const submit = () => {
@@ -105,6 +107,36 @@ const submit = () => {
                         <BreezeInputError
                             class="mt-2"
                             :message="form.errors.description"
+                        />
+                    </div>
+                    <div v-for="upload in uploads" class="w-20 inline-block">
+                        <div v-if="upload['type'] === 'image'">
+                            <img
+                                :src="`/${upload['path']}/${upload['name']}`"
+                            />
+                        </div>
+                        <div v-if="upload['type'] === 'audio'">
+                            {{ upload["name"] }}
+                        </div>
+                    </div>
+                    <div>
+                        <BreezeLabel
+                            for="images"
+                            value="upload files"
+                            class="block mb-2 uppercase font-bold text-xs text-gray-700 w-full"
+                        />
+                        <BreezeInput
+                            id="images"
+                            multiple
+                            type="file"
+                            @input="form.uploads = $event.target.files"
+                            class="border border-blue-300 p-2 w-full rounded mb-2"
+                            required
+                            autofocus
+                        />
+                        <BreezeInputError
+                            class="mt-2"
+                            :message="form.errors.uploads"
                         />
                     </div>
                     <div v-for="category in categories" class="inline mx-2">

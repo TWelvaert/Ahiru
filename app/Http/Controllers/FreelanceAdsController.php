@@ -135,6 +135,15 @@ class FreelanceAdsController extends Controller
 
     public function edit(FreelanceAdvertisement $freelanceAdvertisement)
     {
+        $uploads_matched = [];
+        $uploads = $freelanceAdvertisement->uploads;
+        $uploads = explode(",", $uploads);
+
+        foreach ($uploads as $upload) {
+            $result = Upload::where('id', '=' , $upload)->get();
+            array_push($uploads_matched, $result[0]); 
+        }
+
         $freelanceCategories = FreelanceCategory::all();
         $all_categories = [];
 
@@ -161,7 +170,8 @@ class FreelanceAdsController extends Controller
             'title' => $freelanceAdvertisement->title,
             'slug' => $freelanceAdvertisement->slug,
             'description' => $freelanceAdvertisement->description,
-            'categories' => $categories
+            'categories' => $categories,
+            'uploads' => $uploads_matched,
         ]);
     }
 
@@ -169,6 +179,42 @@ class FreelanceAdsController extends Controller
     {
 
         $user = Auth::user();
+        $files = [];
+        $uploads = [];
+
+        if ($request->uploads){
+            foreach($request->uploads as $file)
+            {
+                $fileName = time().rand(1,99).'.'.$file->extension();  
+                $file->move(public_path('uploads'), $fileName);
+
+                $fileNameParts = parse_url($fileName);
+                $fileExtension = pathinfo($fileNameParts['path'], PATHINFO_EXTENSION);
+
+                if (in_array($fileExtension, array('jpg', 'png', 'jpeg', 'gif'))) {
+                    $fileType = 'image';
+                } else if (in_array($fileExtension, array('mp3', 'wav'))) {
+                    $fileType = 'audio';
+                //} else if (in_array($fileExtension, array('mp4', 'avi', 'mov', 'wmv'))) {
+                //    $fileType = 'video';
+                } else {
+                    dd('unknown file extension');
+                }
+
+                $upload = Upload::create([
+                    'user_id' => $user->id,
+                    'name' => $fileName,
+                    'path' => "uploads",
+                    'type' => $fileType,
+                ]);
+
+                array_push($files, $fileName);
+                array_push($uploads, $upload->id);
+            }
+        }
+
+        $uploads = implode(",", $uploads);
+
         $categories_checked = [];
         $categories = $request->categories;
 
@@ -186,7 +232,7 @@ class FreelanceAdsController extends Controller
             'description' => ['required'],
         ])->validate();
 
-
+            
         $freelanceAdvertisement->update([
             "user_id" => $user->id,
             "category_id" => $categories,
@@ -194,6 +240,7 @@ class FreelanceAdsController extends Controller
             "slug" => $request->slug,
             "title" => $request->title,
             "description" => $request->description,
+            "uploads" => $uploads
         ]);
 
         Session::flash('message', 'Your Advertisement was Updated successfully!');
