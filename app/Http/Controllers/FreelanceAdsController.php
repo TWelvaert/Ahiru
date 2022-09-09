@@ -263,13 +263,14 @@ class FreelanceAdsController extends Controller
         foreach ($freelanceUploads as $upload) {
             if($result = Upload::where('id','=',$upload)->get()){
                 //  dd($result[0]->path);
-                $todelete = "${$result[0]['path']}/${$result[0]['name']}";
-                dd($todelete);
-
-                 Storage::disk('public')->delete();
+                $toDelete = "{$result[0]->path}/{$result[0]->name}";
+                //  dd($toDelete);
+                File::delete($toDelete);
+                //  Storage::disk('public')->delete($toDelete);
             };
             
         } 
+        dd("hello");
         
         $freelanceAdvertisement->delete();
         return redirect('/dashboard');
