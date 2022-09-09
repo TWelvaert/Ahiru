@@ -23,6 +23,7 @@
     "dependencies": {
         "@originjs/vite-plugin-commonjs": "^1.0.3",
         "@rollup/plugin-commonjs": "^22.0.2",
+        "amplitudejs": "^5.3.2",
         "rollup-plugin-commonjs": "^10.1.0",
         "three": "^0.144.0",
         "vue-iframes": "^0.0.20",

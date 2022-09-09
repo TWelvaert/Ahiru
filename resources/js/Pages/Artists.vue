@@ -19,6 +19,7 @@ h2 {
     display: flex;
     justify-content: center;
   	align-items: center;
+    color: white;
 }
 </style>
 
