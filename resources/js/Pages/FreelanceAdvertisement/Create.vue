@@ -111,7 +111,7 @@ const submit = () => {
                     <div>
                         <BreezeLabel
                             for="images"
-                            value="image"
+                            value="upload files"
                             class="block mb-2 uppercase font-bold text-xs text-gray-700 w-full"
                         />
                         <BreezeInput

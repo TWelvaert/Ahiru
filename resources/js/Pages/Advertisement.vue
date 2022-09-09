@@ -5,7 +5,6 @@ import { Head } from "@inertiajs/inertia-vue3";
 let data = defineProps({
     advertisement: String,
     uploads: Array,
-     
 });
 const uploads = data["uploads"];
 
@@ -22,12 +21,16 @@ const uploads = data["uploads"];
         <div class="py-12">
             <div class="max-w-7xl mx-20 sm:px-6 lg:px-8">
                 <h2>{{ advertisement.title }}</h2>
-                <hr>
+                <hr />
                 <p>{{ advertisement.description }}</p>
 
-                <div v-for="upload in uploads">
-                    {{ upload["name"] }}
-                    <img :src="`/${upload['path']}/${ upload['name'] }`" />
+                <div v-for="upload in uploads" class="w-20">
+                    <div v-if="upload['type'] === 'image'">
+                        <img :src="`/${upload['path']}/${upload['name']}`" />
+                    </div>
+                    <div v-if="upload['type'] === 'audio'">
+                        {{ upload['name'] }}
+                    </div>
                 </div>
             </div>
         </div>

@@ -27,16 +27,16 @@ class FreelanceAdsController extends Controller
 
     public function show(FreelanceAdvertisement $freelanceAdvertisement)
     {
-        $uploads_all = Upload::all();
+        
         $uploads_matched = [];
         $uploads = $freelanceAdvertisement->uploads;
         $uploads = explode(",", $uploads);
 
         foreach ($uploads as $upload) {
             $result = Upload::where('id', '=' , $upload)->get();
-            array_push($uploads_matched, $result[0]);
-            
+            array_push($uploads_matched, $result[0]); 
         }
+        
 
         return Inertia::render('Advertisement', [
             'advertisement' => $freelanceAdvertisement,
@@ -183,7 +183,7 @@ class FreelanceAdsController extends Controller
         Validator::make($request->all(), [
             'slug' => ['required', 'string', 'max:255', Rule::unique('freelance_advertisements', 'slug')->ignore($freelanceAdvertisement->id)],
             'title' => ['required', 'string', 'max:255'],
-            'description' => ['required', 'string', 'max:255'],
+            'description' => ['required'],
         ])->validate();
 
 
