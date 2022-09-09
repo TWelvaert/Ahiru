@@ -1,5 +1,8 @@
 <script setup>
 import { Head, Link } from '@inertiajs/inertia-vue3';
+import Navbar from '@/Components/Navbar.vue';
+import Footer from '@/Components/Footer.vue';
+
 
 defineProps({
     canLogin: Boolean,
@@ -12,7 +15,7 @@ defineProps({
 <template>
     <Head title="Welcome" />
 
-    <div class="relative flex items-top justify-center min-h-screen bg-green-600 dark:bg-green-900 sm:items-center sm:pt-0">
+    <div class="relative flex items-top justify-center min-h-screen bg-red-600 dark:bg-red-900 sm:items-center sm:pt-0">
         <div v-if="canLogin" class="hidden fixed top-0 right-0 px-6 py-4 sm:block">
             <Link v-if="$page.props.auth.user" :href="route('dashboard')" class="text-sm text-gray-700 dark:text-green-500 underline">Dashboard</Link>
 
@@ -40,7 +43,7 @@ defineProps({
                             <div class="ml-4 text-lg leading-7 font-semibold"><a href="https://laravel.com/docs" class="underline text-green-900 dark:text-white">Documentation</a></div>
                         </div>
 
-                        
+
                     </div>
 
                     <div class="p-6 border-t border-gray-200 dark:border-gray-700 md:border-t-0 md:border-l">

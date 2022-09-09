@@ -9,14 +9,17 @@ class FreelanceAdvertisement extends Model
 {
     use HasFactory;
 
-    protected $fillable = [
-        'user_id',
-        'category_id',
-        'type',
-        'slug',
-        'title',
-        'description'
-    ];
+    // protected $fillable = [
+    //     'user_id',
+    //     'category_id',
+    //     'type',
+    //     'slug',
+    //     'title',
+    //     'description',
+    //     'images',
+        
+    // ];
+    protected $guarded = [];
     public function category()
     {
         return $this->belongsTo(FreelanceCategory::class);
@@ -25,5 +28,9 @@ class FreelanceAdvertisement extends Model
     public function user()
     {
         return $this->belongsTo(User::class, 'user_id');
+    }
+    public function adsImages()
+    {
+        return $this->hasMany(Upload::class);
     }
 }

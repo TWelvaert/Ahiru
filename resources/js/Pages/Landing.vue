@@ -1,0 +1,226 @@
+<script setup>
+    import Layout from '@/Layouts/Layout.vue';
+</script>
+<!-- TEMPLATE ================================================= -->
+
+<template>
+    <Layout>
+    <!-- LANDING PAGE HEADER ================================================ -->
+
+    <div class="bg-black min-h-screen z-0">
+        <div class="">
+
+            <div class="absolute z-20 pl-40">
+                <img src="../../assets/images/waves.gif" alt="">
+            </div>
+            <div class="z-50 relative">
+                <p id="p-l1" class="text-white text-6xl m-24 pl-60 font-monument antialiased ">POWERFUL <br> FOR <br>
+                    CREATIVES.</p>
+                <p id="p-l2" class="text-white text-6xl m-36 pl-80   font-monument antialiased">ACCESSIBLE <br> FOR <br>
+                    EVERYONE.
+                </p>
+            </div>
+
+            <!-- BUTTONS ==================================================== -->
+
+            <div class="flex items-center justify-center space-x-4 -mt-24">
+                <a href=""
+                    class="bg-green-300 hover:bg-white text-black py-5 px-5 rounded-full font-light tracking-widest  transition ease-in-out delay-50 hover:-translate-y-0.5 hover:scale-60 duration-50 antialiased">
+                    START BUILDING
+                </a>
+                <a href="#community-page" v-smooth-scroll
+                    class="hover:bg-white text-white hover:text-black border-2 border-solid border-white py-5 px-5 rounded-full font-light tracking-widest  transition ease-in-out delay-50 hover:-translate-y-0.5 hover:scale-60 duration-50 antialiased">
+                    WHY AHIRU?
+                </a>
+            </div>
+
+            <!--  INPUT BOX ================================================= -->
+
+           
+        </div>
+    </div>
+
+
+    <!-- FREELANCE PAGE ================================================= -->
+
+    <div id="community-page" class="bg-white min-h-screen pt-10 pl-10 z-0">
+        <h1 class="text-black text-6xl font-monument  flex antialiased">FREELANCE AS AN ARTIST</h1>
+        <div class="flex gap-32 mt-64">
+            <div class="ml-36 max-w-sm z-50 relative">
+                <h2 class="text-black text-4xl font-monument antialiased">Join the fastest growing ecosystem </h2>
+            </div>
+            <div class="max-w-2xl">
+                <p class="text-black font-light z-50 relative antialiased">Our community brings artists together to
+                    bring forward
+                    their creations and benefit from their talent. Our community brings artists together to bring
+                    forward their creations and benefit from there talent.</p>
+                <div class="flex m-4 items-center justify-center">
+                    <a href="#upload-page" v-smooth-scroll
+                        class="hover:bg-black text-black hover:text-white border-2 border-solid border-black py-5 px-6 rounded-full font-light tracking-widest  transition ease-in-out delay-50 hover:-translate-y-0.5 hover:scale-60 duration-50">
+                        UPLOAD
+                    </a>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- CARDS ================================================ -->
+
+        <div class="flex gap-16 mt-16 px-32">
+            <div
+                class="z-50 w-full max-w-smrounded-lg border-gray-200 shadow-xl dark:bg-black dark:border-gray-700 transform transition duration-500 hover:scale-110">
+                <div class="flex justify-end px-4 pt-4">
+                </div>
+                <div class="flex flex-col items-center pb-10">
+                    <img class="mb-3 w-24    h-24 rounded-full shadow-lg" src="../../assets/images/logologo.png"
+                        alt="logo">
+                    <h5 class="mb-1 text-xl font-medium text-gray-900 dark:text-white font-monument antialiased">Jakes
+                    </h5>
+                    <span class="text-sm text-gray-500 dark:text-gray-400 antialiased">Music Producer</span>
+                    <div class="flex mt-4 space-x-3 md:mt-6">
+                        <a href="#"
+                            class="inline-flex items-center py-2 px-4 text-sm text-center bg-green-300 hover:bg-white text-black rounded-full font-light tracking-widest transition ease-in-out delay-50 hover:-translate-y-0.5 hover:scale-60 duration-50 antialiased">FOLLOW</a>
+                        <a href="#"
+                            class="inline-flex items-center py-2 px-4 text-sm text-center hover:bg-white text-white hover:text-black border-2 border-solid border-white rounded-full font-light tracking-widest transition ease-in-out delay-50 hover:-translate-y-0.5 hover:scale-60 duration-50 antialiased">MESSAGE</a>
+                    </div>
+                </div>
+            </div>
+            <div
+                class=" z-50 w-full max-w-sm rounded-lg border-gray-200 shadow-xl dark:bg-black dark:border-gray-700 transform transition duration-500 hover:scale-110">
+                <div class="flex justify-end px-4 pt-4">
+                </div>
+                <div class="flex flex-col items-center pb-10">
+                    <img class="mb-3 w-24    h-24 rounded-full shadow-lg" src="../../assets/images/logologo.png"
+                        alt="logo">
+                    <h5 class="mb-1 text-xl font-medium text-gray-900 dark:text-white font-monument antialiased">
+                        Pendulum</h5>
+                    <span class="text-sm text-gray-500 dark:text-gray-400 antialiased">Music Producer</span>
+                    <div class="flex mt-4 space-x-3 md:mt-6">
+                        <a href="#"
+                            class="inline-flex items-center py-2 px-4 text-sm text-center bg-green-300 hover:bg-white text-black rounded-full font-light tracking-widest transition ease-in-out delay-50 hover:-translate-y-0.5 hover:scale-60 duration-50 antialiased">FOLLOW</a>
+                        <a href="#"
+                            class="inline-flex items-center py-2 px-4 text-sm text-center hover:bg-white text-white hover:text-black border-2 border-solid border-white rounded-full font-light tracking-widest transition ease-in-out delay-50 hover:-translate-y-0.5 hover:scale-60 duration-50 antialiased">MESSAGE</a>
+                    </div>
+                </div>
+            </div>
+            <div
+                class=" z-50 w-full max-w-sm  rounded-lg border-gray-200 shadow-xl dark:bg-black dark:border-gray-700 transform transition duration-500 hover:scale-110">
+                <div class="flex justify-end px-4 pt-4">
+                </div>
+                <div class="flex flex-col items-center pb-10">
+                    <img class="mb-3 w-24    h-24 rounded-full shadow-lg" src="../../assets/images/logologo.png"
+                        alt="logo">
+                    <h5 class="mb-1 text-xl font-medium text-gray-900 dark:text-white font-monument antialiased">Snatcha
+                    </h5>
+                    <span class="text-sm text-gray-500 dark:text-gray-400 antialiased">Music Producer</span>
+                    <div class="flex mt-4 space-x-3 md:mt-6">
+                        <a href="#"
+                            class="inline-flex items-center py-2 px-4 text-sm text-center bg-green-300 hover:bg-white text-black rounded-full font-light tracking-widest transition ease-in-out delay-50 hover:-translate-y-0.5 hover:scale-60 duration-50 antialiased">FOLLOW</a>
+                        <a href="#"
+                            class="inline-flex items-center py-2 px-4 text-sm text-center hover:bg-white text-white hover:text-black border-2 border-solid border-white rounded-full font-light tracking-widest transition ease-in-out delay-50 hover:-translate-y-0.5 hover:scale-60 duration-50 antialiased">MESSAGE</a>
+                    </div>
+                </div>
+            </div>
+            <div
+                class="z-50 w-full max-w-sm rounded-lg border-gray-200 shadow-xl dark:bg-black dark:border-gray-700 transform transition duration-500 hover:scale-110">
+                <div class="flex justify-end px-4 pt-4">
+                </div>
+                <div class="flex flex-col items-center pb-10">
+                    <img class="mb-3 w-24    h-24 rounded-full shadow-lg" src="../../assets/images/logologo.png"
+                        alt="logo">
+                    <h5 class="mb-1 text-xl font-medium text-gray-900 dark:text-white font-monument antialiased">Hawtin
+                    </h5>
+                    <span class="text-sm text-gray-500 dark:text-gray-400 antialiased">Music Producer</span>
+                    <div class="flex mt-4 space-x-3 md:mt-6">
+                        <a href="#"
+                            class="inline-flex items-center py-2 px-4 text-sm text-center bg-green-300 hover:bg-white text-black rounded-full font-light tracking-widest transition ease-in-out delay-50 hover:-translate-y-0.5 hover:scale-60 duration-50 antialiased">FOLLOW</a>
+                        <a href="#"
+                            class="inline-flex items-center py-2 px-4 text-sm text-center hover:bg-white text-white hover:text-black border-2 border-solid border-white rounded-full font-light tracking-widest transition ease-in-out delay-50 hover:-translate-y-0.5 hover:scale-60 duration-50 antialiased">MESSAGE</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- UPLOAD ================================================ -->
+
+
+    <div class=" bg-black min-h-screen text-center pt-8" id="upload-page">
+        <div class="">
+            <h2 class="text-white text-6xl mt-8 pl-50 flex font-monument">UPLOAD YOUR CONTENT AND GROW OUR AD FREE
+                COMMUNITY
+            </h2>
+            <div class="mt-10">
+                <span class="text-white text-4xl font-monument">
+                    Calling all creators
+                </span>
+            </div>
+
+            <p class="text-white text-xl font-light mt-11">
+                Get on AHIRU to connect with fans, share your sounds, and grow your audience. <br> What are you waiting
+                for?
+            </p>
+
+
+        </div>
+        <div class="absolute z-10">
+            <img src="../../assets/images/waves.gif " class="pl-80" alt="">
+        </div>
+        <div class="ml-92 mt-16">
+            <a href=""
+                class="bg-green-300 hover:bg-white text-black py-5 px-6 rounded-full font-light tracking-widest  transition ease-in-out delay-50 hover:-translate-y-0.5 hover:scale-60 duration-50 antialiased">
+                UPLOAD
+            </a>
+        </div>
+    </div>
+
+
+
+    <!-- CONTACT ================================================= -->
+
+
+
+    <div class=" bg-white min-h-screen">
+
+        <article class="text-center pt-24">
+            <h1 class="text-4xl font-monument antialiased">Thanks for listening. <br> Now join in.</h1> <br> <br>
+            <h2 class="text-2xl font-monument antialiased">Save tracks, follow artists and build playlists.<br> All for
+                free.</h2>
+        </article>
+
+        <section class="grid place-items-center pt-24">
+            <article
+                class="text-center p-10 min-h-116 max-w-3xl w-full bg-black rounded-xl text-gray-100 xl:col-span-2 transform duration-500 hover:-translate-y-1">
+                <h1 class=" mt-5 text-5xl font-light text-gray-100 leading-snug  min-h-33 antialiased">One small step
+                    for you one
+                    giant leap for your career
+                </h1>
+                <div class="mt-20">
+
+                </div>
+
+                <div class="flex items-center justify-center space-x-4">
+                    <a href=""
+                        class="bg-green-300 hover:bg-white text-black py-5 px-5 rounded-full font-light tracking-widest font transition ease-in-out delay-50 hover:-translate-y-0.5 hover:scale-60 duration-50 antialiased">
+                        CREATE ACCOUNT
+                    </a>
+                </div>
+                <div class="mt-6 flex items-center justify-center space-x-4 ">
+
+                    <span class="text-center text-xs antialiased">already have an acount?</span>
+                    <a href="#community-page" v-smooth-scroll
+                        class="hover:bg-white text-white hover:text-black border-2 border-solid border-white py-5 px-5 rounded-full tont-light tracking-widest transition ease-in-out delay-50 hover:-translate-y-0.5 hover:scale-60 duration-50 antialiased">
+                        SIGN IN
+                    </a>
+
+                </div>
+            </article>
+        </section>
+
+
+    </div>
+
+
+</Layout>
+</template>

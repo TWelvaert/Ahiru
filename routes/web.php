@@ -7,6 +7,8 @@ use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
+use function PHPSTORM_META\type;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -19,11 +21,9 @@ use Inertia\Inertia;
 */
 
 Route::get('/', function () {
-    return Inertia::render('Welcome', [
+    return Inertia::render('Landing', [
         'canLogin' => Route::has('login'),
         'canRegister' => Route::has('register'),
-        'laravelVersion' => Application::VERSION,
-        'phpVersion' => PHP_VERSION,
     ]);
 });
 
@@ -45,8 +45,33 @@ Route::get('/dashboard/advertisement/delete/{freelanceAdvertisement:slug}', [Fre
 
 Route::get('/advertisement/{freelanceAdvertisement:slug}', [FreelanceAdsController::class, 'show']);
 
+// Route::get('/multiuploads', 'UploadController@uploadForm');
+// Route::post('/multiuploads', 'UploadController@uploadSubmit');
 
-Route::get('settings/account', [\App\Http\Controllers\Auth\RegisteredUserController::class, 'edit'])->name('settings/account'); 
-Route::post('settings/account', [\App\Http\Controllers\Auth\RegisteredUserController::class, 'update'])->name('settings/account'); 
+
+Route::get('settings/account', [\App\Http\Controllers\Auth\RegisteredUserController::class, 'edit'])->name('settings/account');
+Route::post('settings/account', [\App\Http\Controllers\Auth\RegisteredUserController::class, 'update'])->name('settings/account');
+
+Route::get('/about', function () {
+    return Inertia::render('About');
+})->name('about');
+
+// ['auth', 'verified'] when logged in as a user
 
 require __DIR__.'/auth.php';
+
+Route::get('/', function () {
+    return Inertia::render('Landing');
+});
+
+Route::get('/About', function () {
+    return Inertia::render('About', );
+});
+
+Route::get('/Artists', function () {
+    return Inertia::render('Artists');
+});
+
+Route::get('/Contact', function () {
+    return Inertia::render('Contact');
+});

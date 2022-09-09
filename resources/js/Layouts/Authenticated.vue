@@ -15,7 +15,7 @@ const showingNavigationDropdown = ref(false);
 
     <!-- Notification Flash Message -->
     <div v-if="$page.props.flash.message" class="absolute top-8 right-10 z-10">
-        <Notification :message="$page.props.flash.message" />
+        <Notification :message="$page.props.flash.message" :flashtype="$page.props.flash.flashtype" />
     </div>
 
     <div>
@@ -37,6 +37,9 @@ const showingNavigationDropdown = ref(false);
                                 <BreezeNavLink :href="route('dashboard')" :active="route().current('dashboard')">
                                     Dashboard
                                 </BreezeNavLink>
+                                <!-- <BreezeNavLink :href="route('landing')" :active="route().current('landing')">
+                                    Landing
+                                </BreezeNavLink> -->
                             </div>
                         </div>
 
