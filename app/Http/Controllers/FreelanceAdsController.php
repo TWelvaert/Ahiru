@@ -79,11 +79,24 @@ class FreelanceAdsController extends Controller
                 $fileName = time().rand(1,99).'.'.$file->extension();  
                 $file->move(public_path('uploads'), $fileName);
 
+                $fileNameParts = parse_url($fileName);
+                $fileExtension = pathinfo($fileNameParts['path'], PATHINFO_EXTENSION);
+
+                if (in_array($fileExtension, array('jpg', 'png', 'jpeg', 'gif'))) {
+                    $fileType = 'image';
+                } else if (in_array($fileExtension, array('mp3', 'wav'))) {
+                    $fileType = 'audio';
+                //} else if (in_array($fileExtension, array('mp4', 'avi', 'mov', 'wmv'))) {
+                //    $fileType = 'video';
+                } else {
+                    dd('unknown file extension');
+                }
+
                 $upload = Upload::create([
                     'user_id' => $user->id,
                     'name' => $fileName,
                     'path' => "uploads",
-                    'type' => "image",
+                    'type' => $fileType,
                 ]);
 
                 array_push($files, $fileName);
