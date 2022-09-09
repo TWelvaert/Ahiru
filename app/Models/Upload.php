@@ -11,8 +11,4 @@ class Upload extends Model
 
     protected $guarded = [];
 
-    public function advertisement()
-    {
-        return $this->belongsTo(FreelanceAdvertisement::class);
-    }
 }

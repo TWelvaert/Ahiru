@@ -53,8 +53,30 @@ class FreelanceAdsController extends Controller
 
     public function store(Request $request)
     {
-        
         $user = Auth::user();
+        $files = [];
+        $uploads = [];
+
+        if ($request->uploads){
+            foreach($request->uploads as $file)
+            {
+                $fileName = time().rand(1,99).'.'.$file->extension();  
+                $file->move(public_path('uploads'), $fileName);
+
+                $upload = Upload::create([
+                    'user_id' => $user->id,
+                    'name' => $fileName,
+                    'path' => "uploads",
+                    'type' => "image",
+                ]);
+
+                array_push($files, $fileName);
+                array_push($uploads, $upload->id);
+            }
+        }
+
+        $uploads = implode(",", $uploads);
+        
         $categories_checked = [];
         $categories = $request->categories;
 
@@ -74,7 +96,6 @@ class FreelanceAdsController extends Controller
         ])->validate();
         
 
-
         $freelanceAdvertisement = FreelanceAdvertisement::create([
             'user_id' => $user->id,
             'category_id' => $categories,
@@ -82,7 +103,7 @@ class FreelanceAdsController extends Controller
             'slug' => $request->slug,
             'title' => $request->title,
             'description' => $request->description,
-            'uploads' => $request->uploads
+            'uploads' => $uploads
         ]);
 
         Session::flash('message', 'Your Advertisement is successfully made!');
@@ -168,28 +189,4 @@ class FreelanceAdsController extends Controller
         return redirect('/dashboard');
     }
 
-    // public function handleUpload(Request $request)
-    // {
-    //     if ($request->hasFile('photos')) {
-    //         $allowedfileExtension = ['pdf', 'jpg', 'png', 'docx'];
-    //         $files = $request->file('photos');
-    //         foreach ($files as $file) {
-    //             $filename = $file->getClientOriginalName();
-    //             $extension = $file->getClientOriginalExtension();
-    //             $check = in_array($extension, $allowedfileExtension);
-    //             //dd($check);
-    //             if ($check) {
-    //                 $items = Item::create($request->all());
-    //                 foreach ($request->photos as $photo) {
-    //                     $filename = $photo->store('photos');
-    //                     Upload::create([
-    //                         'item_id' => $items->id,
-    //                         'filename' => $filename
-    //                     ]);
-    //                 }
-                    
-    //             }
-    //         }
-    //     }
-    // }
 }
