@@ -4,8 +4,11 @@ import { Head } from "@inertiajs/inertia-vue3";
 
 let data = defineProps({
     advertisement: String,
+    uploads: Array,
+     
 });
-console.log(data["advertisement"]);
+const uploads = data["uploads"];
+
 </script>
 
 <template>
@@ -21,6 +24,11 @@ console.log(data["advertisement"]);
                 <h2>{{ advertisement.title }}</h2>
                 <hr>
                 <p>{{ advertisement.description }}</p>
+
+                <div v-for="upload in uploads">
+                    {{ upload["name"] }}
+                    <img :src="`/${upload['path']}/${ upload['name'] }`" />
+                </div>
             </div>
         </div>
     </BreezeAuthenticatedLayout>

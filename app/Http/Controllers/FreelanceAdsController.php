@@ -31,8 +31,27 @@ class FreelanceAdsController extends Controller
         // Cache::rememberForever('users', function () {
         // return DB::table('users')->get();
         // }); 
+        
+
+        $uploadsAll = Upload::all();
+        $uploads_checked = [];
+        $uploads = $freelanceAdvertisement->uploads;
+        $uploads = explode(",", $uploads);
+
+        foreach ($uploadsAll as $upload) {
+            $result = Upload::where('id', '=' , $uploads);
+            array_push($uploads_checked, $upload['id']);
+            
+        }
+        // dd($uploads_checked);
+        dd($result);
+        
+        
+
         return Inertia::render('Advertisement', [
             'advertisement' => $freelanceAdvertisement,
+            'uploads' => $uploads,
+            
         ]);
     }
 
@@ -184,7 +203,6 @@ class FreelanceAdsController extends Controller
 
     public function destroy(FreelanceAdvertisement $freelanceAdvertisement)
     {
-
         $freelanceAdvertisement->delete();
         return redirect('/dashboard');
     }
