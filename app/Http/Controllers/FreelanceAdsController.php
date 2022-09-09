@@ -27,28 +27,20 @@ class FreelanceAdsController extends Controller
 
     public function show(FreelanceAdvertisement $freelanceAdvertisement)
     {
-        // TODO cash later
-        // Cache::rememberForever('users', function () {
-        // return DB::table('users')->get();
-        // }); 
-        
-
-        $uploadsAll = Upload::all();
-        $uploads_checked = [];
+        $uploads_all = Upload::all();
+        $uploads_matched = [];
         $uploads = $freelanceAdvertisement->uploads;
         $uploads = explode(",", $uploads);
 
-        foreach ($uploadsAll as $upload) {
-            $result = Upload::where('id', '=' , $uploads);
-            array_push($uploads_checked, $upload);
+        foreach ($uploads as $upload) {
+            $result = Upload::where('id', '=' , $upload)->get();
+            array_push($uploads_matched, $result[0]);
             
         }
-        dd($uploads);
-        
 
         return Inertia::render('Advertisement', [
             'advertisement' => $freelanceAdvertisement,
-            'uploads' => $uploads,
+            'uploads' => $uploads_matched,
         ]);
     }
 
