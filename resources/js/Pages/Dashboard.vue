@@ -12,28 +12,33 @@ let data = defineProps({
 
     <BreezeAuthenticatedLayout>
         <template #header>
-            <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                Dashboard
-            </h2>
-            You're logged in!
+            <div class="font-monument">
+            <span class="flex items-center justify-center">
+            Hey {{ $page.props.auth.user.name }} how is your day?
+            </span>
+
+        </div>
+        <span class="flex items-center justify-center">
+            You have 14788 plays last 7 days
+            </span>
         </template>
 
         <div class="py-12">
-            <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+            <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 rounded-full ">
                 <div
-                    class="bg-gray-600 overflow-hidden shadow-sm sm:rounded-lg"
+                    class="bg-gray-600 overflow-hidden sm:rounded-lg "
                 >
-                    <div class="p-6 bg-gray-200 border-b border-blue-400">
+                    <div class="p-6 bg-gray-200 border-green-300">
                         <button
-                            class="px-3 py-1 mx-2 border border-blue-400 rounded-full text-blue-400 text-xs uppercase font-semibold"
+                            class="uppercase bg-green-300 hover:bg-black hover:text-white text-black py-3 px-8 rounded-full font-light tracking-widest  transition ease-in-out delay-50 hover:-translate-y-0.5 hover:scale-60 duration-50 antialiased"
                         >
-                            <a href="/advertisement/create">Create Ads</a>
+                            <a href="/advertisement/create">Colaborate</a>
                         </button>
-                        <button
+                        <!-- <button
                             class="px-3 py-1 border border-blue-400 rounded-full text-blue-400 text-xs uppercase font-semibold"
                         >
                             Create Freelance Task
-                        </button>
+                        </button> -->
                     </div>
                 </div>
 

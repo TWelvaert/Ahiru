@@ -19,8 +19,8 @@ const showingNavigationDropdown = ref(false);
     </div>
 
     <div>
-        <div class="min-h-screen bg-gray-100">
-            <nav class="bg-white border-b border-gray-100">
+        <div class="min-h-screen bg-black">
+            <nav class="bg-black border-b border-gray-100">
                 <!-- Primary Navigation Menu -->
                 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div class="flex justify-between h-16">
@@ -33,10 +33,17 @@ const showingNavigationDropdown = ref(false);
                             </div>
 
                             <!-- Navigation Links -->
-                            <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                            <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex ">
                                 <BreezeNavLink :href="route('dashboard')" :active="route().current('dashboard')">
-                                    Dashboard
+                                    Home
                                 </BreezeNavLink>
+                                <BreezeNavLink :href="route('dashboard')" :active="route().current('dashboard')">
+                                    Stream
+                                </BreezeNavLink>
+                                <BreezeNavLink :href="route('dashboard')" :active="route().current('dashboard')">
+                                    Library
+                                </BreezeNavLink>
+
                                 <!-- <BreezeNavLink :href="route('landing')" :active="route().current('landing')">
                                     Landing
                                 </BreezeNavLink> -->
@@ -61,9 +68,23 @@ const showingNavigationDropdown = ref(false);
 
                                     <template #content>
                                         <BreezeDropdownLink :href="route('logout')" method="post" as="button">
+                                            Profile
+                                        </BreezeDropdownLink>
+                                        <BreezeDropdownLink :href="route('logout')" method="post" as="button">
+                                            Likes
+                                        </BreezeDropdownLink>
+                                        <BreezeDropdownLink :href="route('logout')" method="post" as="button">
+                                            Following
+                                        </BreezeDropdownLink>
+                                        <BreezeDropdownLink :href="route('logout')" method="post" as="button">
+                                            Tracks
+                                        </BreezeDropdownLink>
+                                        <BreezeDropdownLink :href="route('logout')" method="post" as="button">
                                             Log Out
                                         </BreezeDropdownLink>
+
                                     </template>
+
                                 </BreezeDropdown>
                             </div>
                         </div>
