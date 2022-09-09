@@ -6,25 +6,6 @@ import { Head } from "@inertiajs/inertia-vue3";
 let data = defineProps({
     advertisements: String,
 });
-
-
-var i = 0;
-var txt = 'Lorem ipsum typing effect!'; /* The text */
-var speed = 50; /* The speed/duration of the effect in milliseconds */
-
-mounted()
-function typeWriter() {
-  if (i < txt.length) {
-    if (document.getElementById("welcome")){
-        document.getElementById("welcome").innerHTML += txt.charAt(i);
-    i++;
-    setTimeout(typeWriter, speed);
-     }
-    }
-
-}
-typeWriter()
-
 </script>
 
 <template>
@@ -130,3 +111,26 @@ typeWriter()
         </div>
     </BreezeAuthenticatedLayout>
 </template>
+
+<script>
+var i = 0;
+var txt = 'Lorem ipsum typing effect!'; /* The text */
+var speed = 50; /* The speed/duration of the effect in milliseconds */
+
+export default {
+    name: "App",
+    mounted() {
+        typeWriter();
+        function typeWriter() 
+        {
+            if (i < txt.length) {
+                if (document.getElementById("welcome")){
+                    document.getElementById("welcome").innerHTML += txt.charAt(i);
+                    i++;
+                    setTimeout(typeWriter, speed);
+                }
+            }
+        }
+    }
+}
+</script>
