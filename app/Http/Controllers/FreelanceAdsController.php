@@ -97,12 +97,11 @@ class FreelanceAdsController extends Controller
         }
 
         $uploads = implode(",", $uploads);
-        
         $categories_checked = [];
         $categories = $request->categories;
 
         foreach ($categories as $category) {
-            if ($category['checked'] === true) {
+            if ($category['checked'] == true) {
                 array_push($categories_checked, $category['id']);
             }
         }
@@ -177,7 +176,6 @@ class FreelanceAdsController extends Controller
 
     public function update(Request $request, FreelanceAdvertisement $freelanceAdvertisement)
     {
-
         $user = Auth::user();
         $files = [];
         $uploads = [];

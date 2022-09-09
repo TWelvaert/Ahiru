@@ -25,6 +25,8 @@ const form = useForm({
     uploads: data["uploads"],
 });
 
+console.log(data["categories"]);
+
 const submit = () => {
     form.post(`/advertisement/update/${data["slug"]}`);
 };
@@ -156,8 +158,7 @@ const submit = () => {
                             name="form"
                             class="ml-4"
                             :class="{ 'opacity-25': form.processing }"
-                            :disabled="form.processing"
-                        >
+                            :disabled="form.processing">
                             Update
                         </BreezeButton>
                     </div>
