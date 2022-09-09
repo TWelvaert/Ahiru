@@ -40,18 +40,15 @@ class FreelanceAdsController extends Controller
 
         foreach ($uploadsAll as $upload) {
             $result = Upload::where('id', '=' , $uploads);
-            array_push($uploads_checked, $upload['id']);
+            array_push($uploads_checked, $upload);
             
         }
-        // dd($uploads_checked);
-        dd($result);
-        
+        dd($uploads);
         
 
         return Inertia::render('Advertisement', [
             'advertisement' => $freelanceAdvertisement,
             'uploads' => $uploads,
-            
         ]);
     }
 
