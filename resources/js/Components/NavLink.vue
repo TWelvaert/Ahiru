@@ -5,8 +5,8 @@
     const props = defineProps(['href', 'active']);
 
     const classes = computed(() => props.active
-        ? 'inline-flex items-center px-1 pt-1 border-b-4 border-green-300 font-monument text-sm font-medium leading-5 text-white transition ease-in-out delay-50 hover:-translate-y-0.5 hover:scale-60 duration-50 antialiased '
-        : 'inline-flex items-center px-1 pt-1 border-b-2 border-transparent font-monument text-sm font-medium leading-5 text-white transition ease-in-out delay-50 hover:-translate-y-0.5 hover:scale-60 duration-50 antialiased'
+        ? 'inline-flex items-center px-1 pt-1 font-monument transition duration-150 border-b-8 border-transparent hover:border-green-300 text-white transition ease-in-out delay-50 hover:-translate-y-0.5 hover:scale-60 duration-50 antialiased'
+        : 'inline-flex items-center px-1 pt-1 text-6xl font-bold transition duration-150 border-b-8 border-transparent hover:border-purple-500 antialiased'
     );
     </script>
 

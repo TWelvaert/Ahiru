@@ -34,24 +34,14 @@ const showingNavigationDropdown = ref(false);
 
                             <!-- Navigation Links -->
                             <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex ">
-                                <BreezeNavLink :href="route('dashboard')" :active="route().current('dashboard')">
+                                <BreezeNavLink class="" :href="route('dashboard')" :active="route().current('dashboard')">
                                     Home
                                 </BreezeNavLink>
-                                <BreezeNavLink :href="route('dashboard')" :active="route().current('dashboard')">
-                                    Stream
-                                </BreezeNavLink>
-                                <BreezeNavLink :href="route('dashboard')" :active="route().current('dashboard')">
-                                    Library
-                                </BreezeNavLink>
-
-                                <!-- <BreezeNavLink :href="route('landing')" :active="route().current('landing')">
-                                    Landing
-                                </BreezeNavLink> -->
                             </div>
                         </div>
                         <div class="pt-3">
                         <input class="
-                    border-white
+                    border-white opacity-50
                     focus:border-white
                     focus:ring-0 rounded-full
                     bg-black text-l
@@ -63,11 +53,11 @@ const showingNavigationDropdown = ref(false);
                 </div>
 
                         <div class="hidden  space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                                <BreezeNavLink :href="route('dashboard')" :active="route().current('dashboard')">
+                                <BreezeNavLink class="" :href="route('dashboard')" :active="route().current('dashboard')">
                                     Colaborate
                                 </BreezeNavLink>
 
-                                <BreezeNavLink :href="route('dashboard')" :active="route().current('dashboard')">
+                                <BreezeNavLink class="" :href="route('dashboard')" :active="route().current('dashboard')">
                                     Upload
                                 </BreezeNavLink>
                             </div>
@@ -165,3 +155,5 @@ const showingNavigationDropdown = ref(false);
         </div>
     </div>
 </template>
+
+
