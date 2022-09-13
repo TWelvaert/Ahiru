@@ -87,6 +87,7 @@ class FreelanceAdsController extends Controller
                 $upload = Upload::create([
                     'user_id' => $user->id,
                     'name' => $fileName,
+                    'original_name' => $file->getClientOriginalName(),
                     'path' => "uploads",
                     'type' => $fileType,
                 ]);
