@@ -31,12 +31,13 @@ const showingNavigationDropdown = ref(false);
                                 <BreezeApplicationLogo class="block h-9 w-auto" />
                                 </Link>
                             </div>
+
                             <!-- Navigation Links -->
-                            <inertia-link :href="route('dashboard')">
-                                    <BreezeNavLink :class="route().current('dashboard*') ? 'text-black' : 'text-indeigo-lighter group-hover:text-white'">
+                      
+                                    <BreezeNavLink :href="route('dashboard')" :class="{ 'active': $page.url === '/dashboard' }">
                                         Home
                                     </BreezeNavLink>
-                            </inertia-link>
+                
                         </div>
                         <div class="pt-3">
                             <input class="
@@ -52,7 +53,7 @@ const showingNavigationDropdown = ref(false);
                         </div>
 
                         <div class="hidden  space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                            <BreezeNavLink class="" :href="route('dashboard')" :active="route().current('dashboard')">
+                            <BreezeNavLink :href="route('settings/account')" :class="{ 'active': $page.url === '/settings/account' }">
                                 Colaborate
                             </BreezeNavLink>
 
