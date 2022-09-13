@@ -52,6 +52,7 @@ Route::get('/advertisement/{freelanceAdvertisement:slug}', [FreelanceAdsControll
 Route::get('settings/account', [\App\Http\Controllers\Auth\RegisteredUserController::class, 'edit'])->name('settings/account');
 Route::post('settings/account', [\App\Http\Controllers\Auth\RegisteredUserController::class, 'update'])->name('settings/account');
 Route::get('settings/uploads', [\App\Http\Controllers\UploadsController::class, 'index'])->name('settings/uploads');
+Route::post('settings/uploads', [\App\Http\Controllers\UploadsController::class, 'upload'])->name('settings/uploads');
 
 Route::get('/about', function () {
     return Inertia::render('About');

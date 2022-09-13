@@ -34,8 +34,12 @@ class UploadsController extends Controller
     }
 
 
-    public function upload()
+    public function upload(Request $request)
     {
+        $user = Auth::user();
+        $files = [];
+        $uploads = [];
+        
         if ($request->uploads){
             foreach($request->uploads as $file)
             {
@@ -58,6 +62,7 @@ class UploadsController extends Controller
                 $upload = Upload::create([
                     'user_id' => $user->id,
                     'name' => $fileName,
+                    'original_name' => $file->getClientOriginalName(),
                     'path' => "uploads",
                     'type' => $fileType,
                 ]);
