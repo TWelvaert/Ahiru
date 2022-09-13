@@ -65,8 +65,8 @@ Route::get('/', function () {
     return Inertia::render('Landing');
 });
 
-Route::get('/About', function () {
-    return Inertia::render('About', );
+Route::get('/Profile', function () {
+    return Inertia::render('Profile');
 });
 
 Route::get('/Artists', function () {
