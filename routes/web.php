@@ -48,10 +48,17 @@ Route::get('/dashboard/advertisement/delete/{freelanceAdvertisement:slug}', [Fre
 Route::get('/advertisement/{freelanceAdvertisement:slug}', [FreelanceAdsController::class, 'show']);
 
 
+
 Route::get('/admin/news', [NewsController::class, 'admin_index'])->name('news_index')->middleware(['auth', 'verified']);
 Route::get('/news/article/{news_article:slug}', [NewsController::class, 'show']);
 
-Route::get('/news/article/create', [NewsController::class, 'create'])->name('news/article/create')->middleware(['auth', 'verified']);
+Route::get('/admin/news/create', [NewsController::class, 'create'])->middleware(['auth', 'verified']);
+Route::post('admin/news/create', [NewsController::class, 'store'])->middleware(['auth', 'verified'])->name('admin/news/create');
+
+Route::get('/admin/news/{news_article:slug}/edit', [NewsController::class, 'edit'])->middleware(['auth', 'verified']);
+Route::post('/admin/news/{news_article:slug}/edit', [NewsController::class, 'update'])->middleware(['auth', 'verified']);
+
+Route::get('/admin/news/{news_article:slug}/delete', [NewsController::class, 'destroy'])->middleware(['auth', 'verified']);
 
 
 

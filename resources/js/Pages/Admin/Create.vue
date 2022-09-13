@@ -12,21 +12,23 @@ import { Head, useForm } from "@inertiajs/inertia-vue3";
 let data = defineProps({
     title: String,
     slug: String,
+    excerpt: String,
     description: String,
-    categories: Array,
-    uploads: [],
+    // categories: Array,
+    // uploads: [],
 });
 
 const form = useForm({
     title: data["title"],
     slug: data["slug"],
+    excerpt: data["excerpt"],
     description: data["description"],
-    categories: data["categories"],
-    uploads: data["uploads"],
+    // categories: data["categories"],
+    // uploads: data["uploads"],
 });
 
 const submit = () => {
-    form.post(route("news/article/create"));
+    form.post(route("admin/news/create"));
 };
 </script>
 
@@ -85,6 +87,26 @@ const submit = () => {
                         <BreezeInputError
                             class="mt-2"
                             :message="form.errors.slug"
+                        />
+                    </div>
+                    <div>
+                        <BreezeLabel
+                            for="excerpt"
+                            value="excerpt"
+                            class="block mb-2 uppercase font-bold text-xs text-gray-700 w-full"
+                        />
+                        <BreezeInput
+                            id="excerpt"
+                            type="text"
+                            class="border border-blue-300 p-2 w-full rounded"
+                            v-model="form.excerpt"
+                            required
+                            autofocus
+                            autocomplete="excerpt"
+                        />
+                        <BreezeInputError
+                            class="mt-2"
+                            :message="form.errors.excerpt"
                         />
                     </div>
                     <div>

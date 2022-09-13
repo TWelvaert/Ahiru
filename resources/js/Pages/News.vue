@@ -29,10 +29,7 @@ let data = defineProps({
                         <button
                             class="uppercase bg-green-300 hover:bg-black hover:text-white text-black py-3 px-8 rounded-full font-light tracking-widest transition ease-in-out delay-50 hover:-translate-y-0.5 hover:scale-60 duration-50 antialiased"
                         >
-                            <a v-bind:href="/news/article/create">New Articles</a>
-                            
-                                
-                            
+                            <a href="/admin/news/create">New Articles</a>
                         </button>
                     </div>
                 </div>
@@ -67,7 +64,7 @@ let data = defineProps({
                             <td class="text-blue-500 hover:text-blue-600">
                                 <a
                                     v-bind:href="
-                                        '/news_article/' +
+                                        '/admin/news/' +
                                         news_article.slug +
                                         '/edit'
                                     "
@@ -78,24 +75,17 @@ let data = defineProps({
                             <td
                                 class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium"
                             >
-                                <form
-                                    action="/admin/posts/{{ $post->id }}"
-                                    method="POST"
-                                >
-                                    <!-- @csrf
-                        @method('DELETE') -->
-
-                                    <button class="text-xs text-gray-400">
-                                        <a
-                                            v-bind:href="
-                                                '/news_article/delete/' +
-                                                news_article.slug
-                                            "
-                                        >
-                                            Delete
-                                        </a>
-                                    </button>
-                                </form>
+                                <button class="text-xs text-gray-400">
+                                    <a
+                                        v-bind:href="
+                                            '/admin/news/' +
+                                            news_article.slug +
+                                            '/delete'
+                                        "
+                                    >
+                                        Delete
+                                    </a>
+                                </button>
                             </td>
                         </tr>
                     </tbody>

@@ -83,12 +83,6 @@ let data = defineProps({
                             <td
                                 class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium"
                             >
-                                <!-- <form
-                            action="/admin/posts/{{ $post->id }}"
-                            method="POST"
-                        > -->
-                                <!-- @csrf
-                        @method('DELETE') -->
 
                                 <button class="text-xs text-gray-400">
                                     <a
@@ -100,7 +94,6 @@ let data = defineProps({
                                         Delete
                                     </a>
                                 </button>
-                                <!-- </form> -->
                             </td>
                         </tr>
                     </tbody>
