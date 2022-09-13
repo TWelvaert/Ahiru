@@ -62,7 +62,7 @@
                 <div class="border-2 border-black w-40">
                     {{ image['original_name'] }}
                     <img class="w-40 h-40" :src="`/${image['path']}/${image['name']}`" />
-                    Delete
+                    <a v-bind:href="`/settings/uploads/delete/${image['id']}`">Delete</a>
                 </div>
             </div>    
         </div>
@@ -72,7 +72,8 @@
             <div v-for="audio in data['uploads_audio']">
                 <div class="border-2 border-black w-40">
                     {{ audio['original_name'] }}
-                    Play | Delete
+                    <hr>
+                    <a href="">Play</a> | <a v-bind:href="`/settings/uploads/delete/${audio['id']}`">Delete</a>
                 </div>
             </div>    
         </div>

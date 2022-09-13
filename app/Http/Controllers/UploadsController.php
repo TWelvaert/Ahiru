@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
 use App\Models\Upload;
+use File;
 
 class UploadsController extends Controller
 {
@@ -73,6 +74,14 @@ class UploadsController extends Controller
         }
 
         $uploads = implode(",", $uploads);
+    }
+
+    public function destroy(Upload $upload)
+    {
+        $toDelete = "{$upload->path}/{$upload->name}";
+        File::delete($toDelete);
+        $upload->delete();
+        return redirect('/settings/uploads');
     }
 
 
