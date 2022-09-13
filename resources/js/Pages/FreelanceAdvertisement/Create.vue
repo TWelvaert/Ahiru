@@ -34,17 +34,21 @@ const submit = () => {
     <Head title="Advertisement" />
     <BreezeAuthenticatedLayout>
         <template #header>
-            <h2 class="font-monument text-xl text-black leading-tight flex items-center justify-center">
+            <h2 class="font-monument text-xl text-black  flex items-center justify-center">
                 Advertisement
             </h2>
         </template>
-        <div class="py-12 bg-white w-full sm:max-w-md mt-6 px-6 shadow-md overflow-hidden sm:rounded-lg items-center justify-center">
-            <div class="w-3/5 sm:px-6 lg:px-8">
+        <div class="flex items-center justify-center">
+        <div class="py-12 bg-white w-full sm:max-w-md mt-9 overflow-hidden sm:rounded-lg flex items-center justify-center">
+            <div class="">
+                <div class="flex items-center justify-center">
                 <h2
-                    class=" my-4  text-black font-monument"
+                    class=" my-2  text-black font-monument"
                 >
                     Create Advertisement
                 </h2>
+            </div>
+                <hr class="m-4" style="width:100%;text-align:left;margin-left:0">
 
                 <form @submit.prevent="submit" enctype="multipart/form-data">
                     <div>
@@ -57,6 +61,7 @@ const submit = () => {
                             id="title"
                             type="text"
                             v-model="form.title"
+                            class="block w-full"
                             required
                             autofocus
                             autocomplete="title"
@@ -75,7 +80,7 @@ const submit = () => {
                         <BreezeInput
                             id="slug"
                             type="text"
-
+                            class="block w-full"
                             v-model="form.slug"
                             required
                             autofocus
@@ -96,11 +101,11 @@ const submit = () => {
                             id="description"
                             type="textarea"
                             v-model="form.description"
-                            rows="6"
+                            rows="8"
                             required
                             autofocus
                             autocomplete="description"
-                            class="border-gray-300  focus:border-green-300 -webkit-appearance:none border-rounded focus:ring focus:ring-green-200 focus:ring-opacity-50 rounded-md shadow-sm"
+                            class="border-gray-300  focus:border-green-300 block w-full  border-rounded focus:ring focus:ring-green-200 focus:ring-opacity-50 rounded-md shadow-sm"
                         />
 
                         <BreezeInputError
@@ -129,7 +134,7 @@ const submit = () => {
                         />
                     </div>
 
-                    <div v-for="category in categories" class="inline mx-2">
+                    <div v-for="category in categories" class="flex items-center">
                         <BreezeCheckbox
                             :name="category.name"
                             :id="category.id"
@@ -142,7 +147,7 @@ const submit = () => {
                         />
                     </div>
 
-                    <div class="flex items-center justify-end mt-4">
+                    <div class="flex items-center justify-center mt-4">
                         <BreezeButton
                             name="form"
                             :class="{ 'opacity-25': form.processing }"
@@ -154,5 +159,6 @@ const submit = () => {
                 </form>
             </div>
         </div>
+    </div>
     </BreezeAuthenticatedLayout>
 </template>

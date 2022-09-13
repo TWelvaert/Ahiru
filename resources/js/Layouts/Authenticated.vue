@@ -53,7 +53,7 @@ const showingNavigationDropdown = ref(false);
                         </div>
 
                         <div class="hidden  space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                            <BreezeNavLink :href="route('settings/account')" :class="{ 'active': $page.url === '/settings/account' }">
+                            <BreezeNavLink :href="route('advertisement/create')" :class="{ 'active': $page.url === '/advertisement/create' }">
                                 Colaborate
                             </BreezeNavLink>
 
@@ -99,6 +99,9 @@ const showingNavigationDropdown = ref(false);
                                         </BreezeDropdownLink>
                                         <BreezeDropdownLink :href="route('logout')" method="post" as="button">
                                             Tracks
+                                        </BreezeDropdownLink>
+                                        <BreezeDropdownLink :href="route('settings/account')" :class="{ 'active': $page.url === '/settings/account' }">
+                                            Settings
                                         </BreezeDropdownLink>
                                         <BreezeDropdownLink :href="route('logout')" method="post" as="button">
                                             Log Out
