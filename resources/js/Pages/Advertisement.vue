@@ -18,7 +18,7 @@ const uploads = data["uploads"];
                 Advertisement
             </h2>
         </template>
-        <div class="py-12">
+        <div class="py-12 text-white">
             <div class="max-w-7xl mx-20 sm:px-6 lg:px-8">
                 <h2>{{ advertisement.title }}</h2>
                 <hr />

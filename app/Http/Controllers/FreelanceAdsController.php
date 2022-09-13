@@ -28,6 +28,26 @@ class FreelanceAdsController extends Controller
         ]);
     }
 
+
+    public function colaberations()
+    {
+        $colaberations = FreelanceAdvertisement::all();
+        $freelanceCategories = FreelanceCategory::all();
+        $categories = [];
+
+        foreach ($freelanceCategories as $category) {
+            $categoryObject = ['id' => $category->id, 'name' => $category->name, 'slug' => $category->slug, 'checked' => false];
+            array_push($categories, $categoryObject);
+        }
+
+
+        return Inertia::render('Advertisements', [
+            'colaberations' => $colaberations,
+            'categories' => $categories
+        ]);
+    }
+
+
     public function show(FreelanceAdvertisement $freelanceAdvertisement)
     {
 
