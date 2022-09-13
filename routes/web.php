@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AdminAdvertisementController;
 use App\Http\Controllers\FreelanceAdsController;
+use App\Http\Controllers\NewsController;
 use App\Models\FreelanceAdvertisement;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
@@ -45,6 +46,12 @@ Route::post('/advertisement/update/{freelanceAdvertisement:slug}', [FreelanceAds
 Route::get('/dashboard/advertisement/delete/{freelanceAdvertisement:slug}', [FreelanceAdsController::class, 'destroy'])->middleware(['auth', 'verified']);
 
 Route::get('/advertisement/{freelanceAdvertisement:slug}', [FreelanceAdsController::class, 'show']);
+
+
+Route::get('/admin/news', [NewsController::class, 'admin_index'])->name('news_index')->middleware(['auth', 'verified']);
+Route::get('/news/article/{news_article:slug}', [NewsController::class, 'show']);
+
+Route::get('/news/article/create', [NewsController::class, 'create'])->name('news/article/create')->middleware(['auth', 'verified']);
 
 
 
