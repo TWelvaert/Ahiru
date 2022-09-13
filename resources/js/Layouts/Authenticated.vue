@@ -33,11 +33,11 @@ const showingNavigationDropdown = ref(false);
                             </div>
 
                             <!-- Navigation Links -->
-                      
+
                                     <BreezeNavLink :href="route('dashboard')" :class="{ 'active': $page.url === '/dashboard' }">
                                         Home
                                     </BreezeNavLink>
-                
+
                         </div>
                         <div class="pt-3">
                             <input class="
@@ -146,7 +146,7 @@ const showingNavigationDropdown = ref(false);
                         </div>
 
                         <div class="mt-3 space-y-1">
-                            <BreezeResponsiveNavLink :href="route('logout')" method="post" as="button">
+                            <BreezeResponsiveNavLink   BreezeResponsiveNavLink :href="route('logout')" method="post" as="button">
                                 Log Out
                             </BreezeResponsiveNavLink>
                         </div>

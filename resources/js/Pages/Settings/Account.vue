@@ -21,7 +21,7 @@
         new_password: '',
         new_password_confirmation: '',
     });
-   
+
     const submit_personal_info = () => {
         form1.post(route('settings/account'));
     };
@@ -33,24 +33,21 @@
     };
 
 </script>
-    
+
 <template>
     <Head title="Account Settings" />
 
     <BreezeAuthenticatedLayout>
 
         <template #header>
-            <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+            <h2 class="font-monument text-xl text-black leading-tight flex items-center justify-center">
                 Account Settings
             </h2>
         </template>
-        
-        <div class="py-12">
+        <div class="flex items-center justify-center m-10">
+        <div class="py-12 bg-white w-full sm:max-w-md mt-6 px-6 shadow-md overflow-hidden sm:rounded-lg items-center justify-center">
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-
-
-           
-                <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+                <h2 class="text-xl text-black font-monument leading-tight flex items-center justify-center m-4">
                     Personal Information
                 </h2>
 
@@ -74,8 +71,8 @@
                     </div>
                 </form>
 
-                
-                <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+
+                <h2 class="text-xl text-black font-monument leading-tight flex items-center justify-center m-4">
                     Edit Password
                 </h2>
 
@@ -106,6 +103,7 @@
                 </form>
             </div>
         </div>
+    </div>
 
     </BreezeAuthenticatedLayout>
 </template>
