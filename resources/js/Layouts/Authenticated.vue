@@ -31,7 +31,6 @@ const showingNavigationDropdown = ref(false);
                                     <BreezeApplicationLogo class="block h-9 w-auto" />
                                 </Link>
                             </div>
-
                             <!-- Navigation Links -->
                             <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex ">
                                 <BreezeNavLink href="/dashboard" :active="route().current('dashboard')"  :class="{ 'active': $page.component === 'Dashboard' }">
