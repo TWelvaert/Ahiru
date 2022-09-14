@@ -7,30 +7,17 @@ use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
 use App\Models\Upload;
 use File;
-
+use Illuminate\Support\Facades\Route;
+use Redirect;
 class UploadsController extends Controller
 {
     public function index()
     {
         $user = Auth::user();
-
-        $uploads = Upload::where('user_id', '=', $user->id)->get();
-        $uploads_images = [];
-        $uploads_audio = [];
-
-        foreach ($uploads as $upload) {
-
-            if($upload->type == 'image') {
-                array_push($uploads_images, $upload);
-            }
-            if($upload->type == 'audio') {
-                array_push($uploads_audio, $upload);
-            }
-        }
+        $user_uploads = Upload::where('user_id', '=', $user->id)->get();
 
         return Inertia::render('Settings/Uploads', [
-            'uploads_images' => $uploads_images,
-            'uploads_audio' => $uploads_audio
+            'user_uploads' => $user_uploads
         ]);
     }
 
@@ -73,16 +60,32 @@ class UploadsController extends Controller
             }
         }
 
-        $uploads = implode(",", $uploads);
+        $user_uploads = Upload::where('user_id', '=', Auth::user()->id)->get();
+
+        return redirect()->back();
     }
 
     public function destroy(Upload $upload)
     {
+        $hostname = $_SERVER['REQUEST_URI'];
+        $routes = explode("/delete", $hostname, 2);
+        $route = $routes[0];
+
         $toDelete = "{$upload->path}/{$upload->name}";
         File::delete($toDelete);
         $upload->delete();
-        return redirect('/settings/uploads');
+
+        $user_uploads = Upload::where('user_id', '=', Auth::user()->id)->get();
+
+        if($route = '/settings/uploads') {
+            return Inertia::render('FreelanceAdvertisement/Create', [
+                'user_uploads' => $user_uploads,
+                'showModal' => true,
+            ]);  
+        } else {
+            return Inertia::render('Settings/Uploads', [
+                    'user_uploads' => $user_uploads
+                ]);
+        }
     }
-
-
 }

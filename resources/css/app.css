@@ -18,3 +18,7 @@ html {
     border:1px solid red;
     box-shadow: 0 0 10px #719ECE;
   }
+
+  .active_file {
+    background-color: rgb(182, 218, 182);
+  }

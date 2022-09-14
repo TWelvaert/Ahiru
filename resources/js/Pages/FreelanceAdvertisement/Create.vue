@@ -6,28 +6,36 @@ import BreezeInputError from "@/Components/InputError.vue";
 import BreezeLabel from "@/Components/Label.vue";
 import BreezeCheckbox from "@/Components/Checkbox.vue";
 import TextareaVue from "@/Components/textarea.vue";
-
+import Modal from "@/Components/Modal.vue";
+import Uploads from "@/Pages/Settings/Uploads.vue";
+import { reactive } from 'vue'
 import { Head, useForm } from "@inertiajs/inertia-vue3";
 
 let data = defineProps({
-    title: String,
-    slug: String,
-    description: String,
+    user_uploads: Array,
+    showModal: Boolean,
     categories: Array,
-    uploads: [],
+    uploads: Array,
 });
 
-const form = useForm({
-    title: data["title"],
-    slug: data["slug"],
-    description: data["description"],
+let selected_files;
+
+let form = useForm({
+    title: '',
+    slug: '',
+    description: '',
     categories: data["categories"],
-    uploads: data["uploads"],
+    uploads: '',
 });
 
 const submit = () => {
     form.post(route("advertisement/create"));
 };
+
+function processFiles(files){
+    selected_files = files;
+    form.uploads = files;
+}
 </script>
 
 <template>
@@ -108,25 +116,12 @@ const submit = () => {
                             :message="form.errors.description"
                         />
                     </div>
-                    <div>
-                        <BreezeLabel
-                            for="images"
-                            value="upload files"
-                            class="block mb-2 uppercase font-bold text-xs text-gray-700 w-full"
-                        />
-                        <BreezeInput
-                            id="images"
-                            multiple
-                            type="file"
-                            @input="form.uploads = $event.target.files"
-                            class="border border-blue-300 p-2 w-full rounded mb-2"
-                            required
-                            autofocus
-                        />
-                        <BreezeInputError
-                            class="mt-2"
-                            :message="form.errors.uploads"
-                        />
+            
+                    <div class="bg-white">
+                        <button type="button" @click="showModal = true">ADD IMAGE OR AUDIO FILE</button>
+                        <Modal v-if="showModal" @close="showModal = false">
+                            <Uploads @add_files="processFiles" :user_uploads="data['user_uploads']" />
+                        </Modal>
                     </div>
 
                     <div v-for="category in categories" class="inline mx-2">
@@ -157,3 +152,13 @@ const submit = () => {
         </div>
     </BreezeAuthenticatedLayout>
 </template>
+
+<script>
+    export default {
+        data() {
+            return {
+                showModal: false
+            }
+        }
+    }
+</script>
