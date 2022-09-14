@@ -1,8 +1,9 @@
 <template>
  
 		
-	<div class="relative bottom-0 w-player flex flex-col">
-		<div v-show="seen" id="hide" class="px-10 pt-10 pb-4 flex items-center z-50">
+	<div class="relative
+	 bottom-0 w-player flex flex-col">
+		<div v-show="seen" id="hide" class="px-10 pt-10 pb-4 flex items-center z-10">
 			<img :src="currentSong.img" id="songCover" class="w-24 h-24 rounded-md mr-6 border "/>
 
 			<div class="flex flex-col">
@@ -13,7 +14,7 @@
 			</div>
 			<div class="text-white mx-10">
 				<span name="min" @click="min">min</span>
-			<input class="mx-0" type="range" id="volume-slider" min="0" max="100" step="1" v-model="volume" @input="updateVolume">
+			<input class="mx-0" type="range" orient="vertical" id="volume-slider" min="0" max="100" step="1" v-model="volume" @input="updateVolume">
 			<span name="max" @click="max">max</span>
 			</div>
 		</div>
