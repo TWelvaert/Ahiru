@@ -105,10 +105,12 @@ class NewsController extends Controller
                 if ($all_category['id'] == $current_category) {
                     $categoryObject2 = array('id' => $all_category['id'], 'name' => $all_category['name'], 'slug' => $all_category['slug'], 'checked' => true);
                     array_push($categories, $categoryObject2);
+                } else {
+                    $categoryObject2 = ['id' => $all_category['id'], 'name' => $all_category['name'], 'slug' => $all_category['slug'], 'checked' => false];
+                    array_push($categories, $categoryObject2);
                 }
             }
-            $categoryObject2 = ['id' => $all_category['id'], 'name' => $all_category['name'], 'slug' => $all_category['slug'], 'checked' => false];
-            array_push($categories, $categoryObject2);
+
         }
 
         // dd($categories);
