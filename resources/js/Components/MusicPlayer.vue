@@ -121,7 +121,6 @@ data() {
 },
 mounted() {
 	// this.audio = document.querySelector('#audio')
-	
 	this.currentSong = this.songs[this.index]
 	this.audio.src = this.currentSong.src
 	this.progressBar = document.querySelector("#song-slider")
@@ -163,7 +162,7 @@ methods: {
 	},
 	
 	shuffle() {
-      	
+		console.log('shuffle')
 	},
 	repeat() {
 		this.audio.loop = true	
