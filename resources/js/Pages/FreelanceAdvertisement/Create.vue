@@ -157,7 +157,6 @@ function processFiles(files){
     </div>
     </BreezeAuthenticatedLayout>
 </template>
-<<<<<<< HEAD
 
 <script>
     export default {
@@ -168,5 +167,3 @@ function processFiles(files){
         }
     }
 </script>
-=======
->>>>>>> 483163e976e93e1175b8d2368b6bd1cfde5eebd3
