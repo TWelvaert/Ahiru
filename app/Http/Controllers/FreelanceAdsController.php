@@ -178,7 +178,7 @@ class FreelanceAdsController extends Controller
         $categories = [];
 
         foreach ($all_categories as $all_category) {
-            if (in_array($all_category['id'], $current_categories) {
+            if (in_array($all_category['id'], $current_categories)) {
                 $categoryObject2 = array('id' => $all_category['id'], 'name' => $all_category['name'], 'slug' => $all_category['slug'], 'checked' => true);
                 array_push($categories, $categoryObject2);
             } else {
