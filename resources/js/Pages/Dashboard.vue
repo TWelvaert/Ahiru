@@ -16,7 +16,6 @@ let data = defineProps({
             <div class="font-monument">
             <span id="welcome" class="flex items-center  justify-center">
             </span>
-
         </div>
         <span class="flex items-center justify-center">
             You have 14788 plays last 7 days
@@ -27,9 +26,7 @@ let data = defineProps({
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 rounded-full ">
                 <div
                     class="bg-gray-600 overflow-hidden sm:rounded-lg ">
-
                 </div>
-
                 <table class="min-w-full divide-y divide-gray-200">
                     <tbody class="bg-white divide-y divide-gray-200">
                         <tr v-for="advertisement in advertisements">
