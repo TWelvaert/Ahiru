@@ -17,7 +17,7 @@ class NewsController extends Controller
     public function admin_index()
     {
         $user = Auth::user();
-        $newsArticles = NewsArticle::all()->where('user_id', '=', $user->id);
+        $newsArticles = NewsArticle::all();
 
         return Inertia::render('News', [
             'news_articles' => $newsArticles,
@@ -101,14 +101,12 @@ class NewsController extends Controller
         $categories = [];
 
         foreach ($all_categories as $all_category) {
-            foreach ($current_categories as $current_category) {
-                if ($all_category['id'] == $current_category) {
-                    $categoryObject2 = array('id' => $all_category['id'], 'name' => $all_category['name'], 'slug' => $all_category['slug'], 'checked' => true);
-                    array_push($categories, $categoryObject2);
-                } else {
-                    $categoryObject2 = ['id' => $all_category['id'], 'name' => $all_category['name'], 'slug' => $all_category['slug'], 'checked' => false];
-                    array_push($categories, $categoryObject2);
-                }
+            if (in_array($all_category['id'], $current_categories)) {
+                $categoryObject2 = array('id' => $all_category['id'], 'name' => $all_category['name'], 'slug' => $all_category['slug'], 'checked' => true);
+                array_push($categories, $categoryObject2);
+            } else {
+                $categoryObject2 = ['id' => $all_category['id'], 'name' => $all_category['name'], 'slug' => $all_category['slug'], 'checked' => false];
+                array_push($categories, $categoryObject2);
             }
         }
 
