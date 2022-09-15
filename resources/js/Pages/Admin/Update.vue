@@ -11,33 +11,34 @@ import { Head, useForm } from "@inertiajs/inertia-vue3";
 
 let data = defineProps({
     title: String,
+    excerpt: String,
     slug: String,
     description: String,
-    categories: Array,
-    uploads: Array,
+    // categories: Array,
+    // uploads: Array,
 });
+console.log(data["slug"]);
 
 const form = useForm({
     title: data["title"],
     slug: data["slug"],
+    excerpt: data["excerpt"],
     description: data["description"],
-    categories: data["categories"],
-    uploads: data["uploads"],
+    // categories: data["categories"],
+    // uploads: data["uploads"],
 });
 
-console.log(data["categories"]);
-
 const submit = () => {
-    form.post(`/advertisement/update/${data["slug"]}`);
+    form.post(`/admin/news/${data["slug"]}/edit`);
 };
 </script>
 
 <template>
-    <Head title="Advertisement" />
+    <Head title="News Article" />
     <BreezeAuthenticatedLayout>
         <template #header>
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                Advertisement
+                News Article
             </h2>
         </template>
         <div class="flex justify-center">
@@ -45,8 +46,7 @@ const submit = () => {
                 <h2
                     class="block my-4 uppercase font-bold text-xs text-gray-700"
                 >
-                    Update Advertisement for
-                    {{ category_id }}
+                    Update News Atricle for
                 </h2>
                 <hr />
                 <form @submit.prevent="submit">
@@ -92,6 +92,26 @@ const submit = () => {
                     </div>
                     <div>
                         <BreezeLabel
+                            for="excerpt"
+                            value="excerpt"
+                            class="block mb-2 uppercase font-bold text-xs text-gray-700 w-full"
+                        />
+                        <BreezeInput
+                            id="excerpt"
+                            type="text"
+                            v-model="form.excerpt"
+                            class="border border-blue-300 p-2 w-full rounded"
+                            required
+                            autofocus
+                            autocomplete="excerpt"
+                        />
+                        <BreezeInputError
+                            class="mt-2"
+                            :message="form.errors.excerpt"
+                        />
+                    </div>
+                    <div>
+                        <BreezeLabel
                             for="description"
                             value="description"
                             class="block mb-2 uppercase font-bold text-xs text-gray-700 w-full"
@@ -111,7 +131,7 @@ const submit = () => {
                             :message="form.errors.description"
                         />
                     </div>
-                    <div v-for="upload in uploads" class="w-20 inline-block">
+                    <!-- <div v-for="upload in uploads" class="w-20 inline-block">
                         <div v-if="upload['type'] === 'image'">
                             <img
                                 :src="`/${upload['path']}/${upload['name']}`"
@@ -120,8 +140,8 @@ const submit = () => {
                         <div v-if="upload['type'] === 'audio'">
                             {{ upload["name"] }}
                         </div>
-                    </div>
-                    <div>
+                    </div> -->
+                    <!-- <div>
                         <BreezeLabel
                             for="images"
                             value="upload files"
@@ -140,8 +160,8 @@ const submit = () => {
                             class="mt-2"
                             :message="form.errors.uploads"
                         />
-                    </div>
-                    <div v-for="category in categories" class="inline mx-2">
+                    </div> -->
+                    <!-- <div v-for="category in categories" class="inline mx-2">
                         <BreezeCheckbox
                             :name="category.name"
                             :id="category.id"
@@ -152,13 +172,14 @@ const submit = () => {
                             :value="category.name"
                             class="inline-block mb-2 ml-2 uppercase font-bold text-xs text-gray-700"
                         />
-                    </div>
+                    </div> -->
                     <div class="flex items-center justify-end mt-4">
                         <BreezeButton
                             name="form"
                             class="ml-4"
                             :class="{ 'opacity-25': form.processing }"
-                            :disabled="form.processing">
+                            :disabled="form.processing"
+                        >
                             Update
                         </BreezeButton>
                     </div>

@@ -1,6 +1,5 @@
 <?php
 
-use App\Models\FreelanceAdvertisement;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -14,13 +13,15 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('uploads', function (Blueprint $table) {
+        Schema::create('news_articles', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained();
-            $table->string('name');
-            $table->string('original_name');
-            $table->string('path');
-            $table->string('type');
+            $table->foreignId('user_id')->constrained()->cascadeOnDelete();
+            $table->string('category_id')->nullable();
+            $table->string('slug')->unique();
+            $table->string('title');
+            $table->string('excerpt');
+            $table->text('description');
+            $table->string('uploads')->nullable();
             $table->timestamps();
         });
     }
@@ -32,6 +33,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('uploads');
+        Schema::dropIfExists('news_articles');
     }
 };

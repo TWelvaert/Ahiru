@@ -3,8 +3,8 @@ import BreezeAuthenticatedLayout from "@/Layouts/Authenticated.vue";
 import BreezeButton from "@/Components/Button.vue";
 import BreezeInput from "@/Components/Input.vue";
 import BreezeInputError from "@/Components/InputError.vue";
-import BreezeCheckbox from "@/Components/Checkbox.vue";
 import BreezeLabel from "@/Components/Label.vue";
+import BreezeCheckbox from "@/Components/Checkbox.vue";
 import TextareaVue from "@/Components/textarea.vue";
 
 import { Head, useForm } from "@inertiajs/inertia-vue3";
@@ -12,32 +12,32 @@ import { Head, useForm } from "@inertiajs/inertia-vue3";
 let data = defineProps({
     title: String,
     slug: String,
+    excerpt: String,
     description: String,
-    categories: Array,
-    uploads: Array,
+    // categories: Array,
+    // uploads: [],
 });
 
 const form = useForm({
     title: data["title"],
     slug: data["slug"],
+    excerpt: data["excerpt"],
     description: data["description"],
-    categories: data["categories"],
-    uploads: data["uploads"],
+    // categories: data["categories"],
+    // uploads: data["uploads"],
 });
 
-console.log(data["categories"]);
-
 const submit = () => {
-    form.post(`/advertisement/update/${data["slug"]}`);
+    form.post(route("admin/news/create"));
 };
 </script>
 
 <template>
-    <Head title="Advertisement" />
+    <Head title="Create_article" />
     <BreezeAuthenticatedLayout>
         <template #header>
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                Advertisement
+                News Article
             </h2>
         </template>
         <div class="flex justify-center">
@@ -45,11 +45,10 @@ const submit = () => {
                 <h2
                     class="block my-4 uppercase font-bold text-xs text-gray-700"
                 >
-                    Update Advertisement for
-                    {{ category_id }}
+                    Create News Article
                 </h2>
                 <hr />
-                <form @submit.prevent="submit">
+                <form @submit.prevent="submit" enctype="multipart/form-data">
                     <div>
                         <BreezeLabel
                             for="title"
@@ -59,8 +58,8 @@ const submit = () => {
                         <BreezeInput
                             id="title"
                             type="text"
-                            v-model="form.title"
                             class="border border-blue-300 p-2 w-full rounded"
+                            v-model="form.title"
                             required
                             autofocus
                             autocomplete="title"
@@ -92,6 +91,26 @@ const submit = () => {
                     </div>
                     <div>
                         <BreezeLabel
+                            for="excerpt"
+                            value="excerpt"
+                            class="block mb-2 uppercase font-bold text-xs text-gray-700 w-full"
+                        />
+                        <BreezeInput
+                            id="excerpt"
+                            type="text"
+                            class="border border-blue-300 p-2 w-full rounded"
+                            v-model="form.excerpt"
+                            required
+                            autofocus
+                            autocomplete="excerpt"
+                        />
+                        <BreezeInputError
+                            class="mt-2"
+                            :message="form.errors.excerpt"
+                        />
+                    </div>
+                    <div>
+                        <BreezeLabel
                             for="description"
                             value="description"
                             class="block mb-2 uppercase font-bold text-xs text-gray-700 w-full"
@@ -111,17 +130,7 @@ const submit = () => {
                             :message="form.errors.description"
                         />
                     </div>
-                    <div v-for="upload in uploads" class="w-20 inline-block">
-                        <div v-if="upload['type'] === 'image'">
-                            <img
-                                :src="`/${upload['path']}/${upload['name']}`"
-                            />
-                        </div>
-                        <div v-if="upload['type'] === 'audio'">
-                            {{ upload["name"] }}
-                        </div>
-                    </div>
-                    <div>
+                    <!-- <div>
                         <BreezeLabel
                             for="images"
                             value="upload files"
@@ -140,8 +149,9 @@ const submit = () => {
                             class="mt-2"
                             :message="form.errors.uploads"
                         />
-                    </div>
-                    <div v-for="category in categories" class="inline mx-2">
+                    </div> -->
+
+                    <!-- <div v-for="category in categories" class="inline mx-2">
                         <BreezeCheckbox
                             :name="category.name"
                             :id="category.id"
@@ -152,14 +162,16 @@ const submit = () => {
                             :value="category.name"
                             class="inline-block mb-2 ml-2 uppercase font-bold text-xs text-gray-700"
                         />
-                    </div>
+                    </div> -->
+
                     <div class="flex items-center justify-end mt-4">
                         <BreezeButton
                             name="form"
                             class="ml-4"
                             :class="{ 'opacity-25': form.processing }"
-                            :disabled="form.processing">
-                            Update
+                            :disabled="form.processing"
+                        >
+                            Create
                         </BreezeButton>
                     </div>
                 </form>
