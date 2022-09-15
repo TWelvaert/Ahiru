@@ -91,7 +91,7 @@ const showingNavigationDropdown = ref(false);
                                         <BreezeDropdownLink :href="route('logout')" method="post" as="button">
                                             Profile
                                         </BreezeDropdownLink>
-                                        <BreezeDropdownLink :href="route('logout')" method="post" as="button">
+                                        <BreezeDropdownLink :href="route('likes')" :class="{ 'active': $page.url === '/likes' }">
                                             Likes
                                         </BreezeDropdownLink>
                                         <BreezeDropdownLink :href="route('logout')" method="post" as="button">
