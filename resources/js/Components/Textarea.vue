@@ -8,15 +8,16 @@ defineEmits(["update:modelValue"]);
 const input = ref(null);
 
 onMounted(() => {
-    if (input.value.hasAttribute("autofocus")) {
+    if (input.value.hasAttribute("focus")) {
         input.value.focus();
     }
 });
+
 </script>
 
 <template>
     <textarea
-        class="border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm"
+        class="w-xl"
         :value="modelValue"
         @input="$emit('update:modelValue', $event.target.value)"
         ref="input"

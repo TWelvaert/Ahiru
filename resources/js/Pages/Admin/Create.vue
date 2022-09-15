@@ -12,56 +12,54 @@ import { Head, useForm } from "@inertiajs/inertia-vue3";
 let data = defineProps({
     title: String,
     slug: String,
+    excerpt: String,
     description: String,
-    categories: Array,
-    uploads: [],
+    // categories: Array,
+    // uploads: [],
 });
 
 const form = useForm({
     title: data["title"],
     slug: data["slug"],
+    excerpt: data["excerpt"],
     description: data["description"],
-    categories: data["categories"],
-    uploads: data["uploads"],
+    // categories: data["categories"],
+    // uploads: data["uploads"],
 });
 
 const submit = () => {
-    form.post(route("advertisement/create"));
+    form.post(route("admin/news/create"));
 };
 </script>
 
 <template>
-    <Head title="Advertisement" />
+    <Head title="Create_article" />
     <BreezeAuthenticatedLayout>
         <template #header>
-            <h2 class="font-monument text-xl text-black  flex items-center justify-center">
-                Advertisement
+            <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+                News Article
             </h2>
         </template>
-        <div class="flex items-center justify-center">
-        <div class="py-12 bg-white w-full sm:max-w-md mt-9 overflow-hidden sm:rounded-lg flex items-center justify-center">
-            <div class="">
-                <div class="flex items-center justify-center">
+        <div class="flex justify-center">
+            <div class="w-3/5 sm:px-6 lg:px-8">
                 <h2
-                    class=" my-2  text-black font-monument"
+                    class="block my-4 uppercase font-bold text-xs text-gray-700"
                 >
-                    Create Advertisement
+                    Create News Article
                 </h2>
-            </div>
-                <hr class="m-4" style="width:100%;text-align:left;margin-left:0">
-
+                <hr />
                 <form @submit.prevent="submit" enctype="multipart/form-data">
                     <div>
                         <BreezeLabel
                             for="title"
-                            value="Title"
-
+                            value="title"
+                            class="block mb-2 uppercase font-bold text-xs text-gray-700 w-full"
                         />
                         <BreezeInput
                             id="title"
                             type="text"
+                            class="border border-blue-300 p-2 w-full rounded"
                             v-model="form.title"
-                            class="block w-full"
                             required
                             autofocus
                             autocomplete="title"
@@ -74,13 +72,13 @@ const submit = () => {
                     <div>
                         <BreezeLabel
                             for="slug"
-                            value="Slug"
-
+                            value="slug"
+                            class="block mb-2 uppercase font-bold text-xs text-gray-700 w-full"
                         />
                         <BreezeInput
                             id="slug"
                             type="text"
-                            class="block w-full"
+                            class="border border-blue-300 p-2 w-full rounded"
                             v-model="form.slug"
                             required
                             autofocus
@@ -93,38 +91,57 @@ const submit = () => {
                     </div>
                     <div>
                         <BreezeLabel
+                            for="excerpt"
+                            value="excerpt"
+                            class="block mb-2 uppercase font-bold text-xs text-gray-700 w-full"
+                        />
+                        <BreezeInput
+                            id="excerpt"
+                            type="text"
+                            class="border border-blue-300 p-2 w-full rounded"
+                            v-model="form.excerpt"
+                            required
+                            autofocus
+                            autocomplete="excerpt"
+                        />
+                        <BreezeInputError
+                            class="mt-2"
+                            :message="form.errors.excerpt"
+                        />
+                    </div>
+                    <div>
+                        <BreezeLabel
                             for="description"
-                            value="Description"
-
+                            value="description"
+                            class="block mb-2 uppercase font-bold text-xs text-gray-700 w-full"
                         />
                         <TextareaVue
                             id="description"
                             type="textarea"
+                            class="border border-blue-300 p-2 w-full rounded"
                             v-model="form.description"
-                            rows="8"
+                            rows="6"
                             required
                             autofocus
                             autocomplete="description"
-                            class="border-gray-300  focus:border-green-300 block w-full  border-rounded focus:ring focus:ring-green-200 focus:ring-opacity-50 rounded-md shadow-sm"
                         />
-
                         <BreezeInputError
                             class="mt-2"
                             :message="form.errors.description"
                         />
                     </div>
-                    <div>
+                    <!-- <div>
                         <BreezeLabel
                             for="images"
-                            value="Upload files"
-                            class=" m-2  text-black"
+                            value="upload files"
+                            class="block mb-2 uppercase font-bold text-xs text-gray-700 w-full"
                         />
                         <BreezeInput
                             id="images"
                             multiple
                             type="file"
                             @input="form.uploads = $event.target.files"
-                            class=" m-2 text-black w-64"
+                            class="border border-blue-300 p-2 w-full rounded mb-2"
                             required
                             autofocus
                         />
@@ -132,9 +149,9 @@ const submit = () => {
                             class="mt-2"
                             :message="form.errors.uploads"
                         />
-                    </div>
+                    </div> -->
 
-                    <div v-for="category in categories" class="flex items-center">
+                    <!-- <div v-for="category in categories" class="inline mx-2">
                         <BreezeCheckbox
                             :name="category.name"
                             :id="category.id"
@@ -143,13 +160,14 @@ const submit = () => {
                         <BreezeLabel
                             :for="category.id"
                             :value="category.name"
-
+                            class="inline-block mb-2 ml-2 uppercase font-bold text-xs text-gray-700"
                         />
-                    </div>
+                    </div> -->
 
-                    <div class="flex items-center justify-center mt-4">
+                    <div class="flex items-center justify-end mt-4">
                         <BreezeButton
                             name="form"
+                            class="ml-4"
                             :class="{ 'opacity-25': form.processing }"
                             :disabled="form.processing"
                         >
@@ -159,6 +177,5 @@ const submit = () => {
                 </form>
             </div>
         </div>
-    </div>
     </BreezeAuthenticatedLayout>
 </template>
