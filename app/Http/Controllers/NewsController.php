@@ -110,10 +110,8 @@ class NewsController extends Controller
                     array_push($categories, $categoryObject2);
                 }
             }
-
         }
 
-        // dd($categories);
         return Inertia::render('Admin/Update', [
             'title' => $news_article->title,
             'slug' => $news_article->slug,
