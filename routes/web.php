@@ -58,7 +58,7 @@ Route::get('/admin/news/create', [NewsController::class, 'create'])->middleware(
 Route::post('admin/news/create', [NewsController::class, 'store'])->middleware(['auth', 'verified'])->name('admin/news/create');
 
 Route::get('/admin/news/{news_article:slug}/edit', [NewsController::class, 'edit'])->middleware(['auth', 'verified']);
-Route::post('/admin/news/{news_article:slug}/edit', [NewsController::class, 'update'])->middleware(['auth', 'verified']);
+Route::post('/admin/news/{news_article:slug}/update', [NewsController::class, 'update'])->middleware(['auth', 'verified']);
 
 Route::get('/admin/news/{news_article:slug}/delete', [NewsController::class, 'destroy'])->middleware(['auth', 'verified']);
 

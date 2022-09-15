@@ -139,7 +139,7 @@ class FreelanceAdsController extends Controller
         ])->validate();
 
 
-        $freelanceAdvertisement = FreelanceAdvertisement::create([
+        FreelanceAdvertisement::create([
             'user_id' => $user->id,
             'category_id' => $categories,
             'type' => 'advertisement',
