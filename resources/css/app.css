@@ -31,4 +31,9 @@ color: #6EE7B7;
 align-items: center;
 border-bottom-width: 8px;
 border-color: transparent;
-g
+
+hover {
+ --transform-translate-y: -0.125rem;
+border-color: #6EE7B7;
+ }
+}
