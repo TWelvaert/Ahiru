@@ -10,7 +10,7 @@ module.exports = {
     ],
 
     theme: {
-        
+
         extend: {
             fontFamily: {
                 sans: ['Nunito', ...defaultTheme.fontFamily.sans],
@@ -19,6 +19,9 @@ module.exports = {
             screens: {
                 'md': '960px',
                 }
+        },
+        variants:{
+            backgroundColor: ['responsive', 'focus', 'active', 'hover', 'enabled']
         },
     },
 

@@ -10,8 +10,7 @@
             md:flex md:justify-between md:items-center
             shrink-0
         ">
-                <div class="flex items-center justify-between">
-                    <router-link to="/Landing" class="
+                <div class="flex items-center justify-between
                 text-xl
                 font-bold
                 text-white
@@ -20,7 +19,7 @@
                 font-monument
                 antialiased cursor-pointer
             ">AHIRU
-                    </router-link>
+
 
                     <div @click="showMenu = !showMenu" class="flex md:hidden">
                         <button type="button" class="

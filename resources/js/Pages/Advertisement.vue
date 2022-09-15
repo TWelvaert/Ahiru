@@ -14,11 +14,15 @@ const uploads = data["uploads"];
     <Head title="Advertisement" />
     <BreezeAuthenticatedLayout>
         <template #header>
-            <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+            <h2 class="font-monument text-xl text-black leading-tight flex items-center justify-center">
                 Advertisement
             </h2>
+
         </template>
-        <div class="py-12 text-white">
+
+
+        <div class="py-12 bg-white w-full sm:max-w-md mt-6 px-6 shadow-md overflow-hidden sm:rounded-lg flex items-center justify-center">
+
             <div class="max-w-7xl mx-20 sm:px-6 lg:px-8">
                 <h2>{{ advertisement.title }}</h2>
                 <hr />
@@ -34,5 +38,7 @@ const uploads = data["uploads"];
                 </div>
             </div>
         </div>
+
     </BreezeAuthenticatedLayout>
+
 </template>

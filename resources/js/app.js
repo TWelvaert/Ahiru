@@ -8,9 +8,11 @@ import { InertiaProgress } from '@inertiajs/progress';
 import { resolvePageComponent } from 'laravel-vite-plugin/inertia-helpers';
 import { ZiggyVue } from '../../vendor/tightenco/ziggy/dist/vue.m';
 import VueSmoothScroll from 'vue3-smooth-scroll'
+import { TroisJSVuePlugin } from 'troisjs';
 
 
 const appName = window.document.getElementsByTagName('title')[0]?.innerText || 'Laravel';
+
 
 createInertiaApp({
     title: (title) => `${title} - ${appName}`,
@@ -23,6 +25,7 @@ createInertiaApp({
                 duration: 50,
                 updateHistory: false
               } )
+              .use (TroisJSVuePlugin)
             .mount(el);
     },
 });

@@ -8,6 +8,7 @@ use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
+
 use function PHPSTORM_META\type;
 
 /*
@@ -34,6 +35,7 @@ Route::get('/', function () {
 
 
 Route::get('/dashboard', [FreelanceAdsController::class, 'index'])->name('dashboard')->middleware(['auth', 'verified']);
+
 
 Route::get('/advertisement/create', [FreelanceAdsController::class, 'create'])->middleware(['auth', 'verified']);
 Route::post('advertisement/create', [FreelanceAdsController::class, 'store'])->middleware(['auth', 'verified'])->name('advertisement/create');
@@ -65,11 +67,17 @@ Route::get('/admin/news/{news_article:slug}/delete', [NewsController::class, 'de
 Route::get('settings/account', [\App\Http\Controllers\Auth\RegisteredUserController::class, 'edit'])->name('settings/account');
 Route::post('settings/account', [\App\Http\Controllers\Auth\RegisteredUserController::class, 'update'])->name('settings/account');
 Route::get('settings/uploads', [\App\Http\Controllers\UploadsController::class, 'index'])->name('settings/uploads');
+
 Route::post('settings/uploads', [\App\Http\Controllers\UploadsController::class, 'upload'])->name('settings/uploads');
+
 
 Route::get('/about', function () {
     return Inertia::render('About');
 })->name('about');
+
+Route::get('/likes', function () {
+    return Inertia::render('Likes');
+})->name('likes');
 
 // ['auth', 'verified'] when logged in as a user
 
