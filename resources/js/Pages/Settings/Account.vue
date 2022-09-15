@@ -54,7 +54,7 @@ const submit_password = () => {
         <!-- User avatar -->
 
         <div class="flex items-center justify-center">
-            <img class="h-32 w-32 mt-8 border-gray-900 border-4 rounded-full shadow-2xl "
+            <img class="h-48 w-48 mt-8 m-5 border-white border-2 rounded-full shadow-2xl bg-opacity-80 backdrop-blur-lgdrop-shadow-lg"
                 src="../../../assets/images/logologo.png" alt="">
         </div>
         <div class=" flex items-center justify-center">
@@ -73,7 +73,7 @@ const submit_password = () => {
 
             <!-- Information Card -->
 
-            <div class="py-24 bg-white w-full sm:rounded-lg flex flex-row items-center justify-center">
+            <div class="py-24 bg-white w-full sm:rounded-lg bg-opacity-80 backdrop-blur-lg rounded drop-shadow-lg flex flex-row items-center justify-center">
 
                 <!-- Personal information section -->
 
