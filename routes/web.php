@@ -72,10 +72,6 @@ Route::post('settings/uploads', [\App\Http\Controllers\UploadsController::class,
 Route::get('settings/uploads/delete/{upload:id}', [\App\Http\Controllers\UploadsController::class, 'destroy']);
 
 
-Route::get('/about', function () {
-    return Inertia::render('About');
-})->name('about');
-
 Route::get('/likes', function () {
     return Inertia::render('Likes');
 })->name('likes');
@@ -89,7 +85,11 @@ Route::get('/', function () {
 });
 
 Route::get('/About', function () {
-    return Inertia::render('About', );
+    return Inertia::render('About');
+});
+
+Route::get('/Profile', function () {
+    return Inertia::render('Profile');
 });
 
 Route::get('/Artists', function () {
