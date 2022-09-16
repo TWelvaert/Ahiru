@@ -1,12 +1,13 @@
 <script setup>
     
-    import Layout from '@/Layouts/Layout.vue';
+import Layout from '@/Layouts/Layout.vue';
+import MusicPlayer from '@/Components/MusicPlayer.vue';
 </script>
 
 <template>
     <Layout>
         <div>
-            <h2>About</h2>
+            <MusicPlayer />
         </div>
     </Layout>
 </template>  
@@ -19,11 +20,12 @@ h2 {
     display: flex;
     justify-content: center;
   	align-items: center;
+    color: red;
 }
 </style>
 
 <script>
     export default {
-        components: { Layout }
+        components: { Layout, MusicPlayer }
     }
 </script>

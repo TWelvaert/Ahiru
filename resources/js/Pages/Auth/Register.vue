@@ -24,8 +24,15 @@
     <template>
 
         <BreezeGuestLayout>
+
+<!-- Compiled and minified CSS -->
+
+
+<!-- Compiled and minified JavaScript -->
+
             <Head title="Register" />
             <form @submit.prevent="submit">
+
                 <div>
                     <BreezeLabel for="name" value="Name" />
                     <BreezeInput id="name" type="text" class="mt-1 block w-full" v-model="form.name" required autofocus autocomplete="name" />
@@ -71,4 +78,4 @@
         </BreezeGuestLayout>
 
     </template>
-       
+

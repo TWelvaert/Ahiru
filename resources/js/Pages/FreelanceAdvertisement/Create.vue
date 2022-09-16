@@ -6,58 +6,70 @@ import BreezeInputError from "@/Components/InputError.vue";
 import BreezeLabel from "@/Components/Label.vue";
 import BreezeCheckbox from "@/Components/Checkbox.vue";
 import TextareaVue from "@/Components/textarea.vue";
-
+import Modal from "@/Components/Modal.vue";
+import Uploads from "@/Pages/Settings/Uploads.vue";
+import { reactive } from 'vue'
 import { Head, useForm } from "@inertiajs/inertia-vue3";
 
 let data = defineProps({
-    title: String,
-    slug: String,
-    description: String,
+    user_uploads: Array,
+    showModal: Boolean,
     categories: Array,
-    uploads: [],
+    uploads: Array,
 });
 
-const form = useForm({
-    title: data["title"],
-    slug: data["slug"],
-    description: data["description"],
+let selected_files;
+
+let form = useForm({
+    title: '',
+    slug: '',
+    description: '',
     categories: data["categories"],
-    uploads: data["uploads"],
+    uploads: '',
 });
 
 const submit = () => {
     form.post(route("advertisement/create"));
 };
+
+function processFiles(files){
+    selected_files = files;
+    form.uploads = files;
+}
 </script>
 
 <template>
     <Head title="Advertisement" />
     <BreezeAuthenticatedLayout>
         <template #header>
-            <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+            <h2 class="font-monument text-xl text-black  flex items-center justify-center">
                 Advertisement
             </h2>
         </template>
-        <div class="flex justify-center">
-            <div class="w-3/5 sm:px-6 lg:px-8">
+        <div class="flex items-center justify-center">
+        <div class="py-12 bg-white w-full sm:max-w-md mt-9 overflow-hidden sm:rounded-lg flex items-center justify-center">
+            <div class="">
+                <div class="flex items-center justify-center">
                 <h2
-                    class="block my-4 uppercase font-bold text-xs text-gray-700"
+                    class=" my-2  text-black font-monument"
                 >
                     Create Advertisement
                 </h2>
-                <hr />
+            </div>
+                <hr class="m-4" style="width:100%;text-align:left;margin-left:0">
+
                 <form @submit.prevent="submit" enctype="multipart/form-data">
                     <div>
                         <BreezeLabel
                             for="title"
-                            value="title"
-                            class="block mb-2 uppercase font-bold text-xs text-gray-700 w-full"
+                            value="Title"
+
                         />
                         <BreezeInput
                             id="title"
                             type="text"
-                            class="border border-blue-300 p-2 w-full rounded"
                             v-model="form.title"
+                            class="block w-full"
                             required
                             autofocus
                             autocomplete="title"
@@ -70,13 +82,13 @@ const submit = () => {
                     <div>
                         <BreezeLabel
                             for="slug"
-                            value="slug"
-                            class="block mb-2 uppercase font-bold text-xs text-gray-700 w-full"
+                            value="Slug"
+
                         />
                         <BreezeInput
                             id="slug"
                             type="text"
-                            class="border border-blue-300 p-2 w-full rounded"
+                            class="block w-full"
                             v-model="form.slug"
                             required
                             autofocus
@@ -90,46 +102,34 @@ const submit = () => {
                     <div>
                         <BreezeLabel
                             for="description"
-                            value="description"
-                            class="block mb-2 uppercase font-bold text-xs text-gray-700 w-full"
+                            value="Description"
+
                         />
                         <TextareaVue
                             id="description"
                             type="textarea"
-                            class="border border-blue-300 p-2 w-full rounded"
                             v-model="form.description"
-                            rows="6"
+                            rows="8"
                             required
                             autofocus
                             autocomplete="description"
+                            class="border-gray-300  focus:border-green-300 block w-full  border-rounded focus:ring focus:ring-green-200 focus:ring-opacity-50 rounded-md shadow-sm"
                         />
+
                         <BreezeInputError
                             class="mt-2"
                             :message="form.errors.description"
                         />
                     </div>
-                    <div>
-                        <BreezeLabel
-                            for="images"
-                            value="upload files"
-                            class="block mb-2 uppercase font-bold text-xs text-gray-700 w-full"
-                        />
-                        <BreezeInput
-                            id="images"
-                            multiple
-                            type="file"
-                            @input="form.uploads = $event.target.files"
-                            class="border border-blue-300 p-2 w-full rounded mb-2"
-                            required
-                            autofocus
-                        />
-                        <BreezeInputError
-                            class="mt-2"
-                            :message="form.errors.uploads"
-                        />
+            
+                    <div class="bg-white">
+                        <button type="button" @click="showModal = true">ADD IMAGE OR AUDIO FILE</button>
+                        <Modal v-if="showModal" @close="showModal = false">
+                            <Uploads @add_files="processFiles" :user_uploads="data['user_uploads']" />
+                        </Modal>
                     </div>
 
-                    <div v-for="category in categories" class="inline mx-2">
+                    <div v-for="category in categories" class="flex items-center">
                         <BreezeCheckbox
                             :name="category.name"
                             :id="category.id"
@@ -138,14 +138,13 @@ const submit = () => {
                         <BreezeLabel
                             :for="category.id"
                             :value="category.name"
-                            class="inline-block mb-2 ml-2 uppercase font-bold text-xs text-gray-700"
+
                         />
                     </div>
 
-                    <div class="flex items-center justify-end mt-4">
+                    <div class="flex items-center justify-center mt-4">
                         <BreezeButton
                             name="form"
-                            class="ml-4"
                             :class="{ 'opacity-25': form.processing }"
                             :disabled="form.processing"
                         >
@@ -155,5 +154,16 @@ const submit = () => {
                 </form>
             </div>
         </div>
+    </div>
     </BreezeAuthenticatedLayout>
 </template>
+
+<script>
+    export default {
+        data() {
+            return {
+                showModal: false
+            }
+        }
+    }
+</script>

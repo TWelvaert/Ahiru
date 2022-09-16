@@ -1,5 +1,6 @@
 <script setup>
     import Layout from '@/Layouts/Layout.vue';
+
 </script>
 <!-- TEMPLATE ================================================= -->
 
@@ -7,9 +8,11 @@
     <Layout>
     <!-- LANDING PAGE HEADER ================================================ -->
 
+
+
+
     <div class="bg-black min-h-screen z-0">
         <div class="">
-
             <div class="absolute z-20 pl-40">
                 <img src="../../assets/images/waves.gif" alt="">
             </div>
@@ -36,7 +39,7 @@
 
             <!--  INPUT BOX ================================================= -->
 
-           
+
         </div>
     </div>
 
@@ -224,3 +227,8 @@
 
 </Layout>
 </template>
+
+
+<script>
+
+    </script>

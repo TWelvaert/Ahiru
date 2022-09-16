@@ -1,5 +1,5 @@
 <template>
-    <Navbar />
+    <BreezeAuthenticatedLayout />
         <section>
             <slot />
         </section>
@@ -8,13 +8,13 @@
 </template>
 
 <script>
-import Navbar from '@/Components/Navbar.vue';
+import BreezeAuthenticatedLayout from "@/Layouts/Authenticated.vue";
 import Footer from '@/Components/Footer.vue';
 import MusicPlayer from '@/Components/MusicPlayer.vue';
 
 
 
 export default {
-    components : { Navbar, Footer, MusicPlayer }
+    components : { BreezeAuthenticatedLayout, Footer, MusicPlayer }
 }
 </script>

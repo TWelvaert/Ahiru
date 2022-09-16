@@ -1,37 +1,5 @@
-<script setup>
-    import BreezeAuthenticatedLayout from "@/Layouts/Authenticated.vue";
-    import BreezeButton from "@/Components/Button.vue";
-    import BreezeInput from "@/Components/Input.vue";
-    import BreezeInputError from "@/Components/InputError.vue";
-    import BreezeLabel from "@/Components/Label.vue";
-    import { Head, useForm } from "@inertiajs/inertia-vue3";
-
-    let data = defineProps({
-        uploads_images: Array,
-        uploads_audio: Array
-    });
-
-    const form = useForm({
-        uploads: data["uploads"],
-    });
-
-    const submit = () => {
-        form.post(route("settings/uploads"));
-    };
-
-</script>
-    
 <template>
-<Head title="Advertisement"/>
-<BreezeAuthenticatedLayout>      
     <div class="bg-white">
-
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            Your Uploads
-        </h2>
-
-        <hr>
-
         <form @submit.prevent="submit" enctype="multipart/form-data">
             <div>
                 <BreezeLabel
@@ -54,28 +22,84 @@
                     Upload
                 </BreezeButton>
             </div>
-        </form> 
-
+        </form>
+        
         <b>Images</b>
-        <div class="flex gap-4">
-            <div v-for="image in data['uploads_images']">
-                <div class="border-2 border-black w-40">
-                    {{ image['original_name'] }}
-                    <img class="w-40 h-40" :src="`/${image['path']}/${image['name']}`" />
-                    Delete
+        <div class="flex gap-2">
+            <div v-for="image in uploads_images">
+                <div @click="e => select(e)" :id="image['id']" :class="{active: isActive}">
+                    <img class="w-20 h-20" :src="`/${image['path']}/${image['name']}`" />
+                    <Link @click="delete_file" v-bind:href="`/settings/uploads/delete/${image['id']}`">Delete</Link>
                 </div>
             </div>    
         </div>
 
         <b>Audio</b>
-        <div class="flex gap-4">
-            <div v-for="audio in data['uploads_audio']">
-                <div class="border-2 border-black w-40">
-                    {{ audio['original_name'] }}
-                    Play | Delete
-                </div>
-            </div>    
+        <div class="">
+            <table v-for="audio in uploads_audio">
+                <tr @click="e => select(e)" :id="audio['id']" :class="{active: isActive}">
+                    <td>{{ audio['original_name'] }}</td>
+                    <td>- Play</td>
+                    <td><Link v-bind:href="`/settings/uploads/delete/${audio['id']}`">- Delete</Link></td>
+                </tr>
+            </table>    
         </div>
+
     </div>
-</BreezeAuthenticatedLayout>
+
 </template>
+
+
+<script setup>
+    import { Link } from '@inertiajs/inertia-vue3';
+    import BreezeButton from "@/Components/Button.vue";
+    import BreezeInput from "@/Components/Input.vue";
+    import BreezeInputError from "@/Components/InputError.vue";
+    import BreezeLabel from "@/Components/Label.vue";
+    import { useForm } from "@inertiajs/inertia-vue3";
+
+    let uploads_images = [];
+    let uploads_audio = [];
+    let selected_files = [];
+
+    let props = defineProps({
+        user_uploads: Array,
+    });
+
+    function select(e) {
+        e.target.parentElement.classList.toggle('active_file');
+        let file_id = e.path[1].id;
+
+        if(selected_files.includes(file_id)) {
+            let file_index = selected_files.indexOf(file_id);
+            selected_files.splice(file_index, 1); 
+        } else {
+            selected_files.push(file_id);
+        }
+
+        emits('add_files', selected_files)
+
+    }
+
+    const emits = defineEmits(['add_files'])
+
+    props.user_uploads.forEach(upload => {
+        if(upload.type == 'image') {
+            uploads_images.push(upload);
+        }
+        if(upload.type == 'audio') {
+            uploads_audio.push(upload);
+        }
+    });
+
+    const form = useForm({
+        uploads: '',
+    });
+
+    const submit = () => {
+        form.post(route("settings/uploads"));
+    };
+
+</script>
+
+

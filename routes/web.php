@@ -2,10 +2,12 @@
 
 use App\Http\Controllers\AdminAdvertisementController;
 use App\Http\Controllers\FreelanceAdsController;
+use App\Http\Controllers\NewsController;
 use App\Models\FreelanceAdvertisement;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
+
 
 use function PHPSTORM_META\type;
 
@@ -34,7 +36,7 @@ Route::get('/', function () {
 
 Route::get('/dashboard', [FreelanceAdsController::class, 'index'])->name('dashboard')->middleware(['auth', 'verified']);
 
-Route::get('/advertisement/create', [FreelanceAdsController::class, 'create'])->middleware(['auth', 'verified']);
+Route::get('/advertisement/create', [FreelanceAdsController::class, 'create'])->middleware(['auth', 'verified'])->name('advertisement.create');
 Route::post('advertisement/create', [FreelanceAdsController::class, 'store'])->middleware(['auth', 'verified'])->name('advertisement/create');
 
 Route::get('/advertisements', [FreelanceAdsController::class, 'colaberations'])->name('colaberations');
@@ -48,14 +50,31 @@ Route::get('/advertisement/{freelanceAdvertisement:slug}', [FreelanceAdsControll
 
 
 
+Route::get('/admin/news', [NewsController::class, 'admin_index'])->name('news_index')->middleware(['auth', 'verified']);
+Route::get('/news/article/{news_article:slug}', [NewsController::class, 'show']);
+
+Route::get('/admin/news/create', [NewsController::class, 'create'])->middleware(['auth', 'verified']);
+Route::post('admin/news/create', [NewsController::class, 'store'])->middleware(['auth', 'verified'])->name('admin/news/create');
+
+Route::get('/admin/news/{news_article:slug}/edit', [NewsController::class, 'edit'])->middleware(['auth', 'verified']);
+Route::post('/admin/news/{news_article:slug}/edit', [NewsController::class, 'update'])->middleware(['auth', 'verified']);
+
+Route::get('/admin/news/{news_article:slug}/delete', [NewsController::class, 'destroy'])->middleware(['auth', 'verified']);
+
+
+
 Route::get('settings/account', [\App\Http\Controllers\Auth\RegisteredUserController::class, 'edit'])->name('settings/account');
 Route::post('settings/account', [\App\Http\Controllers\Auth\RegisteredUserController::class, 'update'])->name('settings/account');
-Route::get('settings/uploads', [\App\Http\Controllers\UploadsController::class, 'index'])->name('settings/uploads');
-Route::post('settings/uploads', [\App\Http\Controllers\UploadsController::class, 'upload'])->name('settings/uploads');
 
-Route::get('/about', function () {
-    return Inertia::render('About');
-})->name('about');
+Route::get('settings/uploads', [\App\Http\Controllers\UploadsController::class, 'index'])->name('settings/uploads');
+
+Route::post('settings/uploads', [\App\Http\Controllers\UploadsController::class, 'upload'])->name('settings/uploads');
+Route::get('settings/uploads/delete/{upload:id}', [\App\Http\Controllers\UploadsController::class, 'destroy']);
+
+
+Route::get('/likes', function () {
+    return Inertia::render('Likes');
+})->name('likes');
 
 // ['auth', 'verified'] when logged in as a user
 
@@ -63,6 +82,10 @@ require __DIR__.'/auth.php';
 
 Route::get('/', function () {
     return Inertia::render('Landing');
+});
+
+Route::get('/About', function () {
+    return Inertia::render('About');
 });
 
 Route::get('/Profile', function () {
