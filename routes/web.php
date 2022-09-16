@@ -88,9 +88,9 @@ Route::get('/About', function () {
     return Inertia::render('About');
 });
 
-Route::get('/Profile', function () {
+Route::get('/profile', function () {
     return Inertia::render('Profile');
-});
+})->name('profile');
 
 Route::get('/Artists', function () {
     return Inertia::render('Artists');

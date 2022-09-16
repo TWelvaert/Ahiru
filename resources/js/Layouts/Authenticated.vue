@@ -88,7 +88,7 @@ const showingNavigationDropdown = ref(false);
 
 
                                     <template #content>
-                                        <BreezeDropdownLink :href="route('logout')" method="post" as="button">
+                                        <BreezeDropdownLink :href="route('profile')" :class="{ 'active': $page.url === '/profile' }">
                                             Profile
                                         </BreezeDropdownLink>
                                         <BreezeDropdownLink :href="route('likes')" :class="{ 'active': $page.url === '/likes' }">
