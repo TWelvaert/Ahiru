@@ -7,7 +7,7 @@ import BreezeNavLink from '@/Components/NavLink.vue';
 import BreezeResponsiveNavLink from '@/Components/ResponsiveNavLink.vue';
 import Notification from '@/Components/Notification.vue';
 import { Link } from '@inertiajs/inertia-vue3';
-import MusicPlayer from '@/Components/MusicPlayer.vue';
+import MusicPlayer from '@/Plugins/MusicPlayer.vue';
 const showingNavigationDropdown = ref(false);
 </script>
 
