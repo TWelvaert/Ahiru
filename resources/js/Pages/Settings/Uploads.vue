@@ -39,14 +39,12 @@
             <table v-for="audio in uploads_audio">
                 <tr @click="e => select(e)" :id="audio['id']" :class="{active: isActive}">
                     <td>{{ audio['original_name'] }}</td>
-                    <td>- Play</td>
-                    <td><Link v-bind:href="`/settings/uploads/delete/${audio['id']}`">- Delete</Link></td>
+                   <td><span v-on:click="$callMusicPlayer(audio['name'])">[Play]</span></td>
+                    <td><Link v-bind:href="`/settings/uploads/delete/${audio['id']}`">[Delete]</Link></td>
                 </tr>
             </table>    
         </div>
-
     </div>
-
 </template>
 
 

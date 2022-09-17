@@ -26,5 +26,17 @@ html {
 
 }
 
+#musicPlayer {
+  display: none;
+}
+
+#musicPlayer_pauseButton {
+  display: none;
+}
+
+#musicPlayer_playButton {
+  display: block;
+}
+
 
 
