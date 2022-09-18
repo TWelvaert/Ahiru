@@ -1,8 +1,23 @@
 
 <script setup>
 import BreezeAuthenticatedLayout from "@/Layouts/Authenticated.vue";
-import { Head } from "@inertiajs/inertia-vue3";
-    
+import { Head, useForm } from "@inertiajs/inertia-vue3";
+
+let data = defineProps({
+    colaberations: String,
+    categories: Array,
+    uploads: Array,
+});
+const form = useForm({
+    title: data["title"],
+    slug: data["slug"],
+    description: data["description"],
+    categories: data["categories"],
+    uploads: data["uploads"],
+});
+console.log(data["categories"]);
+
+
 </script>
 <template>
     
@@ -102,7 +117,9 @@ import { Head } from "@inertiajs/inertia-vue3";
                            <div class="text-gray-700">
                                <div class="grid md:grid-cols-2 text-sm">
                                    <div class="grid grid-cols-2">
-                                       <div class="px-4 py-2 font-semibold">Adv 1</div>
+                                       <div class="px-4 py-2 font-semibold">
+                                        
+                                       </div>
                                        <div class="px-4 py-2"></div>
                                    </div>
                                    <div class="grid grid-cols-2">
