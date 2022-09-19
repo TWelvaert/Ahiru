@@ -9,7 +9,7 @@ let data = defineProps({
     news_article: String,
     news_comments: String,
     news_author: String,
-    comment: Array,
+    comment: String,
 });
 
 const form = useForm({

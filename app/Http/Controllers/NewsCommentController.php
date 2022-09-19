@@ -16,17 +16,17 @@ class NewsCommentController extends Controller
        
        $user_id = Auth::user()->id; 
         Validator::make($request->all(), [
-            'comment' => ['required'],
+            'comment' => ['required', 'string'],
 
         ])->validate();
-        // dd($request->comment);
+    
         Comment::create([
             'user_id' => $user_id,
             'news_article_id' => $newsArticle->id,
-            'comment' => $request->comment,
+            'comment' => $request['comment'],
         ]);
         
 
-        return redirect(`news/article/$newsArticle->slug`);
+        return redirect("news/article/$newsArticle->slug");
     }
 }

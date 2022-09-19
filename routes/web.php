@@ -55,7 +55,7 @@ Route::get('/advertisement/{freelanceAdvertisement:slug}', [FreelanceAdsControll
 Route::get('/admin/news', [NewsController::class, 'admin_index'])->name('news_index')->middleware(['auth', 'verified']);
 
 Route::get('/news/article/{news_article:slug}', [NewsController::class, 'show']);
-Route::post('news/article/{news_article:slug}/comment', [NewsCommentController::class, 'store']);
+Route::post('news/article/{news_article:slug}/comment', [NewsCommentController::class, 'store'])->name('comment');
 
 Route::get('/admin/news/create', [NewsController::class, 'create'])->middleware(['auth', 'verified']);
 Route::post('admin/news/create', [NewsController::class, 'store'])->middleware(['auth', 'verified'])->name('admin/news/create');
