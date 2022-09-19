@@ -9,10 +9,9 @@ import { resolvePageComponent } from 'laravel-vite-plugin/inertia-helpers';
 import { ZiggyVue } from '../../vendor/tightenco/ziggy/dist/vue.m';
 import VueSmoothScroll from 'vue3-smooth-scroll'
 import { TroisJSVuePlugin } from 'troisjs';
-
+import MusicPLayer from './Plugins/MusicPlayer.vue';
 
 const appName = window.document.getElementsByTagName('title')[0]?.innerText || 'Laravel';
-
 
 createInertiaApp({
     title: (title) => `${title} - ${appName}`,
@@ -20,6 +19,9 @@ createInertiaApp({
     setup({ el, app, props, plugin }) {
         return createApp({ render: () => h(app, props) })
             .use(plugin)
+            .use(MusicPLayer, {
+                MusicPLayer: 'MusicPLayer' 
+            })
             .use(ZiggyVue, Ziggy)
             .use (VueSmoothScroll, {
                 duration: 50,

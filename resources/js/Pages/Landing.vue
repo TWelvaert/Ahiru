@@ -17,9 +17,9 @@
                 <img src="../../assets/images/waves.gif" alt="">
             </div>
             <div class="z-50 relative">
-                <p id="p-l1" class="text-white text-6xl m-24 pl-60 font-monument antialiased ">POWERFUL <br> FOR <br>
+                <p class="text-white text-6xl m-18 pl-60 font-monument antialiased ">POWERFUL <br> FOR <br>
                     CREATIVES.</p>
-                <p id="p-l2" class="text-white text-6xl m-36 pl-80   font-monument antialiased">ACCESSIBLE <br> FOR <br>
+                <p class="text-white text-6xl m-36 pl-80   font-monument antialiased">ACCESSIBLE <br> FOR <br>
                     EVERYONE.
                 </p>
             </div>
