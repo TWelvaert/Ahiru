@@ -2,14 +2,15 @@
     
 import Layout from '@/Layouts/Layout.vue';
 import MusicPlayer from '@/Components/MusicPlayer.vue';
+import HomeLayout from '@/Layouts/HomeLayout.vue';
 </script>
 
 <template>
-    <Layout>
+    <HomeLayout>
         <div>
             <MusicPlayer />
         </div>
-    </Layout>
+    </HomeLayout>
 </template>  
 
 <style>

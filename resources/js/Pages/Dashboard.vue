@@ -4,7 +4,7 @@ import { Head } from "@inertiajs/inertia-vue3";
 // import { Welcome } from "@/Layouts/Welcome.js";
 
 let data = defineProps({
-    advertisements: String,
+    advertisements: String
 });
 </script>
 
