@@ -80,22 +80,21 @@ function processFiles(files){
                                 autofocus autocomplete="description"
                                 class="border-gray-300  focus:border-green-300 block w-full  border-rounded focus:ring focus:ring-green-200 focus:ring-opacity-50 rounded-md shadow-sm" />
 
-                        <BreezeInputError
-                            class="mt-2"
-                            :message="form.errors.description"
-                        />
-                    </div>
-            
-                    <div class="bg-white">
-                        <button type="button" @click="showModal = true">ADD IMAGE OR AUDIO FILE</button>
-                        <Modal v-if="showModal" @close="showModal = false">
-                            <Uploads @add_files="processFiles" :user_uploads="data['user_uploads']" />
-                        </Modal>
-                    </div>
-
-
-                            <BreezeInputError class="mt-2" :message="form.errors.description" />
+                            <BreezeInputError
+                                class="mt-2"
+                                :message="form.errors.description"
+                            />
                         </div>
+                
+                        <div class="bg-white">
+                            <button type="button" @click="showModal = true">ADD IMAGE OR AUDIO FILE</button>
+                            <Modal v-if="showModal" @close="showModal = false">
+                                <Uploads @add_files="processFiles" :user_uploads="data['user_uploads']" />
+                            </Modal>
+                        </div>
+
+
+
                         <div>
                             <BreezeLabel for="images" value="Upload files" class=" m-2  text-black" />
                             <BreezeInput id="images" multiple type="file" @input="form.uploads = $event.target.files"
@@ -118,7 +117,6 @@ function processFiles(files){
                     </form>
                 </div>
             </div>
-
         </div>
     </BreezeAuthenticatedLayout>
 </template>
