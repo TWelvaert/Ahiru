@@ -29,7 +29,7 @@ let data = defineProps({
 
         <!-- Glass container  -->
 
-        <div class="bg-white bg-opacity-80 backdrop-blur-lg rounded drop-shadow-lg flex flex-row items-center justify-center">
+        <div class="bg-<!-- white --> bg-opacity-80 backdrop-blur-lg rounded drop-shadow-lg flex flex-row items-center justify-center">
 
             <section class="container mx-auto p-10 md:py-20 px-5 md:p-10">
         <section class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-10">
