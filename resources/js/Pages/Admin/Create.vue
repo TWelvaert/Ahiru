@@ -14,7 +14,7 @@ let data = defineProps({
     slug: String,
     excerpt: String,
     description: String,
-    // categories: Array,
+    categories: Array,
     // uploads: [],
 });
 
@@ -23,7 +23,7 @@ const form = useForm({
     slug: data["slug"],
     excerpt: data["excerpt"],
     description: data["description"],
-    // categories: data["categories"],
+    categories: data["categories"],
     // uploads: data["uploads"],
 });
 
@@ -151,7 +151,7 @@ const submit = () => {
                         />
                     </div> -->
 
-                    <!-- <div v-for="category in categories" class="inline mx-2">
+                    <div v-for="category in categories" class="inline ml-5 text-white">
                         <BreezeCheckbox
                             :name="category.name"
                             :id="category.id"
@@ -160,9 +160,9 @@ const submit = () => {
                         <BreezeLabel
                             :for="category.id"
                             :value="category.name"
-                            class="inline-block mb-2 ml-2 uppercase font-bold text-xs text-gray-700"
+                            class="inline-block mb-2 uppercase font-bold text-xs text-white"
                         />
-                    </div> -->
+                    </div>
 
                     <div class="flex items-center justify-end mt-4">
                         <BreezeButton
