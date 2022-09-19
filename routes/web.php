@@ -36,8 +36,7 @@ Route::get('/', function () {
 
 Route::get('/dashboard', [FreelanceAdsController::class, 'index'])->name('dashboard')->middleware(['auth', 'verified']);
 
-
-Route::get('/advertisement/create', [FreelanceAdsController::class, 'create'])->middleware(['auth', 'verified']);
+Route::get('/advertisement/create', [FreelanceAdsController::class, 'create'])->middleware(['auth', 'verified'])->name('advertisement.create');
 Route::post('advertisement/create', [FreelanceAdsController::class, 'store'])->middleware(['auth', 'verified'])->name('advertisement/create');
 
 Route::get('/advertisements', [FreelanceAdsController::class, 'colaberations'])->name('colaberations');
@@ -66,9 +65,11 @@ Route::get('/admin/news/{news_article:slug}/delete', [NewsController::class, 'de
 
 Route::get('settings/account', [\App\Http\Controllers\Auth\RegisteredUserController::class, 'edit'])->name('settings/account');
 Route::post('settings/account', [\App\Http\Controllers\Auth\RegisteredUserController::class, 'update'])->name('settings/account');
+
 Route::get('settings/uploads', [\App\Http\Controllers\UploadsController::class, 'index'])->name('settings/uploads');
 
 Route::post('settings/uploads', [\App\Http\Controllers\UploadsController::class, 'upload'])->name('settings/uploads');
+Route::get('settings/uploads/delete/{upload:id}', [\App\Http\Controllers\UploadsController::class, 'destroy']);
 
 
 Route::get('/about', function () {
