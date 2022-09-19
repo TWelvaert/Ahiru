@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Comment;
 use Illuminate\Http\Request;
 use App\Models\NewsArticle;
 use App\Models\NewsCategories;
+use App\Models\User;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Auth;
@@ -25,10 +27,11 @@ class NewsController extends Controller
     }
 
     public function show(NewsArticle $news_article)
-    {
+    {   
         return Inertia::render('Article', [
-            'news_articles' => $news_article,
-
+            'news_article' => $news_article,
+            'news_comments' => $news_article->comments,
+            'news_author' => $news_article->user,
         ]);
     }
 
@@ -72,17 +75,17 @@ class NewsController extends Controller
         ])->validate();
 
             
-        NewsArticle::create([
+        
+
+        Session::flash('message', 'Your Advertisement is successfully made!');
+        Session::flasNewsArticle::create([
             'user_id' => $user->id,
             'slug' => $request->slug,
             'title' => $request->title,
             'excerpt' => $request->excerpt,
             'description' => $request->description,
             'category_id' => $categories,
-        ]);
-
-        Session::flash('message', 'Your Advertisement is successfully made!');
-        Session::flash('flashtype', 'success');
+        ]);h('flashtype', 'success');
 
         return redirect('/admin/news');
     }

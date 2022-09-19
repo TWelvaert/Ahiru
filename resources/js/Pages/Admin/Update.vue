@@ -29,7 +29,7 @@ const form = useForm({
 });
 
 const submit = () => {
-    form.post(`/admin/news/${data["slug"]}/edit`);
+    form.post(`/admin/news/${data["slug"]}/update`);
 };
 </script>
 

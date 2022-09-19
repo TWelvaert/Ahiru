@@ -14,6 +14,7 @@ const form = useForm({
     categories: data["categories"],
     uploads: data["uploads"],
 });
+
 console.log(data["categories"]);
 const submit = () => {
     form.post(route("advertisement/create"));
