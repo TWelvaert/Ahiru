@@ -1,15 +1,15 @@
 <script setup>
     import AdminPanelLayout from "@/Layouts/AdminPanelLayout.vue";  
-    import BreezeAuthenticatedLayout from '@/Layouts/Authenticated.vue';
     import BreezeButton from '@/Components/Button.vue';
     import BreezeInput from '@/Components/Input.vue';
     import BreezeInputError from '@/Components/InputError.vue';
     import BreezeLabel from '@/Components/Label.vue';
-    import { Head, useForm } from '@inertiajs/inertia-vue3';
+    import { useForm } from '@inertiajs/inertia-vue3';
 
     let data = defineProps({
         name: String,
         email: String,
+        slug: String,
     });
   
     const form = useForm({
@@ -19,9 +19,8 @@
     });
 
     const submit = () => {
-        form.post(route(`users/${data['slug']}/edit`));
+        form.post(`/admin/users/${data['slug']}/edit`);
     };
-
 
 </script>
     
@@ -37,7 +36,7 @@
                         </h2>
                         <hr class="m-4" style="width:100%;text-align:left;margin-left:0">
 
-                        <form id="form1" @submit.prevent="submit_personal_info" novalidate>
+                        <form id="form1" @submit.prevent="submit" novalidate>
 
                             <div class="mt-4">
                                 <BreezeLabel for="name" value="Name" />
