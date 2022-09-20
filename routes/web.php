@@ -2,8 +2,10 @@
 
 use App\Http\Controllers\AdminAdvertisementController;
 use App\Http\Controllers\FreelanceAdsController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\NewsCommentController;
 use App\Http\Controllers\NewsController;
+use App\Http\Controllers\ProfileController;
 use App\Models\FreelanceAdvertisement;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
@@ -34,13 +36,16 @@ Route::get('/', function () {
 //     return Inertia::render('Dashboard');
 // })->middleware(['auth', 'verified'])->name('dashboard');
 
+Route::get('/profile/{user:slug}', [ProfileController::class,'index'])
+->name('profile');
 
-Route::get('/dashboard', [FreelanceAdsController::class, 'index'])->name('dashboard')->middleware(['auth', 'verified']);
+// Route::get('/dashboard', [FreelanceAdsController::class, 'index'])->name('dashboard')->middleware(['auth', 'verified']);
+Route::get('/advertisements', [FreelanceAdsController::class, 'collaborations'])->name('advertisements');
+
+Route::get('/dashboard', [HomeController::class, 'index'])->name('dashboard')->middleware(['auth', 'verified']);
 
 Route::get('/advertisement/create', [FreelanceAdsController::class, 'create'])->middleware(['auth', 'verified'])->name('advertisement.create');
 Route::post('advertisement/create', [FreelanceAdsController::class, 'store'])->middleware(['auth', 'verified'])->name('advertisement/create');
-
-Route::get('/advertisements', [FreelanceAdsController::class, 'colaberations'])->name('colaberations');
 
 Route::get('/advertisement/{freelanceAdvertisement:slug}/edit', [FreelanceAdsController::class, 'edit'])->middleware(['auth', 'verified']);
 Route::post('/advertisement/update/{freelanceAdvertisement:slug}', [FreelanceAdsController::class, 'update'])->middleware(['auth', 'verified']);
@@ -71,7 +76,7 @@ Route::get('/admin', [\App\Http\Controllers\AdminController::class, 'index'])->n
 Route::get('/admin/news/create', [NewsController::class, 'create'])->middleware(['auth', 'verified'])->name('admin/news/create');
 Route::post('admin/news/create', [NewsController::class, 'store'])->middleware(['auth', 'verified'])->name('admin/news/create');
 
-// SETTINGS
+
 Route::get('settings/account', [\App\Http\Controllers\Auth\RegisteredUserController::class, 'edit'])->name('settings/account');
 Route::post('settings/account', [\App\Http\Controllers\Auth\RegisteredUserController::class, 'update'])->name('settings/account');
 Route::get('settings/uploads', [\App\Http\Controllers\UploadsController::class, 'index'])->name('settings/uploads');
@@ -95,9 +100,9 @@ Route::get('/About', function () {
     return Inertia::render('About');
 });
 
-Route::get('/profile', function () {
-    return Inertia::render('Profile');
-})->name('profile');
+// Route::get('/profile', function () {
+//     return Inertia::render('Profile');
+// })->name('profile');
 
 Route::get('/Artists', function () {
     return Inertia::render('Artists');

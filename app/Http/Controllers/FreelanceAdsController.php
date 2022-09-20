@@ -29,9 +29,9 @@ class FreelanceAdsController extends Controller
     }
 
 
-    public function colaberations()
+    public function collaborations()
     {
-        $colaberations = FreelanceAdvertisement::all();
+        $collaborations = FreelanceAdvertisement::all();
         $freelanceCategories = FreelanceCategory::all();
         $categories = [];
 
@@ -42,7 +42,7 @@ class FreelanceAdsController extends Controller
 
 
         return Inertia::render('Advertisements', [
-            'colaberations' => $colaberations,
+            'collaborations' => $collaborations,
             'categories' => $categories
         ]);
     }
@@ -51,19 +51,19 @@ class FreelanceAdsController extends Controller
     public function show(FreelanceAdvertisement $freelanceAdvertisement)
     {
 
-        $uploads_matched = [];
-        $uploads = $freelanceAdvertisement->uploads;
-        $uploads = explode(",", $uploads);
+        // $uploads_matched = [];
+        // $uploads = $freelanceAdvertisement->uploads;
+        // $uploads = explode(",", $uploads);
 
-        foreach ($uploads as $upload) {
-            $result = Upload::where('id', '=', $upload)->get();
-            array_push($uploads_matched, $result[0]);
-        }
+        // foreach ($uploads as $upload) {
+        //     $result = Upload::where('id', '=', $upload)->get();
+        //     array_push($uploads_matched, $result[0]);
+        // }
 
 
         return Inertia::render('Advertisement', [
             'advertisement' => $freelanceAdvertisement,
-            'uploads' => $uploads_matched,
+            // 'uploads' => $uploads_matched,
         ]);
     }
 
