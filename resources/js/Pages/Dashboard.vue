@@ -1,5 +1,6 @@
 <script setup>
 import BreezeAuthenticatedLayout from "@/Layouts/Authenticated.vue";
+import Header from "@/Components/Header.vue";
 import { Head } from "@inertiajs/inertia-vue3";
 // import { Welcome } from "@/Layouts/Welcome.js";
 
@@ -7,7 +8,7 @@ let data = defineProps({
     user: Array
 });
 
-console.log (data["user"]);
+//console.log (data["user"]);
 
 </script>
 
@@ -21,8 +22,9 @@ console.log (data["user"]);
     <BreezeAuthenticatedLayout>
 
         <!-- Header -->
+        <Header :user="user" />
 
-        <template #header>
+    
             <div class="font-monument">
             <span id="welcome" class="flex items-center justify-center">
             </span>
@@ -30,7 +32,7 @@ console.log (data["user"]);
         <span class="flex items-center justify-center">
             You have 14788 plays last 7 days
             </span>
-        </template>
+      
 
         <!-- Glass container  -->
 
