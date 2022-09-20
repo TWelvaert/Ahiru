@@ -150,7 +150,7 @@ const submit = () => {
                         <BreezeLabel
                             :for="category.id"
                             :value="category.name"
-                            class="inline-block mb-2 ml-2 uppercase font-bold text-xs text-gray-700"
+                            class="inline-block mb-2 ml-2 uppercase font-bold text-xs text-white"
                         />
                     </div>
                     <div class="flex items-center justify-end mt-4">

@@ -29,9 +29,9 @@ class FreelanceAdsController extends Controller
     }
 
 
-    public function colaberations()
+    public function collaborations()
     {
-        $colaberations = FreelanceAdvertisement::all();
+        $collaborations = FreelanceAdvertisement::all();
         $freelanceCategories = FreelanceCategory::all();
         $categories = [];
 
@@ -42,7 +42,7 @@ class FreelanceAdsController extends Controller
 
 
         return Inertia::render('Advertisements', [
-            'colaberations' => $colaberations,
+            'collaborations' => $collaborations,
             'categories' => $categories
         ]);
     }
@@ -51,24 +51,28 @@ class FreelanceAdsController extends Controller
     public function show(FreelanceAdvertisement $freelanceAdvertisement)
     {
 
-        $uploads_matched = [];
-        $uploads = $freelanceAdvertisement->uploads;
-        $uploads = explode(",", $uploads);
+        // $uploads_matched = [];
+        // $uploads = $freelanceAdvertisement->uploads;
+        // $uploads = explode(",", $uploads);
 
-        foreach ($uploads as $upload) {
-            $result = Upload::where('id', '=', $upload)->get();
-            array_push($uploads_matched, $result[0]);
-        }
+        // foreach ($uploads as $upload) {
+        //     $result = Upload::where('id', '=', $upload)->get();
+        //     array_push($uploads_matched, $result[0]);
+        // }
 
 
         return Inertia::render('Advertisement', [
             'advertisement' => $freelanceAdvertisement,
-            'uploads' => $uploads_matched,
+            // 'uploads' => $uploads_matched,
         ]);
     }
 
     public function create()
     {
+
+        $user = Auth::user();
+        $user_uploads = Upload::where('user_id', '=', $user->id)->get();
+
         $freelanceCategories = FreelanceCategory::all();
         $categories = [];
 
@@ -78,48 +82,14 @@ class FreelanceAdsController extends Controller
         }
 
         return Inertia::render('FreelanceAdvertisement/Create', [
-            'categories' => $categories
+            'categories' => $categories,
+            'user_uploads' => $user_uploads
         ]);
     }
 
     public function store(Request $request)
     {
-        $user = Auth::user();
-        $files = [];
-        $uploads = [];
-
-        if ($request->uploads) {
-            foreach ($request->uploads as $file) {
-                $fileName = time() . rand(1, 99) . '.' . $file->extension();
-                $file->move(public_path('uploads'), $fileName);
-
-                $fileNameParts = parse_url($fileName);
-                $fileExtension = pathinfo($fileNameParts['path'], PATHINFO_EXTENSION);
-
-                if (in_array($fileExtension, array('jpg', 'png', 'jpeg', 'gif'))) {
-                    $fileType = 'image';
-                } else if (in_array($fileExtension, array('mp3', 'wav'))) {
-                    $fileType = 'audio';
-                    //} else if (in_array($fileExtension, array('mp4', 'avi', 'mov', 'wmv'))) {
-                    //    $fileType = 'video';
-                } else {
-                    dd('unknown file extension');
-                }
-
-                $upload = Upload::create([
-                    'user_id' => $user->id,
-                    'name' => $fileName,
-                    'original_name' => $file->getClientOriginalName(),
-                    'path' => "uploads",
-                    'type' => $fileType,
-                ]);
-
-                array_push($files, $fileName);
-                array_push($uploads, $upload->id);
-            }
-        }
-
-        $uploads = implode(",", $uploads);
+        $uploads = implode(",", $request->uploads);
         $categories_checked = [];
         $categories = $request->categories;
 
@@ -138,12 +108,12 @@ class FreelanceAdsController extends Controller
 
         ])->validate();
 
-
         $freelanceAdvertisement = FreelanceAdvertisement::create([
-            'user_id' => $user->id,
+            'user_id' => Auth::user()->id,
+
             'category_id' => $categories,
             'type' => 'advertisement',
-            'slug' => $request->slug,
+            'slug' => str()->slug($request->title),
             'title' => $request->title,
             'description' => $request->description,
             'uploads' => $uploads
@@ -178,14 +148,13 @@ class FreelanceAdsController extends Controller
         $categories = [];
 
         foreach ($all_categories as $all_category) {
-            foreach ($current_categories as $current_category) {
-                if ($all_category['id'] == $current_category) {
-                    $categoryObject2 = array('id' => $all_category['id'], 'name' => $all_category['name'], 'slug' => $all_category['slug'], 'checked' => true);
-                    array_push($categories, $categoryObject2);
-                }
+            if (in_array($all_category['id'], $current_categories)) {
+                $categoryObject2 = array('id' => $all_category['id'], 'name' => $all_category['name'], 'slug' => $all_category['slug'], 'checked' => true);
+                array_push($categories, $categoryObject2);
+            } else {
+                $categoryObject2 = ['id' => $all_category['id'], 'name' => $all_category['name'], 'slug' => $all_category['slug'], 'checked' => false];
+                array_push($categories, $categoryObject2);
             }
-            $categoryObject2 = ['id' => $all_category['id'], 'name' => $all_category['name'], 'slug' => $all_category['slug'], 'checked' => false];
-            array_push($categories, $categoryObject2);
         }
 
         return Inertia::render('FreelanceAdvertisement/Update', [
