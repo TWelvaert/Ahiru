@@ -93,15 +93,6 @@ function processFiles(files){
                             </Modal>
                         </div>
 
-
-
-                        <div>
-                            <BreezeLabel for="images" value="Upload files" class=" m-2  text-black" />
-                            <BreezeInput id="images" multiple type="file" @input="form.uploads = $event.target.files"
-                                class=" m-2 text-black w-64" required autofocus />
-                            <BreezeInputError class="mt-2" :message="form.errors.uploads" />
-                        </div>
-
                         <div v-for="category in categories" class="flex items-center">
                             <BreezeCheckbox :name="category.name" :id="category.id"
                                 v-model:checked="category.checked" />
