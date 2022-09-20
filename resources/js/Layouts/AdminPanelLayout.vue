@@ -7,16 +7,11 @@
 <template>
     <Head title="Admin" />
     <BreezeAuthenticatedLayout>
-
         <div class="flex">
             <AdminSideBar class="flex-col" />
-            <div>
+            <div class="w-11/12">
                 <slot />
             </div>
         </div>
-        
-
-
-
     </BreezeAuthenticatedLayout>
 </template>
