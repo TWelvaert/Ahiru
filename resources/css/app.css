@@ -10,45 +10,41 @@
 html {
     scroll-behavior: smooth;
     background-color: white;
-  }
+}
 
 
-  .active_file {
+.active_file {
     background-color: rgb(182, 218, 182);
-  }
+}
+
 .input:focus {
-  outline: none !important;
-  border:1px solid red;
-  box-shadow: 0 0 10px #719ECE;
+    outline: none !important;
+    border:1px solid red;
+    box-shadow: 0 0 10px #719ECE;
 }
 
 #musicPlayer {
-  display: none;
+    display: none;
 }
 
 #musicPlayer_pauseButton {
-  display: none;
+    display: none;
 }
 
 #musicPlayer_playButton {
-  display: block;
+    display: block;
 }
-
 
 .active {
-
-transition-property: background-color, border-color, color, fill, stroke, opacity, box-shadow, transform;
-transition-duration: 150ms;
-transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-color: #6EE7B7;
--webkit-font-smoothing: antialiased;
--moz-osx-font-smoothing: grayscale;
-align-items: center;
-border-bottom-width: 8px;
-border-color: transparent;
-
-hover {
- --transform-translate-y: -0.125rem;
-border-color: #6EE7B7;
- }
+    transition-property: background-color, border-color, color, fill, stroke, opacity, box-shadow, transform;
+    transition-duration: 150ms;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    color: #6EE7B7;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    align-items: center;
+    border-bottom-width: 8px;
+    border-color: transparent;
 }
+
+
