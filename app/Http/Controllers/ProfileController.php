@@ -9,15 +9,21 @@ use Inertia\Inertia;
 
 class ProfileController extends Controller
 {
-    public function show () 
-    {  
-        // $user = User::Auth();
-        // $collaboration = FreelanceAdvertisement::where('user_id','=',$user->id);
-        // dd($user); 
-        // dd($collaboration); 
+    public function index (User $user)
+    {
 
-        
-        return Inertia::render('Profile');
-        
+        $collaborations = FreelanceAdvertisement::where('user_id','=',$user->id)->get();
+
+        // dd($user->id);
+        // dd($collaboration);
+
+
+        return Inertia::render('Profile',[
+            'user' => $user,
+            'collaborations' => $collaborations
+        ]);
+
     }
+
+    
 }

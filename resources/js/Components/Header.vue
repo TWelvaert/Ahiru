@@ -31,10 +31,10 @@ let data = defineProps({
 
                         <!-- Navigation Links -->
                         <BreezeNavLink :href="route('dashboard')" :class="{ 'active': $page.url === '/dashboard' }">
-                            Home 
+                            Home
                         </BreezeNavLink>
                     </div>
-                    
+
                     <div class="pt-3">
                         <input class="
                                     border-white opacity-50
@@ -49,13 +49,13 @@ let data = defineProps({
                     </div>
 
                     <div class="hidden  space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                        <BreezeNavLink :href="route('advertisement/create')"
-                            :class="{ 'active': $page.url === '/advertisement/create' }">
-                            Collaborate
+                        <BreezeNavLink :href="route('advertisements')"
+                            :class="{ 'active': $page.url === '/advertisements' }">
+                            Advertisements
                         </BreezeNavLink>
 
                         <BreezeNavLink class="" :href="route('dashboard')" :active="route().current('dashboard')">
-                            Upload
+                            Music
                         </BreezeNavLink>
                     </div>
 
