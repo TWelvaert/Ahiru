@@ -113,7 +113,7 @@ class FreelanceAdsController extends Controller
 
             'category_id' => $categories,
             'type' => 'advertisement',
-            'slug' => $request->slug,
+            'slug' => str()->slug($request->title),
             'title' => $request->title,
             'description' => $request->description,
             'uploads' => $uploads
