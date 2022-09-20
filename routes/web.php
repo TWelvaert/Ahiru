@@ -74,7 +74,9 @@ Route::get('/admin/news/{news_article:slug}/delete', [NewsController::class, 'de
 
 // USERS
 Route::get('/admin/users', [\App\Http\Controllers\AdminController::class, 'index_users'])->middleware(['auth', 'verified'])->name('admin/users');
-Route::get('/admin/users/{user:slug}/edit', [\App\Http\Controllers\AdminController::class, 'edit_user'])->middleware(['auth', 'verified'])->name('{user:slug}/edit');
+Route::get('admin/users/{user:slug}/edit', [\App\Http\Controllers\AdminController::class, 'edit_user'])->middleware(['auth', 'verified'])->name('{user:slug}/edit');
+Route::post('admin/users/{user:slug}/edit', [\App\Http\Controllers\AdminController::class, 'update_user'])->middleware(['auth', 'verified']);
+Route::get('admin/users/{user:slug}/delete', [\App\Http\Controllers\AdminController::class, 'destroy_user'])->middleware(['auth', 'verified'])->name('{user:slug}/delete');
 
 // SETTINGS
 Route::get('settings/account', [\App\Http\Controllers\Auth\RegisteredUserController::class, 'edit'])->name('settings/account');
