@@ -21,7 +21,7 @@ class NewsController extends Controller
         $user = Auth::user();
         $newsArticles = NewsArticle::all();
 
-        return Inertia::render('News', [
+        return Inertia::render('Admin/News/Articles', [
             'news_articles' => $newsArticles,
         ]);
     }
