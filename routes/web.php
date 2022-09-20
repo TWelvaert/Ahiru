@@ -61,25 +61,28 @@ Route::get('/admin/news', [NewsController::class, 'admin_index'])->name('news_in
 Route::get('/news/article/{news_article:slug}', [NewsController::class, 'show']);
 Route::post('news/article/{news_article:slug}/comment', [NewsCommentController::class, 'store'])->name('comment');
 
-Route::get('/admin/news/create', [NewsController::class, 'create'])->middleware(['auth', 'verified']);
-Route::post('admin/news/create', [NewsController::class, 'store'])->middleware(['auth', 'verified'])->name('admin/news/create');
+
 
 Route::get('/admin/news/{news_article:slug}/edit', [NewsController::class, 'edit'])->middleware(['auth', 'verified']);
 Route::post('/admin/news/{news_article:slug}/update', [NewsController::class, 'update'])->middleware(['auth', 'verified']);
 
 Route::get('/admin/news/{news_article:slug}/delete', [NewsController::class, 'destroy'])->middleware(['auth', 'verified']);
 
+///////////////////////////////////////////////////////////////////////////////////////////////////// ROUTES ADDED BY GYCH  
+// ADMIN CONTROL PANEL ROUTES
+Route::get('/admin', [\App\Http\Controllers\AdminController::class, 'index'])->name('admin')->middleware(['auth']);
 
+// NEWS ARTICLES
+Route::get('/admin/news/create', [NewsController::class, 'create'])->middleware(['auth', 'verified'])->name('admin/news/create');
+Route::post('admin/news/create', [NewsController::class, 'store'])->middleware(['auth', 'verified'])->name('admin/news/create');
 
 
 Route::get('settings/account', [\App\Http\Controllers\Auth\RegisteredUserController::class, 'edit'])->name('settings/account');
 Route::post('settings/account', [\App\Http\Controllers\Auth\RegisteredUserController::class, 'update'])->name('settings/account');
-
 Route::get('settings/uploads', [\App\Http\Controllers\UploadsController::class, 'index'])->name('settings/uploads');
-
 Route::post('settings/uploads', [\App\Http\Controllers\UploadsController::class, 'upload'])->name('settings/uploads');
 Route::get('settings/uploads/delete/{upload:id}', [\App\Http\Controllers\UploadsController::class, 'destroy']);
-
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 Route::get('/likes', function () {
     return Inertia::render('Likes');
