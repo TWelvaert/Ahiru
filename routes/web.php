@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AdminAdvertisementController;
 use App\Http\Controllers\FreelanceAdsController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\NewsCommentController;
 use App\Http\Controllers\NewsController;
 use App\Http\Controllers\ProfileController;
@@ -38,7 +39,9 @@ Route::get('/', function () {
 Route::get('/profile/{user:slug}', [ProfileController::class,'show'])
 ->name('profile');
 
-Route::get('/dashboard', [FreelanceAdsController::class, 'index'])->name('dashboard')->middleware(['auth', 'verified']);
+// Route::get('/dashboard', [FreelanceAdsController::class, 'index'])->name('dashboard')->middleware(['auth', 'verified']);
+
+Route::get('/dashboard', [HomeController::class, 'index'])->name('dashboard')->middleware(['auth', 'verified']);
 
 Route::get('/advertisement/create', [FreelanceAdsController::class, 'create'])->middleware(['auth', 'verified'])->name('advertisement.create');
 Route::post('advertisement/create', [FreelanceAdsController::class, 'store'])->middleware(['auth', 'verified'])->name('advertisement/create');
@@ -68,7 +71,7 @@ Route::post('/admin/news/{news_article:slug}/update', [NewsController::class, 'u
 Route::get('/admin/news/{news_article:slug}/delete', [NewsController::class, 'destroy'])->middleware(['auth', 'verified']);
 
 
-   
+
 
 Route::get('settings/account', [\App\Http\Controllers\Auth\RegisteredUserController::class, 'edit'])->name('settings/account');
 Route::post('settings/account', [\App\Http\Controllers\Auth\RegisteredUserController::class, 'update'])->name('settings/account');
