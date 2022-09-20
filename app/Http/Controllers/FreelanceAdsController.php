@@ -89,7 +89,12 @@ class FreelanceAdsController extends Controller
 
     public function store(Request $request)
     {
-        $uploads = implode(",", $request->uploads);
+        if($request->uploads == null) {
+            $uploads = 0;
+        } else {
+            $uploads = implode(",", $request->uploads);
+        }
+
         $categories_checked = [];
         $categories = $request->categories;
 
