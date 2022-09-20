@@ -71,26 +71,6 @@ const submit = () => {
                     </div>
                     <div>
                         <BreezeLabel
-                            for="slug"
-                            value="slug"
-                            class="block mb-2 uppercase font-bold text-xs text-gray-700 w-full"
-                        />
-                        <BreezeInput
-                            id="slug"
-                            type="text"
-                            class="border border-blue-300 p-2 w-full rounded"
-                            v-model="form.slug"
-                            required
-                            autofocus
-                            autocomplete="slug"
-                        />
-                        <BreezeInputError
-                            class="mt-2"
-                            :message="form.errors.slug"
-                        />
-                    </div>
-                    <div>
-                        <BreezeLabel
                             for="excerpt"
                             value="excerpt"
                             class="block mb-2 uppercase font-bold text-xs text-gray-700 w-full"
@@ -130,28 +110,7 @@ const submit = () => {
                             :message="form.errors.description"
                         />
                     </div>
-                    <!-- <div>
-                        <BreezeLabel
-                            for="images"
-                            value="upload files"
-                            class="block mb-2 uppercase font-bold text-xs text-gray-700 w-full"
-                        />
-                        <BreezeInput
-                            id="images"
-                            multiple
-                            type="file"
-                            @input="form.uploads = $event.target.files"
-                            class="border border-blue-300 p-2 w-full rounded mb-2"
-                            required
-                            autofocus
-                        />
-                        <BreezeInputError
-                            class="mt-2"
-                            :message="form.errors.uploads"
-                        />
-                    </div> -->
-
-                    <div v-for="category in categories" class="inline ml-5 text-white">
+                    <div v-for="category in categories" class="inline ml-5 ">
                         <BreezeCheckbox
                             :name="category.name"
                             :id="category.id"
@@ -160,7 +119,7 @@ const submit = () => {
                         <BreezeLabel
                             :for="category.id"
                             :value="category.name"
-                            class="inline-block mb-2 uppercase font-bold text-xs text-white"
+                            class="inline-block mb-2 uppercase font-bold text-x"
                         />
                     </div>
 
