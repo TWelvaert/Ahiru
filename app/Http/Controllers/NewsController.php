@@ -65,27 +65,23 @@ class NewsController extends Controller
 
         $categories = implode(",", $categories_checked);
 
-
         Validator::make($request->all(), [
-            'slug' => ['required', 'string', 'unique:news_articles'],
             'title' => ['required', 'string'],
             'excerpt' => ['required', 'string'],
             'description' => ['required', 'string'],
-
         ])->validate();
+ 
+        Session::flash('message', 'News article has been created!');
+        Session::flash('flashtype', 'success');
 
-            
-        
-
-        Session::flash('message', 'Your Advertisement is successfully made!');
-        Session::flasNewsArticle::create([
+        NewsArticle::create([
             'user_id' => $user->id,
-            'slug' => $request->slug,
+            'slug' => str()->slug($request->title),
             'title' => $request->title,
             'excerpt' => $request->excerpt,
             'description' => $request->description,
             'category_id' => $categories,
-        ]);h('flashtype', 'success');
+        ]);
 
         return redirect('/admin/news');
     }
