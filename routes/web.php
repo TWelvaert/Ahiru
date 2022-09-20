@@ -72,6 +72,9 @@ Route::get('/admin/news/{news_article:slug}/edit', [NewsController::class, 'edit
 Route::post('/admin/news/{news_article:slug}/update', [NewsController::class, 'update'])->middleware(['auth', 'verified']);
 Route::get('/admin/news/{news_article:slug}/delete', [NewsController::class, 'destroy'])->middleware(['auth', 'verified']);
 
+// COLLABORATIONS
+Route::get('/admin/collaborations', [\App\Http\Controllers\AdminController::class, 'index_collabs'])->middleware(['auth', 'verified'])->name('admin/collaborations');
+
 // USERS
 Route::get('/admin/users', [\App\Http\Controllers\AdminController::class, 'index_users'])->middleware(['auth', 'verified'])->name('admin/users');
 Route::get('admin/users/{user:slug}/edit', [\App\Http\Controllers\AdminController::class, 'edit_user'])->middleware(['auth', 'verified'])->name('{user:slug}/edit');
