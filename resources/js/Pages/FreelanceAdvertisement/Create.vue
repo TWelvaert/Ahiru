@@ -69,12 +69,6 @@ function processFiles(files){
                             <BreezeInputError class="mt-2" :message="form.errors.title" />
                         </div>
                         <div>
-                            <BreezeLabel for="slug" value="Slug" />
-                            <BreezeInput id="slug" type="text" class="block w-full" v-model="form.slug" required
-                                autofocus autocomplete="slug" />
-                            <BreezeInputError class="mt-2" :message="form.errors.slug" />
-                        </div>
-                        <div>
                             <BreezeLabel for="description" value="Description" />
                             <TextareaVue id="description" type="textarea" v-model="form.description" rows="8" required
                                 autofocus autocomplete="description"
