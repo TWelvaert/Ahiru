@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Validation\Rules;
 use Illuminate\Validation\Rule;
 use App\Models\User;
+use App\Models\FreelanceAdvertisement;
 use Inertia\Inertia;
 use Session;
 
@@ -15,6 +16,15 @@ class AdminController extends Controller
     public function index()
     {
         return Inertia::render('Admin/Dashboard');
+    }
+
+    public function index_collabs()
+    {
+         $collabs = FreelanceAdvertisement::paginate(15);
+
+        return Inertia::render('Admin/Collaborations/List', [
+            'collabs' => $collabs,
+        ]);
     }
 
     public function index_users()
