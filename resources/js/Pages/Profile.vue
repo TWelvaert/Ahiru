@@ -3,19 +3,19 @@
 import BreezeAuthenticatedLayout from "@/Layouts/Authenticated.vue";
 import { Head, useForm } from "@inertiajs/inertia-vue3";
 
-let data = defineProps({
-    colaberations: String,
-    categories: Array,
-    uploads: Array,
-});
-const form = useForm({
-    title: data["title"],
-    slug: data["slug"],
-    description: data["description"],
-    categories: data["categories"],
-    uploads: data["uploads"],
-});
-console.log(data["categories"]);
+// let data = defineProps({
+//     colaberations: String,
+//     categories: Array,
+//     uploads: Array,
+// });
+// const form = useForm({
+//     title: data["title"],
+//     slug: data["slug"],
+//     description: data["description"],
+//     categories: data["categories"],
+//     uploads: data["uploads"],
+// });
+// console.log(data["categories"]);
 
 
 </script>
