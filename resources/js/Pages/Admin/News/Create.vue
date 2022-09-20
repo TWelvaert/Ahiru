@@ -1,5 +1,5 @@
 <script setup>
-import BreezeAuthenticatedLayout from "@/Layouts/Authenticated.vue";
+import AdminPanelLayout from "@/Layouts/AdminPanelLayout.vue";  
 import BreezeButton from "@/Components/Button.vue";
 import BreezeInput from "@/Components/Input.vue";
 import BreezeInputError from "@/Components/InputError.vue";
@@ -34,7 +34,7 @@ const submit = () => {
 
 <template>
     <Head title="Create_article" />
-    <BreezeAuthenticatedLayout>
+    <AdminPanelLayout>
         <template #header>
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
                 News Article
@@ -177,5 +177,5 @@ const submit = () => {
                 </form>
             </div>
         </div>
-    </BreezeAuthenticatedLayout>
+    </AdminPanelLayout>
 </template>

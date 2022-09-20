@@ -11,9 +11,7 @@
         <div class="flex">
             <AdminSideBar class="flex-col" />
             <div>
-
-                Welcome to the Admin Panel
-
+                <slot />
             </div>
         </div>
         

@@ -45,7 +45,7 @@ class NewsController extends Controller
             array_push($categories, $categoryObject);
         }
 
-        return Inertia::render('Admin/Create', [
+        return Inertia::render('Admin/News/Create', [
             'categories' => $categories
         ]);
     }
