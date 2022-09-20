@@ -81,10 +81,12 @@ function processFiles(files){
                         </div>
                 
                         <div class="bg-white">
-                            <button type="button" @click="showModal = true">ADD IMAGE OR AUDIO FILE</button>
-                            <Modal v-if="showModal" @close="showModal = false">
-                                <Uploads @add_files="processFiles" :user_uploads="data['user_uploads']" />
-                            </Modal>
+                            <button class="bg-slate-400 text-white w-full mt-2 mb-2" type="button" @click="showModal = true">Add media (image or audio file)</button>
+                         
+                                <Modal class="absolute min-h-full w-full left-0 top-0" v-if="showModal" @close="showModal = false">
+                                    <Uploads  @add_files="processFiles" :user_uploads="data['user_uploads']" />
+                                </Modal>
+                       
                         </div>
 
                         <div v-for="category in categories" class="flex items-center">
