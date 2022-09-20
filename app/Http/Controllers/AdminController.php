@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
-use Inertia\Inertia;
-
+use Illuminate\Validation\Rules;
+use Illuminate\Validation\Rule;
 use App\Models\User;
-
+use Inertia\Inertia;
+use Session;
 
 class AdminController extends Controller
 {
@@ -42,16 +44,25 @@ class AdminController extends Controller
 
         $user->update([
             'name' => $request->name,
+            'slug' => str()->slug($user->name),
             'email' =>  $request->email,
         ]);
 
         Session::flash('message', 'Account has been updated!');
         Session::flash('flashtype', 'success');
 
-        return Inertia::render('Admin/Users/Edit', [
-            'name' => $user->name,
-            'slug' => $user->slug,
-            'email' => $user->email,
-        ]);
+        return redirect("/admin/users/$user->slug/edit");
     } 
+
+    public function destroy_user(User $user)
+    {
+        $user->delete();
+
+        Session::flash('message', 'User has been deleted !');
+        Session::flash('flashtype', 'success');
+
+        $users = User::paginate(15);
+
+        return redirect("/admin/users");
+    }
 }
