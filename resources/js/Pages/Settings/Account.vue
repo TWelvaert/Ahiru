@@ -7,8 +7,6 @@ import BreezeInputError from '@/Components/InputError.vue';
 import BreezeLabel from '@/Components/Label.vue';
 import { Head, useForm } from '@inertiajs/inertia-vue3';
 
-import Dashboard from '@/Pages/Dashboard.vue';
-
 let data = defineProps({
     name: String,
     email: String,
@@ -41,8 +39,17 @@ const submit_password = () => {
 
 <template>
 
-    <Dashboard>
     <Head title="Account Settings" />
+
+    <BreezeAuthenticatedLayout>
+
+        <!-- Header -->
+
+        <template #header>
+            <h2 class="font-monument text-xl text-black leading-tight flex items-center justify-center">
+                Account Settings
+            </h2>
+        </template>
 
         <!-- User avatar -->
 
@@ -153,6 +160,5 @@ const submit_password = () => {
                 </div>
             </div>
         </div>
-    </Dashboard>
-
+    </BreezeAuthenticatedLayout>
 </template>
