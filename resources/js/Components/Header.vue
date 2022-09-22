@@ -87,8 +87,9 @@ let data = defineProps({
                                     <BreezeDropdownLink :href="route('logout')" method="post" as="button">
                                         Following
                                     </BreezeDropdownLink>
-                                    <BreezeDropdownLink :href="route('logout')" method="post" as="button">
-                                        Tracks
+                                    <BreezeDropdownLink :href="route('settings/uploads')"
+                                        :class="{ 'active': $page.url === 'settings/uploads' }">
+                                        Uploads
                                     </BreezeDropdownLink>
                                     <BreezeDropdownLink :href="route('settings/account')"
                                         :class="{ 'active': $page.url === '/settings/account' }">

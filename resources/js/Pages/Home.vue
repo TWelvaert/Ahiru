@@ -13,6 +13,5 @@ import Dashboard from '@/Pages/Dashboard.vue';
 
 
 
-
 </Dashboard>
 </template>
