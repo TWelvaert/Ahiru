@@ -45,6 +45,7 @@ Route::get('/dashboard', [HomeController::class, 'index'])->name('dashboard')->m
 Route::get('/home', [HomeController::class, 'index_home'])->middleware(['auth', 'verified'])->name('home');
 Route::get('/music', [HomeController::class, 'index_music'])->middleware(['auth', 'verified'])->name('music');
 Route::get('/likes', [HomeController::class, 'index_likes'])->middleware(['auth', 'verified'])->name('likes');
+Route::get('/following', [HomeController::class, 'index_following'])->middleware(['auth', 'verified'])->name('following');
 
 
 Route::get('/advertisement/create', [FreelanceAdsController::class, 'create'])->middleware(['auth', 'verified'])->name('advertisement.create');
@@ -93,9 +94,6 @@ Route::post('settings/uploads', [\App\Http\Controllers\UploadsController::class,
 Route::get('settings/uploads/delete/{upload:id}', [\App\Http\Controllers\UploadsController::class, 'destroy']);
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-Route::get('/likes', function () {
-    return Inertia::render('Likes');
-})->name('likes');
 
 // ['auth', 'verified'] when logged in as a user
 
