@@ -24,6 +24,7 @@ class FreelanceAdsController extends Controller
         $advertisements = FreelanceAdvertisement::all()->where('user_id', '=', $user->id);
 
         return Inertia::render('Dashboard', [
+            'user' => $user,
             'advertisements' => $advertisements,
         ]);
     }
@@ -33,10 +34,11 @@ class FreelanceAdsController extends Controller
     {
 
         $categories = FreelanceCategory::all();
-       
+        $user = Auth::user();
         return Inertia::render(
             'Advertisements',
             [
+                'user' => $user,
                 'categories' => $categories,
                 'freelance_advertisements' => FreelanceAdvertisement::query()
                     ->when(Request::input('search'), function ($query, $search) {

@@ -37,7 +37,7 @@ watch(search, (value) => {
     <Head title="collaborationss" />
 
 
-    <Dashboard>
+    <Dashboard :user="user">
         <BreezeButton name="form1" class="ml-4">
         <a href="advertisement/create">Create</a>
     </BreezeButton>
