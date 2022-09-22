@@ -89,7 +89,13 @@ class FreelanceAdsController extends Controller
 
     public function store(Request $request)
     {
-        $uploads = implode(",", $request->uploads);
+        
+        if($request->uploads == null) {
+            $uploads = 0;
+        } else {
+            $uploads = implode(",", $request->uploads);
+        }
+
         $categories_checked = [];
         $categories = $request->categories;
 
@@ -102,7 +108,6 @@ class FreelanceAdsController extends Controller
         $categories = implode(",", $categories_checked);
 
         Validator::make($request->all(), [
-            'slug' => ['required', 'string', 'unique:freelance_advertisements'],
             'title' => ['required', 'string'],
             'description' => ['required', 'string'],
 
@@ -110,7 +115,6 @@ class FreelanceAdsController extends Controller
 
         $freelanceAdvertisement = FreelanceAdvertisement::create([
             'user_id' => Auth::user()->id,
-
             'category_id' => $categories,
             'type' => 'advertisement',
             'slug' => str()->slug($request->title),

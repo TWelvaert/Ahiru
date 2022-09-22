@@ -56,25 +56,35 @@ Route::get('/advertisement/{freelanceAdvertisement:slug}', [FreelanceAdsControll
 
 
 
-Route::get('/admin/news', [NewsController::class, 'admin_index'])->name('news_index')->middleware(['auth', 'verified']);
+
 
 Route::get('/news/article/{news_article:slug}', [NewsController::class, 'show']);
 Route::post('news/article/{news_article:slug}/comment', [NewsCommentController::class, 'store'])->name('comment');
 
 
 
-Route::get('/admin/news/{news_article:slug}/edit', [NewsController::class, 'edit'])->middleware(['auth', 'verified']);
-Route::post('/admin/news/{news_article:slug}/update', [NewsController::class, 'update'])->middleware(['auth', 'verified']);
 
-Route::get('/admin/news/{news_article:slug}/delete', [NewsController::class, 'destroy'])->middleware(['auth', 'verified']);
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////// ROUTES ADDED BY GYCH  
 // ADMIN CONTROL PANEL ROUTES
 Route::get('/admin', [\App\Http\Controllers\AdminController::class, 'index'])->name('admin')->middleware(['auth']);
 
 // NEWS ARTICLES
+Route::get('/admin/news', [NewsController::class, 'admin_index'])->middleware(['auth', 'verified'])->name('admin/news');
 Route::get('/admin/news/create', [NewsController::class, 'create'])->middleware(['auth', 'verified'])->name('admin/news/create');
 Route::post('admin/news/create', [NewsController::class, 'store'])->middleware(['auth', 'verified'])->name('admin/news/create');
+Route::get('/admin/news/{news_article:slug}/edit', [NewsController::class, 'edit'])->middleware(['auth', 'verified']);
+Route::post('/admin/news/{news_article:slug}/update', [NewsController::class, 'update'])->middleware(['auth', 'verified']);
+Route::get('/admin/news/{news_article:slug}/delete', [NewsController::class, 'destroy'])->middleware(['auth', 'verified']);
+
+// COLLABORATIONS
+Route::get('/admin/collaborations', [\App\Http\Controllers\AdminController::class, 'index_collabs'])->middleware(['auth', 'verified'])->name('admin/collaborations');
+
+// USERS
+Route::get('/admin/users', [\App\Http\Controllers\AdminController::class, 'index_users'])->middleware(['auth', 'verified'])->name('admin/users');
+Route::get('admin/users/{user:slug}/edit', [\App\Http\Controllers\AdminController::class, 'edit_user'])->middleware(['auth', 'verified'])->name('{user:slug}/edit');
+Route::post('admin/users/{user:slug}/edit', [\App\Http\Controllers\AdminController::class, 'update_user'])->middleware(['auth', 'verified']);
+Route::get('admin/users/{user:slug}/delete', [\App\Http\Controllers\AdminController::class, 'destroy_user'])->middleware(['auth', 'verified'])->name('{user:slug}/delete');
 
 
 Route::get('settings/account', [\App\Http\Controllers\Auth\RegisteredUserController::class, 'edit'])->name('settings/account');

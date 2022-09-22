@@ -69,12 +69,6 @@ function processFiles(files){
                             <BreezeInputError class="mt-2" :message="form.errors.title" />
                         </div>
                         <div>
-                            <BreezeLabel for="slug" value="Slug" />
-                            <BreezeInput id="slug" type="text" class="block w-full" v-model="form.slug" required
-                                autofocus autocomplete="slug" />
-                            <BreezeInputError class="mt-2" :message="form.errors.slug" />
-                        </div>
-                        <div>
                             <BreezeLabel for="description" value="Description" />
                             <TextareaVue id="description" type="textarea" v-model="form.description" rows="8" required
                                 autofocus autocomplete="description"
@@ -87,19 +81,12 @@ function processFiles(files){
                         </div>
                 
                         <div class="bg-white">
-                            <button type="button" @click="showModal = true">ADD IMAGE OR AUDIO FILE</button>
-                            <Modal v-if="showModal" @close="showModal = false">
-                                <Uploads @add_files="processFiles" :user_uploads="data['user_uploads']" />
-                            </Modal>
-                        </div>
-
-
-
-                        <div>
-                            <BreezeLabel for="images" value="Upload files" class=" m-2  text-black" />
-                            <BreezeInput id="images" multiple type="file" @input="form.uploads = $event.target.files"
-                                class=" m-2 text-black w-64" required autofocus />
-                            <BreezeInputError class="mt-2" :message="form.errors.uploads" />
+                            <button class="bg-slate-400 text-white w-full mt-2 mb-2" type="button" @click="showModal = true">Add media (image or audio file)</button>
+                         
+                                <Modal class="absolute min-h-full w-full left-0 top-0" v-if="showModal" @close="showModal = false">
+                                    <Uploads  @add_files="processFiles" :user_uploads="data['user_uploads']" />
+                                </Modal>
+                       
                         </div>
 
                         <div v-for="category in categories" class="flex items-center">
