@@ -1,6 +1,7 @@
 <script setup>
 import BreezeAuthenticatedLayout from "@/Layouts/Authenticated.vue";
 import { Head } from "@inertiajs/inertia-vue3";
+import Dashboard from '@/Pages/Dashboard.vue';
 
 let data = defineProps({
     advertisement: String,
@@ -12,6 +13,7 @@ const uploads = data["uploads"];
 
 <template>
     <Head title="Advertisement" />
+    <Dashboard>
     <BreezeAuthenticatedLayout>
         <template #header>
             <h2 class="font-monument text-xl text-black leading-tight flex items-center justify-center">
@@ -40,5 +42,5 @@ const uploads = data["uploads"];
         </div>
 
     </BreezeAuthenticatedLayout>
-
+</Dashboard>
 </template>
