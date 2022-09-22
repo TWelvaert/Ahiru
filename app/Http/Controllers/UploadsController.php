@@ -17,6 +17,7 @@ class UploadsController extends Controller
         $user_uploads = Upload::where('user_id', '=', $user->id)->get();
 
         return Inertia::render('Settings/Uploads', [
+            'user' => $user,
             'user_uploads' => $user_uploads
         ]);
     }

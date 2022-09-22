@@ -7,6 +7,6 @@
 
 <template>
     <Dashboard>
-        Likes Page
+        Music Page
     </Dashboard>
 </template>
