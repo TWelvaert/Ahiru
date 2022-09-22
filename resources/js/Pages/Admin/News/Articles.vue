@@ -1,5 +1,5 @@
 <script setup>
-import BreezeAuthenticatedLayout from "@/Layouts/Authenticated.vue";
+import AdminPanelLayout from "@/Layouts/AdminPanelLayout.vue";
 import { Head } from "@inertiajs/inertia-vue3";
 
 let data = defineProps({
@@ -8,9 +8,9 @@ let data = defineProps({
 </script>
 
 <template>
-    <Head title="Dashboard" />
+    <Head title="Admin - News" />
 
-    <BreezeAuthenticatedLayout>
+    <AdminPanelLayout>
         <template #header>
             <div class="font-monument">
                 <span class="flex items-center justify-center">
@@ -29,7 +29,7 @@ let data = defineProps({
                         <button
                             class="uppercase bg-green-300 hover:bg-black hover:text-white text-black py-3 px-8 rounded-full font-light tracking-widest transition ease-in-out delay-50 hover:-translate-y-0.5 hover:scale-60 duration-50 antialiased"
                         >
-                            <a href="/admin/news/create">New Articles</a>
+                            <a href="/admin/news/create">Create Article</a>
                         </button>
                     </div>
                 </div>
@@ -92,5 +92,5 @@ let data = defineProps({
                 </table>
             </div>
         </div>
-    </BreezeAuthenticatedLayout>
+    </AdminPanelLayout>
 </template>

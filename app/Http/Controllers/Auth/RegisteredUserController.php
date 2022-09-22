@@ -47,6 +47,7 @@ class RegisteredUserController extends Controller
             'name' => $request->name,
             'slug' => str()->slug($request->name),
             'email' => $request->email,
+            'slug' => str()->slug($request->name),
             'password' => Hash::make($request->password),
             'rank' => 'user',
         ]);
@@ -62,8 +63,7 @@ class RegisteredUserController extends Controller
     {
         $user = Auth::user();
         return Inertia::render('Settings/Account', [
-            'name' => $user->name,
-            'email' => $user->email,
+            'user' => $user,
         ]);
     } 
        
