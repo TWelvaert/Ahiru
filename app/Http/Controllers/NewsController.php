@@ -21,7 +21,7 @@ class NewsController extends Controller
         $user = Auth::user();
         $newsArticles = NewsArticle::all();
 
-        return Inertia::render('News', [
+        return Inertia::render('Admin/News/Articles', [
             'news_articles' => $newsArticles,
         ]);
     }
@@ -45,7 +45,7 @@ class NewsController extends Controller
             array_push($categories, $categoryObject);
         }
 
-        return Inertia::render('Admin/Create', [
+        return Inertia::render('Admin/News/Create', [
             'categories' => $categories
         ]);
     }
@@ -65,27 +65,23 @@ class NewsController extends Controller
 
         $categories = implode(",", $categories_checked);
 
-
         Validator::make($request->all(), [
-            'slug' => ['required', 'string', 'unique:news_articles'],
             'title' => ['required', 'string'],
             'excerpt' => ['required', 'string'],
             'description' => ['required', 'string'],
-
         ])->validate();
+ 
+        Session::flash('message', 'News article has been created!');
+        Session::flash('flashtype', 'success');
 
-            
-        
-
-        Session::flash('message', 'Your Advertisement is successfully made!');
-        Session::flasNewsArticle::create([
+        NewsArticle::create([
             'user_id' => $user->id,
-            'slug' => $request->slug,
+            'slug' => str()->slug($request->title),
             'title' => $request->title,
             'excerpt' => $request->excerpt,
             'description' => $request->description,
             'category_id' => $categories,
-        ]);h('flashtype', 'success');
+        ]);
 
         return redirect('/admin/news');
     }
