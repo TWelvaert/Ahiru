@@ -54,10 +54,6 @@ Route::get('/dashboard/advertisement/delete/{freelanceAdvertisement:slug}', [Fre
 
 Route::get('/advertisement/{freelanceAdvertisement:slug}', [FreelanceAdsController::class, 'show']);
 
-
-
-
-
 Route::get('/news/article/{news_article:slug}', [NewsController::class, 'show']);
 Route::post('news/article/{news_article:slug}/comment', [NewsCommentController::class, 'store'])->name('comment');
 
@@ -65,7 +61,7 @@ Route::post('news/article/{news_article:slug}/comment', [NewsCommentController::
 
 
 
-///////////////////////////////////////////////////////////////////////////////////////////////////// ROUTES ADDED BY GYCH  
+///////////////////////////////////////////////////////////////////////////////////////////////////// ROUTES ADDED BY GYCH
 // ADMIN CONTROL PANEL ROUTES
 Route::get('/admin', [\App\Http\Controllers\AdminController::class, 'index'])->name('admin')->middleware(['auth']);
 
