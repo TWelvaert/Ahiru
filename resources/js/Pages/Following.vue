@@ -7,6 +7,6 @@
 
 <template>
     <Dashboard>
-        Likes Page
+        Following Page
     </Dashboard>
 </template>

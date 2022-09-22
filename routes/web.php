@@ -36,13 +36,17 @@ Route::get('/', function () {
 //     return Inertia::render('Dashboard');
 // })->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::get('/profile/{user:slug}', [ProfileController::class,'index'])
-->name('profile');
+Route::get('/profile/{user:slug}', [ProfileController::class,'index']) ->name('profile');
 
 // Route::get('/dashboard', [FreelanceAdsController::class, 'index'])->name('dashboard')->middleware(['auth', 'verified']);
 Route::get('/advertisements', [FreelanceAdsController::class, 'collaborations'])->name('advertisements');
 
 Route::get('/dashboard', [HomeController::class, 'index'])->name('dashboard')->middleware(['auth', 'verified']);
+Route::get('/home', [HomeController::class, 'index_home'])->middleware(['auth', 'verified'])->name('home');
+Route::get('/music', [HomeController::class, 'index_music'])->middleware(['auth', 'verified'])->name('music');
+Route::get('/likes', [HomeController::class, 'index_likes'])->middleware(['auth', 'verified'])->name('likes');
+Route::get('/following', [HomeController::class, 'index_following'])->middleware(['auth', 'verified'])->name('following');
+
 
 Route::get('/advertisement/create', [FreelanceAdsController::class, 'create'])->middleware(['auth', 'verified'])->name('advertisement.create');
 Route::post('advertisement/create', [FreelanceAdsController::class, 'store'])->middleware(['auth', 'verified'])->name('advertisement/create');
@@ -54,27 +58,33 @@ Route::get('/dashboard/advertisement/delete/{freelanceAdvertisement:slug}', [Fre
 
 Route::get('/advertisement/{freelanceAdvertisement:slug}', [FreelanceAdsController::class, 'show']);
 
-
-
-Route::get('/admin/news', [NewsController::class, 'admin_index'])->name('news_index')->middleware(['auth', 'verified']);
-
 Route::get('/news/article/{news_article:slug}', [NewsController::class, 'show']);
 Route::post('news/article/{news_article:slug}/comment', [NewsCommentController::class, 'store'])->name('comment');
 
 
 
-Route::get('/admin/news/{news_article:slug}/edit', [NewsController::class, 'edit'])->middleware(['auth', 'verified']);
-Route::post('/admin/news/{news_article:slug}/update', [NewsController::class, 'update'])->middleware(['auth', 'verified']);
 
-Route::get('/admin/news/{news_article:slug}/delete', [NewsController::class, 'destroy'])->middleware(['auth', 'verified']);
 
-///////////////////////////////////////////////////////////////////////////////////////////////////// ROUTES ADDED BY GYCH  
+///////////////////////////////////////////////////////////////////////////////////////////////////// ROUTES ADDED BY GYCH
 // ADMIN CONTROL PANEL ROUTES
 Route::get('/admin', [\App\Http\Controllers\AdminController::class, 'index'])->name('admin')->middleware(['auth']);
 
 // NEWS ARTICLES
+Route::get('/admin/news', [NewsController::class, 'admin_index'])->middleware(['auth', 'verified'])->name('admin/news');
 Route::get('/admin/news/create', [NewsController::class, 'create'])->middleware(['auth', 'verified'])->name('admin/news/create');
 Route::post('admin/news/create', [NewsController::class, 'store'])->middleware(['auth', 'verified'])->name('admin/news/create');
+Route::get('/admin/news/{news_article:slug}/edit', [NewsController::class, 'edit'])->middleware(['auth', 'verified']);
+Route::post('/admin/news/{news_article:slug}/update', [NewsController::class, 'update'])->middleware(['auth', 'verified']);
+Route::get('/admin/news/{news_article:slug}/delete', [NewsController::class, 'destroy'])->middleware(['auth', 'verified']);
+
+// COLLABORATIONS
+Route::get('/admin/collaborations', [\App\Http\Controllers\AdminController::class, 'index_collabs'])->middleware(['auth', 'verified'])->name('admin/collaborations');
+
+// USERS
+Route::get('/admin/users', [\App\Http\Controllers\AdminController::class, 'index_users'])->middleware(['auth', 'verified'])->name('admin/users');
+Route::get('admin/users/{user:slug}/edit', [\App\Http\Controllers\AdminController::class, 'edit_user'])->middleware(['auth', 'verified'])->name('{user:slug}/edit');
+Route::post('admin/users/{user:slug}/edit', [\App\Http\Controllers\AdminController::class, 'update_user'])->middleware(['auth', 'verified']);
+Route::get('admin/users/{user:slug}/delete', [\App\Http\Controllers\AdminController::class, 'destroy_user'])->middleware(['auth', 'verified'])->name('{user:slug}/delete');
 
 
 Route::get('settings/account', [\App\Http\Controllers\Auth\RegisteredUserController::class, 'edit'])->name('settings/account');
@@ -84,9 +94,6 @@ Route::post('settings/uploads', [\App\Http\Controllers\UploadsController::class,
 Route::get('settings/uploads/delete/{upload:id}', [\App\Http\Controllers\UploadsController::class, 'destroy']);
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-Route::get('/likes', function () {
-    return Inertia::render('Likes');
-})->name('likes');
 
 // ['auth', 'verified'] when logged in as a user
 
