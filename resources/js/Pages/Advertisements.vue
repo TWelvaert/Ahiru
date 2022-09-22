@@ -27,10 +27,11 @@ const submit = () => {
 <template>
 
     <Head title="collaborationss" />
-    <BreezeButton name="form1" class="ml-4">
+
+    <Dashboard>
+        <BreezeButton name="form1" class="ml-4">
         <a href="advertisement/create">Create</a>
     </BreezeButton>
-    <Dashboard>
         <template #header>
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
                 collaborations
