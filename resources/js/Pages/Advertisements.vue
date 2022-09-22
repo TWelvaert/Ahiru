@@ -1,9 +1,10 @@
 <script setup>
-import BreezeAuthenticatedLayout from "@/Layouts/Authenticated.vue";
+import Dashboard from "@/Pages/Dashboard.vue";
 import { Head, useForm } from "@inertiajs/inertia-vue3";
 import BreezeButton from "@/Components/Button.vue";
 
 let data = defineProps({
+    user: Array,
     collaborations: String,
     categories: Array,
     uploads: Array,
@@ -29,7 +30,7 @@ const submit = () => {
     <BreezeButton name="form1" class="ml-4">
         <a href="advertisement/create">Create</a>
     </BreezeButton>
-    <BreezeAuthenticatedLayout>
+    <Dashboard>
         <template #header>
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
                 collaborations
@@ -72,5 +73,5 @@ const submit = () => {
                 </div> -->
             </div>
         </div>
-    </BreezeAuthenticatedLayout>
+    </Dashboard>
 </template>
