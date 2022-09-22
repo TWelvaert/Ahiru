@@ -1,17 +1,12 @@
 <script setup>
     import Dashboard from '@/Pages/Dashboard.vue';
+    let data = defineProps({
+        user: Array,
+    });
+</script>
 
-
-    </script>
-
-
-
-
-    <template>
+<template>
     <Dashboard>
-
-
-
-
+        Likes Page
     </Dashboard>
-    </template>
+</template>
