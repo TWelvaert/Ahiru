@@ -30,7 +30,7 @@ let data = defineProps({
                         </div>
 
                         <!-- Navigation Links -->
-                        <BreezeNavLink :href="route('dashboard')" :class="{ 'active': $page.url === '/dashboard' }">
+                        <BreezeNavLink :href="route('home')" :class="{ 'active': $page.url === '/home' }">
                             Home
                         </BreezeNavLink>
                     </div>
