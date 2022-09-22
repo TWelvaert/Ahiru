@@ -2,76 +2,93 @@
 import Dashboard from "@/Pages/Dashboard.vue";
 import { Head, useForm } from "@inertiajs/inertia-vue3";
 import BreezeButton from "@/Components/Button.vue";
+import BreezeCheckbox from "@/Components/Checkbox.vue";
+import BreezeLabel from "@/Components/Label.vue";
+import { ref } from "vue";
+import { Link } from "@inertiajs/inertia-vue3";
+import { Inertia } from "@inertiajs/inertia";
+import { watch } from "vue";
+ //import Pagination from "@/Components/Pagination.vue";
+
 
 let data = defineProps({
     user: Array,
     collaborations: String,
     categories: Array,
-    uploads: Array,
+    freelance_advertisements: {
+        type: Object,
+        default: () => ({}),
+    },
 });
 
-const form = useForm({
-    title: data["title"],
-    slug: data["slug"],
-    description: data["description"],
-    categories: data["categories"],
-    uploads: data["uploads"],
+let search = ref("");
+watch(search, (value) => {
+    Inertia.get(
+        "/advertisements",
+        { search: value },
+        {
+            preserveState: true,
+        }
+    );
 });
-
-console.log(data["categories"]);
-const submit = () => {
-    form.post(route("advertisement/create"));
-};
 </script>
 
 <template>
-
     <Head title="collaborationss" />
+
 
     <Dashboard>
         <BreezeButton name="form1" class="ml-4">
         <a href="advertisement/create">Create</a>
     </BreezeButton>
+
         <template #header>
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
                 collaborations
             </h2>
         </template>
-        <div class="py-12 text-white">
-            <div v-for="category in categories" class="inline mx-2">
 
-                <input type="checkbox" :for="category.name">
-
-                <BreezeLabel :for="category.name" class="inline-block mb-2 ml-2 uppercase font-bold text-xs text-white">
-                    {{ category.name }}</BreezeLabel>
-            </div>
-            <div v-for="collaboration in collaborations" class="max-w-7xl mx-20 sm:px-6 lg:px-8 mb-2">
-                <a v-bind:href="
-                '/advertisement/' +
-                collaboration.slug"
-                    class="flex flex-col items-center bg-white rounded-lg border shadow-md md:flex-row md:max-w-xl hover:bg-gray-100">
-                    <img class="object-cover w-full h-96 rounded-t-lg md:h-auto md:w-48 md:rounded-none md:rounded-l-lg"
-                        src="" alt="" />
-                    <div class="flex flex-col justify-between p-4 leading-normal">
-                        <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900">
-                            {{ collaboration.title }}
-                        </h5>
-                        <p class="mb-3 font-normal text-gray-700">
-                            {{ collaboration.description }}
-                        </p>
-                    </div>
+        <div v-for="category in categories" class="flex items-center">
+            <BreezeCheckbox
+                :name="category.name"
+                :id="category.id"
+                v-model:checked="category.checked"
+            />
+            <BreezeLabel :for="category.id" :value="category.name" />
+        </div>
+        <div
+            v-for="freelance_advertisement in freelance_advertisements.data"
+            :key="freelance_advertisement.id"
+            class="ml-20 flex space-x-4"
+        >
+            <div class="rounded-lg shadow-lg bg-white max-w-sm inline-block">
+                <a href="#!">
+                    <img
+                        class="rounded-t-lg"
+                        src="https://mdbootstrap.com/img/new/standard/nature/184.jpg"
+                        alt=""
+                    />µ
                 </a>
-
-
-                <!-- <div v-for="upload in uploads" class="w-20">
-                    <div v-if="upload['type'] === 'image'">
-                        <img :src="`/${upload['path']}/${upload['name']}`" />
-                    </div>
-                    <div v-if="upload['type'] === 'audio'">
-                        {{ upload["name"] }}
-                    </div>
-                </div> -->
+                <div class="p-6">
+                    <h5 class="text-gray-900 text-xl font-medium mb-2">
+                        {{ freelance_advertisement.title }}
+                    </h5>
+                    <p class="text-gray-700 text-base mb-4">
+                        {{ freelance_advertisement.description }}
+                    </p>
+                    <button
+                        type="button"
+                        class="inline-block px-6 py-2.5 bg-blue-600 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out"
+                    >
+                        Read More
+                    </button>
+                </div>
             </div>
         </div>
+
+
+        <Pagination :data="freelance_advertisements" />
+
     </Dashboard>
+
 </template>

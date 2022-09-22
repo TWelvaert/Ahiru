@@ -8,12 +8,12 @@ use App\Models\Upload;
 
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
-use Illuminate\Http\Request;
-use Illuminate\Routing\Route;
+use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Storage;
+
 use Inertia\Inertia;
 use File;
+
 use Session;
 
 class FreelanceAdsController extends Controller
@@ -29,39 +29,30 @@ class FreelanceAdsController extends Controller
     }
 
 
-    public function collaborations()
+    public function advertisements()
     {
-        $user = Auth::user();
-        $collaborations = FreelanceAdvertisement::all();
-        $freelanceCategories = FreelanceCategory::all();
-        $categories = [];
 
-        foreach ($freelanceCategories as $category) {
-            $categoryObject = ['id' => $category->id, 'name' => $category->name, 'slug' => $category->slug, 'checked' => false];
-            array_push($categories, $categoryObject);
-        }
+        $categories = FreelanceCategory::all();
+       
+        return Inertia::render(
+            'Advertisements',
+            [
+                'categories' => $categories,
+                'freelance_advertisements' => FreelanceAdvertisement::query()
+                    ->when(Request::input('search'), function ($query, $search) {
+                        $query->where('title', 'like', '%' . $search . '%')
+                            ->OrWhere('description', 'like', '%' . $search . '%')
+                            ->OrWhere('category_id', 'like', '%' . $search . '%');
+                    })->paginate(8)
+                    ->withQueryString(),
+            ]
+        );
 
-
-        return Inertia::render('Advertisements', [
-            'user' => $user,
-            'collaborations' => $collaborations,
-            'categories' => $categories
-        ]);
     }
 
 
     public function show(FreelanceAdvertisement $freelanceAdvertisement)
     {
-
-        // $uploads_matched = [];
-        // $uploads = $freelanceAdvertisement->uploads;
-        // $uploads = explode(",", $uploads);
-
-        // foreach ($uploads as $upload) {
-        //     $result = Upload::where('id', '=', $upload)->get();
-        //     array_push($uploads_matched, $result[0]);
-        // }
-
 
         return Inertia::render('Advertisement', [
             'advertisement' => $freelanceAdvertisement,
