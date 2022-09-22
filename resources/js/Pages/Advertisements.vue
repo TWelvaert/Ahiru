@@ -37,7 +37,6 @@ const submit = () => {
             </h2>
         </template>
         <div class="py-12 text-white">
-            {{ collaborations }}
             <div v-for="category in categories" class="inline mx-2">
 
                 <input type="checkbox" :for="category.name">
