@@ -1,6 +1,6 @@
 <script setup>
 
-import BreezeAuthenticatedLayout from '@/Layouts/Authenticated.vue';
+import Dashboard from '@/Pages/Dashboard.vue';
 import BreezeButton from '@/Components/Button.vue';
 import BreezeInput from '@/Components/Input.vue';
 import BreezeInputError from '@/Components/InputError.vue';
@@ -8,13 +8,12 @@ import BreezeLabel from '@/Components/Label.vue';
 import { Head, useForm } from '@inertiajs/inertia-vue3';
 
 let data = defineProps({
-    name: String,
-    email: String,
+    user: Array,
 });
 
 const form1 = useForm({
-    name: data['name'],
-    email: data['email'],
+    name: data['user'].name,
+    email: data['user'].email,
 });
 
 const form2 = useForm({
@@ -41,7 +40,7 @@ const submit_password = () => {
 
     <Head title="Account Settings" />
 
-    <BreezeAuthenticatedLayout>
+    <Dashboard>
 
         <!-- Header -->
 
@@ -160,5 +159,5 @@ const submit_password = () => {
                 </div>
             </div>
         </div>
-    </BreezeAuthenticatedLayout>
+    </Dashboard>
 </template>
