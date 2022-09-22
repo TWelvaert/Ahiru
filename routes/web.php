@@ -42,6 +42,11 @@ Route::get('/profile/{user:slug}', [ProfileController::class,'index'])->name('pr
 Route::get('/advertisements', [FreelanceAdsController::class, 'advertisements'])->name('advertisements');
 
 Route::get('/dashboard', [HomeController::class, 'index'])->name('dashboard')->middleware(['auth', 'verified']);
+Route::get('/home', [HomeController::class, 'index_home'])->middleware(['auth', 'verified'])->name('home');
+Route::get('/music', [HomeController::class, 'index_music'])->middleware(['auth', 'verified'])->name('music');
+Route::get('/likes', [HomeController::class, 'index_likes'])->middleware(['auth', 'verified'])->name('likes');
+Route::get('/following', [HomeController::class, 'index_following'])->middleware(['auth', 'verified'])->name('following');
+
 
 Route::get('/advertisement/create', [FreelanceAdsController::class, 'create'])->middleware(['auth', 'verified'])->name('advertisement.create');
 Route::post('advertisement/create', [FreelanceAdsController::class, 'store'])->middleware(['auth', 'verified'])->name('advertisement/create');
@@ -53,10 +58,6 @@ Route::get('/dashboard/advertisement/delete/{freelanceAdvertisement:slug}', [Fre
 
 Route::get('/advertisement/{freelanceAdvertisement:slug}', [FreelanceAdsController::class, 'show']);
 
-
-
-
-
 Route::get('/news/article/{news_article:slug}', [NewsController::class, 'show']);
 Route::post('news/article/{news_article:slug}/comment', [NewsCommentController::class, 'store'])->name('comment');
 
@@ -64,7 +65,7 @@ Route::post('news/article/{news_article:slug}/comment', [NewsCommentController::
 
 
 
-///////////////////////////////////////////////////////////////////////////////////////////////////// ROUTES ADDED BY GYCH  
+///////////////////////////////////////////////////////////////////////////////////////////////////// ROUTES ADDED BY GYCH
 // ADMIN CONTROL PANEL ROUTES
 Route::get('/admin', [\App\Http\Controllers\AdminController::class, 'index'])->name('admin')->middleware(['auth']);
 
@@ -93,9 +94,6 @@ Route::post('settings/uploads', [\App\Http\Controllers\UploadsController::class,
 Route::get('settings/uploads/delete/{upload:id}', [\App\Http\Controllers\UploadsController::class, 'destroy']);
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-Route::get('/likes', function () {
-    return Inertia::render('Likes');
-})->name('likes');
 
 // ['auth', 'verified'] when logged in as a user
 

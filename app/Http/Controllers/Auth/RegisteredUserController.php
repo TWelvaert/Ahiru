@@ -63,8 +63,7 @@ class RegisteredUserController extends Controller
     {
         $user = Auth::user();
         return Inertia::render('Settings/Account', [
-            'name' => $user->name,
-            'email' => $user->email,
+            'user' => $user,
         ]);
     } 
        

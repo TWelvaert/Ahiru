@@ -2,6 +2,7 @@
 <script setup>
 import BreezeAuthenticatedLayout from "@/Layouts/Authenticated.vue";
 import { Head, useForm } from "@inertiajs/inertia-vue3";
+import Dashboard from '@/Pages/Dashboard.vue';
 
 let data = defineProps({
     user: Array,
@@ -24,7 +25,7 @@ let data = defineProps({
 <template>
 
     <Head title="Profile" />
-
+    <Dashboard>
     <BreezeAuthenticatedLayout>
 
 
@@ -217,5 +218,6 @@ let data = defineProps({
             </div>
         </div>
 
-    </BreezeAuthenticatedLayout>
+        </BreezeAuthenticatedLayout>
+    </Dashboard>
 </template>
