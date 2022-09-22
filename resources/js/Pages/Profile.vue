@@ -1,7 +1,9 @@
 
 <script setup>
-    import BreezeAuthenticatedLayout from "@/Layouts/Authenticated.vue";
+    import Dashboard from "@/Pages/Dashboard.vue";
     import { Head,Link } from "@inertiajs/inertia-vue3";
+    
+
     
     
     let data = defineProps({
@@ -21,15 +23,12 @@
     // console.log(data["user"]);
     
     
-    </script>
+</script>
     <template>
     
         <Head title="Profile" />
     
-        <BreezeAuthenticatedLayout>
-    
-    
-    
+        <Dashboard>
             <div class="container mx-auto my-5 p-5">
                 <div class="md:flex no-wrap md:-mx-2 ">
                     <!-- Left Side -->
@@ -145,16 +144,16 @@
                                 </div>
                             </div> -->
     <!-- Card -->
-    <div class="rounded overflow-hidden shadow-lg bg-green-100">
+    <div class="rounded overflow-hidden shadow-lg">
         <div class="">
             
         
             <div class="px-6 py-4 border-solid border-black flex-col">
-            <div v-for="collaboration in collaborations" class="flex-col">
+            <div v-for="collaboration in collaborations" class="flex">
                 <div>
                     <img src="../../assets/images/profileplaceholder.jpg" class="object-cover h-40" />
                     <div class="flex">
-                    <a
+                    <a class="p-1 m-1"
                 v-bind:href="
                 '/advertisement/' +
                 collaboration.slug +
@@ -163,7 +162,7 @@
                     >  
                     Update
                     </a>
-                    <a
+                    <a class="p-1 m-1"
                 v-bind:href="
                 '/dashboard/advertisement/delete/' +
                 collaboration.slug
@@ -177,7 +176,7 @@
                 <div class= "flex-col ">
                         <div class="px-4 py-2 font-semibold">{{ collaboration.slug }}</div>
                 
-                    <p class="text-gray-700 text-base line-clamp-5">{{collaboration.description}}</p>
+                        <p class="text-gray-700 text-base line-clamp-3 p-2 m-2">{{collaboration.description}}</p>
                 </div>
                     
     
@@ -231,7 +230,6 @@
                                         <span clas="text-green-500">
     
                                         </span>
-                                        <span class="tracking-wide">Something ?</span>
                                     </div>
                                     <ul class="list-inside space-y-2">
                                         <li>
@@ -252,5 +250,5 @@
                 </div>
             </div>
     
-        </BreezeAuthenticatedLayout>
+        </Dashboard>
     </template>
