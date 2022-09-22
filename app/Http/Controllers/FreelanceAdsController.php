@@ -8,12 +8,12 @@ use App\Models\Upload;
 
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
-use Illuminate\Http\Request;
-use Illuminate\Routing\Route;
+use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Storage;
+
 use Inertia\Inertia;
 use File;
+
 use Session;
 
 class FreelanceAdsController extends Controller
@@ -29,22 +29,23 @@ class FreelanceAdsController extends Controller
     }
 
 
-    public function collaborations()
+    public function advertisements()
     {
-        $collaborations = FreelanceAdvertisement::all();
-        $freelanceCategories = FreelanceCategory::all();
-        $categories = [];
-
-        foreach ($freelanceCategories as $category) {
-            $categoryObject = ['id' => $category->id, 'name' => $category->name, 'slug' => $category->slug, 'checked' => false];
-            array_push($categories, $categoryObject);
-        }
-
-
-        return Inertia::render('Advertisements', [
-            'collaborations' => $collaborations,
-            'categories' => $categories
-        ]);
+        $categories = FreelanceCategory::all();
+       
+        return Inertia::render(
+            'Advertisements',
+            [
+                'categories' => $categories,
+                'freelance_advertisements' => FreelanceAdvertisement::query()
+                    ->when(Request::input('search'), function ($query, $search) {
+                        $query->where('title', 'like', '%' . $search . '%')
+                            ->OrWhere('description', 'like', '%' . $search . '%')
+                            ->OrWhere('category_id', 'like', '%' . $search . '%');
+                    })->paginate(8)
+                    ->withQueryString(),
+            ]
+        );
     }
 
 
