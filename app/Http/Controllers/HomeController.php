@@ -41,4 +41,12 @@ class HomeController extends Controller
         ]);
     }
 
+    public function index_following()
+    {
+        $user = Auth::user();
+        return Inertia::render('Following', [
+            'user' => $user
+        ]);
+    }
+
 }
