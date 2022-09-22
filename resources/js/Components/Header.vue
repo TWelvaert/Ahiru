@@ -84,7 +84,7 @@ let data = defineProps({
                                         :class="{ 'active': $page.url === '/likes' }">
                                         Likes
                                     </BreezeDropdownLink>
-                                    <BreezeDropdownLink :href="route('logout')" method="post" as="button">
+                                    <BreezeDropdownLink :href="route('following')">
                                         Following
                                     </BreezeDropdownLink>
                                     <BreezeDropdownLink :href="route('settings/uploads')"
