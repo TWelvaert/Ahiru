@@ -42,7 +42,9 @@ Route::get('/profile/{user:slug}', [ProfileController::class,'index']) ->name('p
 Route::get('/advertisements', [FreelanceAdsController::class, 'collaborations'])->name('advertisements');
 
 Route::get('/dashboard', [HomeController::class, 'index'])->name('dashboard')->middleware(['auth', 'verified']);
-Route::get('/home', [HomeController::class, 'index_home'])->name('dashboard')->middleware(['auth', 'verified']);
+Route::get('/home', [HomeController::class, 'index_home'])->middleware(['auth', 'verified'])->name('home');
+Route::get('/music', [HomeController::class, 'index_music'])->middleware(['auth', 'verified'])->name('music');
+Route::get('/likes', [HomeController::class, 'index_likes'])->middleware(['auth', 'verified'])->name('likes');
 
 
 Route::get('/advertisement/create', [FreelanceAdsController::class, 'create'])->middleware(['auth', 'verified'])->name('advertisement.create');
