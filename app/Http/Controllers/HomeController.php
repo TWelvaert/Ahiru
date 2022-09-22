@@ -17,4 +17,12 @@ class HomeController extends Controller
         ]);
     }
 
+    public function index_home()
+    {
+        $user = Auth::user();
+        return Inertia::render('Home', [
+            'user' => $user
+        ]);
+    }
+
 }
