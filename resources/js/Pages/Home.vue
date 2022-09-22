@@ -10,7 +10,7 @@ import Dashboard from '@/Pages/Dashboard.vue';
 <template>
 <Dashboard>
 
-
+<p>home</p>
 
 
 </Dashboard>
