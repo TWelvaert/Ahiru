@@ -31,6 +31,7 @@ class FreelanceAdsController extends Controller
 
     public function collaborations()
     {
+        $user = Auth::user();
         $collaborations = FreelanceAdvertisement::all();
         $freelanceCategories = FreelanceCategory::all();
         $categories = [];
@@ -42,6 +43,7 @@ class FreelanceAdsController extends Controller
 
 
         return Inertia::render('Advertisements', [
+            'user' => $user,
             'collaborations' => $collaborations,
             'categories' => $categories
         ]);
