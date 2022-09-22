@@ -43,6 +43,8 @@ Route::get('/profile/{user:slug}', [ProfileController::class,'index'])
 Route::get('/advertisements', [FreelanceAdsController::class, 'collaborations'])->name('advertisements');
 
 Route::get('/dashboard', [HomeController::class, 'index'])->name('dashboard')->middleware(['auth', 'verified']);
+Route::get('/home', [HomeController::class, 'index_home'])->name('dashboard')->middleware(['auth', 'verified']);
+
 
 Route::get('/advertisement/create', [FreelanceAdsController::class, 'create'])->middleware(['auth', 'verified'])->name('advertisement.create');
 Route::post('advertisement/create', [FreelanceAdsController::class, 'store'])->middleware(['auth', 'verified'])->name('advertisement/create');
