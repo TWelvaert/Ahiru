@@ -84,14 +84,7 @@ const submit_password = () => {
                         <hr class="m-4" style="width:100%;text-align:left;margin-left:0">
 
                         <form id="form1" @submit.prevent="submit_personal_info" novalidate>
-
-                            <div>
-                                <BreezeLabel for="display_name" value="Display Name" />
-                                <BreezeInput id="name" type="text" class="mt-1 block w-full"
-                                    v-model="form1.display_name" required autofocus autocomplete="display name" />
-                                <BreezeInputError class="mt-2" :message="form1.errors.name" />
-                            </div>
-
+                            
                             <div class="mt-4">
                                 <BreezeLabel for="name" value="Name" />
                                 <BreezeInput id="name" type="text" class="mt-1 block w-full" v-model="form1.name"
