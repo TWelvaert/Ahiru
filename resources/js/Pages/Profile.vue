@@ -1,8 +1,10 @@
 
 <script setup>
 import BreezeAuthenticatedLayout from "@/Layouts/Authenticated.vue";
+
 import { Head, useForm } from "@inertiajs/inertia-vue3";
 import Dashboard from '@/Pages/Dashboard.vue';
+
 
 let data = defineProps({
     user: Array,
@@ -35,7 +37,7 @@ let data = defineProps({
                 <!-- Left Side -->
                 <div class="w-full md:w-3/12 md:mx-2">
                     <!-- Profile Card -->
-                    <div class="bg-white p-3 border-t-4">
+                    <div class="bg-white">
                         <div class="image overflow-hidden">
                             <img class="h-auto w-full mx-auto" src="../../assets/images/profileplaceholder.jpg" alt="">
                         </div>
@@ -100,7 +102,7 @@ let data = defineProps({
                 <div class="w-full md:w-9/12 mx-2 h-64">
                     <!-- Profile tab -->
                     <!-- Advertisements Section -->
-                    <div class="bg-white p-3 shadow-sm rounded-sm">
+                    <div class="">
                         <div class="flex items-center space-x-2 font-semibold text-gray-900 leading-8">
                             <span clas="text-green-500">
                                 <svg class="h-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
@@ -111,49 +113,83 @@ let data = defineProps({
                             </span>
                             <span class="tracking-wide">Advertisements</span>
                         </div>
-                        <div class="text-gray-700">
-                            <div class="grid md:grid-cols-2 text-sm">
-                                <div class="grid grid-cols-2">
-                                    <div class="px-4 py-2 font-semibold">
-
-                                    </div>
-                                    <div class="px-4 py-2"></div>
-                                </div>
-                                <div v-for="collaboration in collaborations" class="grid grid-cols-2">
+                        <!-- <div class="text-gray-700">
+                            <div class="grid md:grid-cols-3 text-sm">
+                                <div v-for="collaboration in collaborations" class="grid grid-cols-3">
                                     <div class="px-4 py-2 font-semibold">{{ collaboration.slug }}</div>
-                                    <td class="text-blue-500 hover:text-blue-600">
-                                    <a
-                                        v-bind:href="
-                                            '/advertisement/' +
-                                            collaboration.slug +
-                                            '/edit'
-                                        "
-                                    >
-                                        Update
-                                    </a>
-                                </td>
-                                <td
-                                    class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium"
-                                >
+                                        <td class="">
+                                            <Link
+                                                v-bind:href="
+                                                    '/advertisement/' +
+                                                    collaboration.slug +
+                                                    '/edit'
+                                                "
+                                            >
+                                                Update
+                                            </Link>
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
 
-                                    <button class="text-xs text-gray-400">
-                                        <a
-                                            v-bind:href="
-                                                '/dashboard/advertisement/delete/' +
-                                                collaboration.slug
-                                            "
-                                        >
-                                            Delete
-                                        </a>
-                                    </button>
-                                </td>
+                                    
+                                            <Link
+                                                v-bind:href="
+                                                    '/dashboard/advertisement/delete/' +
+                                                    collaboration.slug
+                                                "
+                                            >
+                                                Delete
+                                            </Link>
+                                    
+                                        </td>
 
-                                    <div class="px-4 py-2"></div>
+                                    
                                 </div>
                             </div>
-                        </div>
+                        </div> -->
+<!-- Card -->
+<div class="rounded overflow-hidden shadow-lg bg-green-100">
+    <div class="">
+        
+    
+        <div class="px-6 py-4 border-solid border-black flex-col">
+        <div v-for="collaboration in collaborations" class="flex-col">
+            <div>
+                <img src="../../assets/images/profileplaceholder.jpg" class="object-cover h-40" />
+                <div class="flex">
+                <a
+            v-bind:href="
+            '/advertisement/' +
+            collaboration.slug +
+            '/edit'
+            "
+                >  
+                Update
+                </a>
+                <a
+            v-bind:href="
+            '/dashboard/advertisement/delete/' +
+            collaboration.slug
+            "
+                >
+                Delete
+                                            
+                </a>
+                </div>
+            </div>
+            <div class= "flex-col ">
+                    <div class="px-4 py-2 font-semibold">{{ collaboration.slug }}</div>
+            
+                <p class="text-gray-700 text-base line-clamp-5">{{collaboration.description}}</p>
+            </div>
+                
 
-                    </div>
+           
+        </div>
+        </div>
+        </div>
+    </div>
+</div>
+                    
                     <!-- End of Advertisements section -->
 
                     <div class="my-4"></div>

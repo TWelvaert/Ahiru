@@ -1,6 +1,6 @@
 <script setup>
-import BreezeAuthenticatedLayout from "@/Layouts/Authenticated.vue";
-import { Head } from "@inertiajs/inertia-vue3";
+import Dashboard from "@/Pages/Dashboard.vue";
+import { Head, useForm } from "@inertiajs/inertia-vue3";
 import BreezeButton from "@/Components/Button.vue";
 import BreezeCheckbox from "@/Components/Checkbox.vue";
 import BreezeLabel from "@/Components/Label.vue";
@@ -10,7 +10,10 @@ import { Inertia } from "@inertiajs/inertia";
 import { watch } from "vue";
  //import Pagination from "@/Components/Pagination.vue";
 
-const props = defineProps({
+
+let data = defineProps({
+    user: Array,
+    collaborations: String,
     categories: Array,
     freelance_advertisements: {
         type: Object,
@@ -32,24 +35,19 @@ watch(search, (value) => {
 
 <template>
     <Head title="collaborationss" />
-    <BreezeAuthenticatedLayout>
+
+
+    <Dashboard>
         <BreezeButton name="form1" class="ml-4">
-            <a href="advertisement/create">Create</a>
-        </BreezeButton>
-        <div class="mb-2">
-            <input
-                type="text"
-                v-model="search"
-                placeholder="Search..."
-                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-60 p-2.5"
-            />
-        </div>
+        <a href="advertisement/create">Create</a>
+    </BreezeButton>
 
         <template #header>
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
                 collaborations
             </h2>
         </template>
+
         <div v-for="category in categories" class="flex items-center">
             <BreezeCheckbox
                 :name="category.name"
@@ -69,7 +67,7 @@ watch(search, (value) => {
                         class="rounded-t-lg"
                         src="https://mdbootstrap.com/img/new/standard/nature/184.jpg"
                         alt=""
-                    />
+                    />µ
                 </a>
                 <div class="p-6">
                     <h5 class="text-gray-900 text-xl font-medium mb-2">
@@ -88,6 +86,9 @@ watch(search, (value) => {
             </div>
         </div>
 
+
         <Pagination :data="freelance_advertisements" />
-    </BreezeAuthenticatedLayout>
+
+    </Dashboard>
+
 </template>

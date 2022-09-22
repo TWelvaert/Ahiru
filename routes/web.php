@@ -38,6 +38,7 @@ Route::get('/', function () {
 
 Route::get('/profile/{user:slug}', [ProfileController::class,'index'])->name('profile');
 
+
 // Route::get('/dashboard', [FreelanceAdsController::class, 'index'])->name('dashboard')->middleware(['auth', 'verified']);
 Route::get('/advertisements', [FreelanceAdsController::class, 'advertisements'])->name('advertisements');
 

@@ -31,6 +31,7 @@ class FreelanceAdsController extends Controller
 
     public function advertisements()
     {
+
         $categories = FreelanceCategory::all();
        
         return Inertia::render(
@@ -46,6 +47,7 @@ class FreelanceAdsController extends Controller
                     ->withQueryString(),
             ]
         );
+
     }
 
 
