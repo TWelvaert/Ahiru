@@ -1,6 +1,6 @@
 <template>
     <Dashboard>
-    <div class="bg-white">
+    <div class="bg-white w-full h-full m-4 p-2">
         <form @submit.prevent="submit" enctype="multipart/form-data">
             <div>
                 <div class="flex justify-center items-center w-full">

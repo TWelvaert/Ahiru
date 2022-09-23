@@ -1,24 +1,5 @@
-<script setup>
-import BreezeApplicationLogo from '@/Components/ApplicationLogo.vue';
-import BreezeDropdown from '@/Components/Dropdown.vue';
-import BreezeDropdownLink from '@/Components/DropdownLink.vue';
-import BreezeNavLink from '@/Components/NavLink.vue';
-import BreezeResponsiveNavLink from '@/Components/ResponsiveNavLink.vue';
-import Notification from '@/Components/Notification.vue';
-import { Link } from '@inertiajs/inertia-vue3';
-import MusicPlayer from '@/Plugins/MusicPlayer.vue';
-
-let data = defineProps({
-    user: Array
-});
-
-
-
-</script>
-
-    <template>
-
-            <nav class="bg-white border-b border-gray-100 sticky top-0">
+<template>
+   <nav class="bg-white border-b border-gray-100 sticky top-0">
                 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between h-16">
 
                     <div class="flex">
@@ -64,7 +45,7 @@ let data = defineProps({
                                             class="font-momentum inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-full text-gray-500 bg-white hover:text-gray-700 focus:outline-none transition ease-in-out duration-150">
                                             <img class="h-7 w-7 m-1 rounded-full"
                                                 src="../../assets/images/waterloop.gif" alt="">
-                                                {{ $page.props.user.name}}
+                                                {{ user.name}}
                                             <svg class="ml-2 -mr-0.5 h-4 w-4" xmlns="http://www.w3.org/2000/svg"
                                                 viewBox="0 0 20 20" fill="currentColor">
                                                 <path fill-rule="evenodd"
@@ -79,8 +60,9 @@ let data = defineProps({
                                     <!-- Settings dropdown -->
 
                                 <template #content>
-                                    <BreezeDropdownLink :href="`/profile/${$page.props.user.slug}`"
-                                    :class="{ 'active': $page.url === '/profile' }">
+
+                                    <BreezeDropdownLink :href="`/profile/${user.slug}`" :class="{ 'active': $page.url === '/profile' }">
+
                                         Profile
                                     </BreezeDropdownLink>
                                     <BreezeDropdownLink :href="route('likes')"
@@ -136,8 +118,8 @@ let data = defineProps({
 
                     <div class="pt-4 pb-1 border-t border-gray-200">
                         <div class="px-4">
-                            <div class="font-medium text-base text-gray-800">{{ $page.props.user.name}}</div>
-                            <div class="font-medium text-sm text-gray-500">{{ $page.props.user.email}}</div>
+                            <div class="font-medium text-base text-gray-800">{{ user.name}}</div>
+                            <div class="font-medium text-sm text-gray-500">{{ user.email}}</div>
                         </div>
 
                         <div class="mt-3 space-y-1">
@@ -149,16 +131,14 @@ let data = defineProps({
                 </div>
             </nav>
 
-            <!-- Page Heading -->
-
+     
             <header class="bg-white shadow " v-if="$slots.header">
                 <div class="rounded-full max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
                     <slot name="header" />
                 </div>
             </header>
-
-
-        <div class=" m-8">
+            
+                 <div class=" m-8">
             <span id="welcome" class="font-monument flex items-center justify-center"></span>
 
         <span class="flex items-center justify-center">
@@ -166,32 +146,49 @@ let data = defineProps({
         </span>
         </div>
 
-            <!-- Page Content -->
 
       </template>
-
+<script setup>
+    import BreezeDropdown from '@/Components/Dropdown.vue';
+    import BreezeDropdownLink from '@/Components/DropdownLink.vue';
+    import BreezeNavLink from '@/Components/NavLink.vue';
+    import BreezeResponsiveNavLink from '@/Components/ResponsiveNavLink.vue';
+    import { Link } from '@inertiajs/inertia-vue3';
+</script>
 
 <script>
+  var i = 0;
+  var txt = 'Hey Creator how is your day?'; /* The text */
+  var speed = 150; /* The speed/duration of the effect in milliseconds */
 
-var i = 0;
-var txt = 'Hey Creator how is your day?'; /* The text */
-var speed = 150; /* The speed/duration of the effect in milliseconds */
-
-export default {
-    name: "App",
-    mounted() {
-        typeWriter();
-        function typeWriter()
-        {
-            if (i < txt.length) {
-                if (document.getElementById("welcome")){
-                    document.getElementById("welcome").innerHTML += txt.charAt(i);
-                    i++;
-                    setTimeout(typeWriter, speed);
-                }
-                window.onload = typeWriter;
+    export default {
+        name: 'HeaderComponent',
+        data (){
+            return {
+                user: []
             }
-        }
-    }
-}
+        }, 
+        mounted() {
+            axios.get('user_data').then( (response) => {
+                this.user = response.data.user;
+            })
+            .catch(function (error){
+                console.log(error);
+            });
+             typeWriter();
+            function typeWriter()
+            {
+                if (i < txt.length) {
+                    if (document.getElementById("welcome")){
+                        document.getElementById("welcome").innerHTML += txt.charAt(i);
+                        i++;
+                        setTimeout(typeWriter, speed);
+                    }
+                    window.onload = typeWriter;
+                }
+            }
+        },
+    } 
 </script>
+
+

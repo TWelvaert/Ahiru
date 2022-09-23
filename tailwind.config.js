@@ -26,8 +26,8 @@ module.exports = {
     },
 
     plugins: [
-            require('@tailwindcss/forms'),
-            require('@tailwindcss/lineclamp'),
-            require('flowbite/plugin')
+        require('@tailwindcss/forms'),
+        require('@tailwindcss/lineclamp'),
+        require('flowbite/plugin')
     ],
 };
