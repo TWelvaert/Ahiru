@@ -1,8 +1,5 @@
-
-
-    <template>
-
-            <nav class="bg-white border-b border-gray-100">
+<template>
+   <nav class="bg-white border-b border-gray-100 sticky top-0">
                 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between h-16">
 
                     <div class="flex">
@@ -29,14 +26,14 @@
                             Advertisements
                         </BreezeNavLink>
 
-                        <BreezeNavLink class="" :href="route('dashboard')" :active="route().current('dashboard')">
+                        <BreezeNavLink class="" :href="route('music')" :class="{ 'active': $page.url === '/music' }">
                             Music
                         </BreezeNavLink>
                     </div>
 
                     <div class="hidden sm:flex sm:items-center sm:ml-6">
 
-                        <!-- Settings Dropdown -->
+                        <!-- Settings dropdown username -->
 
                         <div class="ml-3 relative">
                             <BreezeDropdown align="right" width="48">
@@ -60,19 +57,24 @@
                                     </span>
                                 </template>
 
+                                    <!-- Settings dropdown -->
+
                                 <template #content>
+
                                     <BreezeDropdownLink :href="`/profile/${user.slug}`" :class="{ 'active': $page.url === '/profile' }">
+
                                         Profile
                                     </BreezeDropdownLink>
                                     <BreezeDropdownLink :href="route('likes')"
                                         :class="{ 'active': $page.url === '/likes' }">
                                         Likes
                                     </BreezeDropdownLink>
-                                    <BreezeDropdownLink :href="route('following')">
+                                    <BreezeDropdownLink :href="route('following')"
+                                        :class="{ 'active': $page.url === '/following' }">
                                         Following
                                     </BreezeDropdownLink>
                                     <BreezeDropdownLink :href="route('settings/uploads')"
-                                        :class="{ 'active': $page.url === 'settings/uploads' }">
+                                        :class="{ 'active': $page.url === '/settings/uploads' }">
                                         Uploads
                                     </BreezeDropdownLink>
                                     <BreezeDropdownLink :href="route('settings/account')"
@@ -135,6 +137,15 @@
                     <slot name="header" />
                 </div>
             </header>
+            
+                 <div class=" m-8">
+            <span id="welcome" class="font-monument flex items-center justify-center"></span>
+
+        <span class="flex items-center justify-center">
+            You have 14788 plays last 7 days
+        </span>
+        </div>
+
 
       </template>
 <script setup>
@@ -146,6 +157,10 @@
 </script>
 
 <script>
+  var i = 0;
+  var txt = 'Hey Creator how is your day?'; /* The text */
+  var speed = 150; /* The speed/duration of the effect in milliseconds */
+
     export default {
         name: 'HeaderComponent',
         data (){
@@ -160,9 +175,20 @@
             .catch(function (error){
                 console.log(error);
             });
+             typeWriter();
+            function typeWriter()
+            {
+                if (i < txt.length) {
+                    if (document.getElementById("welcome")){
+                        document.getElementById("welcome").innerHTML += txt.charAt(i);
+                        i++;
+                        setTimeout(typeWriter, speed);
+                    }
+                    window.onload = typeWriter;
+                }
+            }
         },
-        methods: {
-
-        }
     } 
 </script>
+
+
