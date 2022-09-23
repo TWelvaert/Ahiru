@@ -111,6 +111,14 @@
                                     </svg>
                                 </span>
                                 <span class="tracking-wide">Advertisements</span>
+                                <a class="p-1 m-1"
+                                    v-bind:href="
+                                    '/dashboard/advertisements'
+                                "
+                                >
+                                Edit
+                                                
+                                </a>
                             </div>
                             <!-- <div class="text-gray-700">
                                 <div class="grid md:grid-cols-3 text-sm">
@@ -155,7 +163,7 @@
                 <div>
                     <img src="../../assets/images/profileplaceholder.jpg" class="object-cover h-40" />
                     <div class="flex">
-                    <a class="p-1 m-1"
+                    <!-- <a class="p-1 m-1"
                 v-bind:href="
                 '/advertisement/' +
                 collaboration.slug +
@@ -172,13 +180,13 @@
                     >
                     Delete
                                                 
-                    </a>
+                    </a> -->
                     </div>
                 </div>
-                <div class= "flex-col ">
+                <div class= "flex ">
                         <div class="px-4 py-2 font-semibold">{{ collaboration.slug }}</div>
-                
                         <p class="text-gray-700 text-base line-clamp-3 whitespace p-2 m-2">{{collaboration.description}}</p>
+                        
                 </div>
                     
     

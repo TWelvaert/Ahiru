@@ -10,11 +10,12 @@ import TextareaVue from "@/Components/textarea.vue";
 import { Head, useForm } from "@inertiajs/inertia-vue3";
 
 let data = defineProps({
+    user: String,
     title: String,
     slug: String,
     description: String,
     categories: Array,
-    uploads: Array,
+    // uploads: Array,
 });
 
 const form = useForm({
@@ -22,7 +23,7 @@ const form = useForm({
     slug: data["slug"],
     description: data["description"],
     categories: data["categories"],
-    uploads: data["uploads"],
+    // uploads: data["uploads"],
 });
 
 console.log(data["categories"]);
@@ -111,7 +112,7 @@ const submit = () => {
                             :message="form.errors.description"
                         />
                     </div>
-                    <div v-for="upload in uploads" class="w-20 inline-block">
+                    <!-- <div v-for="upload in uploads" class="w-20 inline-block">
                         <div v-if="upload['type'] === 'image'">
                             <img
                                 :src="`/${upload['path']}/${upload['name']}`"
@@ -120,8 +121,8 @@ const submit = () => {
                         <div v-if="upload['type'] === 'audio'">
                             {{ upload["name"] }}
                         </div>
-                    </div>
-                    <div>
+                    </div> -->
+                    <!-- <div>
                         <BreezeLabel
                             for="images"
                             value="upload files"
@@ -140,7 +141,7 @@ const submit = () => {
                             class="mt-2"
                             :message="form.errors.uploads"
                         />
-                    </div>
+                    </div> -->
                     <div v-for="category in categories" class="inline mx-2">
                         <BreezeCheckbox
                             :name="category.name"

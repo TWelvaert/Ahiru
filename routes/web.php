@@ -41,7 +41,7 @@ Route::get('/profile/{user:slug}', [ProfileController::class,'index'])->name('pr
 
 // Route::get('/dashboard', [FreelanceAdsController::class, 'index'])->name('dashboard')->middleware(['auth', 'verified']);
 Route::get('/advertisements', [FreelanceAdsController::class, 'advertisements'])->name('advertisements');
-
+Route::get('/dashboard/advertisements', [FreelanceAdsController::class, 'index'])->name('/dashboard/advertisements')->middleware(['auth', 'verified']);
 Route::get('/dashboard', [HomeController::class, 'index'])->name('dashboard')->middleware(['auth', 'verified']);
 Route::get('/home', [HomeController::class, 'index_home'])->middleware(['auth', 'verified'])->name('home');
 Route::get('/music', [HomeController::class, 'index_music'])->middleware(['auth', 'verified'])->name('music');
