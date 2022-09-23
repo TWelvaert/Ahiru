@@ -13,13 +13,18 @@ use File;
 
 class UploadsController extends Controller
 {
+    /**  
+     * success response method.  
+     *  
+     * @return \Illuminate\Http\Response  
+     */  
+
     public function index()
     {
         $user = Auth::user();
         $user_uploads = Upload::where('user_id', '=', $user->id)->get();
 
         return Inertia::render('Settings/Uploads', [
-            'user' => $user,
             'user_uploads' => $user_uploads
         ]);
     }
@@ -62,8 +67,6 @@ class UploadsController extends Controller
                 array_push($uploads, $upload->id);
             }
         }
-
-        $user_uploads = Upload::where('user_id', '=', Auth::user()->id)->get();
 
         Session::flash('message', 'Your file(s) have been uploaded!');
         Session::flash('flashtype', 'success');
