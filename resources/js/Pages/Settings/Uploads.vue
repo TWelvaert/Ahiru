@@ -1,5 +1,6 @@
 <template>
-    <div class="bg-white">
+    <Dashboard>
+    <div class="bg-white w-full h-full m-4 p-2">
         <form @submit.prevent="submit" enctype="multipart/form-data">
             <div>
                 <div class="flex justify-center items-center w-full">
@@ -11,7 +12,7 @@
                         </div>
                         <BreezeInput id="dropzone-file" @input="form.uploads = $event.target.files" type="file" class="hidden" multiple />
                     </label>
-                </div> 
+                </div>
                 <BreezeInputError class="mt-2" :message="form.errors.uploads"/>
 
                 <BreezeButton name="form" class="ml-4" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
@@ -19,7 +20,7 @@
                 </BreezeButton>
             </div>
         </form>
-        
+
         <b>Images</b>
         <div class="flex gap-2">
             <div v-for="image in uploads_images">
@@ -27,7 +28,7 @@
                     <img class="w-20 h-20" :src="`/${image['path']}/${image['name']}`" />
                     <Link @click="delete_file" v-bind:href="`/settings/uploads/delete/${image['id']}`">Delete</Link>
                 </div>
-            </div>    
+            </div>
         </div>
 
         <b>Audio</b>
@@ -38,9 +39,10 @@
                    <td><span v-on:click="$callMusicPlayer(audio['name'])">[Play]</span></td>
                     <td><Link v-bind:href="`/settings/uploads/delete/${audio['id']}`">[Delete]</Link></td>
                 </tr>
-            </table>    
+            </table>
         </div>
     </div>
+</Dashboard>
 </template>
 
 
@@ -51,6 +53,7 @@
     import BreezeInputError from "@/Components/InputError.vue";
     import BreezeLabel from "@/Components/Label.vue";
     import { useForm } from "@inertiajs/inertia-vue3";
+    import Dashboard from '@/Pages/Dashboard.vue';
 
     let uploads_images = [];
     let uploads_audio = [];
@@ -66,7 +69,7 @@
 
         if(selected_files.includes(file_id)) {
             let file_index = selected_files.indexOf(file_id);
-            selected_files.splice(file_index, 1); 
+            selected_files.splice(file_index, 1);
         } else {
             selected_files.push(file_id);
         }

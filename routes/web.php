@@ -10,7 +10,7 @@ use App\Models\FreelanceAdvertisement;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
-
+use Illuminate\Support\Facades\Auth;
 
 use function PHPSTORM_META\type;
 
@@ -36,13 +36,18 @@ Route::get('/', function () {
 //     return Inertia::render('Dashboard');
 // })->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::get('/profile/{user:slug}', [ProfileController::class,'index'])
-->name('profile');
+Route::get('/profile/{user:slug}', [ProfileController::class,'index'])->name('profile');
+
 
 // Route::get('/dashboard', [FreelanceAdsController::class, 'index'])->name('dashboard')->middleware(['auth', 'verified']);
-Route::get('/advertisements', [FreelanceAdsController::class, 'collaborations'])->name('advertisements');
+Route::get('/advertisements', [FreelanceAdsController::class, 'advertisements'])->name('advertisements');
 
 Route::get('/dashboard', [HomeController::class, 'index'])->name('dashboard')->middleware(['auth', 'verified']);
+Route::get('/home', [HomeController::class, 'index_home'])->middleware(['auth', 'verified'])->name('home');
+Route::get('/music', [HomeController::class, 'index_music'])->middleware(['auth', 'verified'])->name('music');
+Route::get('/likes', [HomeController::class, 'index_likes'])->middleware(['auth', 'verified'])->name('likes');
+Route::get('/following', [HomeController::class, 'index_following'])->middleware(['auth', 'verified'])->name('following');
+
 
 Route::get('/advertisement/create', [FreelanceAdsController::class, 'create'])->middleware(['auth', 'verified'])->name('advertisement.create');
 Route::post('advertisement/create', [FreelanceAdsController::class, 'store'])->middleware(['auth', 'verified'])->name('advertisement/create');
@@ -54,10 +59,6 @@ Route::get('/dashboard/advertisement/delete/{freelanceAdvertisement:slug}', [Fre
 
 Route::get('/advertisement/{freelanceAdvertisement:slug}', [FreelanceAdsController::class, 'show']);
 
-
-
-
-
 Route::get('/news/article/{news_article:slug}', [NewsController::class, 'show']);
 Route::post('news/article/{news_article:slug}/comment', [NewsCommentController::class, 'store'])->name('comment');
 
@@ -65,7 +66,7 @@ Route::post('news/article/{news_article:slug}/comment', [NewsCommentController::
 
 
 
-///////////////////////////////////////////////////////////////////////////////////////////////////// ROUTES ADDED BY GYCH  
+///////////////////////////////////////////////////////////////////////////////////////////////////// ROUTES ADDED BY GYCH
 // ADMIN CONTROL PANEL ROUTES
 Route::get('/admin', [\App\Http\Controllers\AdminController::class, 'index'])->name('admin')->middleware(['auth']);
 
@@ -92,11 +93,15 @@ Route::post('settings/account', [\App\Http\Controllers\Auth\RegisteredUserContro
 Route::get('settings/uploads', [\App\Http\Controllers\UploadsController::class, 'index'])->name('settings/uploads');
 Route::post('settings/uploads', [\App\Http\Controllers\UploadsController::class, 'upload'])->name('settings/uploads');
 Route::get('settings/uploads/delete/{upload:id}', [\App\Http\Controllers\UploadsController::class, 'destroy']);
+
+
+Route::get('user_data', function () {
+    return [
+        'user' => Auth::user(),
+    ];});
+
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-Route::get('/likes', function () {
-    return Inertia::render('Likes');
-})->name('likes');
 
 // ['auth', 'verified'] when logged in as a user
 
