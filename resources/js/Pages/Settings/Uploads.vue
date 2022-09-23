@@ -1,6 +1,4 @@
 <template>
-    <Dashboard>
-
         <div class="bg-white w-full h-full m-4 p-2">
             <form id="form" @submit.prevent="submit" novalidate enctype="multipart/form-data">
                 <div>
@@ -65,8 +63,6 @@
             <div id="filtered_uploads" class="flex gap-4"></div>
 
         </div>
-
-    </Dashboard>
 </template>
 
 
@@ -75,11 +71,11 @@
 import { Link, useForm } from '@inertiajs/inertia-vue3';
 import BreezeButton from "@/Components/Button.vue";
 import BreezeInput from "@/Components/Input.vue";
-import Dashboard from '@/Pages/Dashboard.vue';
 import BreezeLabel from '@/Components/Label.vue';
 import { onMounted, inject  } from 'vue';
 
 const emits = defineEmits(['add_files'])
+
 
 let props = defineProps({
     user_uploads: Array,
@@ -108,6 +104,7 @@ function select(e) {
     }
 
     console.log(selected_files)
+    emits('add_files', selected_files);
 }   
 
 function loadFilePreview(files) {
@@ -196,6 +193,5 @@ onMounted(() => {
     });
 })
 
-    //  const emits = defineEmits(['add_files'])
-    //emits('add_files', selected_files);
+
 </script>
