@@ -12,7 +12,9 @@ class ProfileController extends Controller
     public function index (User $user)
     {
 
-        $collaborations = FreelanceAdvertisement::where('user_id','=',$user->id)->get();
+        
+        $collaborations = $user->advertisements()->get();
+        $collaborations = $collaborations->sortByDesc('created_at')->take(5);
 
         // dd($user->id);
         // dd($collaboration);

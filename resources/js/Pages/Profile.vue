@@ -32,7 +32,7 @@
             <div class="container mx-auto my-5 p-5">
                 <div class="md:flex no-wrap md:-mx-2 ">
                     <!-- Left Side -->
-                    <div class="w-full md:w-3/12 md:mx-2">
+                    <div class="w-full md:w-3/12 md:mx-2 ">
                         <!-- Profile Card -->
                         <div class="bg-white">
                             <div class="image overflow-hidden">
@@ -95,6 +95,7 @@
                                 </div>
                             </div>
                         </div>
+                    
                         <!-- End of friends card -->
                     </div>
                     <!-- Right Side -->
@@ -154,48 +155,55 @@
                                 </div>
                             </div> -->
     <!-- Card -->
-    <div class="rounded overflow-hidden shadow-lg">
-        <div class="">
-            
-        
-            <div class="px-6 py-4 border-solid border-black flex-col">
-            <div v-for="collaboration in collaborations " class="flex">
-                <div>
+        <!-- <div class="rounded overflow-hidden shadow-lg">
+            <div class="">
+                <div class="px-6 py-4 border-solid border-black flex-col">
+                    <div v-for="collaboration in collaborations " class="flex">
+                        <div>
                     <img src="../../assets/images/profileplaceholder.jpg" class="object-cover h-40" />
-                    <div class="flex">
-                    <!-- <a class="p-1 m-1"
-                v-bind:href="
-                '/advertisement/' +
-                collaboration.slug +
-                '/edit'
-                "
-                    >  
-                    Update
-                    </a>
-                    <a class="p-1 m-1"
-                v-bind:href="
-                '/dashboard/advertisement/delete/' +
-                collaboration.slug
-                "
-                    >
-                    Delete
-                                                
-                    </a> -->
-                    </div>
-                </div>
-                <div class= "flex ">
+                   
+                        </div>
+            <div class= "flex ">
                         <div class="px-4 py-2 font-semibold">{{ collaboration.slug }}</div>
                         <p class="text-gray-700 text-base line-clamp-3 whitespace p-2 m-2">{{collaboration.description}}</p>
                         
-                </div>
+            </div> -->
                     
     
                
+            <!-- </div>
             </div>
             </div>
-            </div>
-        </div>
-    </div>
+        </div>-->
+    </div> 
+            <div class="flex p-1 m-1 space-x-6">
+                   
+                    <a v-bind:href="
+                        '/advertisement/'+
+                        collaboration.slug
+                            "
+                    v-for="collaboration in collaborations"
+                        class="block p-6 max-w-sm bg-white rounded-lg border border-gray-200 shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
+                        <img src="../../assets/images/070c4ae0e59af72c222e2756c87baa1a.gif" alt="">
+                <div class="flex justify-between">
+                    
+                
+                        <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">{{ collaboration.slug }}</h5>
+                        <button> <a class="p-1 m-1"
+                                            v-bind:href="
+                                                    '/advertisement/' +
+                                                    collaboration.slug +
+                                                    '/edit'
+                                                "
+                                            >
+                                                edit
+                                            </a>                  
+                </button>
+                </div>
+                        <p class="font-normal text-gray-700 dark:text-gray-400 line-clamp-3">{{ collaboration.description }}</p>
+                        <small>{{ collaboration.created_at }}</small>
+                    </a>
+            </div> 
                         
                         <!-- End of Advertisements section -->
     

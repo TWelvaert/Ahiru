@@ -1,6 +1,7 @@
 <script setup>
     import BreezeAuthenticatedLayout from "@/Layouts/Authenticated.vue";
     import { Head } from "@inertiajs/inertia-vue3";
+    import Dashboard from "@/Pages/Dashboard.vue"
     // import { Welcome } from "@/Layouts/Welcome.js";
 
     let data = defineProps({
@@ -10,8 +11,8 @@
 
     <template>
         <Head title="DashboardAds" />
+        <Dashboard>
 
-        <BreezeAuthenticatedLayout>
             <template #header>
                 <div class="font-monument">
                 <span id="welcome" class="flex items-center  justify-center">
@@ -85,7 +86,8 @@
                     </table>
                 </div>
             </div>
-        </BreezeAuthenticatedLayout>
+        
+    </Dashboard>
     </template>
 
     <script>
