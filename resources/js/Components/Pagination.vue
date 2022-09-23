@@ -1,26 +1,34 @@
-<script setup>
-import { Link } from "@inertiajs/inertia-vue3";
+<template>
+    <div v-if="links.length > 3">
+        <div class="flex flex-wrap mt-8">
+            <template v-for="(link, key) in links" :key="key">
+                <div
+                    v-if="link.url === null"
+                    class="mr-1 mb-1 px-4 py-3 text-sm leading-4 text-gray-400 border rounded"
+                    v-html="link.label"
+                />
 
-defineProps({
-    data: {
-        type: Object,
-        default: () => ({}),
+                <Link
+                    v-else
+                    class="mr-1 mb-1 px-4 py-3 text-sm leading-4 border rounded hover:bg-white focus:border-primary focus:text-primary"
+                    :class="{ 'bg-blue-700 text-white': link.active }"
+                    :href="link.url"
+                    v-html="link.label"
+                />
+            </template>
+        </div>
+    </div>
+</template>
+
+<script>
+import { defineComponent } from "vue";
+import { Link } from "@inertiajs/inertia-vue3";
+export default defineComponent({
+    components: {
+        Link,
+    },
+    props: {
+        links: Array,
     },
 });
 </script>
-
-<template>
-    <div
-        v-if="data.links.length > 9"
-        class="flex justify-center mt-4 space-x-4"
-    >
-        <Link
-            v-for="(link, k) in data.links"
-            :key="k"
-            class="px-4 py-3 text-sm leading-4 bg-white rounded hover:bg-white focus:text-indigo-500 hover:shadow"
-            :class="{ 'bg-indigo-400 text-white': link.active }"
-            :href="link.url"
-            v-html="link.label"
-        />
-    </div>
-</template>
