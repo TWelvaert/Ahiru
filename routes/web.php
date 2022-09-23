@@ -10,7 +10,7 @@ use App\Models\FreelanceAdvertisement;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
-
+use Illuminate\Support\Facades\Auth;
 
 use function PHPSTORM_META\type;
 
@@ -93,6 +93,13 @@ Route::post('settings/account', [\App\Http\Controllers\Auth\RegisteredUserContro
 Route::get('settings/uploads', [\App\Http\Controllers\UploadsController::class, 'index'])->name('settings/uploads');
 Route::post('settings/uploads', [\App\Http\Controllers\UploadsController::class, 'upload'])->name('settings/uploads');
 Route::get('settings/uploads/delete/{upload:id}', [\App\Http\Controllers\UploadsController::class, 'destroy']);
+
+
+Route::get('user_data', function () {
+    return [
+        'user' => Auth::user(),
+    ];});
+
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 

@@ -1,6 +1,3 @@
-
-
-
 <template>
     <Dashboard>
     <div class="bg-white w-full h-full m-4 p-2">
@@ -19,7 +16,7 @@
                         </div>
                         <BreezeInput id="dropzone-file" @input="form.uploads = $event.target.files;loadFilePreview($event.target.files)" type="file" class="hidden" multiple />
                     </label>
-                </div> 
+                </div>
                 <BreezeInputError class="mt-2" :message="form.errors.uploads"/>
 
                 <div class="float-right mt-2 mr-2">

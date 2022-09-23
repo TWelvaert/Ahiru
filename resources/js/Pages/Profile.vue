@@ -130,7 +130,7 @@ let data = defineProps({
                                         </td>
                                         <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
 
-                                    
+
                                             <Link
                                                 v-bind:href="
                                                     '/dashboard/advertisement/delete/' +
@@ -139,18 +139,18 @@ let data = defineProps({
                                             >
                                                 Delete
                                             </Link>
-                                    
+
                                         </td>
 
-                                    
+
                                 </div>
                             </div>
                         </div> -->
 <!-- Card -->
 <div class="rounded overflow-hidden shadow-lg bg-green-100">
     <div class="">
-        
-    
+
+
         <div class="px-6 py-4 border-solid border-black flex-col">
         <div v-for="collaboration in collaborations" class="flex-col">
             <div>
@@ -162,7 +162,7 @@ let data = defineProps({
             collaboration.slug +
             '/edit'
             "
-                >  
+                >
                 Update
                 </a>
                 <a
@@ -172,24 +172,24 @@ let data = defineProps({
             "
                 >
                 Delete
-                                            
+
                 </a>
                 </div>
             </div>
             <div class= "flex-col ">
                     <div class="px-4 py-2 font-semibold">{{ collaboration.slug }}</div>
-            
+
                 <p class="text-gray-700 text-base line-clamp-5">{{collaboration.description}}</p>
             </div>
-                
 
-           
+
+
         </div>
         </div>
         </div>
     </div>
 </div>
-                    
+
                     <!-- End of Advertisements section -->
 
                     <div class="my-4"></div>
