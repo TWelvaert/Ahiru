@@ -11,13 +11,9 @@ class ProfileController extends Controller
 {
   public function index (User $user)
     {
-  
         $collaborations = $user->advertisements()->get();
-        //($collaborations);
         $collaborations = $collaborations->sortByDesc('created_at')->take(8);
-        ($collaborations);
-
-
+        
         return Inertia::render('Profile',[
             'user' => $user,
             'collaborations' => $collaborations
