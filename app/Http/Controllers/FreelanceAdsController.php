@@ -55,9 +55,11 @@ class FreelanceAdsController extends Controller
 
     public function show(FreelanceAdvertisement $freelanceAdvertisement)
     {
-
-        return Inertia::render('Advertisement', [
+        $user = Auth::user();
+        return 
+        Inertia::render('Advertisement', [
             'advertisement' => $freelanceAdvertisement,
+            'user'=> $user,
             // 'uploads' => $uploads_matched,
         ]);
     }
