@@ -159,7 +159,7 @@
             
         
             <div class="px-6 py-4 border-solid border-black flex-col">
-            <div v-for="collaboration in collaborations" class="flex">
+            <div v-for="collaboration in collaborations " class="flex">
                 <div>
                     <img src="../../assets/images/profileplaceholder.jpg" class="object-cover h-40" />
                     <div class="flex">
