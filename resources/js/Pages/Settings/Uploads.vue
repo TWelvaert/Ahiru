@@ -28,8 +28,9 @@
         <div class="flex gap-2">
             <div v-for="image in uploads_images">
                 <div @click="e => select(e)" :id="image['id']" :class="{active: isActive}">
-                    <img class="w-20 h-20" :src="`/${image['path']}/${image['name']}`" />
-                    <Link @click="delete_file" v-bind:href="`/settings/uploads/delete/${image['id']}`">Delete</Link>
+                    <Link @click="delete_file" class="" v-bind:href="`/settings/uploads/delete/${image['id']}`">Delete</Link>
+                    <img class="w-30 h-30" :src="`/${image['path']}/${image['name']}`" />
+                    
                 </div>
             </div>
         </div>
