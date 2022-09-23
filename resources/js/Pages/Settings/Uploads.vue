@@ -11,26 +11,46 @@
                         <div class="flex flex-col justify-center items-center pt-5 pb-6">
                             <svg aria-hidden="true" class="mb-3 w-10 h-10 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"></path></svg>
                             <p class="mb-2 text-sm text-gray-500 dark:text-gray-400"><span class="font-semibold">Click to upload</span> or drag and drop</p>
-                            <p class="text-xs text-gray-500 dark:text-gray-400">SVG, PNG, JPG or GIF (MAX. 800x400px)</p>
+                            <p class="text-xs text-gray-500 dark:text-gray-400">Images: SVG, PNG, JPG, GIF</p>
+                            <p class="text-xs text-gray-500 dark:text-gray-400">Audio: MP3, WAV</p>
+                            <div id="filesPreview" class=" absolute flex gap-2 m-4">
+
+                            </div>
                         </div>
-                        <BreezeInput id="dropzone-file" @input="form.uploads = $event.target.files" type="file" class="hidden" multiple />
+                        <BreezeInput id="dropzone-file" @input="form.uploads = $event.target.files;loadFilePreview($event.target.files)" type="file" class="hidden" multiple />
                     </label>
                 </div> 
                 <BreezeInputError class="mt-2" :message="form.errors.uploads"/>
 
-                <BreezeButton name="form" class="ml-4" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
-                    Upload
-                </BreezeButton>
+                <div class="float-right mt-2 mr-2">
+                    <BreezeButton name="form" class="ml-4" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
+                        Upload
+                    </BreezeButton>
+                </div>
+
             </div>
         </form>
 
-        <b>Images</b>
-        <div class="flex gap-2">
+        <div class="flex gap-2 mt-4">
             <div v-for="image in uploads_images">
-                <div @click="e => select(e)" :id="image['id']" :class="{active: isActive}">
-                    <Link @click="delete_file" class="" v-bind:href="`/settings/uploads/delete/${image['id']}`">Delete</Link>
-                    <img class="w-30 h-30" :src="`/${image['path']}/${image['name']}`" />
+                <div @click="e => select(e)" :id="image.id" :class="{active: isActive}">
+                    <header class="flex justify-between bg-gray-100 rounded-t p-1 w-40 truncate">
+                        <div>
+                            <Link @click="delete_file" class="cursor-pointer" v-bind:href="`/settings/uploads/delete/${image.id}`">Edit</Link>
+                        </div>
+                        <div>
+                            <Link @click="delete_file" class="cursor-pointer" v-bind:href="`/settings/uploads/delete/${image.id}`">Delete</Link>
+                        </div>
+                        
+                    </header>
+                    <main class="relative">
+                        <img class="w-40 h-40 z-0 cursor-pointer" :src="`/${image.path}/${image.name}`" />
                     
+                    </main>
+                   
+                    <footer class="flex justify-between bg-gray-100 rounded-b p-1 w-40 truncate">
+                        <span>{{ image.name }}</span>
+                    </footer>
                 </div>
             </div>
         </div>
@@ -51,12 +71,10 @@
 
 
 <script setup>
-    import { Link } from '@inertiajs/inertia-vue3';
+    import { Link, useForm } from '@inertiajs/inertia-vue3';
     import BreezeButton from "@/Components/Button.vue";
     import BreezeInput from "@/Components/Input.vue";
     import BreezeInputError from "@/Components/InputError.vue";
-    import BreezeLabel from "@/Components/Label.vue";
-    import { useForm } from "@inertiajs/inertia-vue3";
     import Dashboard from '@/Pages/Dashboard.vue';
 
     let uploads_images = [];
@@ -68,8 +86,12 @@
     });
 
     function select(e) {
-        e.target.parentElement.classList.toggle('active_file');
-        let file_id = e.path[1].id;
+
+        if(e.path[2].getAttribute('id') > 0) {
+            e.path[2].classList.toggle('active_file');
+        }
+        
+        let file_id = e.path[2].id;
 
         if(selected_files.includes(file_id)) {
             let file_index = selected_files.indexOf(file_id);
@@ -78,8 +100,27 @@
             selected_files.push(file_id);
         }
 
-        emits('add_files', selected_files)
+        emits('add_files', selected_files);
+    }
 
+    function loadFilePreview(files) {
+        
+        if(files) {
+            const filesPreview = document.querySelector('#filesPreview');
+
+            if(files.length > 1) 
+            {
+                for(let i=0; i<files.length; i++) {
+                    let source = URL.createObjectURL(files[i]);
+                    filesPreview.innerHTML += `<img class="w-40 h-40" src="${source}"/>`;
+                };
+            } 
+            else 
+            {
+                let source = URL.createObjectURL(files[0]);
+                filesPreview.innerHTML += `<img class="w-40 h-40" src="${source}"/>`;
+            }
+        }
     }
 
     const emits = defineEmits(['add_files'])
