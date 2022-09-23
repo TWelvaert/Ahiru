@@ -95,7 +95,7 @@ Route::post('settings/uploads', [\App\Http\Controllers\UploadsController::class,
 Route::get('settings/uploads/delete/{upload:id}', [\App\Http\Controllers\UploadsController::class, 'destroy']);
 
 
-Route::get('user_data', function () {
+Route::get('/user_data', function () {
     return [
         'user' => Auth::user(),
     ];});
