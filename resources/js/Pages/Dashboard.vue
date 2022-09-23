@@ -15,17 +15,17 @@ import { Head } from "@inertiajs/inertia-vue3";
 
         <Header />
 
-        <div class="font-monument">
-            <span id="welcome" class="flex items-center justify-center"></span>
-        </div>
-        
+        <div class=" m-8">
+            <span id="welcome" class="font-monument flex items-center justify-center"></span>
+
         <span class="flex items-center justify-center">
             You have 14788 plays last 7 days
         </span>
-
-        <div class="bg-opacity-80 backdrop-blur-lg rounded drop-shadow-lg flex flex-row items-center justify-center">
-            <slot />
         </div>
+
+
+            <slot />
+
 
     </BreezeAuthenticatedLayout>
 </template>

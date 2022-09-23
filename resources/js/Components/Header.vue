@@ -45,14 +45,14 @@ let data = defineProps({
                             Advertisements
                         </BreezeNavLink>
 
-                        <BreezeNavLink class="" :href="route('dashboard')" :active="route().current('dashboard')">
+                        <BreezeNavLink class="" :href="route('music')" :class="{ 'active': $page.url === '/music' }">
                             Music
                         </BreezeNavLink>
                     </div>
 
                     <div class="hidden sm:flex sm:items-center sm:ml-6">
 
-                        <!-- Settings Dropdown -->
+                        <!-- Settings dropdown username -->
 
                         <div class="ml-3 relative">
                             <BreezeDropdown align="right" width="48">
@@ -76,19 +76,23 @@ let data = defineProps({
                                     </span>
                                 </template>
 
+                                    <!-- Settings dropdown -->
+
                                 <template #content>
-                                    <BreezeDropdownLink :href="`/profile/${$page.props.user.slug}`" :class="{ 'active': $page.url === '/profile' }">
+                                    <BreezeDropdownLink :href="`/profile/${$page.props.user.slug}`"
+                                    :class="{ 'active': $page.url === '/profile' }">
                                         Profile
                                     </BreezeDropdownLink>
                                     <BreezeDropdownLink :href="route('likes')"
                                         :class="{ 'active': $page.url === '/likes' }">
                                         Likes
                                     </BreezeDropdownLink>
-                                    <BreezeDropdownLink :href="route('following')">
+                                    <BreezeDropdownLink :href="route('following')"
+                                        :class="{ 'active': $page.url === '/following' }">
                                         Following
                                     </BreezeDropdownLink>
                                     <BreezeDropdownLink :href="route('settings/uploads')"
-                                        :class="{ 'active': $page.url === 'settings/uploads' }">
+                                        :class="{ 'active': $page.url === '/settings/uploads' }">
                                         Uploads
                                     </BreezeDropdownLink>
                                     <BreezeDropdownLink :href="route('settings/account')"
