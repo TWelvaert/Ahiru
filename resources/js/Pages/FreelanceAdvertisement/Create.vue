@@ -1,5 +1,5 @@
 <script setup>
-import BreezeAuthenticatedLayout from "@/Layouts/Authenticated.vue";
+import Dashboard from "@/Pages/Dashboard.vue";
 import BreezeButton from "@/Components/Button.vue";
 import BreezeInput from "@/Components/Input.vue";
 import BreezeInputError from "@/Components/InputError.vue";
@@ -32,16 +32,19 @@ const submit = () => {
     form.post(route("advertisement/create"));
 };
 
+
+
 function processFiles(files){
     selected_files = files;
     form.uploads = files;
 }
+
 </script>
 
 <template>
 
     <Head title="Advertisement" />
-    <BreezeAuthenticatedLayout>
+    <Dashboard>
         <template #header>
             <h2 class="font-monument text-xl text-black  flex items-center justify-center">
                 Advertisement
@@ -49,7 +52,7 @@ function processFiles(files){
         </template>
         <div class="flex items-center justify-center px-12">
             <div
-                class="py-14 bg-white w-full mt-9 overflow-hidden bg-opacity-80 backdrop-blur-lg rounded drop-shadow-lg flex flex-row items-center justify-center">
+                class="py-14 bg-white w-full mt-9 bg-opacity-80 backdrop-blur-lg rounded drop-shadow-lg flex flex-row items-center justify-center">
                 <div class="">
                     <div class="flex items-center justify-center">
                         <h2 class=" my-2  text-black font-monument">
@@ -80,11 +83,11 @@ function processFiles(files){
                             />
                         </div>
                 
-                        <div class="bg-white">
+                        <div class="bg-white min-h-full">
                             <button class="bg-slate-400 text-white w-full mt-2 mb-2" type="button" @click="showModal = true">Add media (image or audio file)</button>
                          
                                 <Modal class="absolute min-h-full w-full left-0 top-0" v-if="showModal" @close="showModal = false">
-                                    <Uploads  @add_files="processFiles" :user_uploads="data['user_uploads']" />
+                                    <Uploads  class="min-h-full" @add_files="processFiles" :user_uploads="data['user_uploads']" />
                                 </Modal>
                        
                         </div>
@@ -96,8 +99,7 @@ function processFiles(files){
                         </div>
 
                         <div class="flex items-center justify-center mt-4">
-                            <BreezeButton name="form" :class="{ 'opacity-25': form.processing }"
-                                :disabled="form.processing">
+                            <BreezeButton class="{ 'opacity-25': form.processing }" :disabled="form.processing">
                                 Create
                             </BreezeButton>
                         </div>
@@ -105,7 +107,7 @@ function processFiles(files){
                 </div>
             </div>
         </div>
-    </BreezeAuthenticatedLayout>
+    </Dashboard>
 </template>
 
 <script>
