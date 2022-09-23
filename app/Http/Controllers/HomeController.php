@@ -17,7 +17,6 @@ class HomeController extends Controller
         return Inertia::render('Home', [
             'user' => $user,
             'advertisements' => $advertisements
-
         ]);
     }
 
