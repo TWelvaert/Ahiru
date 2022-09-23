@@ -1,6 +1,15 @@
 <script setup>
 import Dashboard from '@/Pages/Dashboard.vue';
 
+
+
+let data = defineProps({
+    user: Array,
+    advertisements: String,
+});
+console.log(data['advertisements']);
+
+
 </script>
 
 <template>
@@ -8,84 +17,37 @@ import Dashboard from '@/Pages/Dashboard.vue';
 
         <section class="mt-14 ">
 
-
             <!-- ADVERTISEMENTS -->
 
+            <!-- HEADER ADS -->
 
-            <span class="font-medium font-monument leading-tight text-5xl ml-16 mb-2">Latest advertisements</span>
-
-            <div class="grid grid-cols-4 gap-4 m-14">
-                <a href="#"
-                    class="block p-6 max-w-sm bg-white rounded-lg border border-gray-200 shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
-                    <img src="../../assets/images/070c4ae0e59af72c222e2756c87baa1a.gif" alt="">
-                    <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Noteworthy
-                        technology acquisitions 2021</h5>
-                    <p class="font-normal text-gray-700 dark:text-gray-400">Here are the biggest enterprise technology
-                        acquisitions of 2021 so far, in reverse chronological order.</p>
-                </a>
-                <a href="#"
-                    class="block p-6 max-w-sm bg-white rounded-lg border border-gray-200 shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
-                    <img src="../../assets/images/070c4ae0e59af72c222e2756c87baa1a.gif" alt="">
-                    <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Noteworthy
-                        technology acquisitions 2021</h5>
-                    <p class="font-normal text-gray-700 dark:text-gray-400">Here are the biggest enterprise technology
-                        acquisitions of 2021 so far, in reverse chronological order.</p>
-                </a>
-                <a href="#"
-                    class="block p-6 max-w-sm bg-white rounded-lg border border-gray-200 shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
-                    <img class="" src="../../assets/images/070c4ae0e59af72c222e2756c87baa1a.gif" alt="">
-                    <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Noteworthy
-                        technology acquisitions 2021</h5>
-                    <p class="font-normal text-gray-700 dark:text-gray-400">Here are the biggest enterprise technology
-                        acquisitions of 2021 so far, in reverse chronological order.</p>
-                </a>
-                <a href="#"
-                    class="block p-6 max-w-sm bg-white rounded-lg border border-gray-200 shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
-                    <img src="../../assets/images/070c4ae0e59af72c222e2756c87baa1a.gif" alt="">
-                    <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Noteworthy
-                        technology acquisitions 2021</h5>
-                    <p class="font-normal text-gray-700 dark:text-gray-400">Here are the biggest enterprise technology
-                        acquisitions of 2021 so far, in reverse chronological order.</p>
-                </a>
-                <a href="#"
-                    class="block p-6 max-w-sm bg-white rounded-lg border border-gray-200 shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
-                    <img src="../../assets/images/070c4ae0e59af72c222e2756c87baa1a.gif" alt="">
-                    <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Noteworthy
-                        technology acquisitions 2021</h5>
-                    <p class="font-normal text-gray-700 dark:text-gray-400">Here are the biggest enterprise technology
-                        acquisitions of 2021 so far, in reverse chronological order.</p>
-                </a>
-                <a href="#"
-                    class="block p-6 max-w-sm bg-white rounded-lg border border-gray-200 shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
-                    <img src="../../assets/images/070c4ae0e59af72c222e2756c87baa1a.gif" alt="">
-                    <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Noteworthy
-                        technology acquisitions 2021</h5>
-                    <p class="font-normal text-gray-700 dark:text-gray-400">Here are the biggest enterprise technology
-                        acquisitions of 2021 so far, in reverse chronological order.</p>
-                </a>
-                <a href="#"
-                    class="block p-6 max-w-sm bg-white rounded-lg border border-gray-200 shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
-                    <img class="" src="../../assets/images/070c4ae0e59af72c222e2756c87baa1a.gif" alt="">
-                    <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Noteworthy
-                        technology acquisitions 2021</h5>
-                    <p class="font-normal text-gray-700 dark:text-gray-400">Here are the biggest enterprise technology
-                        acquisitions of 2021 so far, in reverse chronological order.</p>
-                </a>
-                <a href="#"
-                    class="block p-6 max-w-sm bg-white rounded-lg border border-gray-200 shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
-                    <img src="../../assets/images/070c4ae0e59af72c222e2756c87baa1a.gif" alt="">
-                    <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Noteworthy
-                        technology acquisitions 2021</h5>
-                    <p class="font-normal text-gray-700 dark:text-gray-400">Here are the biggest enterprise technology
-                        acquisitions of 2021 so far, in reverse chronological order.</p>
-                </a>
-
+            <div class="flex flex-col ml-16 mb-2 leading-tight">
+                <span class="font-monument text-4xl">Advertisements</span>
+                <span class="mt-3">These advertisements are the latest added to the Ahiru platform</span>
             </div>
+
+            <!-- CARD -->
+
+                <div class="grid grid-cols-4 gap-4 m-14">
+                    <a href="#" v-for="advertisement in advertisements"
+                        class="block p-6 max-w-sm bg-white rounded-lg border border-gray-200 shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
+                        <img src="../../assets/images/070c4ae0e59af72c222e2756c87baa1a.gif" alt="">
+                        <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">{{ advertisement.title }}</h5>
+                        <p class="font-normal text-gray-700 dark:text-gray-400 line-clamp-3">{{ advertisement.description }}</p>
+                        <small>{{ advertisement.created_at }}</small>
+                    </a>
+                </div>
+
 
             <!-- MUSIC -->
 
-            <span class="font-medium font-monument leading-tight text-5xl mt-16 ml-16 mb-2">Latest music</span>
-            <section class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+            <div class="flex flex-col ml-16 mb-2 leading-tight">
+                <span class="font-monument text-4xl">The Upload</span>
+                <span class="mt-3">Newly posted tracks. Just for you</span>
+            </div>
+
+
+            <section class="grid grid-cols-1 sm:grid-cols-3 gap-4 m-14">
                 <!-- CARD 1 -->
                 <div class="bg-gray-900 shadow-lg rounded p-3">
                     <div class="group relative">
@@ -126,9 +88,7 @@ import Dashboard from '@/Pages/Dashboard.vue';
                         <p class="text-gray-400">Tycho</p>
                     </div>
                 </div>
-                <!-- END OF CARD 1 -->
 
-                <!-- CARD 2 -->
                 <div class="bg-gray-900 shadow-lg rounded p-3">
                     <div class="group relative">
                         <img class="w-full md:w-72 block rounded"
@@ -168,9 +128,7 @@ import Dashboard from '@/Pages/Dashboard.vue';
                         <p class="text-gray-400">Tycho</p>
                     </div>
                 </div>
-                <!-- END OF CARD 2 -->
 
-                <!-- CARD 3 -->
                 <div class="bg-gray-900 shadow-lg rounded p-3">
                     <div class="group relative">
                         <img class="w-full md:w-72 block rounded"
@@ -210,14 +168,16 @@ import Dashboard from '@/Pages/Dashboard.vue';
                         <p class="text-gray-400">Tycho</p>
                     </div>
                 </div>
-                <!-- END OF CARD 3 -->
             </section>
 
 
             <!-- CREATORS -->
 
 
-            <span class="font-medium font-monument leading-tight text-5xl mt-16 ml-16 mb-2">Latest creators</span>
+            <div class="flex flex-col ml-16 mb-2 leading-tight">
+                <span class="font-monument text-4xl">Creators</span>
+                <span class="mt-3">Recent artists </span>
+            </div>
 
             <div class="flex gap-4 m-14">
                 <a href="#"

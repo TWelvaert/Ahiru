@@ -18,7 +18,7 @@ let data = defineProps({
 
     <template>
 
-            <nav class="bg-white border-b border-gray-100">
+            <nav class="bg-white border-b border-gray-100 sticky top-0">
                 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between h-16">
 
                     <div class="flex">
@@ -157,6 +157,41 @@ let data = defineProps({
                 </div>
             </header>
 
+
+        <div class=" m-8">
+            <span id="welcome" class="font-monument flex items-center justify-center"></span>
+
+        <span class="flex items-center justify-center">
+            You have 14788 plays last 7 days
+        </span>
+        </div>
+
             <!-- Page Content -->
 
       </template>
+
+
+<script>
+
+var i = 0;
+var txt = 'Hey Creator how is your day?'; /* The text */
+var speed = 150; /* The speed/duration of the effect in milliseconds */
+
+export default {
+    name: "App",
+    mounted() {
+        typeWriter();
+        function typeWriter()
+        {
+            if (i < txt.length) {
+                if (document.getElementById("welcome")){
+                    document.getElementById("welcome").innerHTML += txt.charAt(i);
+                    i++;
+                    setTimeout(typeWriter, speed);
+                }
+                window.onload = typeWriter;
+            }
+        }
+    }
+}
+</script>
