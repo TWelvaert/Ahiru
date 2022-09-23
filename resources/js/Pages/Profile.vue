@@ -38,11 +38,13 @@
                             <div class="image overflow-hidden">
                                 <img class="h-auto w-full mx-auto" src="../../assets/images/profileplaceholder.jpg" alt="">
                             </div>
-                            <h1 class="text-gray-900 font-bold text-xl leading-8 my-1">Artist</h1>
+                            <h1 class="text-gray-900 font-bold text-xl leading-8 my-1">{{user.name}}</h1>
                             <h3 class="text-gray-600 font-lg text-semibold leading-6">Short Bio sentence </h3>
                             <p class="text-sm text-gray-500 hover:text-gray-600 leading-6">Lorem ipsum dolor sit amet
                                 consectetur adipisicing elit.
                                 Reprehenderit, eligendi dolorum sequi illum qui unde aspernatur non deserunt</p>
+                            <button class="bg-green-500 py-1 px-2 rounded text-white text-sm bottom-0 right-0 items">Edit</button>
+                            
                             <ul
                                 class="bg-gray-100 text-gray-600 hover:text-gray-700 hover:shadow py-2 px-3 mt-3 divide-y rounded shadow-sm">
                                 <li class="flex items-center py-3">
@@ -176,7 +178,7 @@
                 <div class= "flex-col ">
                         <div class="px-4 py-2 font-semibold">{{ collaboration.slug }}</div>
                 
-                        <p class="text-gray-700 text-base line-clamp-3 p-2 m-2">{{collaboration.description}}</p>
+                        <p class="text-gray-700 text-base line-clamp-3 whitespace p-2 m-2">{{collaboration.description}}</p>
                 </div>
                     
     
