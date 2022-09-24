@@ -29,21 +29,34 @@
         <Head title="Profile" />
     
         <Dashboard>
-            <div class="container mx-auto my-5 p-5">
+            <div class="container mx-auto my-3 p-3">
                 <div class="md:flex no-wrap md:-mx-2 ">
                     <!-- Left Side -->
                     <div class="w-full md:w-3/12 md:mx-2 ">
                         <!-- Profile Card -->
-                        <div class="bg-white">
+                        <div class="flex items-center space-x-3 font-semibold text-gray-900 text-xl leading-8">
+                            <span clas="text-green-500">
+                                    <svg class="h-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                        stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                                    </svg>
+                                </span>
+                                <span class="tracking-wide">Profile</span>
+                                </div>
+                        <div class="block p-6 max-w-sm bg-white rounded-lg border border-gray-200 shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
                             <div class="image overflow-hidden">
-                                <img class="h-auto w-full mx-auto" src="../../assets/images/profileplaceholder.jpg" alt="">
+                                <img class="h-auto w-full mx-auto" src="../../assets/images/070c4ae0e59af72c222e2756c87baa1a.gif" alt="">
                             </div>
-                            <h1 class="text-gray-900 font-bold text-xl leading-8 my-1">{{user.name}}</h1>
+                            <h1 class="text-gray-900 font-bold text-xl leading-8 m-3">{{user.name}}</h1>
+                            <div class="flex justify-between m-3">
                             <h3 class="text-gray-600 font-lg text-semibold leading-6">Short Bio sentence </h3>
-                            <p class="text-sm text-gray-500 hover:text-gray-600 leading-6">Lorem ipsum dolor sit amet
+                            <button class="bg-green-500 py-1 px-2 rounded text-white text-sm">Edit</button>
+                            </div>
+                            <p class="text-sm text-gray-500 hover:text-gray-600 leading-6 m-3">Lorem ipsum dolor sit amet
                                 consectetur adipisicing elit.
                                 Reprehenderit, eligendi dolorum sequi illum qui unde aspernatur non deserunt</p>
-                            <button class="bg-green-500 py-1 px-2 rounded text-white text-sm bottom-0 right-0 items">Edit</button>
+                            
                             
                             <ul
                                 class="bg-gray-100 text-gray-600 hover:text-gray-700 hover:shadow py-2 px-3 mt-3 divide-y rounded shadow-sm">
@@ -60,8 +73,8 @@
                         </div>
                         <!-- End of profile card -->
                         <div class="my-4"></div>
-                        <!-- Friends card -->
-                        <div class="bg-white p-3 hover:shadow">
+                        <!-- Following card -->
+                        <div class="block p-6 max-w-sm bg-white rounded-lg border border-gray-200 shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
                             <div class="flex items-center space-x-3 font-semibold text-gray-900 text-xl leading-8">
                                 <span class="text-green-500">
                                     <svg class="h-5 fill-current" xmlns="http://www.w3.org/2000/svg" fill="none"
@@ -96,7 +109,7 @@
                             </div>
                         </div>
                     
-                        <!-- End of friends card -->
+                        <!-- End of following card -->
                     </div>
                     <!-- Right Side -->
                     <div class="w-full md:w-9/12 mx-2 h-64">
@@ -112,7 +125,7 @@
                                     </svg>
                                 </span>
                                 <span class="tracking-wide">Advertisements</span>
-                                <a class="p-1 m-1"
+                                <a class="p-1 m-1 bg-green-500 py-1 px-2 rounded text-white text-sm"
                                     v-bind:href="
                                     '/dashboard/advertisements'
                                 "
@@ -121,75 +134,22 @@
                                                 
                                 </a>
                             </div>
-                            <!-- <div class="text-gray-700">
-                                <div class="grid md:grid-cols-3 text-sm">
-                                    <div v-for="collaboration in collaborations" class="grid grid-cols-3">
-                                        <div class="px-4 py-2 font-semibold">{{ collaboration.slug }}</div>
-                                            <td class="">
-                                                <Link
-                                                    v-bind:href="
-                                                        '/advertisement/' +
-                                                        collaboration.slug +
-                                                        '/edit'
-                                                    "
-                                                >
-                                                    Update
-                                                </Link>
-                                            </td>
-                                            <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-    
-                                        
-                                                <Link
-                                                    v-bind:href="
-                                                        '/dashboard/advertisement/delete/' +
-                                                        collaboration.slug
-                                                    "
-                                                >
-                                                    Delete
-                                                </Link>
-                                        
-                                            </td>
-    
-                                        
-                                    </div>
-                                </div>
-                            </div> -->
-    <!-- Card -->
-        <!-- <div class="rounded overflow-hidden shadow-lg">
-            <div class="">
-                <div class="px-6 py-4 border-solid border-black flex-col">
-                    <div v-for="collaboration in collaborations " class="flex">
-                        <div>
-                    <img src="../../assets/images/profileplaceholder.jpg" class="object-cover h-40" />
-                   
-                        </div>
-            <div class= "flex ">
-                        <div class="px-4 py-2 font-semibold">{{ collaboration.slug }}</div>
-                        <p class="text-gray-700 text-base line-clamp-3 whitespace p-2 m-2">{{collaboration.description}}</p>
-                        
-            </div> -->
-                    
-    
-               
-            <!-- </div>
-            </div>
-            </div>
-        </div>-->
+                            
     </div> 
-            <div class="flex p-1 m-1 space-x-6">
+            <div class="flex space-x-6 flex-wrap">
                    
                     <a v-bind:href="
                         '/advertisement/'+
                         collaboration.slug
                             "
                     v-for="collaboration in collaborations"
-                        class="block p-6 max-w-sm bg-white rounded-lg border border-gray-200 shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
+                        class="block p-6 max-w-sm bg-white rounded-lg border border-gray-200 shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700 flex-shrink-0 ">
                         <img src="../../assets/images/070c4ae0e59af72c222e2756c87baa1a.gif" alt="">
-                <div class="flex justify-between">
+                <div class="flex justify-between py-3">
                     
                 
-                        <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">{{ collaboration.slug }}</h5>
-                        <button> <a class="p-1 m-1"
+                        <h5 class="text-2xl font-bold tracking-tight text-gray-900 dark:text-white inline-block align-middle">{{ collaboration.slug }}</h5>
+                        <button> <a class="p-1 m-1 bg-green-500 py-1 px-2 rounded text-white text-sm"
                                             v-bind:href="
                                                     '/advertisement/' +
                                                     collaboration.slug +
