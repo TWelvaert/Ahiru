@@ -7,6 +7,11 @@
 
 <template>
     <Layout>
+
+
+
+        <canvas id="canvas3d" width="1000" height="1000"></canvas>
+
     <!-- LANDING PAGE HEADER ================================================ -->
 
     <div class="bg-black min-h-screen z-0">
@@ -262,5 +267,20 @@
 
 </Layout>
 </template>
+
+<script>
+    import { Application } from '@splinetool/runtime';
+
+    export default {
+        mounted() {
+            // make sure you have a canvas in the body
+            const canvas = document.querySelector('#canvas3d');
+            console.log(canvas)
+            // start the application and load the scene
+            const spline = new Application(canvas);
+            spline.load('https://prod.spline.design/pHiNKU0XXk4eXYUX/scene.splinecode');
+        }
+    }
+</script>
 
 
