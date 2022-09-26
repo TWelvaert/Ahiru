@@ -61,7 +61,7 @@
                            
                         </div>
                         <!-- End of profile card -->
-                        <div class="my-4 flex items-center space-x-3 font-semibold text-gray-900 text-xl py-1"><span class="text-green-500">
+                        <div class="my-4 flex items-center space-x-3 font-semibold text-gray-900 text-xl py-1"><span class="">
                                     <svg class="h-5 fill-current" xmlns="http://www.w3.org/2000/svg" fill="none"
                                         viewBox="0 0 24 24" stroke="currentColor">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
