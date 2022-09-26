@@ -13,6 +13,7 @@ use Illuminate\Http\Request;
 use Inertia\Inertia;
 use File;
 use Illuminate\Http\Request as HttpRequest;
+use Illuminate\Support\Facades\Request as FacadesRequest;
 use Session;
 
 class FreelanceAdsController extends Controller
@@ -31,6 +32,9 @@ class FreelanceAdsController extends Controller
 
     public function advertisements()
     {
+        $collaborations = FreelanceAdvertisement::all();
+
+        $collaborations = $collaborations->sortByDesc('created_at')->take(8);
         $categories = FreelanceCategory::all();
         $user = Auth::user();
         return Inertia::render(
@@ -39,10 +43,9 @@ class FreelanceAdsController extends Controller
                 'user' => $user,
                 'categories' => $categories,
                 'freelance_advertisements' => FreelanceAdvertisement::query()
-                    ->when(Request::input('search'), function ($query, $search) {
+                    ->when(FacadesRequest::input('search'), function ($query, $search) {
                         $query->where('title', 'like', '%' . $search . '%')
-                            ->OrWhere('description', 'like', '%' . $search . '%')
-                            ->OrWhere('category_id', 'like', '%' . $search . '%');
+                            ->OrWhere('description', 'like', '%' . $search . '%');
                     })->paginate(8)
                     ->withQueryString(),
             ]
