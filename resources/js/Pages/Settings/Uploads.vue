@@ -15,13 +15,15 @@
                         </label>
                     </div>
                     <div class="float-right mt-2 mr-2">
-                        <BreezeButton  @click="count++" name="form" class="ml-4" :class="{ 'opacity-25': this.$refs.processing }" :disabled="this.$refs.processing">
+                        <BreezeButton name="form" class="ml-4" :class="{ 'opacity-25': this.$refs.processing }" :disabled="this.$refs.processing">
                             Upload
                         </BreezeButton>
                     </div>
                 </div>
             </form>
-
+            <BreezeButton  @click="resetSelection()" name="form" class="ml-4" :class="{ 'opacity-25': this.$refs.processing }" :disabled="this.$refs.processing">
+                            RESET SELECTION
+                        </BreezeButton>
             <BreezeLabel for="filter" value="Filter" />
             <BreezeInput id="filter" placeholder="Search file name" type="text" />
       
@@ -83,12 +85,37 @@ let props = defineProps({
 
 let selected_files = [];
 
+let selected_file_nr = 0;
+
+function resetSelection() {
+    selected_file_nr = 0;
+    document.querySelectorAll('.active_file').forEach(active => {
+        active.classList.remove('active_file');
+    });
+    document.querySelectorAll('.selectedFile').forEach(active => {
+        active.remove();
+    });
+}
+
 function select(e) {
     let file_id = '';
 
+    if(!document.querySelector(`.selectedFile`)) {
+        selected_file_nr = 0;
+    }
+
     if(e.path[2].getAttribute('id') > 0) {
-        e.path[2].classList.toggle('active_file');
-        file_id = e.path[2].id;
+        e.path[2].classList.add('active_file');
+
+
+        if(document.querySelector(`#nr_${e.path[2].getAttribute('id')}`)) {
+
+        } else {
+            selected_file_nr += 1;
+            e.path[2].innerHTML += `<div id="nr_${e.path[2].getAttribute('id')}" class="absolute selectedFile">${selected_file_nr}</div>`;
+            file_id = e.path[2].id;
+        }
+
     }
 
     if(e.path[1].getAttribute('id') > 0) {
