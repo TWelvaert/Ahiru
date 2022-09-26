@@ -42,7 +42,9 @@ Route::post('/profile/update/{user:slug}', [ProfileController::class, 'update'])
 
 
 // Route::get('/dashboard', [FreelanceAdsController::class, 'index'])->name('dashboard')->middleware(['auth', 'verified']);
+
 Route::get('/advertisements', [FreelanceAdsController::class, 'advertisements'])->name('advertisements');
+Route::get('/dashboard/advertisements', [FreelanceAdsController::class, 'index'])->name('/dashboard/advertisements')->middleware(['auth', 'verified']);
 
 Route::get('/dashboard', [HomeController::class, 'index'])->name('dashboard')->middleware(['auth', 'verified']);
 Route::get('/home', [HomeController::class, 'index_home'])->middleware(['auth', 'verified'])->name('home');
@@ -53,13 +55,13 @@ Route::get('/following', [HomeController::class, 'index_following'])->middleware
 
 Route::get('/advertisement/create', [FreelanceAdsController::class, 'create'])->middleware(['auth', 'verified'])->name('advertisement.create');
 Route::post('advertisement/create', [FreelanceAdsController::class, 'store'])->middleware(['auth', 'verified'])->name('advertisement/create');
-
+Route::get('/advertisement/{freelanceAdvertisement:slug}', [FreelanceAdsController::class, 'show'])->name('advertisement');
 Route::get('/advertisement/{freelanceAdvertisement:slug}/edit', [FreelanceAdsController::class, 'edit'])->middleware(['auth', 'verified']);
 Route::post('/advertisement/update/{freelanceAdvertisement:slug}', [FreelanceAdsController::class, 'update'])->middleware(['auth', 'verified']);
 
 Route::get('/dashboard/advertisement/delete/{freelanceAdvertisement:slug}', [FreelanceAdsController::class, 'destroy'])->middleware(['auth', 'verified']);
 
-Route::get('/advertisement/{freelanceAdvertisement:slug}', [FreelanceAdsController::class, 'show']);
+
 
 Route::get('/news/article/{news_article:slug}', [NewsController::class, 'show']);
 Route::post('news/article/{news_article:slug}/comment', [NewsCommentController::class, 'store'])->name('comment');
@@ -97,7 +99,7 @@ Route::post('settings/uploads', [\App\Http\Controllers\UploadsController::class,
 Route::get('settings/uploads/delete/{upload:id}', [\App\Http\Controllers\UploadsController::class, 'destroy']);
 
 
-Route::get('user_data', function () {
+Route::get('/user_data', function () {
     return [
         'user' => Auth::user(),
     ];});
