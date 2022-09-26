@@ -19,6 +19,8 @@ console.log(data['advertisements']);
 
             <!-- ADVERTISEMENTS -->
 
+            <!-- CARD -->
+
             <!-- HEADER ADS -->
 
             <div class="flex flex-col ml-16 mb-2 leading-tight">
@@ -28,16 +30,19 @@ console.log(data['advertisements']);
 
             <!-- CARD -->
 
-                <div class="grid grid-cols-4 gap-4 m-14">
-                    <a href="#" v-for="advertisement in advertisements"
-                        class="block p-6 max-w-sm bg-white rounded-lg border border-gray-200 shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
-                        <img src="../../assets/images/070c4ae0e59af72c222e2756c87baa1a.gif" alt="">
-                        <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">{{ advertisement.title }}</h5>
-                        <p class="font-normal text-gray-700 dark:text-gray-400 line-clamp-3">{{ advertisement.description }}</p>
-                        <small>{{ advertisement.created_at }}</small>
-                    </a>
-                </div>
+            <div class="grid grid-cols-4 gap-4 m-14">
+                <a href="#" v-for="advertisement in advertisements"
+                    class="block p-6 max-w-sm bg-white rounded-lg border border-gray-200 shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
+                    <img src="../../assets/images/070c4ae0e59af72c222e2756c87baa1a.gif" alt="">
+                    <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">{{
+                    advertisement.title }}</h5>
+                    <p class="font-normal text-gray-700 dark:text-gray-400 line-clamp-3">{{ advertisement.description }}
+                    </p>
+                    <small>{{ advertisement.created_at }}</small>
 
+                </a>
+
+            </div>
 
             <!-- MUSIC -->
 
@@ -175,40 +180,122 @@ console.log(data['advertisements']);
 
 
             <div class="flex flex-col ml-16 mb-2 leading-tight">
-                <span class="font-monument text-4xl">Creators</span>
-                <span class="mt-3">Recent artists </span>
+                <span class="font-monument text-4xl">Popular Artists</span>
+                <span class="mt-3">Most streamed artists of the moment  </span>
             </div>
 
-            <div class="flex gap-4 m-14">
-                <a href="#"
-                    class="block p-6 max-w-sm bg-white rounded-lg border border-gray-200 shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
-                    <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Noteworthy
-                        technology acquisitions 2021</h5>
-                    <p class="font-normal text-gray-700 dark:text-gray-400">Here are the biggest enterprise technology
-                        acquisitions of 2021 so far, in reverse chronological order.</p>
-                </a>
-                <a href="#"
-                    class="block p-6 max-w-sm bg-white rounded-lg border border-gray-200 shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
-                    <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Noteworthy
-                        technology acquisitions 2021</h5>
-                    <p class="font-normal text-gray-700 dark:text-gray-400">Here are the biggest enterprise technology
-                        acquisitions of 2021 so far, in reverse chronological order.</p>
-                </a>
-                <a href="#"
-                    class="block p-6 max-w-sm bg-white rounded-lg border border-gray-200 shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
-                    <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Noteworthy
-                        technology acquisitions 2021</h5>
-                    <p class="font-normal text-gray-700 dark:text-gray-400">Here are the biggest enterprise technology
-                        acquisitions of 2021 so far, in reverse chronological order.</p>
-                </a>
-                <a href="#"
-                    class="block p-6 max-w-sm bg-white rounded-lg border border-gray-200 shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
-                    <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Noteworthy
-                        technology acquisitions 2021</h5>
-                    <p class="font-normal text-gray-700 dark:text-gray-400">Here are the biggest enterprise technology
-                        acquisitions of 2021 so far, in reverse chronological order.</p>
-                </a>
+            <div class="flex gap-4 m-14 mt-32">
+                <div class="card w-96 mx-auto bg-white  shadow-xl hover:shadow">
+                    <img class="w-32 mx-auto rounded-full -mt-20 border-8 border-white"
+                        src="../../assets/images/070c4ae0e59af72c222e2756c87baa1a.gif" alt="">
+                    <div class="text-center mt-2 text-3xl font-medium">Tycho</div>
+                    <div class="text-center mt-2 font-light text-sm">@tycho</div>
+                    <div class="text-center font-normal text-lg">Kerala</div>
+                    <div class="px-6 text-center mt-2 font-light text-sm">
+                        <p>
+                            Scott Hansen (born February 7, 1977), known professionally as Tycho (/ˈtaɪkoʊ/ TY-koh)
+                        </p>
+                    </div>
+                    <hr class="mt-8">
+                    <div class="flex p-4">
+                        <div class="w-1/2 text-center">
+                            <span class="font-bold">1.8 k</span> Followers
+                        </div>
+                        <div class="w-0 border border-gray-300">
+
+                        </div>
+                        <div class="w-1/2 text-center">
+                            <span class="font-bold">2.0 k</span> Following
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="card w-96 mx-auto bg-white  shadow-xl hover:shadow">
+                    <img class="w-32 mx-auto rounded-full -mt-20 border-8 border-white"
+                        src="../../assets/images/070c4ae0e59af72c222e2756c87baa1a.gif" alt="">
+                    <div class="text-center mt-2 text-3xl font-medium">Tycho</div>
+                    <div class="text-center mt-2 font-light text-sm">@tycho</div>
+                    <div class="text-center font-normal text-lg">Kerala</div>
+                    <div class="px-6 text-center mt-2 font-light text-sm">
+                        <p>
+                            Scott Hansen (born February 7, 1977), known professionally as Tycho (/ˈtaɪkoʊ/ TY-koh)
+                        </p>
+                    </div>
+                    <hr class="mt-8">
+                    <div class="flex p-4">
+                        <div class="w-1/2 text-center">
+                            <span class="font-bold">1.8 k</span> Followers
+                        </div>
+                        <div class="w-0 border border-gray-300">
+
+                        </div>
+                        <div class="w-1/2 text-center">
+                            <span class="font-bold">2.0 k</span> Following
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="card w-96 mx-auto bg-white  shadow-xl hover:shadow">
+                    <img class="w-32 mx-auto rounded-full -mt-20 border-8 border-white"
+                        src="../../assets/images/070c4ae0e59af72c222e2756c87baa1a.gif" alt="">
+                    <div class="text-center mt-2 text-3xl font-medium">Tycho</div>
+                    <div class="text-center mt-2 font-light text-sm">@tycho</div>
+                    <div class="text-center font-normal text-lg">Kerala</div>
+                    <div class="px-6 text-center mt-2 font-light text-sm">
+                        <p>
+                            Scott Hansen (born February 7, 1977), known professionally as Tycho (/ˈtaɪkoʊ/ TY-koh)
+                        </p>
+                    </div>
+                    <hr class="mt-8">
+                    <div class="flex p-4">
+                        <div class="w-1/2 text-center">
+                            <span class="font-bold">1.8 k</span> Followers
+                        </div>
+                        <div class="w-0 border border-gray-300">
+
+                        </div>
+                        <div class="w-1/2 text-center">
+                            <span class="font-bold">2.0 k</span> Following
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="card w-96 mx-auto bg-white  shadow-xl hover:shadow">
+                    <img class="w-32 mx-auto rounded-full -mt-20 border-8 border-white"
+                        src="../../assets/images/070c4ae0e59af72c222e2756c87baa1a.gif" alt="">
+                    <div class="text-center mt-2 text-3xl font-medium">Tycho</div>
+                    <div class="text-center mt-2 font-light text-sm">@tycho</div>
+                    <div class="text-center font-normal text-lg">Kerala</div>
+                    <div class="px-6 text-center mt-2 font-light text-sm">
+                        <p>
+                            Scott Hansen (born February 7, 1977), known professionally as Tycho (/ˈtaɪkoʊ/ TY-koh)
+                        </p>
+                    </div>
+                    <hr class="mt-8">
+                    <div class="flex p-4">
+                        <div class="w-1/2 text-center">
+                            <span class="font-bold">1.8 k</span> Followers
+                        </div>
+                        <div class="w-0 border border-gray-300">
+
+                        </div>
+                        <div class="w-1/2 text-center">
+                            <span class="font-bold">2.0 k</span> Following
+                        </div>
+                    </div>
+                </div>
             </div>
+
+
+
+
+
+
+
+
 
         </section>
 

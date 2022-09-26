@@ -2,11 +2,19 @@
     <Head title="collaborationss" />
 
     <Dashboard :user="user">
-        <BreezeButton name="form1" class="ml-4"><a href="advertisement/create">Create</a></BreezeButton>
+
+        <div class="flex items-center justify-center flex-col">
+        <BreezeButton name="form1" class="ml-4">
+        <a href="advertisement/create">Create</a>
+        </BreezeButton>
+        <span class="mt-4">Create a card for collaborations</span>
+        </div>
+
 
         <template #header>
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">collaborations</h2>
         </template>
+
 
         <div v-for="category in categories" class="flex items-center">
             <BreezeCheckbox :name="category.name" :id="category.id" v-model:checked="category.checked" />
@@ -30,8 +38,8 @@
                         Read More
                     </button>
                 </div>
+
             </div>
-        </div>
 
         <Pagination :data="collaborations" />
 

@@ -1,5 +1,5 @@
 <template>
-   <nav class="bg-white border-b border-gray-100 sticky top-0">
+   <nav class="bg-white border-b border-gray-100 sticky top-0 z-50">
                 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between h-16">
 
                     <div class="flex">
@@ -62,7 +62,6 @@
                                 <template #content>
 
                                     <BreezeDropdownLink :href="`/profile/${user.slug}`" :class="{ 'active': $page.url === '/profile' }">
-
                                         Profile
                                     </BreezeDropdownLink>
                                     <BreezeDropdownLink :href="route('likes')"
@@ -131,13 +130,13 @@
                 </div>
             </nav>
 
-     
+
             <header class="bg-white shadow " v-if="$slots.header">
                 <div class="rounded-full max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
                     <slot name="header" />
                 </div>
             </header>
-            
+
                  <div class=" m-8">
             <span id="welcome" class="font-monument flex items-center justify-center"></span>
 
@@ -167,7 +166,7 @@
             return {
                 user: []
             }
-        }, 
+        },
         mounted() {
             axios.get('/user_data').then( (response) => {
                 this.user = response.data.user;
@@ -188,7 +187,7 @@
                 }
             }
         },
-    } 
+    }
 </script>
 
 
