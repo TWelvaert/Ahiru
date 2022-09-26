@@ -6,10 +6,16 @@
         <div class="flex items-center justify-center flex-col">
         <BreezeButton name="form1" class="ml-4">
         <a href="advertisement/create">Create</a>
-        </BreezeButton>
-        <span class="mt-4">Create a card for collaborations</span>
-        </div>
 
+    </BreezeButton>
+    <div class="mb-2">
+            <input
+                type="text"
+                v-model="search"
+                placeholder="Search..."
+                class="bg-gray-50 border border-gray-500 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-60 p-2.5"
+            />
+        </div>
 
         <template #header>
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">collaborations</h2>

@@ -6,6 +6,7 @@ import Dashboard from '@/Pages/Dashboard.vue';
 let data = defineProps({
     advertisement: String,
     uploads: Array,
+    user: Object
 });
 const uploads = data["uploads"];
 
@@ -30,14 +31,14 @@ const uploads = data["uploads"];
                 <hr />
                 <p>{{ advertisement.description }}</p>
 
-                <div v-for="upload in uploads" class="w-20">
+                <!-- <div v-for="upload in uploads" class="w-20">
                     <div v-if="upload['type'] === 'image'">
                         <img :src="`/${upload['path']}/${upload['name']}`" />
                     </div>
                     <div v-if="upload['type'] === 'audio'">
                         {{ upload['name'] }}
                     </div>
-                </div>
+                </div> -->
             </div>
         </div>
 
