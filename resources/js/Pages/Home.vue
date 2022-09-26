@@ -1,5 +1,6 @@
 <script setup>
 import Dashboard from '@/Pages/Dashboard.vue';
+import moment from "moment";
 
 
 
@@ -7,7 +8,6 @@ let data = defineProps({
     user: Array,
     advertisements: String,
 });
-console.log(data['advertisements']);
 
 
 </script>
@@ -31,14 +31,18 @@ console.log(data['advertisements']);
             <!-- CARD -->
 
             <div class="grid grid-cols-4 gap-4 m-14">
-                <a href="#" v-for="advertisement in advertisements"
+                <a v-for="advertisement in advertisements"
+                v-bind:href="
+                                                    '/advertisement/' +
+                                                    advertisement.slug
+                                                "
                     class="block p-6 max-w-sm bg-white rounded-lg border border-gray-200 shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
                     <img src="../../assets/images/070c4ae0e59af72c222e2756c87baa1a.gif" alt="">
                     <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">{{
                     advertisement.title }}</h5>
                     <p class="font-normal text-gray-700 dark:text-gray-400 line-clamp-3">{{ advertisement.description }}
                     </p>
-                    <small>{{ advertisement.created_at }}</small>
+                    <small>{{ dateTime(advertisement.created_at) }}</small>
 
                 </a>
 
@@ -290,15 +294,17 @@ console.log(data['advertisements']);
             </div>
 
 
-
-
-
-
-
-
-
         </section>
 
 
     </Dashboard>
 </template>
+<script>
+export default {
+    methods: {
+        dateTime(value) {
+            return moment(value).format("DD-MM-YYYY");
+        },
+    },
+};
+</script>

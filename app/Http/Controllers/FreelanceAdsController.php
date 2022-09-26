@@ -34,7 +34,7 @@ class FreelanceAdsController extends Controller
     {
         $collaborations = FreelanceAdvertisement::all();
 
-        $collaborations = $collaborations->sortByDesc('created_at')->take(8);
+        $collaborations = $collaborations->sortByDesc('created_at');
         $categories = FreelanceCategory::all();
         $user = Auth::user();
         return Inertia::render(
@@ -46,7 +46,7 @@ class FreelanceAdsController extends Controller
                     ->when(FacadesRequest::input('search'), function ($query, $search) {
                         $query->where('title', 'like', '%' . $search . '%')
                             ->OrWhere('description', 'like', '%' . $search . '%');
-                    })->paginate(8)
+                    })->paginate(20)
                     ->withQueryString(),
             ]
         );
@@ -124,7 +124,7 @@ class FreelanceAdsController extends Controller
         Session::flash('message', 'Your Advertisement is successfully made!');
         Session::flash('flashtype', 'success');
 
-        return redirect('/dashboard/advertisements');
+        return redirect('/advertisements');
     }
 
     public function edit(FreelanceAdvertisement $freelanceAdvertisement) 
