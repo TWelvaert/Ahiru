@@ -37,6 +37,8 @@ Route::get('/', function () {
 // })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::get('/profile/{user:slug}', [ProfileController::class,'index'])->name('profile');
+Route::post('/profile/update/{user:slug}', [ProfileController::class, 'update'])->middleware(['auth', 'verified']);
+
 
 
 // Route::get('/dashboard', [FreelanceAdsController::class, 'index'])->name('dashboard')->middleware(['auth', 'verified']);

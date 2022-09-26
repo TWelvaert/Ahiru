@@ -8,8 +8,7 @@ import { ref } from "vue";
 import { Link } from "@inertiajs/inertia-vue3";
 import { Inertia } from "@inertiajs/inertia";
 import { watch } from "vue";
- //import Pagination from "@/Components/Pagination.vue";
-
+//import Pagination from "@/Components/Pagination.vue";
 
 let data = defineProps({
     user: Array,
@@ -34,13 +33,18 @@ watch(search, (value) => {
 </script>
 
 <template>
-    <Head title="collaborationss" />
-
+    <Head title="collaborations" />
+    <input
+        v-model="search"
+        type="text"
+        placeholder="Search..."
+        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-60 p-2.5"
+    />
 
     <Dashboard :user="user">
         <BreezeButton name="form1" class="ml-4">
-        <a href="advertisement/create">Create</a>
-    </BreezeButton>
+            <a href="advertisement/create">Create</a>
+        </BreezeButton>
 
         <template #header>
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
@@ -86,9 +90,6 @@ watch(search, (value) => {
             </div>
         </div>
 
-
         <Pagination :data="freelance_advertisements" />
-
     </Dashboard>
-
 </template>
