@@ -53,15 +53,17 @@ class RegisteredUserController extends Controller
             'rank' => 'user',
         ]);
 
+        event(new Registered($user));
+        Auth::login($user);
+        $user = Auth::user();
+
         Profile::create([
             'user_id' => $user->id,
-            'profile_image' => '',
+            'profile_image' => 'assets/img/default.png',
             'bio' => ''
         ]);
 
-        event(new Registered($user));
 
-        Auth::login($user);
 
         return redirect(RouteServiceProvider::HOME);
     }
