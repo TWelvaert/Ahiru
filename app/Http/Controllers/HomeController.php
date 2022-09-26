@@ -12,7 +12,7 @@ class HomeController extends Controller
 {
     public function index_home()
     {
-        $advertisements = FreelanceAdvertisement::all();
+        $advertisements = FreelanceAdvertisement::orderBy('created_at', 'desc')->take(8)->get();
         $user = Auth::user();
         return Inertia::render('Home', [
             'user' => $user,

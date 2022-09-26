@@ -40,7 +40,7 @@ Route::get('/profile/{user:slug}', [ProfileController::class,'index'])->name('pr
 
 
 // Route::get('/dashboard', [FreelanceAdsController::class, 'index'])->name('dashboard')->middleware(['auth', 'verified']);
-Route::get('/advertisements', [FreelanceAdsController::class, 'advertisements'])->name('advertisements');
+Route::get('/advertisements', [FreelanceAdsController::class, 'index'])->name('advertisements');
 
 Route::get('/dashboard', [HomeController::class, 'index'])->name('dashboard')->middleware(['auth', 'verified']);
 Route::get('/home', [HomeController::class, 'index_home'])->middleware(['auth', 'verified'])->name('home');
@@ -95,7 +95,7 @@ Route::post('settings/uploads', [\App\Http\Controllers\UploadsController::class,
 Route::get('settings/uploads/delete/{upload:id}', [\App\Http\Controllers\UploadsController::class, 'destroy']);
 
 
-Route::get('user_data', function () {
+Route::get('/user_data', function () {
     return [
         'user' => Auth::user(),
     ];});

@@ -8,9 +8,8 @@ use App\Models\Upload;
 
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
-use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\Auth;
-
+use Illuminate\Http\Request;
 use Inertia\Inertia;
 use File;
 
@@ -21,18 +20,17 @@ class FreelanceAdsController extends Controller
     public function index()
     {
         $user = Auth::user();
-        $advertisements = FreelanceAdvertisement::all()->where('user_id', '=', $user->id);
+        $collaborations = FreelanceAdvertisement::all()->where('user_id', '=', $user->id);
 
-        return Inertia::render('Dashboard', [
+        return Inertia::render('Advertisements', [
             'user' => $user,
-            'advertisements' => $advertisements,
+            'collaborations' => $collaborations,
         ]);
     }
 
 
     public function advertisements()
     {
-
         $categories = FreelanceCategory::all();
         $user = Auth::user();
         return Inertia::render(
@@ -84,7 +82,7 @@ class FreelanceAdsController extends Controller
 
     public function store(Request $request)
     {
-        
+      
         if($request->uploads == null) {
             $uploads = 0;
         } else {
@@ -121,7 +119,7 @@ class FreelanceAdsController extends Controller
         Session::flash('message', 'Your Advertisement is successfully made!');
         Session::flash('flashtype', 'success');
 
-        return redirect('/dashboard');
+        return redirect("/advertisements");
     }
 
     public function edit(FreelanceAdvertisement $freelanceAdvertisement)
