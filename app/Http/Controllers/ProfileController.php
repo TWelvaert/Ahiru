@@ -9,15 +9,11 @@ use Inertia\Inertia;
 
 class ProfileController extends Controller
 {
-    public function index (User $user)
+  public function index (User $user)
     {
-
-        $collaborations = FreelanceAdvertisement::where('user_id','=',$user->id)->get();
-
-        // dd($user->id);
-        // dd($collaboration);
-
-
+        $collaborations = $user->advertisements()->get();
+        $collaborations = $collaborations->sortByDesc('created_at')->take(8);
+        
         return Inertia::render('Profile',[
             'user' => $user,
             'collaborations' => $collaborations

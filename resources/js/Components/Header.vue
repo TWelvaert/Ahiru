@@ -168,7 +168,7 @@
             }
         },
         mounted() {
-            axios.get('user_data').then( (response) => {
+            axios.get('/user_data').then( (response) => {
                 this.user = response.data.user;
             })
             .catch(function (error){
