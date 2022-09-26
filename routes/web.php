@@ -32,6 +32,13 @@ Route::get('/', function () {
     ]);
 });
 
+Route::get('landing', function () {
+    return Inertia::render('Landing', [
+        'canLogin' => Route::has('login'),
+        'canRegister' => Route::has('register'),
+    ]);
+})->name('landing');
+
 // Route::get('/dashboard', function () {
 //     return Inertia::render('Dashboard');
 // })->middleware(['auth', 'verified'])->name('dashboard');

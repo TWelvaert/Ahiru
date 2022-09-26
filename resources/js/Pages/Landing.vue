@@ -1,6 +1,7 @@
 <script setup>
     import Layout from '@/Layouts/Layout.vue';
 
+
 </script>
 <!-- TEMPLATE ================================================= -->
 
@@ -8,22 +9,35 @@
     <Layout>
     <!-- LANDING PAGE HEADER ================================================ -->
 
-
-
-
     <div class="bg-black min-h-screen z-0">
         <div class="">
-            <div class="grid-rows-6 ">
-                <p class="text-white text-6xl font-monument antialiased ">POWERFUL <br> FOR <br>
+            <div class="grid grid-rows-2 gap-10 grid-cols-2 p-24 pl-72 ">
+                <p class="text-white text-6xl font-monument antialiased">POWERFUL <br> FOR <br>
                     CREATIVES.</p>
-                <p class="text-white text-6xl font-monument antialiased grid-rows-2">ACCESSIBLE <br> FOR <br>
+
+                <p class="text-white text-6xl font-monument antialiased col-span-2">ACCESSIBLE <br> FOR <br>
                     EVERYONE.
                 </p>
+
+                <div class="ml-8 mt-4 space-x-4">
+                <a href=""
+                    class="bg-green-300 hover:bg-white text-black py-3 px-5 rounded-full font-light tracking-widest  transition ease-in-out delay-50 hover:-translate-y-0.5 hover:scale-60 duration-50 antialiased">
+                    START BUILDING
+                </a>
+                <a href="#community-page" v-smooth-scroll
+                    class="hover:bg-white text-white hover:text-black border-2 border-solid border-white py-3 px-5 rounded-full font-light tracking-widest  transition ease-in-out delay-50 hover:-translate-y-0.5 hover:scale-60 duration-50 antialiased">
+                    WHY AHIRU?
+                </a>
+
+                <spline :scene=YOUR_SCENE_OBJECT_HERE />
+
+            </div>
+
             </div>
 
             <!-- BUTTONS ==================================================== -->
 
-            <div class="flex items-center justify-center space-x-4 mt-24">
+            <!-- <div class="flex items-center justify-center space-x-4 mt-18">
                 <a href=""
                     class="bg-green-300 hover:bg-white text-black py-5 px-5 rounded-full font-light tracking-widest  transition ease-in-out delay-50 hover:-translate-y-0.5 hover:scale-60 duration-50 antialiased">
                     START BUILDING
@@ -32,7 +46,7 @@
                     class="hover:bg-white text-white hover:text-black border-2 border-solid border-white py-5 px-5 rounded-full font-light tracking-widest  transition ease-in-out delay-50 hover:-translate-y-0.5 hover:scale-60 duration-50 antialiased">
                     WHY AHIRU?
                 </a>
-            </div>
+            </div> -->
         </div>
     </div>
 
@@ -56,6 +70,7 @@
                         UPLOAD
                     </a>
                 </div>
+
             </div>
 
         </div>
@@ -249,6 +264,3 @@
 </template>
 
 
-<script>
-
-    </script>
