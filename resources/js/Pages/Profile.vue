@@ -32,7 +32,7 @@
             <div class="container mx-auto my-3 p-3">
                 <div class="md:flex no-wrap md:-mx-2 ">
                     <!-- Left Side -->
-                    <div class="w-full md:w-3/12 md:mx-2 ">
+                    <div class="w-full md:w-3/12 ">
                         <!-- Profile Card -->
                         <div class="flex items-center space-x-3 font-semibold text-gray-900 text-xl py-1">
                             <span clas="text-green-500">
@@ -102,7 +102,7 @@
                         <!-- End of following card -->
                     </div>
                     <!-- Right Side -->
-                    <div class="w-full md:w-9/12 mx-2 h-64">
+                    <div class="w-full m-3 md:w-9/12 h-64">
                         <!-- Profile tab -->
                         <!-- Advertisements Section -->
                         <div class="">
@@ -157,10 +157,10 @@
                         
                         <!-- End of Advertisements section -->
     
-                        <div class="my-4 flex items-center space-x-3 font-semibold text-gray-900 text-xl py-1"></div>
+                        <div class="my-2 flex items-center space-x-3 font-semibold text-gray-900 text-xl">
     
                         <!-- Uploads and Something? -->
-                        <span clas="text-green-500">
+                        <span clas="">
                                             <svg class="h-5" xmlns="http://www.w3.org/2000/svg" fill="none"
                                                 viewBox="0 0 24 24" stroke="currentColor">
                                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -168,6 +168,7 @@
                                             </svg>
                                         </span>
                                         <span class="tracking-wide font-semibold text-gray-900 text-xl">Uploads</span>
+                                    </div>
                         <div class="bg-white block p-6 max-w-sm rounded-lg border border-gray-200 shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700 w-full">
     
                             <div class="grid grid-cols-2">
