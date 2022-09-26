@@ -6,10 +6,16 @@
         <div class="flex items-center justify-center flex-col">
         <BreezeButton name="form1" class="ml-4">
         <a href="advertisement/create">Create</a>
-        </BreezeButton>
-        <span class="mt-4">Create a card for collaborations</span>
-        </div>
 
+    </BreezeButton>
+    <div class="mb-2">
+            <input
+                type="text"
+                v-model="search"
+                placeholder="Search..."
+                class="bg-gray-50 border border-gray-500 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-60 p-2.5"
+            />
+        </div>
 
         <template #header>
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">collaborations</h2>
@@ -21,8 +27,20 @@
             <BreezeLabel :for="category.id" :value="category.name" />
         </div>
 
+        <div
+            v-for="freelance_advertisement in freelance_advertisements.data"
+            :key="freelance_advertisement.id"
+            class="ml-20 flex space-x-4"
+        >
+                                <a
+                                                v-bind:href="
+                                                    '/advertisement/' +
+                                                    freelance_advertisement.slug
+                                                "
+                                            >
+                                                {{ freelance_advertisement.title }}
+                                </a>
 
-        <div v-for="collaboration in collaborations" :key="collaboration.id" class="ml-20 flex space-x-4">
             <div class="rounded-lg shadow-lg bg-white max-w-sm inline-block">
                 <a href="#!">
                     <img class="rounded-t-lg" src="https://mdbootstrap.com/img/new/standard/nature/184.jpg" alt="" />
