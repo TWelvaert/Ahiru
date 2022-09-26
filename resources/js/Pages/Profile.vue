@@ -32,10 +32,21 @@ const submit = () => {
             <div class="container mx-auto my-3 p-3">
                 <div class="md:flex no-wrap md:-mx-2 ">
                     <!-- Left Side -->
-                    <div class="w-full md:w-3/12 md:mx-2 ">
-                    
-                                           <!-- Profile Card -->
-                        <div class="bg-white">
+
+                    <div class="w-full md:w-3/12 ">
+                        <!-- Profile Card -->
+                        <div class="flex items-center space-x-3 font-semibold text-gray-900 text-xl py-1">
+                            <span clas="text-green-500">
+                                    <svg class="h-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                        stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                                    </svg>
+                                </span>
+                                <span class="tracking-wide">Profile</span>
+                                </div>
+                        <div class="block p-6 max-w-sm bg-white rounded-lg border border-gray-200 shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
+
                             <div class="image overflow-hidden">
                                 <img
                                     class="h-auto w-full mx-auto"
@@ -100,9 +111,10 @@ const submit = () => {
                             </ul>
                         </div>
                         <!-- End of profile card -->
-                        
-                        <!-- End of profile card -->
-                        <div class="my-4 flex items-center space-x-3 font-semibold text-gray-900 text-xl py-1"><span class="text-green-500">
+
+                        <div class="my-4 flex items-center space-x-3 font-semibold text-gray-900 text-xl py-1"><span class="">
+
+
                                     <svg class="h-5 fill-current" xmlns="http://www.w3.org/2000/svg" fill="none"
                                         viewBox="0 0 24 24" stroke="currentColor">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -144,7 +156,7 @@ const submit = () => {
 
                     </div>
                     <!-- Right Side -->
-                    <div class="w-full md:w-9/12 mx-2 h-64">
+                    <div class="w-full m-3 md:w-9/12 h-64">
                         <!-- Profile tab -->
                         <!-- Advertisements Section -->
                         <div class="">
@@ -202,10 +214,10 @@ const submit = () => {
                         
                         <!-- End of Advertisements section -->
     
-                        <div class="my-4 flex items-center space-x-3 font-semibold text-gray-900 text-xl py-1"></div>
+                        <div class="my-2 flex items-center space-x-3 font-semibold text-gray-900 text-xl">
     
                         <!-- Uploads and Something? -->
-                        <span clas="text-green-500">
+                        <span clas="">
                                             <svg class="h-5" xmlns="http://www.w3.org/2000/svg" fill="none"
                                                 viewBox="0 0 24 24" stroke="currentColor">
                                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -213,6 +225,7 @@ const submit = () => {
                                             </svg>
                                         </span>
                                         <span class="tracking-wide font-semibold text-gray-900 text-xl">Uploads</span>
+                                    </div>
                         <div class="bg-white block p-6 max-w-sm rounded-lg border border-gray-200 shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700 w-full">
     
                             <div class="grid grid-cols-2">
