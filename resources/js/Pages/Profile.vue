@@ -34,7 +34,7 @@
                     <!-- Left Side -->
                     <div class="w-full md:w-3/12 md:mx-2 ">
                         <!-- Profile Card -->
-                        <div class="flex items-center space-x-3 font-semibold text-gray-900 text-xl leading-8">
+                        <div class="flex items-center space-x-3 font-semibold text-gray-900 text-xl py-1">
                             <span clas="text-green-500">
                                     <svg class="h-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                         stroke="currentColor">
@@ -116,7 +116,7 @@
                         <!-- Profile tab -->
                         <!-- Advertisements Section -->
                         <div class="">
-                            <div class="flex items-center space-x-2 font-semibold text-gray-900 leading-8">
+                            <div class="flex items-center space-x-2 ">
                                 <span clas="text-green-500">
                                     <svg class="h-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                         stroke="currentColor">
@@ -124,7 +124,7 @@
                                             d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
                                     </svg>
                                 </span>
-                                <span class="tracking-wide">Advertisements</span>
+                                <span class="tracking-wide font-semibold text-gray-900 text-xl">Advertisements</span>
                                 <a class="p-1 m-1 bg-green-500 py-1 px-2 rounded text-white text-sm"
                                     v-bind:href="
                                     '/dashboard/advertisements'
@@ -136,7 +136,7 @@
                             </div>
                             
     </div> 
-            <div class="flex space-x-6 flex-wrap">
+            <div class="grid grid-cols-1 gap-4 md:grid-cols-4">
                    
                     <a v-bind:href="
                         '/advertisement/'+
@@ -170,7 +170,7 @@
                         <div class="my-4"></div>
     
                         <!-- Uploads and Something? -->
-                        <div class="bg-white p-3 shadow-sm rounded-sm">
+                        <div class="bg-white block p-6 max-w-sm rounded-lg border border-gray-200 shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700 w-full">
     
                             <div class="grid grid-cols-2">
                                 <div>
