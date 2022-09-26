@@ -38,9 +38,12 @@ watch(search, (value) => {
 
 
     <Dashboard :user="user">
+        <div class="flex items-center justify-center flex-col">
         <BreezeButton name="form1" class="ml-4">
         <a href="advertisement/create">Create</a>
-    </BreezeButton>
+        </BreezeButton>
+        <span class="mt-4">Create a card for collaborations</span>
+        </div>
 
         <template #header>
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
@@ -48,43 +51,28 @@ watch(search, (value) => {
             </h2>
         </template>
 
-        <div v-for="category in categories" class="flex items-center">
+        <!-- <div v-for="category in categories" class="flex items-center">
             <BreezeCheckbox
                 :name="category.name"
                 :id="category.id"
                 v-model:checked="category.checked"
             />
             <BreezeLabel :for="category.id" :value="category.name" />
-        </div>
-        <div
-            v-for="freelance_advertisement in freelance_advertisements.data"
-            :key="freelance_advertisement.id"
-            class="ml-20 flex space-x-4"
-        >
-            <div class="rounded-lg shadow-lg bg-white max-w-sm inline-block">
-                <a href="#!">
-                    <img
-                        class="rounded-t-lg"
-                        src="https://mdbootstrap.com/img/new/standard/nature/184.jpg"
-                        alt=""
-                    />µ
-                </a>
-                <div class="p-6">
-                    <h5 class="text-gray-900 text-xl font-medium mb-2">
-                        {{ freelance_advertisement.title }}
-                    </h5>
-                    <p class="text-gray-700 text-base mb-4">
-                        {{ freelance_advertisement.description }}
+        </div> -->
+
+
+        <div class="grid grid-cols-4 gap-4 m-14">
+                <a href="#" v-for="freelance_advertisement in freelance_advertisements.data" :key="freelance_advertisement.id"
+                    class="block p-6 max-w-sm bg-white rounded-lg border border-gray-200 shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
+                    <img src="../../assets/images/070c4ae0e59af72c222e2756c87baa1a.gif" alt="">
+                    <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">{{ freelance_advertisement.title }}</h5>
+                    <p class="font-normal text-gray-700 dark:text-gray-400 line-clamp-3">{{ freelance_advertisement.description }}
                     </p>
-                    <button
-                        type="button"
-                        class="inline-block px-6 py-2.5 bg-blue-600 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out"
-                    >
-                        Read More
-                    </button>
-                </div>
+                    <small>{{ freelance_advertisement.created_at }}</small>
+
+                </a>
+
             </div>
-        </div>
 
 
         <Pagination :data="freelance_advertisements" />
