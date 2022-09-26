@@ -51,7 +51,7 @@ class User extends Authenticatable
         return $this->hasMany(FreelanceAdvertisement::class);
     }
 
-    public function comment()
+    public function comments()
     {
         return $this->hasMany(Comment::class);
     }

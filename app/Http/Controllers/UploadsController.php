@@ -4,20 +4,27 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use App\Models\Upload;
-use File;
-use Illuminate\Support\Facades\Route;
+use Session;
 use Redirect;
+use File;
+
 class UploadsController extends Controller
 {
+    /**  
+     * success response method.  
+     *  
+     * @return \Illuminate\Http\Response  
+     */  
+
     public function index()
     {
         $user = Auth::user();
         $user_uploads = Upload::where('user_id', '=', $user->id)->get();
 
         return Inertia::render('Settings/Uploads', [
-            'user' => $user,
             'user_uploads' => $user_uploads
         ]);
     }
@@ -61,7 +68,8 @@ class UploadsController extends Controller
             }
         }
 
-        $user_uploads = Upload::where('user_id', '=', Auth::user()->id)->get();
+        Session::flash('message', 'Your file(s) have been uploaded!');
+        Session::flash('flashtype', 'success');
 
         return redirect()->back();
     }
@@ -78,15 +86,6 @@ class UploadsController extends Controller
 
         $user_uploads = Upload::where('user_id', '=', Auth::user()->id)->get();
 
-        if($route = '/settings/uploads') {
-            return Inertia::render('FreelanceAdvertisement/Create', [
-                'user_uploads' => $user_uploads,
-                'showModal' => true,
-            ]);  
-        } else {
-            return Inertia::render('Settings/Uploads', [
-                    'user_uploads' => $user_uploads
-                ]);
-        }
+        return redirect()->back();
     }
 }

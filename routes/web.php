@@ -10,7 +10,7 @@ use App\Models\FreelanceAdvertisement;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
-
+use Illuminate\Support\Facades\Auth;
 
 use function PHPSTORM_META\type;
 
@@ -40,8 +40,10 @@ Route::get('/profile/{user:slug}', [ProfileController::class,'index'])->name('pr
 
 
 // Route::get('/dashboard', [FreelanceAdsController::class, 'index'])->name('dashboard')->middleware(['auth', 'verified']);
+
 Route::get('/advertisements', [FreelanceAdsController::class, 'advertisements'])->name('advertisements');
 Route::get('/dashboard/advertisements', [FreelanceAdsController::class, 'index'])->name('/dashboard/advertisements')->middleware(['auth', 'verified']);
+
 Route::get('/dashboard', [HomeController::class, 'index'])->name('dashboard')->middleware(['auth', 'verified']);
 Route::get('/home', [HomeController::class, 'index_home'])->middleware(['auth', 'verified'])->name('home');
 Route::get('/music', [HomeController::class, 'index_music'])->middleware(['auth', 'verified'])->name('music');
@@ -93,6 +95,13 @@ Route::post('settings/account', [\App\Http\Controllers\Auth\RegisteredUserContro
 Route::get('settings/uploads', [\App\Http\Controllers\UploadsController::class, 'index'])->name('settings/uploads');
 Route::post('settings/uploads', [\App\Http\Controllers\UploadsController::class, 'upload'])->name('settings/uploads');
 Route::get('settings/uploads/delete/{upload:id}', [\App\Http\Controllers\UploadsController::class, 'destroy']);
+
+
+Route::get('/user_data', function () {
+    return [
+        'user' => Auth::user(),
+    ];});
+
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 

@@ -1,9 +1,10 @@
 <script setup>
 import AdminPanelLayout from "@/Layouts/AdminPanelLayout.vue";
-import { Head } from "@inertiajs/inertia-vue3";
+import { Head, Link, Useform } from "@inertiajs/inertia-vue3";
+import Pagination from "@/Components/Pagination.vue";
 
 let data = defineProps({
-    news_articles: String,
+    news_articles: Object,
 });
 </script>
 
@@ -36,7 +37,7 @@ let data = defineProps({
 
                 <table class="min-w-full divide-y divide-gray-200">
                     <tbody class="bg-white divide-y divide-gray-200">
-                        <tr v-for="news_article in news_articles">
+                        <tr v-for="news_article in news_articles.data">
                             <td class="px-6 py-4 whitespace-nowrap">
                                 <div class="flex items-center">
                                     <div
@@ -90,6 +91,7 @@ let data = defineProps({
                         </tr>
                     </tbody>
                 </table>
+                <Pagination class="mt-6" :links="news_articles.links" />
             </div>
         </div>
     </AdminPanelLayout>
