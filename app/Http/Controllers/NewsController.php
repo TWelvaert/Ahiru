@@ -18,9 +18,9 @@ class NewsController extends Controller
     //
     public function admin_index()
     {
-        $user = Auth::user();
-        $newsArticles = NewsArticle::all();
-
+        $newsArticles = NewsArticle::latest()
+        ->paginate(8);
+                    
         return Inertia::render('Admin/News/Articles', [
             'news_articles' => $newsArticles,
         ]);
@@ -28,6 +28,7 @@ class NewsController extends Controller
 
     public function show(NewsArticle $news_article)
     {   
+        $user = Auth::user();
         return Inertia::render('Article', [
             'news_article' => $news_article,
             'news_comments' => $news_article->comments,
@@ -146,8 +147,8 @@ class NewsController extends Controller
             "title" => $request->title,
             "excerpt" => $request->excerpt,
             "description" => $request->description,
-            "category_id" => $categories 
-
+            "category_id" => $categories,
+            "user" => $user
         ]);
 
         Session::flash('message', 'Your News Article was Updated successfully!');

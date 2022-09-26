@@ -13,20 +13,17 @@
 
     <div class="bg-black min-h-screen z-0">
         <div class="">
-            <div class="absolute z-20 pl-40">
-                <img src="../../assets/images/waves.gif" alt="">
-            </div>
-            <div class="z-50 relative">
-                <p class="text-white text-6xl m-18 pl-60 font-monument antialiased ">POWERFUL <br> FOR <br>
+            <div class="grid-rows-6 ">
+                <p class="text-white text-6xl font-monument antialiased ">POWERFUL <br> FOR <br>
                     CREATIVES.</p>
-                <p class="text-white text-6xl m-36 pl-80   font-monument antialiased">ACCESSIBLE <br> FOR <br>
+                <p class="text-white text-6xl font-monument antialiased grid-rows-2">ACCESSIBLE <br> FOR <br>
                     EVERYONE.
                 </p>
             </div>
 
             <!-- BUTTONS ==================================================== -->
 
-            <div class="flex items-center justify-center space-x-4 -mt-24">
+            <div class="flex items-center justify-center space-x-4 mt-24">
                 <a href=""
                     class="bg-green-300 hover:bg-white text-black py-5 px-5 rounded-full font-light tracking-widest  transition ease-in-out delay-50 hover:-translate-y-0.5 hover:scale-60 duration-50 antialiased">
                     START BUILDING
@@ -36,10 +33,6 @@
                     WHY AHIRU?
                 </a>
             </div>
-
-            <!--  INPUT BOX ================================================= -->
-
-
         </div>
     </div>
 
@@ -70,78 +63,105 @@
         <!-- CARDS ================================================ -->
 
         <div class="flex gap-16 mt-16 px-32">
-            <div
-                class="z-50 w-full max-w-smrounded-lg border-gray-200 shadow-xl dark:bg-black dark:border-gray-700 transform transition duration-500 hover:scale-110">
-                <div class="flex justify-end px-4 pt-4">
-                </div>
-                <div class="flex flex-col items-center pb-10">
-                    <img class="mb-3 w-24    h-24 rounded-full shadow-lg" src="../../assets/images/logologo.png"
-                        alt="logo">
-                    <h5 class="mb-1 text-xl font-medium text-gray-900 dark:text-white font-monument antialiased">Jakes
-                    </h5>
-                    <span class="text-sm text-gray-500 dark:text-gray-400 antialiased">Music Producer</span>
-                    <div class="flex mt-4 space-x-3 md:mt-6">
-                        <a href="#"
-                            class="inline-flex items-center py-2 px-4 text-sm text-center bg-green-300 hover:bg-white text-black rounded-full font-light tracking-widest transition ease-in-out delay-50 hover:-translate-y-0.5 hover:scale-60 duration-50 antialiased">FOLLOW</a>
-                        <a href="#"
-                            class="inline-flex items-center py-2 px-4 text-sm text-center hover:bg-white text-white hover:text-black border-2 border-solid border-white rounded-full font-light tracking-widest transition ease-in-out delay-50 hover:-translate-y-0.5 hover:scale-60 duration-50 antialiased">MESSAGE</a>
+            <div class="card w-96 mx-auto bg-white  shadow-xl hover:shadow">
+                    <img class="w-32 mx-auto rounded-full -mt-20 border-8 border-white"
+                        src="../../assets/images/070c4ae0e59af72c222e2756c87baa1a.gif" alt="">
+                    <div class="text-center mt-2 text-3xl font-medium">Tycho</div>
+                    <div class="text-center mt-2 font-light text-sm">@tycho</div>
+                    <div class="text-center font-normal text-lg">Kerala</div>
+                    <div class="px-6 text-center mt-2 font-light text-sm">
+                        <p>
+                            Scott Hansen (born February 7, 1977), known professionally as Tycho (/ˈtaɪkoʊ/ TY-koh)
+                        </p>
+                    </div>
+                    <hr class="mt-8">
+                    <div class="flex p-4">
+                        <div class="w-1/2 text-center">
+                            <span class="font-bold">1.8 k</span> Followers
+                        </div>
+                        <div class="w-0 border border-gray-300">
+
+                        </div>
+                        <div class="w-1/2 text-center">
+                            <span class="font-bold">2.0 k</span> Following
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div
-                class=" z-50 w-full max-w-sm rounded-lg border-gray-200 shadow-xl dark:bg-black dark:border-gray-700 transform transition duration-500 hover:scale-110">
-                <div class="flex justify-end px-4 pt-4">
-                </div>
-                <div class="flex flex-col items-center pb-10">
-                    <img class="mb-3 w-24    h-24 rounded-full shadow-lg" src="../../assets/images/logologo.png"
-                        alt="logo">
-                    <h5 class="mb-1 text-xl font-medium text-gray-900 dark:text-white font-monument antialiased">
-                        Pendulum</h5>
-                    <span class="text-sm text-gray-500 dark:text-gray-400 antialiased">Music Producer</span>
-                    <div class="flex mt-4 space-x-3 md:mt-6">
-                        <a href="#"
-                            class="inline-flex items-center py-2 px-4 text-sm text-center bg-green-300 hover:bg-white text-black rounded-full font-light tracking-widest transition ease-in-out delay-50 hover:-translate-y-0.5 hover:scale-60 duration-50 antialiased">FOLLOW</a>
-                        <a href="#"
-                            class="inline-flex items-center py-2 px-4 text-sm text-center hover:bg-white text-white hover:text-black border-2 border-solid border-white rounded-full font-light tracking-widest transition ease-in-out delay-50 hover:-translate-y-0.5 hover:scale-60 duration-50 antialiased">MESSAGE</a>
+
+                <div class="card w-96 mx-auto bg-white  shadow-xl hover:shadow">
+                    <img class="w-32 mx-auto rounded-full -mt-20 border-8 border-white"
+                        src="../../assets/images/070c4ae0e59af72c222e2756c87baa1a.gif" alt="">
+                    <div class="text-center mt-2 text-3xl font-medium">Tycho</div>
+                    <div class="text-center mt-2 font-light text-sm">@tycho</div>
+                    <div class="text-center font-normal text-lg">Kerala</div>
+                    <div class="px-6 text-center mt-2 font-light text-sm">
+                        <p>
+                            Scott Hansen (born February 7, 1977), known professionally as Tycho (/ˈtaɪkoʊ/ TY-koh)
+                        </p>
+                    </div>
+                    <hr class="mt-8">
+                    <div class="flex p-4">
+                        <div class="w-1/2 text-center">
+                            <span class="font-bold">1.8 k</span> Followers
+                        </div>
+                        <div class="w-0 border border-gray-300">
+
+                        </div>
+                        <div class="w-1/2 text-center">
+                            <span class="font-bold">2.0 k</span> Following
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div
-                class=" z-50 w-full max-w-sm  rounded-lg border-gray-200 shadow-xl dark:bg-black dark:border-gray-700 transform transition duration-500 hover:scale-110">
-                <div class="flex justify-end px-4 pt-4">
-                </div>
-                <div class="flex flex-col items-center pb-10">
-                    <img class="mb-3 w-24    h-24 rounded-full shadow-lg" src="../../assets/images/logologo.png"
-                        alt="logo">
-                    <h5 class="mb-1 text-xl font-medium text-gray-900 dark:text-white font-monument antialiased">Snatcha
-                    </h5>
-                    <span class="text-sm text-gray-500 dark:text-gray-400 antialiased">Music Producer</span>
-                    <div class="flex mt-4 space-x-3 md:mt-6">
-                        <a href="#"
-                            class="inline-flex items-center py-2 px-4 text-sm text-center bg-green-300 hover:bg-white text-black rounded-full font-light tracking-widest transition ease-in-out delay-50 hover:-translate-y-0.5 hover:scale-60 duration-50 antialiased">FOLLOW</a>
-                        <a href="#"
-                            class="inline-flex items-center py-2 px-4 text-sm text-center hover:bg-white text-white hover:text-black border-2 border-solid border-white rounded-full font-light tracking-widest transition ease-in-out delay-50 hover:-translate-y-0.5 hover:scale-60 duration-50 antialiased">MESSAGE</a>
+
+                <div class="card w-96 mx-auto bg-white  shadow-xl hover:shadow">
+                    <img class="w-32 mx-auto rounded-full -mt-20 border-8 border-white"
+                        src="../../assets/images/070c4ae0e59af72c222e2756c87baa1a.gif" alt="">
+                    <div class="text-center mt-2 text-3xl font-medium">Tycho</div>
+                    <div class="text-center mt-2 font-light text-sm">@tycho</div>
+                    <div class="text-center font-normal text-lg">Kerala</div>
+                    <div class="px-6 text-center mt-2 font-light text-sm">
+                        <p>
+                            Scott Hansen (born February 7, 1977), known professionally as Tycho (/ˈtaɪkoʊ/ TY-koh)
+                        </p>
+                    </div>
+                    <hr class="mt-8">
+                    <div class="flex p-4">
+                        <div class="w-1/2 text-center">
+                            <span class="font-bold">1.8 k</span> Followers
+                        </div>
+                        <div class="w-0 border border-gray-300">
+
+                        </div>
+                        <div class="w-1/2 text-center">
+                            <span class="font-bold">2.0 k</span> Following
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div
-                class="z-50 w-full max-w-sm rounded-lg border-gray-200 shadow-xl dark:bg-black dark:border-gray-700 transform transition duration-500 hover:scale-110">
-                <div class="flex justify-end px-4 pt-4">
-                </div>
-                <div class="flex flex-col items-center pb-10">
-                    <img class="mb-3 w-24    h-24 rounded-full shadow-lg" src="../../assets/images/logologo.png"
-                        alt="logo">
-                    <h5 class="mb-1 text-xl font-medium text-gray-900 dark:text-white font-monument antialiased">Hawtin
-                    </h5>
-                    <span class="text-sm text-gray-500 dark:text-gray-400 antialiased">Music Producer</span>
-                    <div class="flex mt-4 space-x-3 md:mt-6">
-                        <a href="#"
-                            class="inline-flex items-center py-2 px-4 text-sm text-center bg-green-300 hover:bg-white text-black rounded-full font-light tracking-widest transition ease-in-out delay-50 hover:-translate-y-0.5 hover:scale-60 duration-50 antialiased">FOLLOW</a>
-                        <a href="#"
-                            class="inline-flex items-center py-2 px-4 text-sm text-center hover:bg-white text-white hover:text-black border-2 border-solid border-white rounded-full font-light tracking-widest transition ease-in-out delay-50 hover:-translate-y-0.5 hover:scale-60 duration-50 antialiased">MESSAGE</a>
+
+                <div class="card w-96 mx-auto bg-white  shadow-xl hover:shadow">
+                    <img class="w-32 mx-auto rounded-full -mt-20 border-8 border-white"
+                        src="../../assets/images/070c4ae0e59af72c222e2756c87baa1a.gif" alt="">
+                    <div class="text-center mt-2 text-3xl font-medium">Tycho</div>
+                    <div class="text-center mt-2 font-light text-sm">@tycho</div>
+                    <div class="text-center font-normal text-lg">Kerala</div>
+                    <div class="px-6 text-center mt-2 font-light text-sm">
+                        <p>
+                            Scott Hansen (born February 7, 1977), known professionally as Tycho (/ˈtaɪkoʊ/ TY-koh)
+                        </p>
+                    </div>
+                    <hr class="mt-8">
+                    <div class="flex p-4">
+                        <div class="w-1/2 text-center">
+                            <span class="font-bold">1.8 k</span> Followers
+                        </div>
+                        <div class="w-0 border border-gray-300">
+
+                        </div>
+                        <div class="w-1/2 text-center">
+                            <span class="font-bold">2.0 k</span> Following
+                        </div>
                     </div>
                 </div>
-            </div>
         </div>
     </div>
 

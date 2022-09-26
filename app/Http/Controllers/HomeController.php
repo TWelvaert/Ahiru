@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\FreelanceAdvertisement;
 use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\Factories\BelongsToManyRelationship;
 use Illuminate\Support\Facades\Auth;
@@ -9,19 +10,13 @@ use Inertia\Inertia;
 
 class HomeController extends Controller
 {
-    public function index()
-    {
-        $user = Auth::user();
-        return Inertia::render('Dashboard', [
-            'user' => $user
-        ]);
-    }
-
     public function index_home()
     {
+        $advertisements = FreelanceAdvertisement::orderBy('created_at', 'desc')->take(8)->get();
         $user = Auth::user();
         return Inertia::render('Home', [
-            'user' => $user
+            'user' => $user,
+            'advertisements' => $advertisements
         ]);
     }
 

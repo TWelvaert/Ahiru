@@ -146,6 +146,7 @@
                                                     '/edit'
                                                 "
                                             >
+
                                                 edit
                                             </a>                  
                 </button>
@@ -194,6 +195,7 @@
                                             <div class="text-gray-500 text-xs">Date of upload</div>
                                         </li>
                                     </ul>
+
                                 </div>
                                 <div>
                                     <div class="flex items-center space-x-2 font-semibold text-gray-900 leading-8 mb-3">

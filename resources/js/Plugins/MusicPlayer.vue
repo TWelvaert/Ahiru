@@ -97,6 +97,10 @@ export default {
 
       app.config.globalProperties.$callMusicPlayer = (fileName) => 
       {
+        playMusic(fileName);
+      }
+
+      function playMusic(fileName) {
         let path = `/uploads/${fileName}`;
         console.log(`Audio playing: ${path}`);
 
@@ -169,6 +173,7 @@ export default {
         document.querySelector('#songTime').innerHTML = `${currentTimeTxt}/${currentDurationTxt}`;
       }
 
+
       app.config.globalProperties.$playMusicPlayer = () => 
       {
         audio.play();
@@ -204,6 +209,11 @@ export default {
         let inputVolume = document.querySelector('#volume-slider').value;
         audio.volume = inputVolume/100
       } 
+
+      app.config.globalProperties.$playMusic = playMusic;
+      
+      app.provide("playMusic", {playMusic});  
+     // app.provide('musicPlayerPlugin', options)
       
     }
   }
