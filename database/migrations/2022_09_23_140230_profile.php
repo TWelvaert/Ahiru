@@ -18,7 +18,6 @@ return new class extends Migration
             $table->foreignId('user_id')->constrained()->cascadeOnDelete();
             $table->foreignId('profile_image');
             $table->text('bio');
-            $table->timestamps();
         });
     }
 

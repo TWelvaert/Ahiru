@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\Profile;
 use App\Models\User;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Auth\Events\Registered;
@@ -50,6 +51,12 @@ class RegisteredUserController extends Controller
             'slug' => str()->slug($request->name),
             'password' => Hash::make($request->password),
             'rank' => 'user',
+        ]);
+
+        Profile::create([
+            'user_id' => $user->id,
+            'profile_image' => '',
+            'bio' => ''
         ]);
 
         event(new Registered($user));
