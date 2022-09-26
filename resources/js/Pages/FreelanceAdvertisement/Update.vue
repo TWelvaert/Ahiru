@@ -26,8 +26,6 @@ const form = useForm({
     // uploads: data["uploads"],
 });
 
-console.log(data["categories"]);
-
 const submit = () => {
     form.post(`/advertisement/update/${data["slug"]}`);
 };

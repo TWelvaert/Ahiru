@@ -1,65 +1,106 @@
-
 <script setup>
-    import Dashboard from "@/Pages/Dashboard.vue";
-    import { Head,Link } from "@inertiajs/inertia-vue3";
-    
 
-    
-    
-    let data = defineProps({
-        user: Array,
-        collaborations: Array,
-    });
-    
-    
-    
-    // const form = useForm({
-    //     title: data["title"],
-    //     slug: data["slug"],
-    //     description: data["description"],
-    //     categories: data["categories"],
-    //     uploads: data["uploads"],
-    // });
-    // console.log(data["user"]);
-    
-    
+import BreezeAuthenticatedLayout from "@/Layouts/Authenticated.vue";
+import BreezeLabel from "@/Components/Label.vue";
+import TextareaVue from "@/Components/textarea.vue";
+import BreezeInputError from "@/Components/InputError.vue";
+import BreezeButton from "@/Components/Button.vue";
+
+import { Head, useForm } from "@inertiajs/inertia-vue3";
+import Dashboard from "@/Pages/Dashboard.vue";
+import moment from "moment";
+
+let data = defineProps({
+    user: Array,
+    collaborations: Array,
+    profile: String,
+});
+
+const form = useForm({
+    profile: data["profile"],
+});
+
+const submit = () => {
+    form.post(`/profile/update/${data["user"]["slug"]}`);
+};
+// console.log(data['user']['slug']);
 </script>
-    <template>
-    
-        <Head title="Profile" />
-    
-        <Dashboard>
+<template>
+    <Head title="Profile" />
+    <Dashboard>
+
             <div class="container mx-auto my-3 p-3">
                 <div class="md:flex no-wrap md:-mx-2 ">
                     <!-- Left Side -->
                     <div class="w-full md:w-3/12 md:mx-2 ">
-                        <!-- Profile Card -->
-                        <div class="flex items-center space-x-3 font-semibold text-gray-900 text-xl py-1">
-                            <span clas="text-green-500">
-                                    <svg class="h-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                        stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                            d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-                                    </svg>
-                                </span>
-                                <span class="tracking-wide">Profile</span>
-                                </div>
-                        <div class="block p-6 max-w-sm bg-white rounded-lg border border-gray-200 shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
+                    
+                                           <!-- Profile Card -->
+                        <div class="bg-white">
                             <div class="image overflow-hidden">
-                                <img class="h-auto w-full mx-auto" src="../../assets/images/070c4ae0e59af72c222e2756c87baa1a.gif" alt="">
+                                <img
+                                    class="h-auto w-full mx-auto"
+                                    src="../../assets/images/profileplaceholder.jpg"
+                                    alt=""
+                                />
                             </div>
-                            <h1 class="text-gray-900 font-bold text-xl leading-8 m-3">{{user.name}}</h1>
-                            <div class="flex justify-between m-3">
-                            <h3 class="text-gray-600 font-lg text-semibold leading-6">Short Bio sentence </h3>
-                            <button class="bg-green-500 py-1 px-2 rounded text-white text-sm">Edit</button>
-                            </div>
-                            <p class="text-sm text-gray-500 hover:text-gray-600 leading-6 m-3">Lorem ipsum dolor sit amet
-                                consectetur adipisicing elit.
-                                Reprehenderit, eligendi dolorum sequi illum qui unde aspernatur non deserunt</p>
-                            
-                            
-                           
+                            <h1
+                                class="text-gray-900 font-bold text-xl leading-8 my-1"
+                            >
+                                Artist
+                            </h1>
+                            <h3
+                                class="text-gray-600 font-lg text-semibold leading-6"
+                            >
+                                {{ user.name }}
+                            </h3>
+                            <form @submit.prevent="submit">
+                                <div>
+                                    <BreezeLabel
+                                        for="description"
+                                        value="description"
+                                        class="block mb-2 uppercase font-bold text-xs text-gray-700 w-full"
+                                    />
+                                    <TextareaVue
+                                        id="description"
+                                        type="textarea"
+                                        class="border border-blue-300 p-2 w-full rounded"
+                                        rows="6"
+                                        v-model="form.profile[0]['bio']"
+                                        required
+                                    />
+                                    <BreezeInputError class="mt-2" />
+                                </div>
+                                <BreezeButton
+                                    name="form"
+                                    class="ml-4"
+                                    :class="{ 'opacity-25': form.processing }"
+                                    :disabled="form.processing"
+                                >
+                                    Update
+                                </BreezeButton>
+                            </form>
+                            <ul
+                                class="bg-gray-100 text-gray-600 hover:text-gray-700 hover:shadow py-2 px-3 mt-3 divide-y rounded shadow-sm"
+                            >
+                                <li class="flex items-center py-3">
+                                    <span>Status</span>
+                                    <span class="ml-auto"
+                                        ><span
+                                            class="bg-green-500 py-1 px-2 rounded text-white text-sm"
+                                            >Active</span
+                                        ></span
+                                    >
+                                </li>
+                                <li class="flex items-center py-3">
+                                    <span>Member since</span>
+                                    <span class="ml-auto">
+                                        {{ dateTime(user.created_at) }}
+                                    </span>
+                                </li>
+                            </ul>
                         </div>
+                        <!-- End of profile card -->
+                        
                         <!-- End of profile card -->
                         <div class="my-4 flex items-center space-x-3 font-semibold text-gray-900 text-xl py-1"><span class="text-green-500">
                                     <svg class="h-5 fill-current" xmlns="http://www.w3.org/2000/svg" fill="none"
@@ -100,12 +141,14 @@
                         </div>
                     
                         <!-- End of following card -->
+
                     </div>
                     <!-- Right Side -->
                     <div class="w-full md:w-9/12 mx-2 h-64">
                         <!-- Profile tab -->
                         <!-- Advertisements Section -->
                         <div class="">
+
                             <div class="flex items-center space-x-2 ">
                                 <span clas="text-green-500">
                                     <svg class="h-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
@@ -141,11 +184,12 @@
                         <h5 class="text-2xl font-bold tracking-tight text-gray-900 dark:text-white inline-block align-middle">{{ collaboration.slug }}</h5>
                         <button> <a class="p-1 m-1 bg-green-500 py-1 px-2 rounded text-white text-sm"
                                             v-bind:href="
+
                                                     '/advertisement/' +
                                                     collaboration.slug +
                                                     '/edit'
                                                 "
-                                            >
+
 
                                                 edit
                                             </a>                  
@@ -201,15 +245,22 @@
                                         <span clas="text-green-500">
     
                                         </span>
+
                                     </div>
                                     <ul class="list-inside space-y-2">
                                         <li>
                                             <div class="text-teal-600"></div>
-                                            <div class="text-gray-500 text-xs"></div>
+
+                                            <div
+                                                class="text-gray-500 text-xs"
+                                            ></div>
                                         </li>
                                         <li>
                                             <div class="text-teal-600"></div>
-                                            <div class="text-gray-500 text-xs"></div>
+                                            <div
+                                                class="text-gray-500 text-xs"
+                                            ></div>
+
                                         </li>
                                     </ul>
                                 </div>
@@ -220,6 +271,16 @@
                     </div>
                 </div>
             </div>
-    
-        </Dashboard>
-    </template>
+
+    </Dashboard>
+</template>
+<script>
+export default {
+    methods: {
+        dateTime(value) {
+            return moment(value).format("DD-MM-YYYY");
+        },
+    },
+};
+</script>
+
