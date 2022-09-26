@@ -60,15 +60,15 @@ const submit = () => {
                                 Artist
                             </h1>
                             <h3
-                                class="text-gray-600 font-lg text-semibold leading-6"
+                                class="text-gray-900 font-bold text-xl leading-8 my-1"
                             >
                                 {{ user.name }}
                             </h3>
                             <form @submit.prevent="submit">
                                 <div>
-                                    <BreezeLabel
+                                    <BreezeLabel 
                                         for="description"
-                                        value="description"
+                                        value="Bio"
                                         class="block mb-2 uppercase font-bold text-xs text-gray-700 w-full"
                                     />
                                     <TextareaVue
@@ -90,25 +90,7 @@ const submit = () => {
                                     Update
                                 </BreezeButton>
                             </form>
-                            <ul
-                                class="bg-gray-100 text-gray-600 hover:text-gray-700 hover:shadow py-2 px-3 mt-3 divide-y rounded shadow-sm"
-                            >
-                                <li class="flex items-center py-3">
-                                    <span>Status</span>
-                                    <span class="ml-auto"
-                                        ><span
-                                            class="bg-green-500 py-1 px-2 rounded text-white text-sm"
-                                            >Active</span
-                                        ></span
-                                    >
-                                </li>
-                                <li class="flex items-center py-3">
-                                    <span>Member since</span>
-                                    <span class="ml-auto">
-                                        {{ dateTime(user.created_at) }}
-                                    </span>
-                                </li>
-                            </ul>
+                           
                         </div>
                         <!-- End of profile card -->
 
@@ -156,7 +138,7 @@ const submit = () => {
 
                     </div>
                     <!-- Right Side -->
-                    <div class="w-full m-3 md:w-9/12 h-64">
+                    <div class="w-full mx-5 md:w-9/12 h-64">
                         <!-- Profile tab -->
                         <!-- Advertisements Section -->
                         <div class="">
@@ -170,14 +152,15 @@ const submit = () => {
                                     </svg>
                                 </span>
                                 <span class="tracking-wide font-semibold text-gray-900 text-xl">Advertisements</span>
-                                <a class="p-1 m-1 bg-green-500 py-1 px-2 rounded text-white text-sm"
+                             <BreezeButton>  
+                                <a 
                                     v-bind:href="
                                     '/dashboard/advertisements'
                                 "
                                 >
                                 Edit
                                                 
-                                </a>
+                                </a></BreezeButton> 
                             </div>
                             
     </div> 
@@ -193,7 +176,7 @@ const submit = () => {
                 <div class="flex justify-between py-3">
                     
                 
-                        <h5 class="text-2xl font-bold tracking-tight text-gray-900 dark:text-white inline-block align-middle">{{ collaboration.slug }}</h5>
+                        <h5 class="text-2xl font-bold tracking-tight text-gray-900 dark:text-white inline-block align-middle">{{ collaboration.title }}</h5>
                         <button> <a class="p-1 m-1 bg-green-500 py-1 px-2 rounded text-white text-sm"
                                             v-bind:href="
 
@@ -207,7 +190,7 @@ const submit = () => {
                                             </a>                  
                 </button>
                 </div>
-                        <p class="font-normal text-gray-700 dark:text-gray-400 line-clamp-3">{{ collaboration.description }}</p>
+                        <p class="font-normal text-gray-700 dark:text-gray-400 line-clamp-5">{{ collaboration.description }}</p>
                         <small>{{ collaboration.created_at }}</small>
                     </a>
             </div> 
