@@ -33,9 +33,7 @@ const submit = () => {
     form.post(route("advertisement/create"));
 };
 
-
-function processFiles(files){
-
+function processFiles(files) {
     let uploadsPreview = [];
     document.querySelector('#selectedFiles').innerHTML = "";
     selected_files = files;
@@ -53,11 +51,6 @@ function processFiles(files){
     uploadsPreview.forEach(upload => {
         document.querySelector('#selectedFiles').innerHTML += `<img class="w-20 h-20 rounded" src="../${upload.path}/${upload.name}">`;
     });
-
-
-
-    
-
 }
 </script>
 
@@ -114,7 +107,6 @@ function processFiles(files){
 <script>
 
 export default {
-        name: 'HeaderComponent',
         data (){
             return {
                 showing: false
