@@ -14,6 +14,8 @@ let data = defineProps({
     user: Array,
     collaborations: Array,
     profile: String,
+    followProfileData: Array,
+    auth: Array
 });
 
 const form = useForm({
@@ -48,11 +50,8 @@ const submit = () => {
                         <div class="block p-6 max-w-sm bg-white rounded-lg border border-gray-200 shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
 
                             <div class="image overflow-hidden">
-                                <img
-                                    class="h-auto w-full mx-auto"
-                                    src="../../assets/images/profileplaceholder.jpg"
-                                    alt=""
-                                />
+                                <img class="h-auto w-full mx-auto" v-bind:src="'/' + profile[0]['profile_image']" alt="" />
+                                
                             </div>
                             <h1
                                 class="text-gray-900 font-bold text-xl leading-8 my-1"
@@ -64,15 +63,18 @@ const submit = () => {
                             >
                                 {{ user.name }}
                             </h3>
+                           
+                         
+                            <div v-if="auth.id == user.id && auth">
                             <form @submit.prevent="submit">
                                 <div>
                                     <BreezeLabel 
-                                        for="description"
+                                        for="bio"
                                         value="Bio"
                                         class="block mb-2 uppercase font-bold text-xs text-gray-700 w-full"
                                     />
                                     <TextareaVue
-                                        id="description"
+                                        id="bio"
                                         type="textarea"
                                         class="border border-gray-200 p-2 w-full rounded"
                                         rows="6"
@@ -91,6 +93,11 @@ const submit = () => {
                                 </Button>
                             </form>
                            
+                           </div>
+                           <div v-else>
+                                    <h4 class="block mb-2 uppercase font-bold text-xs text-gray-700 w-full">Bio</h4>
+                                    <p>{{ profile[0]['bio'] }}</p>
+                                </div>
                         </div>
                         <!-- End of profile card -->
 
@@ -111,36 +118,14 @@ const submit = () => {
                                 
                             </div>
                             <div class="grid grid-cols-3 ">
-                                <div class="text-center my-2">
-                                    <img class="h-16 w-16 rounded-full mx-auto"
-                                        src="../../assets/images/profileplaceholder.jpg" alt="">
-                                    <a href="#" class="text-main-color">Artist</a>
-                                </div>
-                                <div class="text-center my-2">
-                                    <img class="h-16 w-16 rounded-full mx-auto"
-                                        src="../../assets/images/profileplaceholder.jpg" alt="">
-                                    <a href="#" class="text-main-color">Artist</a>
-                                </div>
-                                <div class="text-center my-2">
-                                    <img class="h-16 w-16 rounded-full mx-auto"
-                                        src="../../assets/images/profileplaceholder.jpg" alt="">
-                                    <a href="#" class="text-main-color">Artist</a>
-                                </div>
-                                <div class="text-center my-2">
-                                    <img class="h-16 w-16 rounded-full mx-auto"
-                                        src="../../assets/images/profileplaceholder.jpg" alt="">
-                                    <a href="#" class="text-main-color">Artist</a>
-                                </div>
-                                <div class="text-center my-2">
-                                    <img class="h-16 w-16 rounded-full mx-auto"
-                                        src="../../assets/images/profileplaceholder.jpg" alt="">
-                                    <a href="#" class="text-main-color">Artist</a>
-                                </div>
-                                <div class="text-center my-2">
-                                    <img class="h-16 w-16 rounded-full mx-auto"
-                                        src="../../assets/images/profileplaceholder.jpg" alt="">
-                                    <a href="#" class="text-main-color">Artist</a>
-                                </div>
+                                <div v-for="followProfile in followProfileData" class="text-center my-2">
+                                <img class="h-16 w-16 rounded-full mx-auto"
+                                    v-bind:src="'/' + followProfile.profile.profile_image" alt="">
+                                <a v-bind:href="
+                                    '/profile/' +
+                                    followProfile.follow.slug
+                                ">{{ followProfile.follow.name }}</a>
+                            </div>
                             </div>
                         </div>
                     
@@ -162,7 +147,10 @@ const submit = () => {
 </svg>
                                 </span>
                                 <span class="tracking-wide font-semibold text-gray-900 text-xl p-1">Advertisements</span>
+                                <div v-if="auth">
+                                <div v-if="auth.id == user.id">
                                 <button class="inline-flex border-spacing-1 border-1 border-color border-gray-400 shadow-sm items-center bg-green-300 hover:bg-black hover:text-white text-black  px-3 rounded-full font-light tracking-widest  transition ease-in-out delay-50 hover:-translate-y-0.5 hover:scale-60 duration-50 antialiased">
+                             
                                 <a 
                                     v-bind:href="
                                     '/dashboard/advertisements'
@@ -171,6 +159,8 @@ const submit = () => {
                                 edit
                                             
                                 </a>   </button> 
+                                </div>
+                                </div>
                             </div>
                             
     </div> 
@@ -187,6 +177,8 @@ const submit = () => {
                     
                 
                         <h5 class="text-2xl font-bold tracking-tight text-gray-900 dark:text-white inline-block align-middle">{{ collaboration.title }}</h5>
+                        <div v-if="auth">
+                                        <div v-if="auth.id == user.id">
                         <button> <a class="inline-flex border-spacing-1 border-1 border-color border-gray-400 shadow-sm items-center bg-green-300 hover:bg-black hover:text-white text-black  px-3 rounded-full font-light tracking-widest  transition ease-in-out delay-50 hover:-translate-y-0.5 hover:scale-60 duration-50 antialiased"
                                             v-bind:href="
 
@@ -200,8 +192,10 @@ const submit = () => {
                                             </a>                  
                 </button>
                 </div>
+                </div>
+                </div>
                         <p class="font-normal text-gray-700 dark:text-gray-400 line-clamp-5">{{ collaboration.description }}</p>
-                        <small>{{ collaboration.created_at }}</small>
+                        <small>{{ dateTime(collaboration.created_at) }}</small>
                     </a>
             </div> 
                         
