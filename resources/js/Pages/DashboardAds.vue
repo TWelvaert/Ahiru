@@ -5,7 +5,7 @@
     // import { Welcome } from "@/Layouts/Welcome.js";
 
     let data = defineProps({
-        advertisements: String,
+        collaborations: String,
     });
     </script>
 
@@ -22,7 +22,6 @@
                 You have 14788 plays last 7 days
                 </span>
             </template>
-
             <div class="py-12">
                 <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 rounded-full ">
                     <div
@@ -30,7 +29,7 @@
                     </div>
                     <table class="min-w-full divide-y divide-gray-200">
                         <tbody class="bg-white divide-y divide-gray-200">
-                            <tr v-for="advertisement in advertisements">
+                            <tr v-for="advertisement in collaborations">
                                 <td class="px-6 py-4 whitespace-nowrap">
                                     <div class="flex items-center">
                                         <div

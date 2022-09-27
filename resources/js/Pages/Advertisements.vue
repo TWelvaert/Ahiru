@@ -4,6 +4,7 @@ import { Head, useForm } from "@inertiajs/inertia-vue3";
 import BreezeButton from "@/Components/Button.vue";
 import BreezeCheckbox from "@/Components/Checkbox.vue";
 import BreezeLabel from "@/Components/Label.vue";
+import moment from "moment";
 import { ref } from "vue";
 import { Link } from "@inertiajs/inertia-vue3";
 import { Inertia } from "@inertiajs/inertia";
@@ -55,8 +56,13 @@ watch(search, (value) => {
 
         <div class="grid grid-cols-4 gap-4 m-14">
             <a
-                href="#"
+                
                 v-for="collaboration in freelance_advertisements.data"
+                v-bind:href="
+                                                    '/advertisement/' +
+                                                    collaboration.slug
+                                                "
+            
                 class="block p-6 max-w-sm bg-white rounded-lg border border-gray-200 shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700"
             >
                 <img
@@ -73,9 +79,18 @@ watch(search, (value) => {
                 >
                     {{ collaboration.description }}
                 </p>
-                <small>{{ collaboration.created_at }}</small>
+                <small>{{ dateTime(collaboration.created_at) }}</small>
             </a>
         </div>
         <Pagination :data="collaborations" />
     </Dashboard>
 </template>
+<script>
+export default {
+    methods: {
+        dateTime(value) {
+            return moment(value).format("DD-MM-YYYY");
+        },
+    },
+};
+</script>
