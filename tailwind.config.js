@@ -14,7 +14,8 @@ module.exports = {
         extend: {
             fontFamily: {
                 sans: ['Nunito', ...defaultTheme.fontFamily.sans],
-                monument: ['monument']
+                monument: ['monument'],
+                roboto: ['Roboto']
             },
             screens: {
                 'md': '960px',
@@ -28,6 +29,6 @@ module.exports = {
     plugins: [
         require('@tailwindcss/forms'),
         require('@tailwindcss/lineclamp'),
-        require('flowbite/plugin')
+        require('flowbite/plugin'),
     ],
 };

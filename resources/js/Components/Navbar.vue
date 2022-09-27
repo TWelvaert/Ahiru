@@ -1,8 +1,9 @@
 <template>
-    <div class="sticky  top-0 z-50">
-        <div class="bg-black p-4">
-            <nav class=" ml-8 md:flex md:justify-between md:items-center">
-                <div class="flex items-center justify-between font-bold text-white md:text-4xl hover:text-gray-400 font-monument antialiased cursor-pointer
+    <div class="sticky top-0 z-50">
+        <div class="bg-black p-5">
+            <nav class="justify-around md:flex md:justify-around     md:items-center">
+                <img src="../../assets/images/sphere.gif" class="h-20 absolute left-20" alt="">
+                <div class="flex items-center z-30 justify-between font-bold text-white md:text-4xl hover:text-gray-400 font-monument antialiased cursor-pointer
             ">AHIRU
                 </div>
                 <input class="border-whitefocus:border-white focus:ring-0 rounded-full bg-black text-white pr-32
@@ -59,6 +60,7 @@
 </template>
 <script>
 import { Link, Head } from '@inertiajs/inertia-vue3';
+
 export default {
     components: { Link, Head, route },
 
