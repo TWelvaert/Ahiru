@@ -164,7 +164,8 @@
         name: 'HeaderComponent',
         data (){
             return {
-                user: []
+                user: [],
+                showingNavigationDropdown: false,
             }
         },
         mounted() {
