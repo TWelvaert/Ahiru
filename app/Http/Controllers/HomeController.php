@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\FreelanceAdvertisement;
+use App\Models\Profile;
+use App\Models\User;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\Factories\BelongsToManyRelationship;
 use Illuminate\Support\Facades\Auth;
@@ -57,5 +60,4 @@ class HomeController extends Controller
             'user' => $user
         ]);
     }
-
 }
