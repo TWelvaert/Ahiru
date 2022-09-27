@@ -4,6 +4,7 @@ import { Head, useForm } from "@inertiajs/inertia-vue3";
 import BreezeButton from "@/Components/Button.vue";
 import BreezeCheckbox from "@/Components/Checkbox.vue";
 import BreezeLabel from "@/Components/Label.vue";
+import Header from "@/Components/Header.vue";
 import moment from "moment";
 import { ref } from "vue";
 import { Link } from "@inertiajs/inertia-vue3";
@@ -31,8 +32,8 @@ watch(search, (value) => {
 </script>
 <template>
     <Head title="freelance_advertisements" />
-
     <Dashboard :user="user">
+        
         <div class="flex items-center justify-center flex-col">
             <BreezeButton name="form1" class="ml-4">
                 <a href="advertisement/create">Create</a>
@@ -40,12 +41,12 @@ watch(search, (value) => {
         </div>
 
         <div class="mb-2">
-            <input
+            <!-- <input
                 type="text"
                 v-model="search"
                 placeholder="Search..."
                 class="bg-gray-50 border border-gray-500 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-60 p-2.5"
-            />
+            /> -->
         </div>
 
         <template #header>
