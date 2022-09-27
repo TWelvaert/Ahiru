@@ -94,7 +94,58 @@ let props = defineProps({
 });
 
 
+function callFilter() {
+    let input = document.querySelector('#filter').value;
+            if(input.length > 0) {
+                let uploads = props.user_uploads;
 
+                uploads = uploads.filter(upload => upload.original_name.toLowerCase().includes(input.toLowerCase()));
+
+                document.querySelector('#filtered_uploads').innerHTML = '';
+                
+                document.querySelector('#all_uploads').style.display = "none";
+
+                for(let i=0; i<uploads.length; i++) {
+
+                    let main_content = ``;
+
+                    if(uploads[i].type == 'image') {
+                        main_content = `<img class="w-40 h-40 z-0 cursor-pointer" src="../${uploads[i].path}/${uploads[i].name}" />`;
+                    } 
+                    if(uploads[i].type == 'audio') {
+                        main_content = `<img id="play" alt="${uploads[i].name}" src="/assets/img/play_audio.png" class="cursor-pointer w-40 h-40" />`;
+                    } 
+                
+                    let output = `
+                        <div>
+                            <header class="bg-gray-100 text-black rounded-t p-1 w-40 truncate">
+                                <Link class="cursor-pointer" v-bind:href="/settings/uploads/delete/${uploads[i].id}">Delete</Link>  
+                            </header>
+                            <main>
+                                ${main_content}
+                            </main>
+                            <footer class="flex justify-between bg-gray-100 rounded-b p-1 w-40 truncate">
+                                ${uploads[i].original_name} 
+                            </footer>
+                        </div>
+                    `;
+
+                    document.querySelector('#filtered_uploads').innerHTML += output;
+
+                    if(document.querySelectorAll(`#play`)) {
+                        for (let i = 0; i < document.querySelectorAll(`#play`).length; i++) {
+                            let result = document.querySelectorAll(`#play`)[i];
+                            result.addEventListener("click", () => {
+                                playMusic(result.alt);
+                            });  
+                        }
+                    }
+                }   
+            } else {
+                document.querySelector('#filtered_uploads').innerHTML = '';
+                document.querySelector('#all_uploads').style.display = "block";
+            }
+}
 
 let selected_files = [];
 
@@ -108,6 +159,8 @@ function resetSelection() {
     document.querySelectorAll('.selectedFile').forEach(active => {
         active.remove();
     });
+    document.querySelector('#filter').value = '';
+    callFilter();
 }
 
 function select(e) {
@@ -180,56 +233,7 @@ onMounted(() => {
 
     if(document.querySelector('#filter')) {
         document.querySelector('#filter').addEventListener("input", (e) => {
-            let input = document.querySelector('#filter').value;
-            if(input.length > 0) {
-                let uploads = props.user_uploads;
-
-                uploads = uploads.filter(upload => upload.original_name.toLowerCase().includes(input.toLowerCase()));
-
-                document.querySelector('#filtered_uploads').innerHTML = '';
-                
-                document.querySelector('#all_uploads').style.display = "none";
-
-                for(let i=0; i<uploads.length; i++) {
-
-                    let main_content = ``;
-
-                    if(uploads[i].type == 'image') {
-                        main_content = `<img class="w-40 h-40 z-0 cursor-pointer" src="../${uploads[i].path}/${uploads[i].name}" />`;
-                    } 
-                    if(uploads[i].type == 'audio') {
-                        main_content = `<img id="play" alt="${uploads[i].name}" src="/assets/img/play_audio.png" class="cursor-pointer w-40 h-40" />`;
-                    } 
-                
-                    let output = `
-                        <div>
-                            <header class="bg-gray-100 text-black rounded-t p-1 w-40 truncate">
-                                <Link class="cursor-pointer" v-bind:href="/settings/uploads/delete/${uploads[i].id}">Delete</Link>  
-                            </header>
-                            <main>
-                                ${main_content}
-                            </main>
-                            <footer class="flex justify-between bg-gray-100 rounded-b p-1 w-40 truncate">
-                                ${uploads[i].original_name} 
-                            </footer>
-                        </div>
-                    `;
-
-                    document.querySelector('#filtered_uploads').innerHTML += output;
-
-                    if(document.querySelectorAll(`#play`)) {
-                        for (let i = 0; i < document.querySelectorAll(`#play`).length; i++) {
-                            let result = document.querySelectorAll(`#play`)[i];
-                            result.addEventListener("click", () => {
-                                playMusic(result.alt);
-                            });  
-                        }
-                    }
-                }   
-            } else {
-                document.querySelector('#filtered_uploads').innerHTML = '';
-                document.querySelector('#all_uploads').style.display = "block";
-            }
+            callFilter();
         }); 
     }
 })
