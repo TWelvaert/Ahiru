@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\NewsArticle;
 use App\Models\NewsCategories;
 use App\Models\User;
+use App\Models\Upload;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Auth;
@@ -41,13 +42,17 @@ class NewsController extends Controller
         $newsCategories = NewsCategories::all();
         $categories = [];
 
+        $user = Auth::user();
+        $user_uploads = Upload::where('user_id', '=', $user->id)->get();
+
         foreach ($newsCategories as $category) {
             $categoryObject = ['id' => $category->id, 'name' => $category->name, 'slug' => $category->slug, 'checked' => false];
             array_push($categories, $categoryObject);
         }
 
         return Inertia::render('Admin/News/Create', [
-            'categories' => $categories
+            'categories' => $categories,
+            'user_uploads' => $user_uploads
         ]);
     }
 
