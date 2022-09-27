@@ -157,6 +157,7 @@ import { Link } from '@inertiajs/inertia-vue3';
 </script>
 
 <script>
+
 var i = 0;
 var txt = 'Hey Creator how is your day?'; /* The text */
 var speed = 150; /* The speed/duration of the effect in milliseconds */
@@ -165,7 +166,8 @@ export default {
     name: 'HeaderComponent',
     data() {
         return {
-            user: []
+            user: [],
+            showingNavigationDropdown: false,
         }
     },
     mounted() {
@@ -173,6 +175,7 @@ export default {
             this.user = response.data.user;
         })
             .catch(function (error) {
+
                 console.log(error);
             });
         typeWriter();

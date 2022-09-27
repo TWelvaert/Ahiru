@@ -86,6 +86,12 @@
 
 <script>
 export default {
+    data (){
+            return {
+                volume: Number,
+                isShuffle: Boolean,
+            }
+    },
     install: (app, options) => {
 
       let isPlaying = false;
