@@ -7,6 +7,11 @@
     src: url('/resources/assets/fonts/MonumentExtended-Regular.otf');
 }
 
+@font-face {
+    font-family: 'roboto';
+    src: url('/resources/assets/fonts/Roboto-Light.ttf') format('truetype');
+}
+
 html {
     scroll-behavior: smooth;
     background-color: white;

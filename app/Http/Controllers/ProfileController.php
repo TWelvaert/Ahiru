@@ -41,6 +41,7 @@ class ProfileController extends Controller
             'auth' => $auth
         ]);
 
+
     }
 
     public function update(Request $request, User $user)
