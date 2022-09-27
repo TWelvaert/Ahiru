@@ -113,7 +113,7 @@
                 <BreezeNavLink :href="route('home')" :class="{ 'active': $page.url === '/home' }">
                     Home
                 </BreezeNavLink>
-            </div>
+            
 
             <div class="pt-3">
                 <input
@@ -205,7 +205,7 @@
                     </svg>
                 </button>
             </div>
-        </div>
+        
 
         <div :class="{'block': showingNavigationDropdown, 'hidden': ! showingNavigationDropdown}" class="sm:hidden">
             <div class="pt-2 pb-3 space-y-1">
