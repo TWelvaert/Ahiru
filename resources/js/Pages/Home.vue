@@ -7,9 +7,11 @@ import moment from "moment";
 let data = defineProps({
     user: Array,
     advertisements: String,
+    artists: String,
+    userProfileData: Array
 });
 
-
+console.log(data['userProfileData']);
 </script>
 
 <template>
@@ -31,11 +33,10 @@ let data = defineProps({
             <!-- CARD -->
 
             <div class="grid grid-cols-4 gap-4 m-14">
-                <a v-for="advertisement in advertisements"
-                v-bind:href="
-                                                    '/advertisement/' +
-                                                    advertisement.slug
-                                                "
+                <a v-for="advertisement in advertisements" v-bind:href="
+                    '/advertisement/' +
+                    advertisement.slug
+                "
                     class="block p-6 max-w-sm bg-white rounded-lg border border-gray-200 shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
                     <img src="../../assets/images/070c4ae0e59af72c222e2756c87baa1a.gif" alt="">
                     <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">{{
@@ -185,112 +186,45 @@ let data = defineProps({
 
             <div class="flex flex-col ml-16 mb-2 leading-tight">
                 <span class="font-monument text-4xl">Popular Artists</span>
-                <span class="mt-3">Most streamed artists of the moment  </span>
+                <span class="mt-3">Most streamed artists of the moment </span>
             </div>
 
             <div class="flex gap-4 m-14 mt-32">
-                <div class="card w-96 mx-auto bg-white  shadow-xl hover:shadow">
-                    <img class="w-32 mx-auto rounded-full -mt-20 border-8 border-white"
-                        src="../../assets/images/070c4ae0e59af72c222e2756c87baa1a.gif" alt="">
-                    <div class="text-center mt-2 text-3xl font-medium">Tycho</div>
-                    <div class="text-center mt-2 font-light text-sm">@tycho</div>
-                    <div class="text-center font-normal text-lg">Kerala</div>
-                    <div class="px-6 text-center mt-2 font-light text-sm">
-                        <p>
-                            Scott Hansen (born February 7, 1977), known professionally as Tycho (/ˈtaɪkoʊ/ TY-koh)
-                        </p>
+                <a v-for="userProfile in userProfileData" v-bind:href="
+                    '/profile/' +
+                    userProfile.user.slug
+                ">
+                    <div class="card w-96 mx-auto bg-white  shadow-xl hover:shadow">
+
+
+                        <img class="w-32 mx-auto rounded-full -mt-20 border-8 border-white"
+                            v-bind:src="userProfile.profile.profile_image" alt="" />
+
+                        <div class="text-center mt-2 text-3xl font-medium">{{ userProfile.user.name }}
+                        </div>
+                        <div class="text-center mt-2 font-light text-sm">@tycho</div>
+                        <div class="text-center font-normal text-lg"></div>
+                        <div class="px-6 text-center mt-2 font-light text-sm">
+                            <p>
+                                {{ userProfile.profile.bio }}
+
+                            </p>
+                        </div>
+                        <hr class="mt-8">
+                        <div class="flex p-4">
+                            <div class="w-1/2 text-center">
+                                <span class="font-bold">1.8 k</span> Followers
+                            </div>
+                            <div class="w-0 border border-gray-300">
+
+                            </div>
+                            <div class="w-1/2 text-center">
+                                <span class="font-bold">2.0 k</span> Following
+                            </div>
+                        </div>
+
                     </div>
-                    <hr class="mt-8">
-                    <div class="flex p-4">
-                        <div class="w-1/2 text-center">
-                            <span class="font-bold">1.8 k</span> Followers
-                        </div>
-                        <div class="w-0 border border-gray-300">
-
-                        </div>
-                        <div class="w-1/2 text-center">
-                            <span class="font-bold">2.0 k</span> Following
-                        </div>
-                    </div>
-                </div>
-
-
-                <div class="card w-96 mx-auto bg-white  shadow-xl hover:shadow">
-                    <img class="w-32 mx-auto rounded-full -mt-20 border-8 border-white"
-                        src="../../assets/images/070c4ae0e59af72c222e2756c87baa1a.gif" alt="">
-                    <div class="text-center mt-2 text-3xl font-medium">Tycho</div>
-                    <div class="text-center mt-2 font-light text-sm">@tycho</div>
-                    <div class="text-center font-normal text-lg">Kerala</div>
-                    <div class="px-6 text-center mt-2 font-light text-sm">
-                        <p>
-                            Scott Hansen (born February 7, 1977), known professionally as Tycho (/ˈtaɪkoʊ/ TY-koh)
-                        </p>
-                    </div>
-                    <hr class="mt-8">
-                    <div class="flex p-4">
-                        <div class="w-1/2 text-center">
-                            <span class="font-bold">1.8 k</span> Followers
-                        </div>
-                        <div class="w-0 border border-gray-300">
-
-                        </div>
-                        <div class="w-1/2 text-center">
-                            <span class="font-bold">2.0 k</span> Following
-                        </div>
-                    </div>
-                </div>
-
-
-                <div class="card w-96 mx-auto bg-white  shadow-xl hover:shadow">
-                    <img class="w-32 mx-auto rounded-full -mt-20 border-8 border-white"
-                        src="../../assets/images/070c4ae0e59af72c222e2756c87baa1a.gif" alt="">
-                    <div class="text-center mt-2 text-3xl font-medium">Tycho</div>
-                    <div class="text-center mt-2 font-light text-sm">@tycho</div>
-                    <div class="text-center font-normal text-lg">Kerala</div>
-                    <div class="px-6 text-center mt-2 font-light text-sm">
-                        <p>
-                            Scott Hansen (born February 7, 1977), known professionally as Tycho (/ˈtaɪkoʊ/ TY-koh)
-                        </p>
-                    </div>
-                    <hr class="mt-8">
-                    <div class="flex p-4">
-                        <div class="w-1/2 text-center">
-                            <span class="font-bold">1.8 k</span> Followers
-                        </div>
-                        <div class="w-0 border border-gray-300">
-
-                        </div>
-                        <div class="w-1/2 text-center">
-                            <span class="font-bold">2.0 k</span> Following
-                        </div>
-                    </div>
-                </div>
-
-
-                <div class="card w-96 mx-auto bg-white  shadow-xl hover:shadow">
-                    <img class="w-32 mx-auto rounded-full -mt-20 border-8 border-white"
-                        src="../../assets/images/070c4ae0e59af72c222e2756c87baa1a.gif" alt="">
-                    <div class="text-center mt-2 text-3xl font-medium">Tycho</div>
-                    <div class="text-center mt-2 font-light text-sm">@tycho</div>
-                    <div class="text-center font-normal text-lg">Kerala</div>
-                    <div class="px-6 text-center mt-2 font-light text-sm">
-                        <p>
-                            Scott Hansen (born February 7, 1977), known professionally as Tycho (/ˈtaɪkoʊ/ TY-koh)
-                        </p>
-                    </div>
-                    <hr class="mt-8">
-                    <div class="flex p-4">
-                        <div class="w-1/2 text-center">
-                            <span class="font-bold">1.8 k</span> Followers
-                        </div>
-                        <div class="w-0 border border-gray-300">
-
-                        </div>
-                        <div class="w-1/2 text-center">
-                            <span class="font-bold">2.0 k</span> Following
-                        </div>
-                    </div>
-                </div>
+                </a>
             </div>
 
 

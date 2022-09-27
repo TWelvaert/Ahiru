@@ -26,12 +26,10 @@ class HomeController extends Controller
             array_push($userProfileData, $userProfileArray);
         }
 
-        dd($userProfileData);
-
         return Inertia::render('Home', [
             'advertisements' => $advertisements,
             'artists' => $users,
-            'artistInfos' => $userProfileData
+            'userProfileData' => $userProfileData
         ]);
     }
 
