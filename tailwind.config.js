@@ -30,6 +30,5 @@ module.exports = {
         require('@tailwindcss/forms'),
         require('@tailwindcss/lineclamp'),
         require('flowbite/plugin'),
-
     ],
 };
