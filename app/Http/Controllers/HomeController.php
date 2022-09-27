@@ -10,8 +10,6 @@ use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\Factories\BelongsToManyRelationship;
 use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
-use App\Models\User;
-use Illuminate\Database\Eloquent\Collection;
 class HomeController extends Controller
 {
     public function index_home()

@@ -16,9 +16,7 @@
                         </BreezeNavLink>
                     </div>
 
-                    <div class="pt-3">
-                        <input class="border-white opacity-50 focus:border-white focus:ring-0 rounded-full bg-black text-l text-white h-10 pr-32 px-8" type="text" id="search" placeholder="SEARCH FOR ARTISTS" />
-                    </div>
+                    <Searchbar/>
 
                     <div class="hidden  space-x-8 sm:-my-px sm:ml-10 sm:flex">
                         <BreezeNavLink :href="route('advertisements')"
@@ -152,6 +150,7 @@
     import BreezeDropdownLink from '@/Components/DropdownLink.vue';
     import BreezeNavLink from '@/Components/NavLink.vue';
     import BreezeResponsiveNavLink from '@/Components/ResponsiveNavLink.vue';
+    import Searchbar from "@/Components/SearchBar.vue";
     import { Link } from '@inertiajs/inertia-vue3';
 </script>
 
