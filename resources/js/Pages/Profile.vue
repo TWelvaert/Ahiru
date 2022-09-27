@@ -33,7 +33,7 @@ const submit = () => {
                 <div class="md:flex no-wrap md:-mx-2 ">
                     <!-- Left Side -->
 
-                    <div class="w-full md:w-3/12 ">
+                    <div class="w-full px-5 md:w-3/12 ">
                         <!-- Profile Card -->
                         <div class="flex items-center space-x-3 font-semibold text-gray-900 text-xl py-1">
                             <span clas="text-green-500">
@@ -74,21 +74,21 @@ const submit = () => {
                                     <TextareaVue
                                         id="description"
                                         type="textarea"
-                                        class="border border-blue-300 p-2 w-full rounded"
+                                        class="border border-gray-200 p-2 w-full rounded"
                                         rows="6"
                                         v-model="form.profile[0]['bio']"
                                         required
                                     />
                                     <BreezeInputError class="mt-2" />
                                 </div>
-                                <BreezeButton
+                                <Button class="inline-flex border-spacing-1 border-1 border-color border-gray-400 shadow-sm items-center bg-green-300 hover:bg-black hover:text-white text-black  px-3 rounded-full font-light tracking-widest  transition ease-in-out delay-50 hover:-translate-y-0.5 hover:scale-60 duration-50 antialiased ml-4 "
                                     name="form"
-                                    class="ml-4"
+                                   
                                     :class="{ 'opacity-25': form.processing }"
                                     :disabled="form.processing"
                                 >
                                     Update
-                                </BreezeButton>
+                                </Button>
                             </form>
                            
                         </div>
@@ -110,7 +110,17 @@ const submit = () => {
                             <div class="flex items-center space-x-3 font-semibold text-gray-900 text-xl leading-8">
                                 
                             </div>
-                            <div class="grid grid-cols-3">
+                            <div class="grid grid-cols-3 ">
+                                <div class="text-center my-2">
+                                    <img class="h-16 w-16 rounded-full mx-auto"
+                                        src="../../assets/images/profileplaceholder.jpg" alt="">
+                                    <a href="#" class="text-main-color">Artist</a>
+                                </div>
+                                <div class="text-center my-2">
+                                    <img class="h-16 w-16 rounded-full mx-auto"
+                                        src="../../assets/images/profileplaceholder.jpg" alt="">
+                                    <a href="#" class="text-main-color">Artist</a>
+                                </div>
                                 <div class="text-center my-2">
                                     <img class="h-16 w-16 rounded-full mx-auto"
                                         src="../../assets/images/profileplaceholder.jpg" alt="">
@@ -138,33 +148,33 @@ const submit = () => {
 
                     </div>
                     <!-- Right Side -->
-                    <div class="w-full mx-5 md:w-9/12 h-64">
+                    <div class="w-full px-5 md:w-9/12 h-64">
                         <!-- Profile tab -->
                         <!-- Advertisements Section -->
                         <div class="">
 
                             <div class="flex items-center space-x-2 ">
                                 <span clas="text-green-500">
-                                    <svg class="h-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                        stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                            d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-                                    </svg>
+                                    <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24" height="24" viewBox="0 0 512 512">
+<g>
+</g>
+	<path d="M256.010 128.738c121.887 0 221.942 38.574 221.942 85.811 0 23.368-24.894 44.186-64.993 59.934-10.168 3.563 25.877 105.636 14.224 108.697-11.714 3.041-71.639-92.457-85.34-90.419-26.409 4.567-55.378 6.605-85.832 6.605-121.897 0-221.962-38.605-221.962-84.818 0-47.237 100.065-85.811 221.962-85.811z" fill="#000000" />
+</svg>
                                 </span>
-                                <span class="tracking-wide font-semibold text-gray-900 text-xl">Advertisements</span>
-                             <BreezeButton>  
+                                <span class="tracking-wide font-semibold text-gray-900 text-xl p-1">Advertisements</span>
+                                <button class="inline-flex border-spacing-1 border-1 border-color border-gray-400 shadow-sm items-center bg-green-300 hover:bg-black hover:text-white text-black  px-3 rounded-full font-light tracking-widest  transition ease-in-out delay-50 hover:-translate-y-0.5 hover:scale-60 duration-50 antialiased">
                                 <a 
                                     v-bind:href="
                                     '/dashboard/advertisements'
                                 "
                                 >
-                                Edit
-                                                
-                                </a></BreezeButton> 
+                                edit
+                                            
+                                </a>   </button> 
                             </div>
                             
     </div> 
-            <div class="grid grid-cols-1 gap-4 md:grid-cols-4">
+            <div class="grid grid-cols-1 gap-8 md:grid-cols-4">
                    
                     <a v-bind:href="
                         '/advertisement/'+
@@ -177,7 +187,7 @@ const submit = () => {
                     
                 
                         <h5 class="text-2xl font-bold tracking-tight text-gray-900 dark:text-white inline-block align-middle">{{ collaboration.title }}</h5>
-                        <button> <a class="p-1 m-1 bg-green-500 py-1 px-2 rounded text-white text-sm"
+                        <button> <a class="inline-flex border-spacing-1 border-1 border-color border-gray-400 shadow-sm items-center bg-green-300 hover:bg-black hover:text-white text-black  px-3 rounded-full font-light tracking-widest  transition ease-in-out delay-50 hover:-translate-y-0.5 hover:scale-60 duration-50 antialiased"
                                             v-bind:href="
 
                                                     '/advertisement/' +
