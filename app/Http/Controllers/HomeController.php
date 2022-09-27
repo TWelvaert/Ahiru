@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\FreelanceAdvertisement;
+use App\Models\Profile;
+use App\Models\User;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\Factories\BelongsToManyRelationship;
 use Illuminate\Support\Facades\Auth;
@@ -13,10 +16,22 @@ class HomeController extends Controller
     public function index_home()
     {
         $advertisements = FreelanceAdvertisement::orderBy('created_at', 'desc')->take(8)->get();
-        $user = Auth::user();
+        $users = User::orderBy('created_at', 'desc')->take(8)->get();
+
+        $userProfileData = [];
+
+        foreach ($users as $user) {
+            $profile = $user->profile()->get();
+            $userProfileArray = ['user' => $user, 'profile' => $profile[0]];
+            array_push($userProfileData, $userProfileArray);
+        }
+
+        dd($userProfileData);
+
         return Inertia::render('Home', [
-            'user' => $user,
-            'advertisements' => $advertisements
+            'advertisements' => $advertisements,
+            'artists' => $users,
+            'artistInfos' => $userProfileData
         ]);
     }
 
@@ -43,5 +58,4 @@ class HomeController extends Controller
             'user' => $user
         ]);
     }
-
 }
