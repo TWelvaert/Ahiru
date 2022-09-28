@@ -21,16 +21,24 @@ class MusicController extends Controller
     {
         $user = Auth::user();
         $user_uploads = Upload::where('user_id', '=', $user->id)->get();
-        $uploads = [];
+        $uploads_audio = [];
+        $uploads_images = [];
 
         foreach ($user_uploads as $upload) {
             if($upload['type'] == 'audio') {
-                array_push($uploads, $upload);
+                array_push($uploads_audio, $upload);
+            }
+        }
+
+        foreach ($user_uploads as $upload) {
+            if($upload['type'] == 'image') {
+                array_push($uploads_images, $upload);
             }
         }
 
         return Inertia::render('MusicManager', [
-            'user_uploads' => $uploads
+            'user_uploads_audio' => $uploads_audio,
+            'user_uploads_images' => $uploads_images,
         ]);
     }
 }
