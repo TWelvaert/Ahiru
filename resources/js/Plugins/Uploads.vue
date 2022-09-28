@@ -39,10 +39,10 @@
             </div>
 
             <div id="all_uploads" class="gap-4 mt-4">
-                <div class="flex gap-4">
+                <div class="flex">
                     <div v-for="upload in this.user_uploads">
                         <div v-if="upload.type == 'image'">
-                            <div @click="e => select(e)" :id="upload.id" :class="{active: isActive}">
+                            <div @click="e => select(e)" :id="upload.id" class="ml-1" :class="{active: isActive} ">
                                 <header class="bg-gray-100 text-black rounded-t p-1 w-40 truncate">
                                     <Link class="cursor-pointer" v-bind:href="`/settings/uploads/delete/${upload.id}`">Delete</Link>  
                                 </header>
@@ -56,21 +56,23 @@
                         </div>
                     </div>
                 </div>
-                <div v-for="upload in this.user_uploads" class="mt-4">
-                    <div v-if="upload.type == 'audio'" class="w-40" @click="e => select(e)" :id="upload.id" :class="{active: isActive}">
-                        <header class="bg-gray-100 text-black rounded-t p-1 w-40 truncate text-center">
-                            <Link class="cursor-pointer" v-bind:href="`/settings/uploads/delete/${upload.id}`">Delete</Link>  
-                        </header>
-                        <main>
-                            <img  class="cursor-pointer w-40 h-40" src="/assets/img/play_audio.png" v-on:click="$callMusicPlayer(upload.name)"/>
-                        </main>
-                        <footer class="bg-gray-100 rounded-b p-1 w-40 truncate">
-                            {{ upload.original_name }}
-                        </footer>
+                <div class="flex">
+                    <div v-for="upload in this.user_uploads" class="mt-4">
+                        <div v-if="upload.type == 'audio'" class="w-40 ml-1" @click="e => select(e)" :id="upload.id" :class="{active: isActive}">
+                            <header class="bg-gray-100 text-black rounded-t p-1 w-40 truncate text-center flex justify-between">
+                                <span id="play" v-on:click="$callMusicPlayer(upload.name)">Play</span> 
+                                <Link class="cursor-pointer" v-bind:href="`/settings/uploads/delete/${upload.id}`">Delete</Link> 
+                            </header>
+                            <main class="relative">
+                                <img  class="cursor-pointer w-40 h-40 z-0" src="/assets/img/play_audio.png"/>
+                            </main>
+                            <footer class="bg-gray-100 rounded-b p-1 w-40 truncate">
+                                {{ upload.original_name }}
+                            </footer>
+                        </div>
                     </div>
                 </div>
             </div>
-
 
             <div id="filtered_uploads" class="flex gap-4"></div>
         </div>
@@ -85,7 +87,7 @@ import BreezeInput from "@/Components/Input.vue";
 import BreezeLabel from '@/Components/Label.vue';
 import { onMounted, inject  } from 'vue';
 
-const emits = defineEmits(['add_files'])
+const emits = defineEmits(['add_files', 'close'])
 
 
 let props = defineProps({
@@ -110,16 +112,18 @@ function callFilter() {
                     let main_content = ``;
 
                     if(uploads[i].type == 'image') {
+                        top_content = `<Link class="cursor-pointer" v-bind:href="/settings/uploads/delete/${uploads[i].id}">Delete</Link> `;
                         main_content = `<img class="w-40 h-40 z-0 cursor-pointer" src="../${uploads[i].path}/${uploads[i].name}" />`;
                     } 
                     if(uploads[i].type == 'audio') {
-                        main_content = `<img id="play" alt="${uploads[i].name}" src="/assets/img/play_audio.png" class="cursor-pointer w-40 h-40" />`;
+                        top_content = `<Link class="cursor-pointer" v-bind:href="/settings/uploads/delete/${uploads[i].id}">Delete</Link><span id="play">Play</span>`;
+                        main_content = `<img class="cursor-pointer w-40 h-40 z-0" id="play" alt="${uploads[i].name}" src="/assets/img/play_audio.png" />`;
                     } 
                 
                     let output = `
                         <div>
                             <header class="bg-gray-100 text-black rounded-t p-1 w-40 truncate">
-                                <Link class="cursor-pointer" v-bind:href="/settings/uploads/delete/${uploads[i].id}">Delete</Link>  
+                                ${top_content} 
                             </header>
                             <main>
                                 ${main_content}
@@ -132,14 +136,14 @@ function callFilter() {
 
                     document.querySelector('#filtered_uploads').innerHTML += output;
 
-                    if(document.querySelectorAll(`#play`)) {
-                        for (let i = 0; i < document.querySelectorAll(`#play`).length; i++) {
-                            let result = document.querySelectorAll(`#play`)[i];
-                            result.addEventListener("click", () => {
-                                playMusic(result.alt);
-                            });  
-                        }
-                    }
+                    // if(document.querySelectorAll(`#play`)) {
+                    //     for (let i = 0; i < document.querySelectorAll(`#play`).length; i++) {
+                    //         let result = document.querySelectorAll(`#play`)[i];
+                    //         result.addEventListener("click", () => {
+                    //            // playMusic(result.alt);
+                    //         });  
+                    //     }
+                    // }
                 }   
             } else {
                 document.querySelector('#filtered_uploads').innerHTML = '';
@@ -177,7 +181,7 @@ function select(e) {
         } else {
             selected_file_nr += 1;
             // console.log(e.path[1])
-            e.path[1].innerHTML += `<div id="nr_${e.path[2].getAttribute('id')}" class="top-0 content-center absolute selectedFile min-w-full min-h-full flex justify-center items-center text-white text-3xl">${selected_file_nr}</div>`;
+            e.path[1].innerHTML += `<div id="nr_${e.path[2].getAttribute('id')}" class="top-0 content-center absolute selectedFile w-40 min-h-full flex justify-center items-center text-white text-3xl">${selected_file_nr}</div>`;
             file_id = e.path[2].id;
         }
 
@@ -229,7 +233,7 @@ const submit = () => {
 
 onMounted(() => {
 
-    const { playMusic } = inject('playMusic');
+   // const { playMusic } = inject('playMusic');
 
     if(document.querySelector('#filter')) {
         document.querySelector('#filter').addEventListener("input", (e) => {
