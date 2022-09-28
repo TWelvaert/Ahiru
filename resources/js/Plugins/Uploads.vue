@@ -1,5 +1,5 @@
 <template>
-        <div class="bg-white w-full h-full p-2">
+        <div class="bg-white w-full min-h-full p-2">
             <form id="form" @submit.prevent="submit" enctype="multipart/form-data" novalidate>
                 <div>
                     <div class="flex justify-center items-center w-full">
@@ -93,8 +93,10 @@ const emits = defineEmits(['add_files', 'close'])
 let props = defineProps({
     isActive: Boolean,
     user_uploads: Array,
+    index: Number,
 });
 
+//console.log(props.index);
 
 function callFilter() {
     let input = document.querySelector('#filter').value;
@@ -199,7 +201,7 @@ function select(e) {
         selected_files.push(file_id);
     }
 
-    console.log(selected_files)
+   // console.log(selected_files)
     emits('add_files', selected_files);
 }   
 
