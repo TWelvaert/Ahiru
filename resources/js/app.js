@@ -10,6 +10,8 @@ import { ZiggyVue } from '../../vendor/tightenco/ziggy/dist/vue.m';
 import VueSmoothScroll from 'vue3-smooth-scroll'
 import { TroisJSVuePlugin } from 'troisjs';
 import MusicPLayer from './Plugins/MusicPlayer.vue';
+// import  Spline  from '../../node_modules/vue-spline';
+
 
 const appName = window.document.getElementsByTagName('title')[0]?.innerText || 'Laravel';
 
@@ -20,7 +22,7 @@ createInertiaApp({
         return createApp({ render: () => h(app, props) })
             .use(plugin)
             .use(MusicPLayer, {
-                MusicPLayer: 'MusicPLayer' 
+                MusicPLayer: 'MusicPLayer'
             })
             .use(ZiggyVue, Ziggy)
             .use (VueSmoothScroll, {
@@ -28,7 +30,9 @@ createInertiaApp({
                 updateHistory: false
               } )
               .use (TroisJSVuePlugin)
-            .mount(el);
+            .mount(el)
+          
+
     },
 });
 

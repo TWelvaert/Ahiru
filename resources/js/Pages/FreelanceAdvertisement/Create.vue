@@ -6,25 +6,26 @@ import BreezeInputError from "@/Components/InputError.vue";
 import BreezeLabel from "@/Components/Label.vue";
 import BreezeCheckbox from "@/Components/Checkbox.vue";
 import TextareaVue from "@/Components/textarea.vue";
-import Modal from "@/Components/Modal.vue";
-import Uploads from "@/Pages/Settings/Uploads.vue";
-import { reactive } from 'vue'
+import Uploads from "@/Plugins/Uploads.vue";
 import { Head, useForm } from "@inertiajs/inertia-vue3";
 
-let data = defineProps({
+let props = defineProps({
     user_uploads: Array,
-    showModal: Boolean,
     categories: Array,
     uploads: Array,
 });
 
 let selected_files;
 
+function openUploads() {
+   sessionStorage.setItem("UPLOADS", "OPEN");
+}
+
 let form = useForm({
     title: '',
     slug: '',
     description: '',
-    categories: data["categories"],
+    categories: props["categories"],
     uploads: '',
 });
 
@@ -32,13 +33,10 @@ const submit = () => {
     form.post(route("advertisement/create"));
 };
 
-
-
 function processFiles(files){
     selected_files = files;
     form.uploads = files;
 }
-
 </script>
 
 <template>
@@ -77,19 +75,13 @@ function processFiles(files){
                                 autofocus autocomplete="description"
                                 class="border-gray-300  focus:border-green-300 block w-full  border-rounded focus:ring focus:ring-green-200 focus:ring-opacity-50 rounded-md shadow-sm" />
 
-                            <BreezeInputError
-                                class="mt-2"
-                                :message="form.errors.description"
-                            />
+                            <BreezeInputError class="mt-2" :message="form.errors.description"/>
                         </div>
                 
                         <div class="bg-white min-h-full">
-                            <button class="bg-slate-400 text-white w-full mt-2 mb-2" type="button" @click="showModal = true">Add media (image or audio file)</button>
-                         
-                                <Modal class="absolute min-h-full w-full left-0 top-0" v-if="showModal" @close="showModal = false">
-                                    <Uploads  class="min-h-full" @add_files="processFiles" :user_uploads="data['user_uploads']" />
-                                </Modal>
-                       
+                            <button class="bg-slate-400 text-white w-full mt-2 mb-2" type="button" @click="showing = true; openUploads()">Add media (image or audio file)</button>
+                            <Uploads class="absolute min-h-full w-full left-0 top-0" v-if="showing"  @close="showing = false" @add_files="processFiles" :user_uploads="user_uploads" />
+
                         </div>
 
                         <div v-for="category in categories" class="flex items-center">
@@ -111,11 +103,18 @@ function processFiles(files){
 </template>
 
 <script>
-    export default {
-        data() {
+
+export default {
+        name: 'HeaderComponent',
+        data (){
             return {
-                showModal: false
+                showing: false
             }
-        }
+        },
+        mounted() {
+            if(sessionStorage.getItem('UPLOADS') == 'OPEN') {
+                this.showing = true;
+            } 
+        },
     }
 </script>
