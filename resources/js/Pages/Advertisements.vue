@@ -31,13 +31,18 @@ watch(search, (value) => {
 });
 </script>
 <template>
+
     <Head title="freelance_advertisements" />
     <Dashboard :user="user">
+
         
         <div class="flex items-center justify-center flex-col">
+            <input type="text" v-model="search" placeholder="Search..."
+            class="border-white my-3 opacity-50 focus:border-white focus:ring-0 rounded-full bg-black text-l text-white h-10 pr-32 px-8" />
             <BreezeButton name="form1" class="ml-4">
                 <a href="advertisement/create">Create</a>
             </BreezeButton>
+
         </div>
 
         <div class="mb-2">
@@ -56,28 +61,16 @@ watch(search, (value) => {
         </template>
 
         <div class="grid grid-cols-4 gap-4 m-14">
-            <a
-                
-                v-for="collaboration in freelance_advertisements.data"
-                v-bind:href="
-                                                    '/advertisement/' +
-                                                    collaboration.slug
-                                                "
-            
-                class="block p-6 max-w-sm bg-white rounded-lg border border-gray-200 shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700"
-            >
-                <img
-                    src="../../assets/images/070c4ae0e59af72c222e2756c87baa1a.gif"
-                    alt=""
-                />
-                <h5
-                    class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white"
-                >
+            <a v-for="collaboration in freelance_advertisements.data" v-bind:href="
+                '/advertisement/' +
+                collaboration.slug
+            "
+                class="block p-6 max-w-sm bg-white rounded-lg border border-gray-200 shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
+                <img src="../../assets/images/070c4ae0e59af72c222e2756c87baa1a.gif" alt="" />
+                <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
                     {{ collaboration.title }}
                 </h5>
-                <p
-                    class="font-normal text-gray-700 dark:text-gray-400 line-clamp-3"
-                >
+                <p class="font-normal text-gray-700 dark:text-gray-400 line-clamp-3">
                     {{ collaboration.description }}
                 </p>
                 <small>{{ dateTime(collaboration.created_at) }}</small>
