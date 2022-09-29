@@ -164,7 +164,7 @@ const submit = () => {
                             </div>
                             
     </div> 
-            <div class="grid grid-cols-1 gap-8 md:grid-cols-4">
+            <div class="grid grid-cols-1 w-full content-center gap-8 md:grid-cols-4">
                    
                     <a v-bind:href="
                         '/advertisement/'+
