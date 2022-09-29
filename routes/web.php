@@ -3,6 +3,7 @@
 use App\Http\Controllers\AdminAdvertisementController;
 use App\Http\Controllers\FreelanceAdsController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\MusicController;
 use App\Http\Controllers\NewsCommentController;
 use App\Http\Controllers\NewsController;
 use App\Http\Controllers\ProfileController;
@@ -54,8 +55,9 @@ Route::get('/advertisements', [FreelanceAdsController::class, 'advertisements'])
 Route::get('/dashboard/advertisements', [FreelanceAdsController::class, 'index'])->name('/dashboard/advertisements')->middleware(['auth', 'verified']);
 
 Route::get('/dashboard', [HomeController::class, 'index'])->name('dashboard')->middleware(['auth', 'verified']);
-Route::get('/home', [HomeController::class, 'index_home'])->name('home');
-Route::get('/music', [HomeController::class, 'index_music'])->middleware(['auth', 'verified'])->name('music');
+Route::get('/home', [HomeController::class, 'index'])->name('home');
+Route::get('/music', [MusicController::class, 'index'])->name('music');
+Route::get('/music/manager', [MusicController::class, 'manager'])->middleware(['auth', 'verified']);
 Route::get('/likes', [HomeController::class, 'index_likes'])->middleware(['auth', 'verified'])->name('likes');
 Route::get('/following', [HomeController::class, 'index_following'])->middleware(['auth', 'verified'])->name('following');
 
