@@ -1,11 +1,13 @@
 <template>
-   <nav class="bg-white border-b border-gray-100 sticky top-0">
+
+
+   <nav class="bg-white border-b border-gray-100 sticky top-0 z-50">
                 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between h-16">
 
                     <div class="flex">
                         <!-- Logo -->
                         <div class="shrink-0 flex items-center">
-                            <Link :href="route('dashboard')">
+                            <Link :href="route('landing')">
                             <img src="../../assets/images/54520cca8c5613dd95fef5fd6a608def.gif" alt="" class="rounded-full m-7 block h-9 w-auto" />
                             </Link>
                         </div>
@@ -16,9 +18,7 @@
                         </BreezeNavLink>
                     </div>
 
-                    <div class="pt-3">
-                        <input class="border-white opacity-50 focus:border-white focus:ring-0 rounded-full bg-black text-l text-white h-10 pr-32 px-8" type="text" id="search" placeholder="SEARCH FOR ARTISTS" />
-                    </div>
+                    <!-- <Searchbar/> -->
 
                     <div class="hidden  space-x-8 sm:-my-px sm:ml-10 sm:flex">
                         <BreezeNavLink :href="route('advertisements')"
@@ -62,7 +62,6 @@
                                 <template #content>
 
                                     <BreezeDropdownLink :href="`/profile/${user.slug}`" :class="{ 'active': $page.url === '/profile' }">
-
                                         Profile
                                     </BreezeDropdownLink>
                                     <BreezeDropdownLink :href="route('likes')"
@@ -107,88 +106,84 @@
                             </svg>
                         </button>
                     </div>
+
                 </div>
 
-                <div :class="{'block': showingNavigationDropdown, 'hidden': ! showingNavigationDropdown}" class="sm:hidden">
-                    <div class="pt-2 pb-3 space-y-1">
-                        <BreezeResponsiveNavLink :href="route('dashboard')" :active="route().current('dashboard')">
-                            Dashboard
-                        </BreezeResponsiveNavLink>
-                    </div>
+              
 
-                    <div class="pt-4 pb-1 border-t border-gray-200">
-                        <div class="px-4">
-                            <div class="font-medium text-base text-gray-800">{{ user.name}}</div>
-                            <div class="font-medium text-sm text-gray-500">{{ user.email}}</div>
-                        </div>
 
-                        <div class="mt-3 space-y-1">
-                            <BreezeResponsiveNavLink BreezeResponsiveNavLink :href="route('logout')" method="post" as="button">
-                                Log Out
-                            </BreezeResponsiveNavLink>
-                        </div>
-                    </div>
+        <div :class="{'block': showingNavigationDropdown, 'hidden': ! showingNavigationDropdown}" class="sm:hidden">
+            <div class="pt-2 pb-3 space-y-1">
+                <BreezeResponsiveNavLink :href="route('dashboard')" :active="route().current('dashboard')">
+                    Dashboard
+                </BreezeResponsiveNavLink>
+            </div>
+
+            <div class="pt-4 pb-1 border-t border-gray-200">
+                <div class="px-4">
+                    <div class="font-medium text-base text-gray-800">{{ user.name}}</div>
+                    <div class="font-medium text-sm text-gray-500">{{ user.email}}</div>
                 </div>
-            </nav>
 
-     
-            <header class="bg-white shadow " v-if="$slots.header">
-                <div class="rounded-full max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
-                    <slot name="header" />
+                <div class="mt-3 space-y-1">
+                    <BreezeResponsiveNavLink BreezeResponsiveNavLink :href="route('logout')" method="post" as="button">
+                        Log Out
+                    </BreezeResponsiveNavLink>
                 </div>
-            </header>
-            
-                 <div class=" m-8">
-            <span id="welcome" class="font-monument flex items-center justify-center"></span>
-
-        <span class="flex items-center justify-center">
-            You have 14788 plays last 7 days
-        </span>
+            </div>
         </div>
+    </nav>
 
 
-      </template>
+  
+
+</template>
 <script setup>
+
     import BreezeDropdown from '@/Components/Dropdown.vue';
     import BreezeDropdownLink from '@/Components/DropdownLink.vue';
     import BreezeNavLink from '@/Components/NavLink.vue';
     import BreezeResponsiveNavLink from '@/Components/ResponsiveNavLink.vue';
+    import Searchbar from "@/Components/SearchBar.vue";
     import { Link } from '@inertiajs/inertia-vue3';
+
 </script>
 
 <script>
-  var i = 0;
-  var txt = 'Hey Creator how is your day?'; /* The text */
-  var speed = 150; /* The speed/duration of the effect in milliseconds */
 
-    export default {
-        name: 'HeaderComponent',
-        data (){
-            return {
-                user: []
-            }
-        }, 
-        mounted() {
-            axios.get('user_data').then( (response) => {
-                this.user = response.data.user;
-            })
-            .catch(function (error){
+var i = 0;
+var txt = 'Hey Creator how is your day?'; /* The text */
+var speed = 150; /* The speed/duration of the effect in milliseconds */
+
+export default {
+    name: 'HeaderComponent',
+    data() {
+        return {
+            user: [],
+            showingNavigationDropdown: false,
+        }
+    },
+    mounted() {
+        axios.get('/user_data').then((response) => {
+            this.user = response.data.user;
+        })
+            .catch(function (error) {
+
                 console.log(error);
             });
-             typeWriter();
-            function typeWriter()
-            {
-                if (i < txt.length) {
-                    if (document.getElementById("welcome")){
-                        document.getElementById("welcome").innerHTML += txt.charAt(i);
-                        i++;
-                        setTimeout(typeWriter, speed);
-                    }
-                    window.onload = typeWriter;
+        typeWriter();
+        function typeWriter() {
+            if (i < txt.length) {
+                if (document.getElementById("welcome")) {
+                    document.getElementById("welcome").innerHTML += txt.charAt(i);
+                    i++;
+                    setTimeout(typeWriter, speed);
                 }
+                window.onload = typeWriter;
             }
-        },
-    } 
+        }
+    },
+}
 </script>
 
 

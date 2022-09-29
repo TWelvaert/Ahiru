@@ -7,6 +7,11 @@
     src: url('/resources/assets/fonts/MonumentExtended-Regular.otf');
 }
 
+@font-face {
+    font-family: 'roboto';
+    src: url('/resources/assets/fonts/Roboto-Light.ttf') format('truetype');
+}
+
 html {
     scroll-behavior: smooth;
     background-color: white;
@@ -14,7 +19,8 @@ html {
 
 
 .active_file {
-    background-color: rgb(182, 218, 182);
+    border-color: rgb(182, 218, 182);
+    box-shadow: 0 0 10px rgb(146, 205, 146);
 }
 
 .input:focus {
@@ -25,6 +31,10 @@ html {
 
 #musicPlayer {
     display: none;
+    width: 100%;
+    bottom: 0;
+    position: fixed;
+    margin-bottom: -10px;
 }
 
 #musicPlayer_pauseButton {

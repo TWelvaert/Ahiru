@@ -8,12 +8,12 @@ use App\Models\Upload;
 
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
-use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\Auth;
-
+use Illuminate\Http\Request;
 use Inertia\Inertia;
 use File;
-
+use Illuminate\Http\Request as HttpRequest;
+use Illuminate\Support\Facades\Request as FacadesRequest;
 use Session;
 
 class FreelanceAdsController extends Controller
@@ -21,18 +21,20 @@ class FreelanceAdsController extends Controller
     public function index()
     {
         $user = Auth::user();
-        $advertisements = FreelanceAdvertisement::all()->where('user_id', '=', $user->id);
+        $collaborations = FreelanceAdvertisement::all()->where('user_id', '=', $user->id);
 
-        return Inertia::render('Dashboard', [
+        return Inertia::render('DashboardAds', [
             'user' => $user,
-            'advertisements' => $advertisements,
+            'collaborations' => $collaborations,
         ]);
     }
 
 
     public function advertisements()
     {
+        $collaborations = FreelanceAdvertisement::all();
 
+        $collaborations = $collaborations->sortByDesc('created_at');
         $categories = FreelanceCategory::all();
         $user = Auth::user();
         return Inertia::render(
@@ -41,11 +43,10 @@ class FreelanceAdsController extends Controller
                 'user' => $user,
                 'categories' => $categories,
                 'freelance_advertisements' => FreelanceAdvertisement::query()
-                    ->when(Request::input('search'), function ($query, $search) {
+                    ->when(FacadesRequest::input('search'), function ($query, $search) {
                         $query->where('title', 'like', '%' . $search . '%')
-                            ->OrWhere('description', 'like', '%' . $search . '%')
-                            ->OrWhere('category_id', 'like', '%' . $search . '%');
-                    })->paginate(8)
+                            ->OrWhere('description', 'like', '%' . $search . '%');
+                    })->paginate(20)
                     ->withQueryString(),
             ]
         );
@@ -55,9 +56,11 @@ class FreelanceAdsController extends Controller
 
     public function show(FreelanceAdvertisement $freelanceAdvertisement)
     {
-
-        return Inertia::render('Advertisement', [
+        $user = Auth::user();
+        return 
+        Inertia::render('Advertisement', [
             'advertisement' => $freelanceAdvertisement,
+            'user'=> $user,
             // 'uploads' => $uploads_matched,
         ]);
     }
@@ -84,7 +87,7 @@ class FreelanceAdsController extends Controller
 
     public function store(Request $request)
     {
-        
+      
         if($request->uploads == null) {
             $uploads = 0;
         } else {
@@ -121,19 +124,20 @@ class FreelanceAdsController extends Controller
         Session::flash('message', 'Your Advertisement is successfully made!');
         Session::flash('flashtype', 'success');
 
-        return redirect('/dashboard');
+        return redirect('/advertisements');
     }
 
-    public function edit(FreelanceAdvertisement $freelanceAdvertisement)
+    public function edit(FreelanceAdvertisement $freelanceAdvertisement) 
     {
-        $uploads_matched = [];
-        $uploads = $freelanceAdvertisement->uploads;
-        $uploads = explode(",", $uploads);
+        $user = Auth::user();
+        // $uploads_matched = [];
+        // $uploads = $freelanceAdvertisement->uploads;
+        // $uploads = explode(",", $uploads);
 
-        foreach ($uploads as $upload) {
-            $result = Upload::where('id', '=', $upload)->get();
-            array_push($uploads_matched, $result[0]);
-        }
+        // foreach ($uploads as $upload) {
+        //     $result = Upload::where('id', '=', $upload)->get();
+        //     array_push($uploads_matched, $result[0]);
+        // }
 
         $freelanceCategories = FreelanceCategory::all();
         $all_categories = [];
@@ -156,53 +160,56 @@ class FreelanceAdsController extends Controller
             }
         }
 
-        return Inertia::render('FreelanceAdvertisement/Update', [
+        return 
+        Inertia::render('FreelanceAdvertisement/Update', [
+            'user' => $user,
             'title' => $freelanceAdvertisement->title,
             'slug' => $freelanceAdvertisement->slug,
             'description' => $freelanceAdvertisement->description,
             'categories' => $categories,
-            'uploads' => $uploads_matched,
+            // 'uploads' => $uploads_matched,
         ]);
     }
 
-    public function update(Request $request, FreelanceAdvertisement $freelanceAdvertisement)
+    public function update(HttpRequest $request, FreelanceAdvertisement $freelanceAdvertisement)
     {
+        
         $user = Auth::user();
         $files = [];
-        $uploads = [];
+        // $uploads = [];
 
-        if ($request->uploads) {
-            foreach ($request->uploads as $file) {
-                $fileName = time() . rand(1, 99) . '.' . $file->extension();
-                $file->move(public_path('uploads'), $fileName);
+        // if ($request->uploads) {
+        //     foreach ($request->uploads as $file) {
+        //         $fileName = time() . rand(1, 99) . '.' . $file->extension();
+        //         $file->move(public_path('uploads'), $fileName);
 
-                $fileNameParts = parse_url($fileName);
-                $fileExtension = pathinfo($fileNameParts['path'], PATHINFO_EXTENSION);
+        //         $fileNameParts = parse_url($fileName);
+        //         $fileExtension = pathinfo($fileNameParts['path'], PATHINFO_EXTENSION);
 
-                if (in_array($fileExtension, array('jpg', 'png', 'jpeg', 'gif'))) {
-                    $fileType = 'image';
-                } else if (in_array($fileExtension, array('mp3', 'wav'))) {
-                    $fileType = 'audio';
-                    //} else if (in_array($fileExtension, array('mp4', 'avi', 'mov', 'wmv'))) {
-                    //    $fileType = 'video';
-                } else {
-                    dd('unknown file extension');
-                }
+        //         if (in_array($fileExtension, array('jpg', 'png', 'jpeg', 'gif'))) {
+        //             $fileType = 'image';
+        //         } else if (in_array($fileExtension, array('mp3', 'wav'))) {
+        //             $fileType = 'audio';
+        //             //} else if (in_array($fileExtension, array('mp4', 'avi', 'mov', 'wmv'))) {
+        //             //    $fileType = 'video';
+        //         } else {
+        //             dd('unknown file extension');
+        //         }
 
-                $upload = Upload::create([
-                    'user_id' => $user->id,
-                    'name' => $fileName,
-                    'path' => "uploads",
-                    'type' => $fileType,
-                ]);
+        //         $upload = Upload::create([
+        //             'user_id' => $user->id,
+        //             'name' => $fileName,
+        //             'path' => "uploads",
+        //             'type' => $fileType,
+        //         ]);
 
-                array_push($files, $fileName);
-                array_push($uploads, $upload->id);
-            }
-        }
+        //         array_push($files, $fileName);
+        //         array_push($uploads, $upload->id);
+        //     }
+        // }
 
-        $uploads = implode(",", $uploads);
-        $uploads = "$freelanceAdvertisement->uploads,$uploads";
+        // $uploads = implode(",", $uploads);
+        // $uploads = "$freelanceAdvertisement->uploads,$uploads";
 
         $categories_checked = [];
         $categories = $request->categories;
@@ -229,28 +236,28 @@ class FreelanceAdsController extends Controller
             "slug" => $request->slug,
             "title" => $request->title,
             "description" => $request->description,
-            "uploads" => $uploads
+            // "uploads" => $uploads
         ]);
 
         Session::flash('message', 'Your Advertisement was Updated successfully!');
         Session::flash('flashtype', 'success');
 
-        return redirect('/dashboard');
+        return redirect('/dashboard/advertisements');
     }
 
 
     public function destroy(FreelanceAdvertisement $freelanceAdvertisement)
     {
-        $freelanceUploads = explode(',', $freelanceAdvertisement->uploads);
+        // $freelanceUploads = explode(',', $freelanceAdvertisement->uploads);
 
-        foreach ($freelanceUploads as $upload) {
-            if ($result = Upload::where('id', '=', $upload)->get()) {
-                $toDelete = "{$result[0]->path}/{$result[0]->name}";
-                File::delete($toDelete);
-                $result[0]->delete();
-            };
-        }
+        // foreach ($freelanceUploads as $upload) {
+        //     if ($result = Upload::where('id', '=', $upload)->get()) {
+        //         $toDelete = "{$result[0]->path}/{$result[0]->name}";
+        //         File::delete($toDelete);
+        //         $result[0]->delete();
+        //     };
+        // }
         $freelanceAdvertisement->delete();
-        return redirect('/dashboard');
+        return redirect('/dashboard/advertisements');
     }
 }

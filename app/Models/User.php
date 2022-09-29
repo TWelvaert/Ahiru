@@ -46,13 +46,18 @@ class User extends Authenticatable
     ];
 
      // user can have many ads
-    public function advertisement()
+    public function advertisements()
     {
-        return $this->hasMany(Advertisement::class);
+        return $this->hasMany(FreelanceAdvertisement::class);
     }
 
-    public function comment()
+    public function comments()
     {
         return $this->hasMany(Comment::class);
+    }
+
+    public function profile()
+    {
+        return $this->hasMany(Profile::class);
     }
 }

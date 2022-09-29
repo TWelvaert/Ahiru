@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\NewsArticle;
 use App\Models\NewsCategories;
 use App\Models\User;
+use App\Models\Upload;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Auth;
@@ -18,9 +19,9 @@ class NewsController extends Controller
     //
     public function admin_index()
     {
-        $user = Auth::user();
-        $newsArticles = NewsArticle::all();
-
+        $newsArticles = NewsArticle::latest()
+        ->paginate(8);
+                    
         return Inertia::render('Admin/News/Articles', [
             'news_articles' => $newsArticles,
         ]);
@@ -28,6 +29,7 @@ class NewsController extends Controller
 
     public function show(NewsArticle $news_article)
     {   
+        $user = Auth::user();
         return Inertia::render('Article', [
             'news_article' => $news_article,
             'news_comments' => $news_article->comments,
@@ -40,13 +42,17 @@ class NewsController extends Controller
         $newsCategories = NewsCategories::all();
         $categories = [];
 
+        $user = Auth::user();
+        $user_uploads = Upload::where('user_id', '=', $user->id)->get();
+
         foreach ($newsCategories as $category) {
             $categoryObject = ['id' => $category->id, 'name' => $category->name, 'slug' => $category->slug, 'checked' => false];
             array_push($categories, $categoryObject);
         }
 
         return Inertia::render('Admin/News/Create', [
-            'categories' => $categories
+            'categories' => $categories,
+            'user_uploads' => $user_uploads
         ]);
     }
 
@@ -146,8 +152,8 @@ class NewsController extends Controller
             "title" => $request->title,
             "excerpt" => $request->excerpt,
             "description" => $request->description,
-            "category_id" => $categories 
-
+            "category_id" => $categories,
+            "user" => $user
         ]);
 
         Session::flash('message', 'Your News Article was Updated successfully!');
