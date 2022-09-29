@@ -9,10 +9,9 @@
 <template>
     <Dashboard>
         <div class="flex items-center justify-center flex-col">
-        <BreezeButton name="form1" class="ml-4">
-        <a href="">Upload</a>
+        <BreezeButton name="form1" class="ml-4 mt-4">
+            <a href="/music/manager">Publish New Music</a>
         </BreezeButton>
-        <span class="mt-4">Upload your music</span>
         </div>
 
         <section class="grid grid-cols-1 sm:grid-cols-3 gap-4 m-14">

@@ -12,6 +12,8 @@
 
 <template>
     <Dashboard>
-        <Uploads class="absolute min-h-full w-full left-0 top-0" :showing="showing = true"  @close="showing = false" @add_files="processFiles" :user_uploads="user_uploads" />              
+        <div class="relative">
+            <Uploads class="absolute min-h-full w-full left-0 top-0" :showing="showing = true"  @close="showing = false" @add_files="processFiles" :user_uploads="user_uploads" />              
+        </div>
     </Dashboard>
 </template>

@@ -10,9 +10,10 @@ use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\Factories\BelongsToManyRelationship;
 use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
+
 class HomeController extends Controller
 {
-    public function index_home()
+    public function index()
     {
         $advertisements = FreelanceAdvertisement::orderBy('created_at', 'desc')->take(8)->get();
         $users = User::orderBy('created_at', 'desc')->take(8)->get();
@@ -31,14 +32,6 @@ class HomeController extends Controller
             'userProfileData' => $userProfileData
         ]);
         
-    }
-
-    public function index_music()
-    {
-        $user = Auth::user();
-        return Inertia::render('Music', [
-            'user' => $user
-        ]);
     }
 
     public function index_likes()
