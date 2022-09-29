@@ -123,7 +123,7 @@ class NewsController extends Controller
             }
         }
 
-        return Inertia::render('Admin/Update', [
+        return Inertia::render('Admin/News/Update', [
             'title' => $news_article->title,
             'slug' => $news_article->slug,
             'excerpt' => $news_article->excerpt,

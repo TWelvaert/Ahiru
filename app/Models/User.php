@@ -60,4 +60,8 @@ class User extends Authenticatable
     {
         return $this->hasMany(Profile::class);
     }
+    public function uploads()
+    {
+        return $this->hasMany(Upload::class);
+    }
 }
