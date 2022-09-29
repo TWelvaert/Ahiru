@@ -16,7 +16,7 @@
         <slot />
     </main>
   
-    <MusicPlayer />
+    <MusicPlayer class="bg-white absolute bottom-0 overflow-clip" />
 
 </template>
 
