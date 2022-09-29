@@ -70,6 +70,7 @@ class NewsController extends Controller
         }
 
         $categories = implode(",", $categories_checked);
+        $uploads = implode(",", $request->uploads);
 
         Validator::make($request->all(), [
             'title' => ['required', 'string'],
@@ -87,6 +88,7 @@ class NewsController extends Controller
             'excerpt' => $request->excerpt,
             'description' => $request->description,
             'category_id' => $categories,
+            'uploads' => $uploads,
         ]);
 
         return redirect('/admin/news');
