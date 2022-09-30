@@ -9,9 +9,15 @@
 <template>
     <Dashboard>
         <div class="flex items-center justify-center flex-col">
-        <BreezeButton name="form1" class="ml-4 mt-4">
-            <a href="/music/create">Publish New Music</a>
-        </BreezeButton>
+            <span class="text-center bg-black text-white w-full py-4">
+                Welcome on the Music Page !<br>
+                On this page you can find all the latest releases.<br><br>
+                To release and manage your own music, you can use the music manager by clicking on the button below.
+            </span>
+
+            <BreezeButton name="form1" class="ml-4 mt-4">
+                <a href="/music/create">Music Manager</a>
+            </BreezeButton>
         </div>
 
         <section class="flex flex-row flex-wrap justify-center gap-4 m-14">

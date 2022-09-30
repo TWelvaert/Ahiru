@@ -15,11 +15,15 @@
         <div class="flex items-center justify-center flex-col min-w-full relative">
             <span class="text-center bg-black text-white w-full py-4">
                 Welcome to the Music Manager !<br>
-                Via this tool you can upload and publish your latest music on our platform.
+                Via this tool you can release and manage your music on our platform.<br><br>
+
+                You can open the uploader/file selector by clicking the button below.
             </span>
           
             <div class="min-h-full flex items-center justify-center flex-col min-w-full relative mt-2">
-                <BreezeButton v-if="!showUploader" type="button" @click="showUploader = true; openUploader('100')">Click Here to open the uploader</BreezeButton> 
+                <BreezeButton v-if="!showUploader" type="button" @click="showUploader = true; openUploader('100')">
+                    File Selector
+                </BreezeButton> 
                 <div id="100" style="display:none" >
                     <Uploads class="uploader min-h-full min-w-full left-0 top-0 z-10 absolute" v-if="showUploader"  @close="this.showUploader = false;" @add_files="processFiles" :user_uploads="user_uploads_audio" />
                  </div>
