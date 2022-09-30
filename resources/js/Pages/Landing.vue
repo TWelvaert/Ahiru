@@ -29,9 +29,9 @@ import Layout from '@/Layouts/Layout.vue';
 
                 <!-- Buttons -->
 
-                <div class="mt-4 space-x-4 z-40 ">
+                <div class=" flex flex-wrap w-full gap-x-5 gap-y-3 :color-red">
                     <a href=""
-                        class="bg-green-300 z-30 hover:bg-white text-black py-3 px-5 rounded-full font-light tracking-widest  transition ease-in-out delay-50 hover:-translate-y-0.5 hover:scale-60 duration-50 antialiased">
+                        class="bg-green-300 z-30 hover:bg-white text-black py-3 px-4 rounded-full font-light tracking-widest  transition ease-in-out delay-50 hover:-translate-y-0.5 hover:scale-60 duration-50 antialiased ">
                         START BUILDING
                     </a>
                     <a href="#community-page" v-smooth-scroll
