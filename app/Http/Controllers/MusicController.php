@@ -83,18 +83,48 @@ class MusicController extends Controller
                 'track_title' => $req['track_title'],
             ]);
         }
+
+        Session::flash('message', 'Your music has been published!');
+        Session::flash('flashtype', 'success');
  
         return $request;
     }
 
-    public function edit(MusicUpload $track )
+    public function edit(MusicUpload $track)
     {   
-        $image = Upload::where('id', '=', $track->image_id)->get();
-        $track->image_id = $image[0]['name'];
+        $user = Auth::user();
+        $user_uploads = Upload::where('user_id', '=', $user->id)->get();
+        $uploads_images = [];
 
+        $image = Upload::where('id', '=', $track->image_id)->get();
+  
+
+        foreach ($user_uploads as $upload) {
+            if($upload['type'] == 'image') {
+                array_push($uploads_images, $upload);
+            }
+        }
+        
         return Inertia::render('Music/Edit', [
-            'music' => $track
+            'uploads_images' => $uploads_images,
+            'music' => $track,
+            'image' => $image[0]['name']
         ]);
+    }
+
+    public function update(MusicUpload $track, Request $request)
+    {
+            $track->update([
+                'user_id' => Auth::user()->id,
+                'audio_id' => $request->track['audio_id'],
+                'image_id' => $request->track['image_id'],
+                'track_title' => $request->track['track_title'],
+            ]);
+
+            Session::flash('message', 'Your track has been updated!');
+            Session::flash('flashtype', 'success');
+ 
+        return $track;
     }
 
 
@@ -102,7 +132,7 @@ class MusicController extends Controller
     {
         $track->delete();
         
-        Session::flash('message', 'Your track has been uccessfully deleted!');
+        Session::flash('message', 'Your track has been deleted!');
         Session::flash('flashtype', 'success');
 
         return redirect()->back();
