@@ -27,22 +27,26 @@
                     <b><span class="text-red-800">ERROR: </span></b><span class="text-red-700"> {{ this.error }}</span>
                 </div>
 
+                <div v-if="this.success != 'None'" class="ml-2">
+                    <b><span class="text-green-800">Success: </span></b><span class="text-green-700"> {{ this.success }}</span>
+                </div>
+
        
                       
                     <div class="flex mt-2">
                         <div class="relative">
-                            <img  class="cursor-pointer w-40 h-40 z-0" :src="'/uploads/' + music['image_id']"/>
+                            <img id="coverImage" class="cursor-pointer w-40 h-40 z-0" :src="'/uploads/' + image"/>
                         </div>
                         <div class="bg-gray-100 text-black rounded-b p-1 w-full truncate">
                             <div>
                                 <BreezeLabel for="excerpt" value="Track Title" class="block mb-2 uppercase font-bold text-xs text-gray-700 w-full" />
-                                <input type="text" :id="`title_id${index}`" class="border-0 rounded-full w-1/2" :value="music['track_title']" />
+                                <input type="text" id="titleInput" class="border-0 rounded-full w-1/2" :value="music['track_title']" />
                             </div>
                             <button class="bg-black  text-white rounded-full p-4 mt-2 mb-2" v-if="showUploader == 999" type="button" @click="showUploader = index; openUploader(index)">Change Cover Picture</button>  
                         </div>
                         <div class="min-h-full flex items-center justify-center flex-col mt-2">     
                         
-                                <Uploads v-if="showUploader == index" @close="this.showUploader = 999;" @add_files="processFiles" :user_uploads="user_uploads_images" class="uploader min-h-full min-w-full left-0 top-0 z-10 absolute" />
+                                <Uploads v-if="showUploader == index" @close="this.showUploader = 999;" @add_files="processFiles" :user_uploads="uploads_images" class="uploader min-h-full min-w-full left-0 top-0 z-10 absolute" />
                         
                             <div id="selectedFiles"></div>
                         </div>
@@ -62,99 +66,70 @@
 
 <script>
     export default {
-            props: ['user', 'user_uploads_audio', 'selected_uploads', 'user_uploads_images', 'music'],
+            props: ['user', 'selected_uploads', 'uploads_images', 'music', 'image'],
             data (){
                 return {
                     showUploader: 999,
-                    current_uploader: 100,
                     uploadsPreview: [],
-                    music_uploads: [],
                     error: 'None',
+                    success: 'None',
                 }
             },
             mounted() {
-                 if(sessionStorage.getItem('UPLOADS') == 'OPEN') {
-                     this.showUploader = 999;
-                 } 
-                for (let i = 0; i < 6; i++) {
-                    if(document.getElementById(`${i}`)) { 
-                        document.getElementById(`${i}`).style.display = 'block'; 
-                    }    
-                }
-
-                if(document.getElementById(`100`)) { 
-                    document.getElementById(`100`).style.display = 'block'; 
-                }  
+                this.success = 'None';
             },
             methods: {
                 processFiles(files) {
+                    let uploadsPreview = [];
+                    document.querySelector('#selectedFiles').innerHTML = "";
+                    this.selected_files = files;
+                    form.uploads = files;
 
-                    if(this.current_uploader == 100) {
-                        this.music_uploads = [];
-                        this.selected_music = '';
-                        files.forEach(id => {
-                            let trackTitle = '';
-                            let track = {'track_title': trackTitle, 'audio_id': id, 'image_id': 0};
-                            this.music_uploads.push(track);
+                    this.music.image_id = files[0];
+                    
+                    this.uploads_images.forEach(upload => {
+                        this.selected_files.forEach(file => {
+                            if(file == upload.id) {
+                                uploadsPreview.push(upload);
+                            }  
                         });
-                        this.selected_music = files; 
-                    } else {
-                        this.selected_images = '';
-                        files.forEach(file => {
-                            this.music_uploads[this.current_uploader]['image_id'] = file;
-                        });
-                    }
+                    });
 
-                    if(this.selected_music) {
-                        document.querySelector('#publishButton_Container').style.display = 'block';
-                    }
-                   
+                    uploadsPreview.forEach(upload => {
+                        document.querySelector('#coverImage').src = `/${upload.path}/${upload.name}`;
+                    });
                 },
-                openUploader(index) {  
-                    document.querySelector('#tracks').style.display = 'block';
-                    for (let i = 0; i < 6; i++) {
-                        if(document.getElementById(`${i}`)) { 
-                            document.getElementById(`${i}`).style.display = 'none'; 
-                        }    
-                    }
-                    this.current_uploader = parseInt(index);
+                openUploader() {  
                     sessionStorage.setItem("UPLOADS", "OPEN");
                 },
                 publishForm(e) {
 
                     this.error = 'None';
+                    let titleInput = document.querySelector('#titleInput');
 
-                    console.log(this.selected_music.length)
-                    let length = this.selected_music.length;
-                    for (let i = 0; i < length; i++) {
-                      
-                        let titleInput = document.querySelector('#title_id' + i);
-                        if(titleInput) {
-                            if(titleInput.value != '') {
-                                this.music_uploads[i]['track_title'] = titleInput.value;
-                            } else {
-                            this.error = ('The input field track title cannot be empty !');
-                            }
-                        }
+                    if(titleInput.value != '') {
+                       
+                        this.music.track_title = titleInput.value;
+                        console.log(this.music)
+                    } else {
+                    this.error = ('The input field track title cannot be empty !');
                     }
            
                     e.preventDefault();
 
-                    console.log(this.error)
-
                     if(this.error == 'None') {
                         let currentObj = this;
-                        axios.post('/music/create', {
-                        uploads: this.music_uploads,
+                        axios.post(`/music/edit/${this.music.id}`, {
+                        track: this.music,
                         })
                         .then(function (response) {
-                            document.querySelector('#tracks').style.display = 'none';
-                            window.location.href = "/music/create"
+                            
                         })
                         .catch(function (error) {
                             currentObj.output = error;
                             console.log(error)
                         });
+                        this.success = 'Your track has been updatec!';
                     }
 
                 },
