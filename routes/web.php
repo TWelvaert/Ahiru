@@ -58,7 +58,9 @@ Route::get('/dashboard', [HomeController::class, 'index'])->name('dashboard')->m
 Route::get('/home', [HomeController::class, 'index'])->name('home');
 Route::get('/music', [MusicController::class, 'index'])->name('music');
 Route::get('/music/create', [MusicController::class, 'create'])->middleware(['auth', 'verified']);
-Route::post('music/create', [MusicController::class, 'store']);
+Route::get('/music/delete/{track:id}', [MusicController::class, 'destroy'])->middleware(['auth', 'verified']);
+Route::get('/music/edit/{track:id}', [MusicController::class, 'edit'])->middleware(['auth', 'verified']);
+Route::post('music/create', [MusicController::class, 'store'])->middleware(['auth', 'verified']);
 //Route::post('music/create','MusicController@store');
 
 
