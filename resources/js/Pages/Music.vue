@@ -10,7 +10,7 @@
     <Dashboard>
         <div class="flex items-center justify-center flex-col">
         <BreezeButton name="form1" class="ml-4 mt-4">
-            <a href="/music/manager">Publish New Music</a>
+            <a href="/music/create">Publish New Music</a>
         </BreezeButton>
         </div>
 

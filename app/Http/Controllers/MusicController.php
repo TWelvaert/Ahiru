@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
 use App\Models\Upload;
+use App\Models\MusicUpload;
 
 class MusicController extends Controller
 {
@@ -17,7 +18,7 @@ class MusicController extends Controller
         ]);
     }
 
-    public function manager()
+    public function create()
     {
         $user = Auth::user();
         $user_uploads = Upload::where('user_id', '=', $user->id)->get();
@@ -41,4 +42,28 @@ class MusicController extends Controller
             'user_uploads_images' => $uploads_images,
         ]);
     }
+
+    public function store(Request $request)
+    {
+        // foreach ($request as $req) {
+        //     $musicupload = MusicUpload::create([
+        //         'user_id' => Auth::user()->id,
+        //         'audio_id' => $req->uploads[0]['audio_id'],
+        //         'image_id' => $req->uploads[0]['image_id'],
+        //         'track_title' => $req->uploads[0]['track_title'],
+        //     ]);
+        // }
+
+        foreach ($request->uploads as $req) {
+            $musicupload = MusicUpload::create([
+                'user_id' => Auth::user()->id,
+                'audio_id' => $req['audio_id'],
+                'image_id' => $req['image_id'],
+                'track_title' => $req['track_title'],
+            ]);
+        }
+ 
+        return $request;
+    }
+
 }
