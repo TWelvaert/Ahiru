@@ -57,7 +57,12 @@ Route::get('/dashboard/advertisements', [FreelanceAdsController::class, 'index']
 Route::get('/dashboard', [HomeController::class, 'index'])->name('dashboard')->middleware(['auth', 'verified']);
 Route::get('/home', [HomeController::class, 'index'])->name('home');
 Route::get('/music', [MusicController::class, 'index'])->name('music');
-Route::get('/music/manager', [MusicController::class, 'manager'])->middleware(['auth', 'verified']);
+Route::get('/music/create', [MusicController::class, 'create'])->middleware(['auth', 'verified']);
+Route::post('music/create', [MusicController::class, 'store']);
+//Route::post('music/create','MusicController@store');
+
+
+
 Route::get('/likes', [HomeController::class, 'index_likes'])->middleware(['auth', 'verified'])->name('likes');
 Route::get('/following', [HomeController::class, 'index_following'])->middleware(['auth', 'verified'])->name('following');
 
