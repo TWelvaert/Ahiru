@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
 use App\Models\Upload;
 use App\Models\MusicUpload;
+use Session;
 
 class MusicController extends Controller
 {
@@ -19,7 +20,7 @@ class MusicController extends Controller
         foreach ($music as $key => $track) {
             $image = 0;
             if($track->image_id == '0') {
-                $image = Upload::where('id', '=', 1)->get();
+                $image = Upload::where('id', '=', 90)->get();
             } else {
                 $image = Upload::where('id', '=', $track->image_id)->get();
             }
@@ -34,6 +35,7 @@ class MusicController extends Controller
 
     public function create()
     {
+        
         $user = Auth::user();
         $user_uploads = Upload::where('user_id', '=', $user->id)->get();
         $uploads_audio = [];
@@ -52,19 +54,18 @@ class MusicController extends Controller
         }
 
         $music = $user->music()->get();
-
+   
         foreach ($music as $key => $track) {
             $image = 0;
             if($track->image_id == '0') {
-                $image = Upload::where('id', '=', 1)->get();
+                $image = Upload::where('id', '=', 90)->get();
             } else {
                 $image = Upload::where('id', '=', $track->image_id)->get();
             }
-           
             $track->image_id = $image[0]['name'];
         }
        
-        return Inertia::render('MusicManager', [
+        return Inertia::render('Music/Manager', [
             'user' => $user,
             'music' => $music,
             'user_uploads_audio' => $uploads_audio,
@@ -84,6 +85,27 @@ class MusicController extends Controller
         }
  
         return $request;
+    }
+
+    public function edit(MusicUpload $track )
+    {   
+        $image = Upload::where('id', '=', $track->image_id)->get();
+        $track->image_id = $image[0]['name'];
+
+        return Inertia::render('Music/Edit', [
+            'music' => $track
+        ]);
+    }
+
+
+    public function destroy(MusicUpload $track)
+    {
+        $track->delete();
+        
+        Session::flash('message', 'Your track has been uccessfully deleted!');
+        Session::flash('flashtype', 'success');
+
+        return redirect()->back();
     }
 
 }
