@@ -36,7 +36,7 @@ console.log(data['userProfileData']);
                 <a v-for="advertisement in advertisements" v-bind:href="'/advertisement/' + advertisement.slug"
                     class="block p-6 max-w-sm bg-white rounded-lg border border-gray-200 shadow-md hover:bg-gray-10 ">
                     <div class="rounded-lg md:flex-row md:max-w-xl">
-                        <img class="max-w- mb-3 mx-auto" src="../../assets/images/54520cca8c5613dd95fef5fd6a608def.gif"
+                        <img class="mb-3 mx-auto" src="../../assets/images/54520cca8c5613dd95fef5fd6a608def.gif"
                             alt="">
                         <!-- Make dynamic -->
                         <button type="button"
@@ -212,7 +212,7 @@ console.log(data['userProfileData']);
                     '/profile/' +
                     userProfile.user.slug
                 ">
-                <div class="w-72 h-auto bg-white border border-gray-200 shadow-md hover:bg-gray-10rounded-lg p-10   ">
+                <div class="w-72 h-auto  bg-white border border-gray-200 shadow-md hover:bg-gray-10rounded-lg p-10   ">
 
                     <div class="flex flex-col gap-4 text-center items-center">
                         <img class="h-32 w-32 bg-white p-2 rounded-full shadow" mb-4 v-bind:src="userProfile.profile.profile_image"

@@ -49,16 +49,16 @@ class FreelanceAdsController extends Controller
                     ->when(FacadesRequest::input('search'), function ($query, $search) {
                         $query->where('title', 'like', '%' . $search . '%')
                             ->OrWhere('description', 'like', '%' . $search . '%');
-                    })->paginate(10)
+                    })->paginate(30)
                     ->withQueryString();
 
         $collabs = [];
-       
+
         foreach ($collaborations as $collaboration) {
 
             $uploads = explode(",", $collaboration->uploads);
             $uploadsResult = [];
-            
+
 
             foreach ($uploads as $upload) {
                 if (strlen($upload) > 0) {
@@ -66,9 +66,9 @@ class FreelanceAdsController extends Controller
                     $uploadsResult = $result;
                 }
             }
-           
+
             $collab = ['collab' => $collaboration, 'uploads' => $uploadsResult];
-            
+
             array_push($collabs, $collab);
 
         }
