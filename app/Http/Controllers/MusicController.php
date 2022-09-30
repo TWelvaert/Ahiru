@@ -13,8 +13,22 @@ class MusicController extends Controller
     public function index()
     {
         $user = Auth::user();
+
+        $music = MusicUpload::all();
+
+        foreach ($music as $key => $track) {
+            $image = 0;
+            if($track->image_id == '0') {
+                $image = Upload::where('id', '=', 1)->get();
+            } else {
+                $image = Upload::where('id', '=', $track->image_id)->get();
+            }
+           
+            $track->image_id = $image[0]['name'];
+        }
+
         return Inertia::render('Music', [
-            'user' => $user
+            'music' => $music
         ]);
     }
 
@@ -37,7 +51,22 @@ class MusicController extends Controller
             }
         }
 
+        $music = $user->music()->get();
+
+        foreach ($music as $key => $track) {
+            $image = 0;
+            if($track->image_id == '0') {
+                $image = Upload::where('id', '=', 1)->get();
+            } else {
+                $image = Upload::where('id', '=', $track->image_id)->get();
+            }
+           
+            $track->image_id = $image[0]['name'];
+        }
+       
         return Inertia::render('MusicManager', [
+            'user' => $user,
+            'music' => $music,
             'user_uploads_audio' => $uploads_audio,
             'user_uploads_images' => $uploads_images,
         ]);
@@ -45,15 +74,6 @@ class MusicController extends Controller
 
     public function store(Request $request)
     {
-        // foreach ($request as $req) {
-        //     $musicupload = MusicUpload::create([
-        //         'user_id' => Auth::user()->id,
-        //         'audio_id' => $req->uploads[0]['audio_id'],
-        //         'image_id' => $req->uploads[0]['image_id'],
-        //         'track_title' => $req->uploads[0]['track_title'],
-        //     ]);
-        // }
-
         foreach ($request->uploads as $req) {
             $musicupload = MusicUpload::create([
                 'user_id' => Auth::user()->id,

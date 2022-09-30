@@ -60,4 +60,10 @@ class User extends Authenticatable
     {
         return $this->hasMany(Profile::class);
     }
+
+    public function music()
+    {
+        return $this->hasMany(MusicUpload::class);
+    }
+
 }
