@@ -9,24 +9,26 @@ import Layout from '@/Layouts/Layout.vue';
 
 
 
-        <canvas class="absolute z-10 right-0" id="canvas3d" width="1000" height="1000"></canvas>
+        
 
         <!-- First page -->
 
-        <div class="relative bg-black min-h-screen">
-
+        <div class="bg-black min-h-screen">
+        <canvas class="absolute z-10 right-0" id="canvas3d" width="1000" height="1000"></canvas>
             <!-- Header text -->
 
             <div class="grid grid-rows-2 gap-10 grid-cols-2 p-24 pl-72 ">
+                
                 <p class="text-white text-6xl font-monument antialiased z-30">
-                <p class="text-green-300">POWERFUL</p> FOR <br>
-                CREATIVES.
+                <p class="text-green-300">POWERFUL</p>
+                <p>FOR</p>
+                <p>CREATIVES</p>
                 </p>
 
                 <p class="text-white text-6xl font-monument antialiased col-span-2 z-30">ACCESSIBLE <br> FOR <br>
                     EVERYONE.
                 </p>
-
+                
                 <!-- Buttons -->
 
                 <div class=" flex flex-wrap w-full gap-x-5 gap-y-3 :color-red">
@@ -35,7 +37,7 @@ import Layout from '@/Layouts/Layout.vue';
                         START BUILDING
                     </a>
                     <a href="#community-page" v-smooth-scroll
-                        class="hover:bg-white text-white z-30 hover:text-black border-2 border-solid border-white py-3 px-5 rounded-full font-light tracking-widest  transition ease-in-out delay-50 hover:-translate-y-0.5 hover:scale-60 duration-50 antialiased">
+                        class="hover:bg-white text-white z-30 hover:text-black border-2 border-solid border-white py-3 px-8 rounded-full font-light tracking-widest  transition ease-in-out delay-50 hover:-translate-y-0.5 hover:scale-60 duration-50 antialiased">
                         WHY AHIRU?
                     </a>
                 </div>
