@@ -13,8 +13,22 @@ class MusicController extends Controller
     public function index()
     {
         $user = Auth::user();
+
+        $music = MusicUpload::all();
+
+        foreach ($music as $key => $track) {
+            $image = 0;
+            if($track->image_id == '0') {
+                $image = Upload::where('id', '=', 1)->get();
+            } else {
+                $image = Upload::where('id', '=', $track->image_id)->get();
+            }
+           
+            $track->image_id = $image[0]['name'];
+        }
+
         return Inertia::render('Music', [
-            'user' => $user
+            'music' => $music
         ]);
     }
 
