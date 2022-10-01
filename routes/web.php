@@ -7,11 +7,12 @@ use App\Http\Controllers\MusicController;
 use App\Http\Controllers\NewsCommentController;
 use App\Http\Controllers\NewsController;
 use App\Http\Controllers\ProfileController;
-use App\Models\FreelanceAdvertisement;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
-use Inertia\Inertia;
 use Illuminate\Support\Facades\Auth;
+use App\Models\FreelanceAdvertisement;
+use App\Models\Upload;
+use Inertia\Inertia;
 
 use function PHPSTORM_META\type;
 
@@ -111,16 +112,24 @@ Route::get('admin/users/{user:slug}/delete', [\App\Http\Controllers\AdminControl
 
 Route::get('settings/account', [\App\Http\Controllers\Auth\RegisteredUserController::class, 'edit'])->name('settings/account');
 Route::post('settings/account', [\App\Http\Controllers\Auth\RegisteredUserController::class, 'update'])->name('settings/account');
-Route::post('settings/account/password', [\App\Http\Controllers\Auth\RegisteredUserController::class, 'update_password'])->name('settings/account/password');
-Route::post('settings/account/profile-picture', [\App\Http\Controllers\Auth\RegisteredUserController::class, 'update_profile_picture'])->name('settings/account/profile-picture');
 Route::get('settings/uploads', [\App\Http\Controllers\UploadsController::class, 'index'])->name('settings/uploads');
 Route::post('settings/uploads', [\App\Http\Controllers\UploadsController::class, 'upload'])->name('settings/uploads');
 Route::get('settings/uploads/delete/{upload:id}', [\App\Http\Controllers\UploadsController::class, 'destroy']);
 
 
 Route::get('/user_data', function () {
+    $user = Auth::user();
+    $profile = $user->profile()->get();
+    $profile_picture = 0;
+
+    if($profile[0]->profile_image != 0) {
+        $profile_picture = Upload::Where('id', '=', $profile[0]->profile_image)->get();
+        $profile_picture = $profile_picture[0]['name'];
+    }
+
     return [
         'user' => Auth::user(),
+        'profile' => $profile_picture,
     ];});
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
