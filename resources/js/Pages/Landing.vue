@@ -13,14 +13,15 @@
     
             <!-- First page -->
     
-            <div class="bg-black min-h-screen  ">
+            <div class="relative bg-black min-h-screen  ">
             
                 <!-- Header text -->
-                <div class="flex justify-around">
+                
+                <div class="flex py-32 pl-72">
                     <div class="flex">
-                        <div class="flex flex-wrap flex-col ">
+                        <div class="flex flex-col ">
                             <div class="py-5">
-                                <p class="text-white text-6xl font-monument antialiased z-30">
+                                <p class="text-white text-6xl font-monument antialiased z-30 ">
                                 <p class="text-green-300">POWERFUL</p>
                                 <p>FOR</p>
                                 <p>CREATIVES</p>
@@ -52,10 +53,11 @@
     
                             </div>
                 </div>
-            <canvas class="w-96" id="canvas3d"></canvas>
+            
            
                 </div>
-                
+                <canvas class="w-24 h-auto object-contain " id="canvas3d"></canvas>
+            
             </div>
     
     
@@ -63,11 +65,11 @@
     
             <!-- FREELANCE PAGE ================================================= -->
     
-            <div id="community-page" class="relative  bg-black min-h-screen">
+            <div id="community-page" class="bg-black min-h-screen">
     
                 <!-- Header text -->
     
-                <div class="flex flex-wrap flex-col py-24 pl-72 ">
+                <div class="flex flex-wrap flex-col flex-shrink py-32 pl-72 ">
                     <div class="py-5">
                                 <p class="text-white text-6xl font-monument antialiased z-30">
                                 <p class="text-green-300">FREELANCE</p>
