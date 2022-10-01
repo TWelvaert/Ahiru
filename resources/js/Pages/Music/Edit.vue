@@ -129,7 +129,7 @@
                             currentObj.output = error;
                             console.log(error)
                         });
-                        this.success = 'Your track has been updatec!';
+                        this.success = 'Your track has been updated!';
                     }
 
                 },
