@@ -60,7 +60,7 @@ class RegisteredUserController extends Controller
 
         Profile::create([
             'user_id' => $user->id,
-            'profile_image' => 'assets/img/default.png',
+            'profile_image' => 0,
             'bio' => ''
         ]);
 
