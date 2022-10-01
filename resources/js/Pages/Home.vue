@@ -1,6 +1,7 @@
 <script setup>
 import Dashboard from '@/Pages/Dashboard.vue';
 import moment from "moment";
+import BreezeButton from "@/Components/Button.vue";
 
 
 
@@ -17,43 +18,59 @@ console.log(data['userProfileData']);
 <template>
     <Dashboard>
 
-        <section class="mt-14 ">
+        <section class="mt-14 p-24 pl-26 ">
 
             <!-- ADVERTISEMENTS -->
 
-            <!-- CARD -->
-
-            <!-- HEADER ADS -->
+            <!-- Header advertisements -->
 
             <div class="flex flex-col ml-16 mb-2 leading-tight">
                 <span class="font-monument text-4xl">Advertisements</span>
                 <span class="mt-3">These advertisements are the latest added to the Ahiru platform</span>
+                <small class="mt-8">8 Advertisements available</small>
             </div>
 
-            <!-- CARD -->
+            <!-- Card -->
 
-            <div class="grid grid-cols-4 gap-4 m-14">
-                <a v-for="advertisement in advertisements" v-bind:href="
-                    '/advertisement/' +
-                    advertisement.slug
-                "
-                    class="block p-6 max-w-sm bg-white rounded-lg border border-gray-200 shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
-                    <img src="../../assets/images/070c4ae0e59af72c222e2756c87baa1a.gif" alt="">
-                    <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">{{
-                    advertisement.title }}</h5>
-                    <p class="font-normal text-gray-700 dark:text-gray-400 line-clamp-3">{{ advertisement.description }}
-                    </p>
-                    <small>{{ dateTime(advertisement.created_at) }}</small>
+            <div class="grid grid-cols-4 gap-6 m-16 md:grid-cols-2 lg:grid-cols-4 ">
+                <a v-for="advertisement in advertisements" v-bind:href="'/advertisement/' + advertisement.slug"
+                    class="block p-6 max-w-sm bg-white rounded-lg border border-gray-200 shadow-md hover:bg-gray-10 ">
+                    <div class="rounded-lg md:flex-row md:max-w-xl">
+                        <img class="mb-3 mx-auto" src="../../assets/images/54520cca8c5613dd95fef5fd6a608def.gif"
+                            alt="">
+                        <!-- Make dynamic -->
+                        <button type="button"
+                            class="mb-3 inline-flex items-center px-1 py-0 border border-transparent text-sm rounded text-gray-500 bg-gray-100 hover:text-green-300 focus:outline-none transition ease-in-out duration-150">
+                            <img class="h-7 w-7 m-1 rounded-full" src="../../assets/images/waterloop.gif" alt="">
+                            advertisements.user
+                            <!-- Make dynamic -->
+                        </button>
+                        <h5 class="text-2xl pb-6 text-gray-900 dark:text-white">
+                            {{ advertisement.title }}
+                        </h5>
+                        <p class="line-clamp-5 mb-5 text-gray-500">
+                            {{ advertisement.description }}
+                        </p>
+                        <hr>
+                        <div class="mt-4">
+                            <BreezeButton name="form1" class="">
+                                <a href="advertisement/create">Read more</a>
+                            </BreezeButton>
+                        </div>
 
+                    </div>
                 </a>
-
             </div>
+
+
+
 
             <!-- MUSIC -->
 
             <div class="flex flex-col ml-16 mb-2 leading-tight">
                 <span class="font-monument text-4xl">The Upload</span>
                 <span class="mt-3">Newly posted tracks. Just for you</span>
+                <small class="mt-8">3 Tracks available</small>
             </div>
 
 
@@ -187,52 +204,57 @@ console.log(data['userProfileData']);
             <div class="flex flex-col ml-16 mb-2 leading-tight">
                 <span class="font-monument text-4xl">Popular Artists</span>
                 <span class="mt-3">Most streamed artists of the moment </span>
+                <small class="mt-8">8 Artists available</small>
             </div>
 
-            <div class="flex gap-4 m-14 mt-32">
+            <div class="grid grid-cols-4 gap-6 m-16 md:grid-cols-2 lg:grid-cols-4">
                 <a v-for="userProfile in userProfileData" v-bind:href="
                     '/profile/' +
                     userProfile.user.slug
                 ">
-                    <div class="card w-96 mx-auto bg-white  shadow-xl hover:shadow">
+                <div class="w-72 h-auto  bg-white border border-gray-200 shadow-md hover:bg-gray-10rounded-lg p-10   ">
 
+                    <div class="flex flex-col gap-4 text-center items-center">
+                        <img class="h-32 w-32 bg-white p-2 rounded-full shadow" mb-4 v-bind:src="userProfile.profile.profile_image"
 
-                        <img class="w-32 mx-auto rounded-full -mt-20 border-8 border-white"
-                            v-bind:src="userProfile.profile.profile_image" alt="" />
-
-                        <div class="text-center mt-2 text-3xl font-medium">{{ userProfile.user.name }}
+                            alt="">
+                        <p class="font-semibold">{{ userProfile.user.name }}</p>
+                        <div class="text-sm leading-normal text-gray-400 flex justify-center items-center">
+                            <svg viewBox="0 0 24 24" class="mr-1" width="16" height="16" stroke="currentColor"
+                                stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                                <circle cx="12" cy="10" r="3"></circle>
+                            </svg>
+                            Los Angeles, California
                         </div>
-                        <div class="text-center mt-2 font-light text-sm">@tycho</div>
-                        <div class="text-center font-normal text-lg"></div>
-                        <div class="px-6 text-center mt-2 font-light text-sm">
+                        <div class="line-clamp-2 px-6 text-center mt-2 font-light text-sm">
                             <p>
                                 {{ userProfile.profile.bio }}
-
                             </p>
                         </div>
-                        <hr class="mt-8">
-                        <div class="flex p-4">
-                            <div class="w-1/2 text-center">
-                                <span class="font-bold">1.8 k</span> Followers
-                            </div>
-                            <div class="w-0 border border-gray-300">
-
-                            </div>
-                            <div class="w-1/2 text-center">
-                                <span class="font-bold">2.0 k</span> Following
-                            </div>
-                        </div>
-
                     </div>
-                </a>
+                    <!-- <div class="flex justify-center items-center gap-2 my-3">
+                        <div class="font-semibold text-center mx-4">
+                            <p class="text-black">102</p>
+                            <span class="text-gray-400">Posts</span>
+                        </div>
+                        <div class="font-semibold text-center mx-4">
+                            <p class="text-black">102</p>
+                            <span class="text-gray-400">Followers</span>
+                        </div>
+                        <div class="font-semibold text-center mx-4">
+                            <p class="text-black">102</p>
+                            <span class="text-gray-400">Folowing</span>
+                        </div>
+                    </div> -->
             </div>
-
+        </a>
+        </div>
 
         </section>
-
-
     </Dashboard>
 </template>
+
 <script>
 export default {
     methods: {

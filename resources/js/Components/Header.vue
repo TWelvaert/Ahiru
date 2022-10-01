@@ -64,9 +64,9 @@
                                     <BreezeDropdownLink :href="`/profile/${user.slug}`" :class="{ 'active': $page.url === '/profile' }">
                                         Profile
                                     </BreezeDropdownLink>
-                                    <BreezeDropdownLink :href="route('likes')"
-                                        :class="{ 'active': $page.url === '/likes' }">
-                                        Likes
+                                    <BreezeDropdownLink :href="route('inbox')"
+                                        :class="{ 'active': $page.url === '/inbox' }">
+                                        Inbox
                                     </BreezeDropdownLink>
                                     <BreezeDropdownLink :href="route('following')"
                                         :class="{ 'active': $page.url === '/following' }">
@@ -109,7 +109,7 @@
 
                 </div>
 
-              
+
 
 
         <div :class="{'block': showingNavigationDropdown, 'hidden': ! showingNavigationDropdown}" class="sm:hidden">
@@ -135,7 +135,7 @@
     </nav>
 
 
-  
+
 
 </template>
 <script setup>

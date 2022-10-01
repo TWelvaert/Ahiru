@@ -6,6 +6,8 @@ import BreezeInputError from "@/Components/InputError.vue";
 import BreezeCheckbox from "@/Components/Checkbox.vue";
 import BreezeLabel from "@/Components/Label.vue";
 import TextareaVue from "@/Components/textarea.vue";
+import Uploads from "@/Plugins/Uploads.vue";
+import Dashboard from "@/Pages/Dashboard.vue";
 
 import { Head, useForm } from "@inertiajs/inertia-vue3";
 
@@ -33,7 +35,7 @@ const submit = () => {
 
 <template>
     <Head title="Advertisement" />
-    <BreezeAuthenticatedLayout>
+    <Dashboard>
         <template #header>
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
                 Advertisement
@@ -110,36 +112,11 @@ const submit = () => {
                             :message="form.errors.description"
                         />
                     </div>
-                    <!-- <div v-for="upload in uploads" class="w-20 inline-block">
-                        <div v-if="upload['type'] === 'image'">
-                            <img
-                                :src="`/${upload['path']}/${upload['name']}`"
-                            />
-                        </div>
-                        <div v-if="upload['type'] === 'audio'">
-                            {{ upload["name"] }}
-                        </div>
-                    </div> -->
-                    <!-- <div>
-                        <BreezeLabel
-                            for="images"
-                            value="upload files"
-                            class="block mb-2 uppercase font-bold text-xs text-gray-700 w-full"
-                        />
-                        <BreezeInput
-                            id="images"
-                            multiple
-                            type="file"
-                            @input="form.uploads = $event.target.files"
-                            class="border border-blue-300 p-2 w-full rounded mb-2"
-                            required
-                            autofocus
-                        />
-                        <BreezeInputError
-                            class="mt-2"
-                            :message="form.errors.uploads"
-                        />
-                    </div> -->
+                    <div class="min-h-full">
+                        <button class="bg-slate-400 text-white w-full mt-2 mb-2" type="button" @click="showing = true; openUploads()">Add media (image or audio file)</button>
+                        <Uploads class="absolute min-h-full w-full left-0 top-0" v-if="showing"  @close="showing = false" @add_files="processFiles" :user_uploads="user_uploads" />
+                        <div id="selectedFiles" class="flex gap-1 flex-wrap"></div>
+                    </div>
                     <div v-for="category in categories" class="inline mx-2">
                         <BreezeCheckbox
                             :name="category.name"
@@ -149,7 +126,7 @@ const submit = () => {
                         <BreezeLabel
                             :for="category.id"
                             :value="category.name"
-                            class="inline-block mb-2 ml-2 uppercase font-bold text-xs text-white"
+                            class="inline-block mb-2 ml-2 uppercase font-bold text-xs"
                         />
                     </div>
                     <div class="flex items-center justify-end mt-4">
@@ -164,5 +141,5 @@ const submit = () => {
                 </form>
             </div>
         </div>
-    </BreezeAuthenticatedLayout>
+    </Dashboard>
 </template>

@@ -66,4 +66,10 @@ class User extends Authenticatable
         return $this->hasMany(MusicUpload::class);
     }
 
+
+    public function uploads()
+    {
+        return $this->hasMany(Upload::class);
+    }
+
 }
