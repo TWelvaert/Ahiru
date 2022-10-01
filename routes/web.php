@@ -7,11 +7,12 @@ use App\Http\Controllers\MusicController;
 use App\Http\Controllers\NewsCommentController;
 use App\Http\Controllers\NewsController;
 use App\Http\Controllers\ProfileController;
-use App\Models\FreelanceAdvertisement;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
-use Inertia\Inertia;
 use Illuminate\Support\Facades\Auth;
+use App\Models\FreelanceAdvertisement;
+use App\Models\Upload;
+use Inertia\Inertia;
 
 use function PHPSTORM_META\type;
 
@@ -57,8 +58,20 @@ Route::get('/dashboard/advertisements', [FreelanceAdsController::class, 'index']
 Route::get('/dashboard', [HomeController::class, 'index'])->name('dashboard')->middleware(['auth', 'verified']);
 Route::get('/home', [HomeController::class, 'index'])->name('home');
 Route::get('/music', [MusicController::class, 'index'])->name('music');
-Route::get('/music/manager', [MusicController::class, 'manager'])->middleware(['auth', 'verified']);
+
+Route::get('/music/create', [MusicController::class, 'create'])->middleware(['auth', 'verified']);
+Route::get('/music/delete/{track:id}', [MusicController::class, 'destroy'])->middleware(['auth', 'verified']);
+Route::get('/music/edit/{track:id}', [MusicController::class, 'edit'])->middleware(['auth', 'verified']);
+Route::post('/music/edit/{track:id}', [MusicController::class, 'update'])->middleware(['auth', 'verified']);
+Route::post('music/create', [MusicController::class, 'store'])->middleware(['auth', 'verified']);
+//Route::post('music/create','MusicController@store');
+
+
+
+Route::get('/likes', [HomeController::class, 'index_likes'])->middleware(['auth', 'verified'])->name('likes');
+
 Route::get('/inbox', [HomeController::class, 'index_inbox'])->middleware(['auth', 'verified'])->name('inbox');
+
 Route::get('/following', [HomeController::class, 'index_following'])->middleware(['auth', 'verified'])->name('following');
 
 
@@ -109,8 +122,18 @@ Route::get('settings/uploads/delete/{upload:id}', [\App\Http\Controllers\Uploads
 
 
 Route::get('/user_data', function () {
+    $user = Auth::user();
+    $profile = $user->profile()->get();
+    $profile_picture = 0;
+
+    if($profile[0]->profile_image != 0) {
+        $profile_picture = Upload::Where('id', '=', $profile[0]->profile_image)->get();
+        $profile_picture = $profile_picture[0]['name'];
+    }
+
     return [
         'user' => Auth::user(),
+        'profile' => $profile_picture,
     ];});
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

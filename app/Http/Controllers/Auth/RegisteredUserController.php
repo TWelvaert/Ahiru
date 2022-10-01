@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Models\Profile;
 use App\Models\User;
+use App\Models\Upload;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\Request;
@@ -71,8 +72,27 @@ class RegisteredUserController extends Controller
     public function edit() 
     {
         $user = Auth::user();
+        $user_uploads = Upload::where('user_id', '=', $user->id)->get();
+        $uploads_images = [];
+        foreach ($user_uploads as $upload) {
+            if($upload['type'] == 'image') {
+                array_push($uploads_images, $upload);
+            }
+        }
+
+        $profile = $user->profile()->get();
+        $profile_image_id = $profile[0]->profile_image;
+        $profile_image = 0;
+
+        if($profile_image_id > 0) {
+            $profile_image = Upload::where('id', '=', $profile_image_id)->get();
+            $profile_image = $profile_image[0]->name;
+        }
+
         return Inertia::render('Settings/Account', [
             'user' => $user,
+            'user_uploads' => $uploads_images,
+            'profile_image' => $profile_image
         ]);
     } 
        
@@ -133,5 +153,19 @@ class RegisteredUserController extends Controller
                 'email' => $user->email,
             ]);
         }
+    }
+    
+    public function update_profile_picture(Request $request) 
+    {
+        $user = Auth::user();
+        $profile = $user->profile()->get();
+
+        $profile[0]->update([
+            'profile_image' => $request->picture,
+        ]);
+
+        return $request;
+        
     } 
-}
+
+} 
