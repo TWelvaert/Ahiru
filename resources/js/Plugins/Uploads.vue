@@ -154,6 +154,7 @@ let selected_files = [];
 let selected_file_nr = 0;
 
 function resetSelection() {
+    selected_files = [];
     selected_file_nr = 0;
     document.querySelectorAll('.active_file').forEach(active => {
         active.classList.remove('active_file');
@@ -169,7 +170,7 @@ function select(e) {
     let file_id = '';
 
     let location = window.location.href;
-    if(location.includes("settings")) {
+    if(location.includes("settings/uploads")) {
         return;
     }
 
@@ -202,7 +203,6 @@ function select(e) {
         selected_files.push(file_id);
     }
 
-    emits('add_files', selected_files);
 }   
 
 function loadFilePreview(files) {
@@ -225,18 +225,25 @@ function loadFilePreview(files) {
 }
 
 function submit() {
+
     document.querySelector('#filesPreview').style.display = 'none';
     document.querySelector('#filesPreview').innerHTML = ``;
     document.querySelector('#upload_info').style.display = 'block';
     form.post(route('settings/uploads'));
 };
 
+function close() {
+    emits('close');
+    emits('add_files', selected_files);
+    sessionStorage.setItem("UPLOADS", "CLOSED");
+}
+
 
 onMounted(() => {
 
 
     let location = window.location.href;
-    if(location.includes("settings")) {
+    if(location.includes("settings/uploads")) {
         document.querySelector('#confirmButton').style.display = 'none';
     }
    // const { playMusic } = inject('playMusic');
@@ -250,15 +257,3 @@ onMounted(() => {
 
 
 </script>
-
-<script>
-    export default {
-        methods: {
-            close() {
-            this.$emit('close');
-            sessionStorage.setItem("UPLOADS", "CLOSED");
-            }
-        },
-    }
-</script>
-
