@@ -7,6 +7,7 @@ use App\Http\Controllers\MusicController;
 use App\Http\Controllers\NewsCommentController;
 use App\Http\Controllers\NewsController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\InboxController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
@@ -70,7 +71,8 @@ Route::post('music/create', [MusicController::class, 'store'])->middleware(['aut
 
 Route::get('/likes', [HomeController::class, 'index_likes'])->middleware(['auth', 'verified'])->name('likes');
 
-Route::get('/inbox', [HomeController::class, 'index_inbox'])->middleware(['auth', 'verified'])->name('inbox');
+Route::get('/inbox', [InboxController::class, 'index'])->middleware(['auth', 'verified'])->name('inbox');
+Route::get('/inbox/message/{user:slug}', [InboxController::class, 'create'])->middleware(['auth', 'verified']);
 
 Route::get('/following', [HomeController::class, 'index_following'])->middleware(['auth', 'verified'])->name('following');
 
