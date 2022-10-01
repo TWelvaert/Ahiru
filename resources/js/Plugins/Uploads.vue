@@ -29,14 +29,14 @@
                     <BreezeButton  @click="resetSelection()" class="ml-4">
                         Reset
                     </BreezeButton>
-                    <BreezeButton @click.prevent="close" class="ml-4">
+                    <BreezeButton id="confirmButton" @click.prevent="close" class="ml-4">
                         Confirm
                     </BreezeButton>
                 </form>
             </div>
 
             <div id="all_uploads" class="gap-4 mt-4">
-                <div class="flex overflow-scroll">
+                <div class="flex overflow-scroll p-2">
                     <div v-for="upload in this.user_uploads">
                         <div v-if="upload.type == 'image'">
                             <div @click="e => select(e)" :id="upload.id" class="ml-1" :class="{active: isActive} ">
@@ -53,7 +53,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="flex">
+                <div class="flex overflow-scroll p-2">
                     <div v-for="upload in this.user_uploads" class="mt-4">
                         <div v-if="upload.type == 'audio'" class="w-40 ml-1" @click="e => select(e)" :id="upload.id" :class="{active: isActive}">
                             <header class="bg-gray-100 text-black rounded-t p-1 w-40 truncate text-center flex justify-between">
@@ -99,7 +99,7 @@ function callFilter() {
     let input = document.querySelector('#filter').value;
     if(input.length > 0) {
         let uploads = props.user_uploads;
-
+        
         uploads = uploads.filter(upload => upload.original_name.toLowerCase().includes(input.toLowerCase()));
 
         document.querySelector('#filtered_uploads').innerHTML = '';
@@ -107,7 +107,7 @@ function callFilter() {
         document.querySelector('#all_uploads').style.display = "none";
 
         for(let i=0; i<uploads.length; i++) {
-
+            let top_content = ``;
             let main_content = ``;
 
             if(uploads[i].type == 'image') {
@@ -167,6 +167,11 @@ function resetSelection() {
 
 function select(e) {
     let file_id = '';
+
+    let location = window.location.href;
+    if(location.includes("settings")) {
+        return;
+    }
 
     if(!document.querySelector(`.selectedFile`)) {
         selected_file_nr = 0;
@@ -230,7 +235,10 @@ function submit() {
 onMounted(() => {
 
 
-
+    let location = window.location.href;
+    if(location.includes("settings")) {
+        document.querySelector('#confirmButton').style.display = 'none';
+    }
    // const { playMusic } = inject('playMusic');
 
     if(document.querySelector('#filter')) {
