@@ -40,7 +40,7 @@
                         <div v-if="file == audio_upload.id"> 
                             <div class="flex mt-2">
                                 <div class="relative">
-                                    <img  class="cursor-pointer w-40 h-40 z-0" src="/assets/img/play_audio.png"/>
+                                    <img :id="'coverImage'+index" class="cursor-pointer w-40 h-40 z-0" src="/assets/img/play_audio.png"/>
                                 </div>
                                 <div class="bg-gray-100 text-black rounded-b p-1 w-full truncate">
                                     <div>
@@ -153,6 +153,11 @@
                         this.selected_images = '';
                         files.forEach(file => {
                             this.music_uploads[this.current_uploader]['image_id'] = file;
+                            this.user_uploads_images.forEach(upload => {
+                                if(upload.id == file) {
+                                    document.querySelector('#coverImage' + this.current_uploader).src = `/uploads/${upload.name}`;
+                                }
+                            });
                         });
                     }
 
