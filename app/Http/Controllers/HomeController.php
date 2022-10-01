@@ -34,15 +34,6 @@ class HomeController extends Controller
 
     }
 
-    public function index_inbox()
-    {
-        $user = Auth::user();
-        return
-        Inertia::render('Inbox', [
-            'user' => $user
-        ]);
-    }
-
     public function index_following()
     {
         $user = Auth::user();
