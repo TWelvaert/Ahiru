@@ -40,7 +40,7 @@ let data = defineProps({
                         
                             class="mb-3 inline-flex items-center px-1 py-0 border border-transparent text-sm rounded text-gray-500 bg-gray-100 hover:text-green-300 focus:outline-none transition ease-in-out duration-150">
                             <a v-bind:href="'/profile/' + advertisement.user.slug">
-                            <img class="h-7 w-7 m-1 rounded-full" v-bind:src="advertisement.profile.profile_image" alt="">
+                            <img class="h-7 w-7 m-1 rounded-full" v-bind:src="'uploads/' + advertisement.profile.profile_image" alt="">
                             {{ advertisement.user.name }}
                             </a>
                            

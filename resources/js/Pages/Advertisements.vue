@@ -79,10 +79,13 @@ watch(search, (value) => {
                         <!-- Make dynamic -->
                         <button type="button"
                             class="mb-3 mt-3 inline-flex items-center px-1 py-0 border border-transparent text-sm rounded text-gray-500 bg-gray-100 hover:text-green-300 focus:outline-none transition ease-in-out duration-150">
-                            <img class="h-7 w-7 m-1 rounded-full" src="../../assets/images/waterloop.gif" alt="">
-                            advertisements.user
+                            <a v-bind:href="'profile/' + collaboration.artist.slug">
+                            <!-- <img class="h-7 w-7 m-1 rounded-full" v-bin:src="'uploads/' + collaboration.profile.profile_image" alt=""> -->
+                             {{ collaboration.artist.name }}
+                              </a>
                             <!-- Make dynamic -->
                         </button>
+                        {{ collaboration.profile }}
                         <h5 class="text-2xl pb-6 text-gray-900 dark:text-white">
                             {{ collaboration.collab.title }}
                         </h5>
@@ -93,7 +96,7 @@ watch(search, (value) => {
                         <small>{{ dateTime(collaboration.created_at) }}</small>
                         <div class="mt-4">
                             <BreezeButton name="form1" class="">
-                                <a v-bind:href="'/advertisement/' + advertisement.collab.slug">Read more</a>
+                                <a v-bind:href="'/advertisement/' + collaboration.collab.slug">Read more</a>
                             </BreezeButton>
                         </div>
 

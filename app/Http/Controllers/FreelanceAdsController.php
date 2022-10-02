@@ -4,8 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\FreelanceAdvertisement;
 use App\Models\FreelanceCategory;
+use App\Models\Profile;
 use App\Models\Upload;
-
+use App\Models\User;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Auth;
@@ -55,20 +56,21 @@ class FreelanceAdsController extends Controller
                     $uploadsResult = $result;
                 }
             }
+           
+            $profile = Profile::Where('profile_image', '=',$uploadsResult->id)->first();
+            
+            $artist = User::Where('id', '=',$collaboration->user_id)->first();
 
-            $collab = ['collab' => $collaboration, 'upload' => $uploadsResult];
+            $collab = ['collab' => $collaboration, 'upload' => $uploadsResult, 'artist' => $artist, 'profile' => $profile];
 
             array_push($collabs, $collab);
         }
         //dd($collabs);
-        $categories = FreelanceCategory::all();
         $user = Auth::user();
         return Inertia::render(
             'Advertisements',
             [
-                'user' => $user,
                 'collabs' => $collabs,
-                'categories' => $categories,
             ]
         );
     }
@@ -87,10 +89,10 @@ class FreelanceAdsController extends Controller
             }
         }
 
-        $collab = ['collab' => $freelanceAdvertisement, 'uploads' => $uploadsResult];
+        $collab = ['collab' => $freelanceAdvertisement, 'upload' => $uploadsResult];
 
         $user = Auth::user();
-      
+     // dd($collab);
         return
             Inertia::render('Advertisement', [
                 'advertisement' => $collab,
