@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use App\Models\FreelanceAdvertisement;
 use App\Models\Upload;
+use App\Models\Profile;
 use Inertia\Inertia;
 
 use function PHPSTORM_META\type;
@@ -129,12 +130,13 @@ Route::get('settings/uploads/delete/{upload:id}', [\App\Http\Controllers\Uploads
 
 Route::get('/user_data', function () {
     $user = Auth::user();
-    $profile = $user->profile()->get();
+    $profile = $user->profile()->first();
+
     $profile_picture = 0;
 
-    if($profile[0]->profile_image != 0) {
-        $profile_picture = Upload::Where('id', '=', $profile[0]->profile_image)->get();
-        $profile_picture = $profile_picture[0]['name'];
+    if($profile->profile_image != 0) {
+        $profile_picture = Upload::Where('id', '=', $profile->profile_image)->first();
+        $profile_picture = $profile_picture->name;
     }
 
     return [
