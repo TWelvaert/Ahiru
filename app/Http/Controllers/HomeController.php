@@ -18,6 +18,7 @@ class HomeController extends Controller
     {
         $collaborations = FreelanceAdvertisement::orderBy('created_at', 'desc')->take(8)->get();
         $users = User::orderBy('created_at', 'desc')->take(8)->get();
+
         $collabs = [];
         
        
@@ -48,19 +49,12 @@ class HomeController extends Controller
         
         //dd($userProfileData);
         
+
         return Inertia::render('Home', [
             'artists' => $users,
             'userProfileData' => $userProfileData
         ]);
-        
-    }
 
-    public function index_likes()
-    {
-        $user = Auth::user();
-        return Inertia::render('Likes', [
-            'user' => $user
-        ]);
     }
 
     public function index_following()

@@ -30,7 +30,7 @@ console.log(data['userProfileData']);
             </div>
 
             <!-- Card -->
-            
+
             <div class="grid grid-cols-4 gap-6 m-16 md:grid-cols-2 lg:grid-cols-4 ">
                 <a v-for="advertisement in userProfileData" v-bind:href="'/advertisement/' + advertisement.collabs.collab.slug"
                     class="block p-6 max-w-sm bg-white rounded-lg border border-gray-200 shadow-md hover:bg-gray-10 ">
@@ -54,11 +54,14 @@ console.log(data['userProfileData']);
                         </h5>
                         <p class="line-clamp-5 mb-5 text-gray-500">
                             {{ advertisement.collabs.collab.description }}
+
                         </p>
                         <hr>
                         <div class="mt-4">
                             <BreezeButton name="form1" class="">
+
                                 <a v-bind:href="'/advertisement/' + advertisement.collabs.collab.slug">Read more</a>
+
                             </BreezeButton>
                         </div>
 
@@ -216,7 +219,9 @@ console.log(data['userProfileData']);
                     '/profile/' +
                     userProfile.user.slug
                 ">
+
                 <div class="w-72 h-auto bg-white border border-gray-200 shadow-md hover:bg-gray-10rounded-lg p-10   ">
+
 
                     <div class="flex flex-col gap-4 text-center items-center">
                         <img class="h-32 w-32 bg-white p-2 rounded-full shadow" mb-4 v-bind:src="userProfile.profile.profile_image"

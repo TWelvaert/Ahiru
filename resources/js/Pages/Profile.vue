@@ -51,7 +51,7 @@ const submit = () => {
 
                             <div class="image overflow-hidden">
                                 <img class="h-auto w-full mx-auto" v-bind:src="'/' + profile[0]['profile_image']" alt="" />
-                                
+
                             </div>
                             <h1
                                 class="text-gray-900 font-bold text-xl leading-8 my-1"
@@ -63,12 +63,12 @@ const submit = () => {
                             >
                                 {{ user.name }}
                             </h3>
-                           
-                         
+
+
                             <div v-if="auth.id == user.id && auth">
                             <form @submit.prevent="submit">
                                 <div>
-                                    <BreezeLabel 
+                                    <BreezeLabel
                                         for="bio"
                                         value="Bio"
                                         class="block mb-2 uppercase font-bold text-xs text-gray-700 w-full"
@@ -85,14 +85,14 @@ const submit = () => {
                                 </div>
                                 <Button class="inline-flex border-spacing-1 border-1 border-color border-gray-400 shadow-sm items-center bg-green-300 hover:bg-black hover:text-white text-black  px-3 rounded-full font-light tracking-widest  transition ease-in-out delay-50 hover:-translate-y-0.5 hover:scale-60 duration-50 antialiased ml-4 "
                                     name="form"
-                                   
+
                                     :class="{ 'opacity-25': form.processing }"
                                     :disabled="form.processing"
                                 >
                                     Update
                                 </Button>
                             </form>
-                           
+
                            </div>
                            <div v-else>
                                     <h4 class="block mb-2 uppercase font-bold text-xs text-gray-700 w-full">Bio</h4>
@@ -113,9 +113,9 @@ const submit = () => {
                                 <span>Following</span></div>
                         <!-- Following card -->
                         <div class="block p-6 max-w-sm bg-white rounded-lg border border-gray-200 shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
-                            
+
                             <div class="flex items-center space-x-3 font-semibold text-gray-900 text-xl leading-8">
-                                
+
                             </div>
                             <div class="grid grid-cols-3 ">
                                 <div v-for="followProfile in followProfileData" class="text-center my-2">
@@ -128,7 +128,7 @@ const submit = () => {
                             </div>
                             </div>
                         </div>
-                    
+
                         <!-- End of following card -->
 
                     </div>
@@ -150,22 +150,22 @@ const submit = () => {
                                 <div v-if="auth">
                                 <div v-if="auth.id == user.id">
                                 <button class="inline-flex border-spacing-1 border-1 border-color border-gray-400 shadow-sm items-center bg-green-300 hover:bg-black hover:text-white text-black  px-3 rounded-full font-light tracking-widest  transition ease-in-out delay-50 hover:-translate-y-0.5 hover:scale-60 duration-50 antialiased">
-                             
-                                <a 
+
+                                <a
                                     v-bind:href="
                                     '/dashboard/advertisements'
                                 "
                                 >
                                 edit
-                                            
-                                </a>   </button> 
+
+                                </a>   </button>
                                 </div>
                                 </div>
                             </div>
-                            
-    </div> 
-            <div class="grid grid-cols-1 w-full content-center gap-8 md:grid-cols-4">
-                   
+
+    </div>
+            <div class="grid grid-cols-1 content-center gap-8 md:grid-cols-4">
+
                     <a v-bind:href="
                         '/advertisement/'+
                         collaboration.slug
@@ -174,8 +174,8 @@ const submit = () => {
                         class="block p-6 max-w-sm bg-white rounded-lg border border-gray-200 shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700 flex-shrink-0 ">
                         <img src="../../assets/images/070c4ae0e59af72c222e2756c87baa1a.gif" alt="">
                 <div class="flex justify-between py-3">
-                    
-                
+
+
                         <h5 class="text-2xl font-bold tracking-tight text-gray-900 dark:text-white inline-block align-middle">{{ collaboration.title }}</h5>
                         <div v-if="auth">
                                         <div v-if="auth.id == user.id">
@@ -189,7 +189,7 @@ const submit = () => {
 
 >
                                                 edit
-                                            </a>                  
+                                            </a>
                 </button>
                 </div>
                 </div>
@@ -197,12 +197,12 @@ const submit = () => {
                         <p class="font-normal text-gray-700 dark:text-gray-400 line-clamp-5">{{ collaboration.description }}</p>
                         <small>{{ dateTime(collaboration.created_at) }}</small>
                     </a>
-            </div> 
-                        
+            </div>
+
                         <!-- End of Advertisements section -->
-    
+
                         <div class="my-2 flex items-center space-x-3 font-semibold text-gray-900 text-xl">
-    
+
                         <!-- Uploads and Something? -->
                         <span clas="">
                                             <svg class="h-5" xmlns="http://www.w3.org/2000/svg" fill="none"
@@ -214,11 +214,11 @@ const submit = () => {
                                         <span class="tracking-wide font-semibold text-gray-900 text-xl">Uploads</span>
                                     </div>
                         <div class="bg-white block p-6 max-w-sm rounded-lg border border-gray-200 shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700 w-full">
-    
+
                             <div class="grid grid-cols-2">
                                 <div>
                                     <div class="flex items-center space-x-2 font-semibold text-gray-900 leading-8 mb-3">
-                                        
+
                                     </div>
                                     <ul class="list-inside space-y-2">
                                         <li>
@@ -243,7 +243,7 @@ const submit = () => {
                                 <div>
                                     <div class="flex items-center space-x-2 font-semibold text-gray-900 leading-8 mb-3">
                                         <span clas="text-green-500">
-    
+
                                         </span>
 
                                     </div>

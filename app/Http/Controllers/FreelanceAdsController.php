@@ -33,11 +33,13 @@ class FreelanceAdsController extends Controller
     public function advertisements()
     {
         $collaborations = FreelanceAdvertisement::query()
+
             ->when(FacadesRequest::input('search'), function ($query, $search) {
                 $query->where('title', 'like', '%' . $search . '%')
                     ->OrWhere('description', 'like', '%' . $search . '%');
             })->paginate(30)
             ->withQueryString();
+
 
         $collabs = [];
 
@@ -55,6 +57,7 @@ class FreelanceAdsController extends Controller
             }
 
             $collab = ['collab' => $collaboration, 'uploads' => $uploadsResult];
+
 
             array_push($collabs, $collab);
         }

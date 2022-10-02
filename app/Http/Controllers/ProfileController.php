@@ -25,7 +25,8 @@ class ProfileController extends Controller
 
         foreach ($followers as $follow) {
             $profile = $follow->profile()->get();
-            $followProfileArray = ['follow' => $follow, 'profile' => $profile[0]];
+
+            $followProfileArray = ['follow' => $follow, 'profile' => $profile];
             array_push($followProfileData, $followProfileArray);
         }
         
