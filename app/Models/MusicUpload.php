@@ -17,7 +17,7 @@ class MusicUpload extends Model
         return $this->belongsTo(User::class, 'user_id');
     }
 
-    public function uploadds()
+    public function uploads()
     {
         return $this->hasMany(Upload::class);
     }

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\FreelanceAdvertisement;
+use App\Models\MusicUpload;
 use App\Models\Profile;
 use App\Models\Upload;
 use App\Models\User;
@@ -43,6 +44,7 @@ class ProfileController extends Controller
                     $uploadsResult = $result;
                 }
             }
+           
             
             $profile = Profile::Where('user_id', '=',$collaboration->user_id)->first();
             
