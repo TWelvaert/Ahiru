@@ -6,8 +6,8 @@ import moment from "moment";
 
 let data = defineProps({
     advertisement: String,
-    uploads: Array,
-    user: Object
+    upload: Array,
+    user: Array
 });
 
 </script>
@@ -28,8 +28,8 @@ let data = defineProps({
 
             <div class="max-w-7xl mx-20 sm:px-6 lg:px-8">
                 <!-- <img src="../../../public/uploads/166454112748.jpg" alt=""> -->
-                 <img :src="`uploads/${advertisement.uploads.name}`" alt="" class="w-40" />
-                <!-- <img v-bind:src="'uploads/'+ collaboration.uploads['name']" alt="" /> -->
+             
+                 <img v-bind:src="'/uploads/' + advertisement.upload.name" alt="" />
                 <h2>{{ advertisement.collab.title }}</h2>
                 <hr />
                 <p>{{ advertisement.collab.description }}</p>
