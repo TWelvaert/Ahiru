@@ -57,11 +57,11 @@ class FreelanceAdsController extends Controller
             }
 
             $collab = ['collab' => $collaboration, 'uploads' => $uploadsResult];
-
+            
 
             array_push($collabs, $collab);
         }
-
+        //dd($collabs);
         $categories = FreelanceCategory::all();
         $user = Auth::user();
         return Inertia::render(

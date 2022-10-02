@@ -1,6 +1,6 @@
 <script setup>
 import Dashboard from "@/Pages/Dashboard.vue";
-import { Head, Link, useForm } from "@inertiajs/inertia-vue3";
+import { Head, useForm } from "@inertiajs/inertia-vue3";
 import BreezeButton from "@/Components/Button.vue";
 import BreezeCheckbox from "@/Components/Checkbox.vue";
 import BreezeLabel from "@/Components/Label.vue";
@@ -8,14 +8,14 @@ import Header from "@/Components/Header.vue";
 //import Pagination from "@/Components/Pagination.vue";
 import moment from "moment";
 import { ref } from "vue";
-//import { Link } from "@inertiajs/inertia-vue3";
+import { Link } from "@inertiajs/inertia-vue3";
 import { Inertia } from "@inertiajs/inertia";
 import { watch } from "vue";
 
 let data = defineProps({
     user: Array,
     categories: Array,
-    collabs: Object
+    collabs: Array
 });
 
 let search = ref("");
@@ -75,8 +75,9 @@ watch(search, (value) => {
             "
                     class="block p-6 max-w-sm bg-white rounded-lg border border-gray-200 shadow-md hover:bg-gray-10 ">
                     <div class="rounded-lg md:flex-row md:max-w-xl">
-                        <img class="h-72" v-bind:src="'uploads/'+ collaboration.uploads['name']" alt="" />
+                        <!-- <img class="h-72" v-bind:src="'uploads/'+ collaboration.uploads['name']" alt="" /> -->
                         <!-- Make dynamic -->
+                        {{ collaboration.uploads.name }}
                         <button type="button"
                             class="mb-3 mt-3 inline-flex items-center px-1 py-0 border border-transparent text-sm rounded text-gray-500 bg-gray-100 hover:text-green-300 focus:outline-none transition ease-in-out duration-150">
                             <img class="h-7 w-7 m-1 rounded-full" src="../../assets/images/waterloop.gif" alt="">
@@ -101,7 +102,7 @@ watch(search, (value) => {
                 </a>
             </div>
 
-        <Pagination :links="collabs.links" />
+        <!-- <Pagination :links="collabs.links" /> -->
     </Dashboard>
 </template>
 <script>
