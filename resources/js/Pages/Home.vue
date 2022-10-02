@@ -6,7 +6,7 @@ import BreezeButton from "@/Components/Button.vue";
 
 
 let data = defineProps({
-    collabs: Array, 
+    collabs: Array,
 });
 
 </script>
@@ -23,28 +23,26 @@ let data = defineProps({
             <div class="flex flex-col ml-16 mb-2 leading-tight">
                 <span class="font-monument text-4xl">Advertisements</span>
                 <span class="mt-3">These advertisements are the latest added to the Ahiru platform</span>
-                <small class="mt-8">8 Advertisements available</small>
+                <!-- <small class="mt-8">8 Advertisements available</small> -->
             </div>
 
             <!-- Card -->
 
             <div class="grid grid-cols-4 gap-6 m-16 md:grid-cols-2 lg:grid-cols-4 ">
                  <a v-for="advertisement in collabs" v-bind:href="'/advertisement/' + advertisement.collab.slug"
-                    class="block p-6 max-w-sm bg-white rounded-lg border border-gray-200 shadow-md hover:bg-gray-10 "> 
+                    class="block p-6 max-w-sm bg-white rounded-lg border border-gray-200 shadow-md hover:bg-gray-10 ">
                     <div class="rounded-lg md:flex-row md:max-w-xl">
                         <img class="max-w- mb-3 mx-auto" v-bind:src="'uploads/'+ advertisement.uploads.name"
                             alt="">
                            {{ advertisement.collab.title }}
                         <!-- Make dynamic -->
                         <button type="button"
-                        
+
                             class="mb-3 inline-flex items-center px-1 py-0 border border-transparent text-sm rounded text-gray-500 bg-gray-100 hover:text-green-300 focus:outline-none transition ease-in-out duration-150">
                             <a v-bind:href="'/profile/' + advertisement.user.slug">
                             <img class="h-7 w-7 m-1 rounded-full" v-bind:src="'uploads/' + advertisement.profile.profile_image" alt="">
                             {{ advertisement.user.name }}
                             </a>
-                           
-                            Make dynamic
                         </button>
                         <h5 class="text-2xl pb-6 text-gray-900 dark:text-white">
                             {{ advertisement.collab.title }}
@@ -74,7 +72,7 @@ let data = defineProps({
             <div class="flex flex-col ml-16 mb-2 leading-tight">
                 <span class="font-monument text-4xl">The Upload</span>
                 <span class="mt-3">Newly posted tracks. Just for you</span>
-                <small class="mt-8">3 Tracks available</small>
+                <!-- <small class="mt-8">3 Tracks available</small> -->
             </div>
 
 
@@ -206,9 +204,9 @@ let data = defineProps({
 
 
             <div class="flex flex-col ml-16 mb-2 leading-tight">
-                <span class="font-monument text-4xl">Popular Artists</span>
-                <span class="mt-3">Most streamed artists of the moment </span>
-                <small class="mt-8">8 Artists available</small>
+                <span class="font-monument text-4xl">Recent Artists</span>
+                <span class="mt-3">Most new artists of the moment </span>
+                <!-- <small class="mt-8">8 Artists available</small> -->
             </div>
 
             <div class="grid grid-cols-4 gap-6 m-16 md:grid-cols-2 lg:grid-cols-4">

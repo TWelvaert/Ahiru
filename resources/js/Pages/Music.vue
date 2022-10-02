@@ -10,11 +10,11 @@
 <template>
     <Dashboard>
         <div class="flex items-center justify-center flex-col">
-            <span class="text-center bg-black text-white w-full py-4">
+            <!-- <span class="text-center bg-black text-white w-full py-4">
                 Welcome on the Music Page !<br>
                 On this page you can find all the latest releases.<br><br>
                 To release and manage your own music, you can use the music manager by clicking on the button below.
-            </span>
+            </span> -->
 
             <BreezeButton name="form1" class="ml-4 mt-4">
                 <Link class="cursor-pointer" v-bind:href="'/music/create'"> Music Manager</Link>
@@ -61,7 +61,7 @@
                     </div>
                 </div>
             </div>
-        </section>  
+        </section>
 
 
 
