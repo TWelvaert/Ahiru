@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use App\Models\FreelanceAdvertisement;
 use App\Models\Upload;
+use App\Models\Profile;
 use Inertia\Inertia;
 
 use function PHPSTORM_META\type;
@@ -74,6 +75,7 @@ Route::get('/likes', [HomeController::class, 'index_likes'])->middleware(['auth'
 Route::get('/inbox', [InboxController::class, 'index'])->middleware(['auth', 'verified'])->name('inbox');
 Route::get('/inbox/message/{user:slug}', [InboxController::class, 'load_conversation'])->middleware(['auth', 'verified']);
 Route::post('/inbox/message/{user:slug}', [InboxController::class, 'send_message'])->middleware(['auth', 'verified']);
+Route::get('/inbox/message/{user:slug}/delete', [InboxController::class, 'soft_delete_message'])->middleware(['auth', 'verified']);
 
 Route::get('/following', [HomeController::class, 'index_following'])->middleware(['auth', 'verified'])->name('following');
 
@@ -128,12 +130,13 @@ Route::get('settings/uploads/delete/{upload:id}', [\App\Http\Controllers\Uploads
 
 Route::get('/user_data', function () {
     $user = Auth::user();
-    $profile = $user->profile()->get();
+    $profile = $user->profile()->first();
+
     $profile_picture = 0;
 
-    if($profile[0]->profile_image != 0) {
-        $profile_picture = Upload::Where('id', '=', $profile[0]->profile_image)->get();
-        $profile_picture = $profile_picture[0]['name'];
+    if($profile->profile_image != 0) {
+        $profile_picture = Upload::Where('id', '=', $profile->profile_image)->first();
+        $profile_picture = $profile_picture->name;
     }
 
     return [

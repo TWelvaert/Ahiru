@@ -165,4 +165,14 @@ class InboxController extends Controller
         return $request;
         
     } 
+
+    public function soft_delete_message(User $user) 
+    {
+        dd($user);
+
+      //  $messages = PrivateMessage::Where([['user_id', '=',  $user->id],['to_user', '=', $user_auth->id]])->get();
+
+        return redirect()->route('inbox');
+        
+    } 
 }
