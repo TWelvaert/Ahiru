@@ -39,7 +39,7 @@ function processFiles(files) {
             files.forEach(file => {
                 if(file == upload.id) {
                     uploadsPreview.push(upload);
-                }  
+                }
             });
         });
 
@@ -104,6 +104,7 @@ const submit_password = () => {
             <div class="flex items-center justify-center">
                 <img id="settings_profilePicture" class="h-48 w-48 mt-8 m-5 border-white border-2 rounded-full bg-opacity-80 backdrop-blur-lg drop-shadow-lg" src="../../../assets/images/logologo.png" alt="">
             </div>
+            
             <div class=" flex items-center justify-center">
                 <div @click="showing = true; openUploads()">
                     <svg class="cursor-pointer" ahref="www.google.com" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="30" height="30" viewBox="0 0 50 50" style=" fill:#000000;">
@@ -111,9 +112,9 @@ const submit_password = () => {
                     </svg>
                 </div>
                     <div v-if="showing">
-                        <Uploads class="absolute min-h-full w-full left-0 top-0 z-20" @close="showing = false" @add_files="processFiles" :user_uploads="user_uploads" />       
+                        <Uploads class="absolute min-h-full w-full left-0 top-0 z-20" @close="showing = false" @add_files="processFiles" :user_uploads="user_uploads" />
                     </div>
-                    
+
             </div>
         </div>
         <!-- Account settings card -->
@@ -218,7 +219,7 @@ const submit_password = () => {
             mounted() {
                 if(sessionStorage.getItem('UPLOADS') == 'OPEN') {
                    //  this.showing = true;
-                } 
+                }
             },
         }
     </script>
