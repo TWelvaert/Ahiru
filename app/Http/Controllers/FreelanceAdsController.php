@@ -56,8 +56,7 @@ class FreelanceAdsController extends Controller
                 }
             }
 
-            $collab = ['collab' => $collaboration, 'uploads' => $uploadsResult];
-            
+            $collab = ['collab' => $collaboration, 'upload' => $uploadsResult];
 
             array_push($collabs, $collab);
         }

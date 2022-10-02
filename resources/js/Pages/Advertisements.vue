@@ -75,9 +75,8 @@ watch(search, (value) => {
             "
                     class="block p-6 max-w-sm bg-white rounded-lg border border-gray-200 shadow-md hover:bg-gray-10 ">
                     <div class="rounded-lg md:flex-row md:max-w-xl">
-                        <!-- <img class="h-72" v-bind:src="'uploads/'+ collaboration.uploads['name']" alt="" /> -->
+                        <img class="h-72" v-bind:src="'uploads/'+ collaboration.upload.name" alt="" />
                         <!-- Make dynamic -->
-                        {{ collaboration.uploads.name }}
                         <button type="button"
                             class="mb-3 mt-3 inline-flex items-center px-1 py-0 border border-transparent text-sm rounded text-gray-500 bg-gray-100 hover:text-green-300 focus:outline-none transition ease-in-out duration-150">
                             <img class="h-7 w-7 m-1 rounded-full" src="../../assets/images/waterloop.gif" alt="">
