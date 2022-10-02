@@ -44,7 +44,7 @@ class ProfileController extends Controller
                     $uploadsResult = $result;
                 }
             }
-           
+            
             
             $profile = Profile::Where('user_id', '=',$collaboration->user_id)->first();
             
@@ -53,13 +53,19 @@ class ProfileController extends Controller
 
             array_push($collabs, $collab); 
         }
-
-        //dd($collabs);
+    
+        $musicUploads = MusicUpload::where('user_id', '=', $user->id)->get();
+        
+        foreach ($musicUploads as $key => $track) {
+            $audio_file = Upload::Where('id', '=', $track->audio_id)->first();
+            $image_file = Upload::Where('id', '=', $track->image_id)->first();
+            $latest_music[$key] = collect($track)->merge(['image' => $image_file, 'audio' => $audio_file]);
+        }
+        //dd($latest_music);
         
         $profile = $user->profile()->get();
        
         $profileImage = Upload::where('id', '=', $profile[0]->profile_image)->first();
-        
 
         $auth = Auth::user();
         
@@ -70,7 +76,8 @@ class ProfileController extends Controller
             'profile' => $profile,
             'followProfileData' => $followProfileData,
             'auth' => $auth,
-            'profileImage' => $profileImage
+            'profileImage' => $profileImage,
+            'latest_music' => $latest_music
         ]);
 
 

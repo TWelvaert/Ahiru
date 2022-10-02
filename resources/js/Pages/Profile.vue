@@ -16,9 +16,10 @@ let data = defineProps({
     profile: String,
     followProfileData: Array,
     auth: Array,
-    profileImage: Array
+    profileImage: Array,
+    latest_music: Array
 });
-console.log(data["collabs"]);
+console.log(data["latest_music"]);
 const form = useForm({
     profile: data["profile"],
 });
@@ -121,7 +122,7 @@ const submit = () => {
                     <div
                         class="my-4 flex items-center space-x-3 font-semibold text-gray-900 text-xl py-1"
                     >
-                        <span class="">
+                        <!-- <span class="">
                             <svg
                                 class="h-5 fill-current"
                                 xmlns="http://www.w3.org/2000/svg"
@@ -136,8 +137,8 @@ const submit = () => {
                                     d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"
                                 />
                             </svg>
-                        </span>
-                        <span>Following</span>
+                        </span> -->
+                        <!-- <span>Following</span> -->
                     </div>
                     <!-- Following card -->
                     <div
@@ -298,54 +299,19 @@ const submit = () => {
                                     class="flex items-center space-x-2 font-semibold text-gray-900 leading-8 mb-3"
                                 ></div>
                                 <ul class="list-inside space-y-2">
-                                    <li>
-                                        <div class="text-teal-600">Song 1</div>
+                                    
+                                    <li v-for="music in latest_music">
+                                        <div class="text-teal-600">{{ music.track_title }}</div>
                                         <div class="text-gray-500 text-xs">
-                                            Date of upload
+                                           {{ dateTime(music.created_at) }}
                                         </div>
-                                    </li>
-                                    <li>
-                                        <div class="text-teal-600">Song 2</div>
-                                        <div class="text-gray-500 text-xs">
-                                            Date of upload
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="text-teal-600">Song 3</div>
-                                        <div class="text-gray-500 text-xs">
-                                            Date of upload
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="text-teal-600">Song 4</div>
-                                        <div class="text-gray-500 text-xs">
-                                            Date of upload
+                                        <div>
+                                        <button v-on:click="$callMusicPlayer(music.audio.name, music.track_title, music.image.name, 0)">Play</button>
                                         </div>
                                     </li>
                                 </ul>
                             </div>
-                            <div>
-                                <div
-                                    class="flex items-center space-x-2 font-semibold text-gray-900 leading-8 mb-3"
-                                >
-                                    <span clas="text-green-500"> </span>
-                                </div>
-                                <ul class="list-inside space-y-2">
-                                    <li>
-                                        <div class="text-teal-600"></div>
-
-                                        <div
-                                            class="text-gray-500 text-xs"
-                                        ></div>
-                                    </li>
-                                    <li>
-                                        <div class="text-teal-600"></div>
-                                        <div
-                                            class="text-gray-500 text-xs"
-                                        ></div>
-                                    </li>
-                                </ul>
-                            </div>
+                           
                         </div>
                         <!-- End of Uploads and Something grid -->
                     </div>
