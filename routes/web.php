@@ -119,6 +119,8 @@ Route::get('admin/users/{user:slug}/delete', [\App\Http\Controllers\AdminControl
 
 Route::get('settings/account', [\App\Http\Controllers\Auth\RegisteredUserController::class, 'edit'])->name('settings/account');
 Route::post('settings/account', [\App\Http\Controllers\Auth\RegisteredUserController::class, 'update'])->name('settings/account');
+Route::post('/settings/account/password', [\App\Http\Controllers\Auth\RegisteredUserController::class, 'update_password'])->name('settings/account/password');
+Route::post('/settings/account/profile-picture', [\App\Http\Controllers\Auth\RegisteredUserController::class, 'update_profile_picture'])->name('settings/account/profile-picture');
 Route::get('settings/uploads', [\App\Http\Controllers\UploadsController::class, 'index'])->name('settings/uploads');
 Route::post('settings/uploads', [\App\Http\Controllers\UploadsController::class, 'upload'])->name('settings/uploads');
 Route::get('settings/uploads/delete/{upload:id}', [\App\Http\Controllers\UploadsController::class, 'destroy']);
