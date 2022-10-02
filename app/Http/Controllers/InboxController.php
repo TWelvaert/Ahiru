@@ -40,8 +40,20 @@ class InboxController extends Controller
             if($message['to_user'] == $user->id) {
                 $message['to_user'] = $message['user_id'];
             } 
+            
+            $to_user_profile_img_id = 0;
+
             $to_user = User::Where('id', '=', $message['to_user'])->get();
             $all_messages[$key]['to_user'] = $to_user[0];
+            $to_user_profile = $all_messages[$key]['to_user']->profile()->get();
+            $to_user_profile_img_id = $to_user_profile[0]['profile_image'];
+
+            if($to_user_profile_img_id != 0) {
+                $to_user_profile_img = Upload::Where('id', '=', $to_user_profile_img_id)->get();
+            }
+
+            $to_user_profile_img = $to_user_profile_img[0]['name'];
+            $all_messages[$key]['to_user'] = collect($all_messages[$key]['to_user'])->merge(['profile_picture' => $to_user_profile_img]);
         }
 
         return Inertia::render('Inbox', [
@@ -84,6 +96,16 @@ class InboxController extends Controller
             } 
             $to_user = User::Where('id', '=', $message['to_user'])->get();
             $all_messages[$key]['to_user'] = $to_user[0];
+
+            $to_user_profile = $all_messages[$key]['to_user']->profile()->get();
+            $to_user_profile_img_id = $to_user_profile[0]['profile_image'];
+
+            if($to_user_profile_img_id != 0) {
+                $to_user_profile_img = Upload::Where('id', '=', $to_user_profile_img_id)->get();
+            }
+            
+            $to_user_profile_img = $to_user_profile_img[0]['name'];
+            $all_messages[$key]['to_user'] = collect($all_messages[$key]['to_user'])->merge(['profile_picture' => $to_user_profile_img]);
         }
 
         
