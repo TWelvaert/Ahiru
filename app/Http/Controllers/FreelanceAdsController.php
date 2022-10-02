@@ -57,7 +57,7 @@ class FreelanceAdsController extends Controller
                 }
             }
            
-            $profile = Profile::Where('profile_image', '=',$uploadsResult->id)->first();
+            $profile = Profile::Where('profile_image', '=',$collaboration->user_id)->first();
             
             $artist = User::Where('id', '=',$collaboration->user_id)->first();
 
@@ -90,13 +90,13 @@ class FreelanceAdsController extends Controller
         }
 
         $collab = ['collab' => $freelanceAdvertisement, 'upload' => $uploadsResult];
-
-        $user = Auth::user();
-     // dd($collab);
+      
+        $user = $freelanceAdvertisement->user()->get();
+      //dd($user[0]);
         return
             Inertia::render('Advertisement', [
                 'advertisement' => $collab,
-                'user' => $user,
+                'user' => $user[0],
                 // 'uploads' => $uploads_matched,
             ]);
     }
