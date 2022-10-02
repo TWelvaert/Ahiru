@@ -8,12 +8,15 @@
                         <!-- Logo -->
                         <div class="shrink-0 flex items-center">
                             <Link :href="route('landing')">
-                            <img src="../../assets/images/54520cca8c5613dd95fef5fd6a608def.gif" alt="" class="rounded-full m-7 block h-9 w-auto" />
+                            <img src="../../assets/images/54520cca8c5613dd95fef5fd6a608def.gif"
+                                    alt=""
+                                    class="rounded-full m-7 block h-9 w-auto" />
                             </Link>
                         </div>
 
                         <!-- Navigation Links -->
-                        <BreezeNavLink :href="route('home')" :class="{ 'active': $page.url === '/home' }">
+                        <BreezeNavLink :href="route('home')"
+                            :class="{ 'active': $page.url === '/home' }">
                             Home
                         </BreezeNavLink>
                     </div>
@@ -26,7 +29,8 @@
                             Advertisements
                         </BreezeNavLink>
 
-                        <BreezeNavLink class="" :href="route('music')" :class="{ 'active': $page.url === '/music' }">
+                        <BreezeNavLink class="" :href="route('music')"
+                            :class="{ 'active': $page.url === '/music' }">
                             Music
                         </BreezeNavLink>
                     </div>
@@ -61,7 +65,8 @@
 
                                 <template #content>
 
-                                    <BreezeDropdownLink :href="`/profile/${user.slug}`" :class="{ 'active': $page.url === '/profile' }">
+                                    <BreezeDropdownLink :href="`/profile/${user.slug}`"
+                                        :class="{ 'active': $page.url === '/profile' }">
                                         Profile
                                     </BreezeDropdownLink>
                                     <BreezeDropdownLink :href="route('inbox')"
@@ -152,7 +157,7 @@
 <script>
 
 var i = 0;
-var txt = 'Hey Creator how is your day?'; /* The text */
+var txt = 'Hey how is your day?'; /* The text */
 var speed = 150; /* The speed/duration of the effect in milliseconds */
 
 export default {
@@ -189,7 +194,7 @@ export default {
             if(this.profile != 0) {
                 document.querySelector('#headerProfilePicture').src = '/uploads/'+this.profile;
             }
-            
+
         })
         .catch(function (error) {
             console.log(error);
