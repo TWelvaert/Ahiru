@@ -1,6 +1,6 @@
 <script setup>
 import Dashboard from "@/Pages/Dashboard.vue";
-import { Head, Link, useForm } from "@inertiajs/inertia-vue3";
+import { Head, useForm } from "@inertiajs/inertia-vue3";
 import BreezeButton from "@/Components/Button.vue";
 import BreezeCheckbox from "@/Components/Checkbox.vue";
 import BreezeLabel from "@/Components/Label.vue";
@@ -8,15 +8,14 @@ import Header from "@/Components/Header.vue";
 //import Pagination from "@/Components/Pagination.vue";
 import moment from "moment";
 import { ref } from "vue";
-//import { Link } from "@inertiajs/inertia-vue3";
+import { Link } from "@inertiajs/inertia-vue3";
 import { Inertia } from "@inertiajs/inertia";
 import { watch } from "vue";
 
 let data = defineProps({
     user: Array,
     categories: Array,
-    freelance_advertisements: Array,
-    collabs: Object
+    collabs: Array
 });
 
 let search = ref("");
@@ -76,14 +75,17 @@ watch(search, (value) => {
             "
                     class="block p-6 max-w-sm bg-white rounded-lg border border-gray-200 shadow-md hover:bg-gray-10 ">
                     <div class="rounded-lg md:flex-row md:max-w-xl">
-                        <img class="h-72" v-bind:src="'uploads/'+ collaboration.uploads['name']" alt="" />
+                        <img class="h-72" v-bind:src="'uploads/'+ collaboration.upload.name" alt="" />
                         <!-- Make dynamic -->
                         <button type="button"
                             class="mb-3 mt-3 inline-flex items-center px-1 py-0 border border-transparent text-sm rounded text-gray-500 bg-gray-100 hover:text-green-300 focus:outline-none transition ease-in-out duration-150">
-                            <img class="h-7 w-7 m-1 rounded-full" src="../../assets/images/waterloop.gif" alt="">
-                            advertisements.user
+                            <a v-bind:href="'profile/' + collaboration.artist.slug">
+                            <!-- <img class="h-7 w-7 m-1 rounded-full" v-bin:src="'uploads/' + collaboration.profile.profile_image" alt=""> -->
+                             {{ collaboration.artist.name }}
+                              </a>
                             <!-- Make dynamic -->
                         </button>
+                        {{ collaboration.profile }}
                         <h5 class="text-2xl pb-6 text-gray-900 dark:text-white">
                             {{ collaboration.collab.title }}
                         </h5>
@@ -94,7 +96,7 @@ watch(search, (value) => {
                         <small>{{ dateTime(collaboration.created_at) }}</small>
                         <div class="mt-4">
                             <BreezeButton name="form1" class="">
-                                <a href="advertisement/create">Read more</a>
+                                <a v-bind:href="'/advertisement/' + collaboration.collab.slug">Read more</a>
                             </BreezeButton>
                         </div>
 
@@ -102,7 +104,7 @@ watch(search, (value) => {
                 </a>
             </div>
 
-        <Pagination :links="collabs.links" />
+        <!-- <Pagination :links="collabs.links" /> -->
     </Dashboard>
 </template>
 <script>

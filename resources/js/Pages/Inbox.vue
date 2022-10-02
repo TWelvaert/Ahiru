@@ -10,9 +10,9 @@
         <main class="flex min-w-full min-h-full mt-8">
 
             <section class="flex flex-col pt-3 w-4/12 bg-gray-50 min-h-full overflow-y-scroll">
-                <label class="px-3">
+                <!-- <label class="px-3">
                     <input class="rounded-lg p-4 bg-gray-100 transition duration-200 focus:outline-none focus:ring-2 w-full" placeholder="Search..." />
-                </label>
+                </label> -->
                 <ul v-if="all_messages" v-for="message in all_messages" class="mt-6">
                     <Link id="user2_profile_link"  class="cursor-pointer" v-bind:href="'/inbox/message/' + message.to_user.slug"> 
                    
@@ -50,11 +50,12 @@
                     </div>
                     <div>
                         <ul class="flex text-gray-400 space-x-4">
-         
                             <li class="w-6 h-6">
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
-                                </svg>
+                                <!-- <Link class="cursor-pointer" v-bind:href="'/inbox/message/'+user2.slug+'/delete'"> 
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                                    </svg>
+                                </Link>  -->
                             </li>
                         </ul>
                     </div>
@@ -74,7 +75,6 @@
                         </div> 
                     </div>
                     <div v-else="!messages">
-    
                         <p v-if="user2" class="text-gray-400 mt-2 text-sm text-center">                      
                             There are no messages in this conversation<br>
                             Write and send a new message to start a new conversation.
@@ -111,9 +111,10 @@
             }
         },
         mounted() {
-
             if(this.user2 != 0) {
-                document.querySelector('#user2_profile_image').src = '/uploads/'+this.user2_profile_img;
+                if(this.user2_profile_img != 0) {
+                    document.querySelector('#user2_profile_image').src = '/uploads/'+this.user2_profile_img;
+                }
                 this.conversationStarted = true;
             }
 

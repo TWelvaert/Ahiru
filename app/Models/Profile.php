@@ -15,5 +15,9 @@ class Profile extends Model
     {
         return $this->hasMany(User::class);
     }
+    public function profileImage()
+    {
+        return $this->hasMany(Upload::class);
+    }
     
 }

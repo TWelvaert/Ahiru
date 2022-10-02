@@ -22,20 +22,20 @@
                 You have 14788 plays last 7 days
                 </span>
             </template>
-            <div class="py-12">
-                <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 rounded-full ">
+            <div class="py-12 ">
+                <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 rounded-full bg-white rounded-lg border border-gray-200 shadow-md">
                     <div
-                        class="bg-gray-600 overflow-hidden sm:rounded-lg ">
+                        class="bg-gray-600 overflow-hidden sm:rounded-lg  ">
                     </div>
                     <table class="min-w-full divide-y divide-gray-200">
                         <tbody class="bg-white divide-y divide-gray-200">
                             <tr v-for="advertisement in collaborations">
-                                <td class="px-6 py-4 whitespace-nowrap">
+                                <td class="px-6 py-4 whitespace-nowrap ">
                                     <div class="flex items-center">
                                         <div
-                                            class="text-sm font-medium text-gray-900"
+                                            class="text-sm font-monument text-gray-900"
                                         >
-                                            <a
+                                            <a 
                                                 v-bind:href="
                                                     '/advertisement/' +
                                                     advertisement.slug
@@ -49,13 +49,13 @@
 
                                 <td class="px-6 py-4 whitespace-nowrap">
                                     <span
-                                        class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-blue-100 text-blue-800"
+                                        class="inline-flex border-spacing-1 border-1 border-color border-gray-400 shadow-sm items-center bg-green-300 hover:bg-black hover:text-white text-black  px-3 rounded-full font-light tracking-widest  transition ease-in-out delay-50 hover:-translate-y-0.5 hover:scale-60 duration-50 antialiased text-sm"
                                     >
                                         Published
                                     </span>
                                 </td>
-                                <td class="text-blue-500 hover:text-blue-600">
-                                    <a
+                                <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                                    <a class="inline-flex items-center bg-white hover:bg-black hover:text-white text-black  px-3 rounded-full font-light tracking-widest  transition ease-in-out delay-50 hover:-translate-y-0.5 hover:scale-60 duration-50 antialiased"
                                         v-bind:href="
                                             '/advertisement/' +
                                              advertisement.slug +
@@ -69,7 +69,7 @@
                                     class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium"
                                 >
 
-                                    <button class="text-xs text-gray-400">
+                                    <button class="inline-flex items-center bg-white hover:bg-black hover:text-white text-black  px-3 rounded-full font-light tracking-widest  transition ease-in-out delay-50 hover:-translate-y-0.5 hover:scale-60 duration-50 antialiased">
                                         <a
                                             v-bind:href="
                                                 '/dashboard/advertisement/delete/' +
