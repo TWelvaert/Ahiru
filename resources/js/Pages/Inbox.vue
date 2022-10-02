@@ -12,16 +12,18 @@
                 <label class="px-3">
                     <input class="rounded-lg p-4 bg-gray-100 transition duration-200 focus:outline-none focus:ring-2 w-full" placeholder="Search..." />
                 </label>
-                <ul class="mt-6">
-                    <li class="py-5 border-b px-3 transition hover:bg-indigo-100">
-                        <a href="#" class="flex justify-between items-center">
-                            <h3 class="text-lg font-semibold">Akhil Gautam</h3>
-                            <p class="text-md text-gray-400">23m ago</p>
-                        </a>
-                        <div class="text-md italic text-gray-400">
-                            You have been invited!
-                        </div>
-                    </li>
+                <ul v-if="all_messages" v-for="message in all_messages" class="mt-6">
+                    <a :href="'/inbox/message/' + message.to_user.slug">
+                        <li class="py-5 border-b px-3 transition hover:bg-indigo-100">
+                            <div class="flex justify-between items-center">
+                                <h3 class="text-lg font-semibold">{{ message.to_user.name}}</h3>
+                                <!-- <p class="text-md text-gray-400">23m ago</p> -->
+                            </div>
+                            <div class="text-md italic text-gray-400">
+                                {{ message.message}}
+                            </div>
+                        </li>
+                    </a>
                 </ul>
             </section>
 
@@ -50,12 +52,12 @@
                     
                     <div v-if="messages" v-for="message in messages">
                         <div v-if="message.user_id == user_auth.id" class="flex justify-end">
-                            <p class="bg-green-300 rounded-full w-fit max-w-3/5 p-2 right-0">
+                            <p class="bg-green-300 rounded-xl w-fit max-w-3/5 p-1 px-2 right-0">
                                 {{ message.message }}
                             </p>
                         </div>
                         <div v-else="message.to_user == user2.id">
-                            <p class="bg-slate-100 rounded-full w-fit max-w-3/5 p-2 left-0">
+                            <p class="bg-slate-100 rounded-xl w-fit max-w-3/5 p-1 px-2 left-0">
                                 {{ message.message }}
                             </p>
                         </div> 
@@ -91,7 +93,7 @@
 <script>
 
     export default {
-        props: ['user_auth', 'messages', 'user2', 'user2_profile_img'],
+        props: ['user_auth', 'all_messages', 'messages', 'user2', 'user2_profile_img'],
         data() {
             return {
                 conversationStarted: false,
