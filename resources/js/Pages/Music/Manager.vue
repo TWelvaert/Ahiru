@@ -8,10 +8,7 @@
 </script>
 
 <template>
-
-
     <Dashboard>
-        
         <div class="flex items-center justify-center flex-col min-w-full relative">
             <span class="text-center bg-black text-white w-full py-4">
                 Welcome to the Music Manager !<br>
@@ -21,36 +18,41 @@
             </span>
           
             <div class="min-h-full flex items-center justify-center flex-col min-w-full relative mt-2">
-                <BreezeButton v-if="!showUploader" type="button" @click="showUploader = true; openUploader('100')">
+                <BreezeButton v-if="showUploader == 999" type="button" @click="showUploader = 100; openUploader('100')">
                     File Selector
                 </BreezeButton> 
-                <div id="100" style="display:none" >
-                    <Uploads class="uploader min-h-full min-w-full left-0 top-0 z-10 absolute" v-if="showUploader"  @close="this.showUploader = false;" @add_files="processFiles" :user_uploads="user_uploads_audio" />
-                 </div>
+               
+                    <Uploads id="100" v-if="showUploader == 100"  @close="this.showUploader = 999;" @add_files="processFiles" :user_uploads="user_uploads_audio" class="uploader min-h-full min-w-full left-0 top-0 z-10 absolute" />
+               
                 <div id="selectedFiles"></div>
             </div>
         </div>
 
         <div id="tracks" class="relative">
             <form @submit="publishForm">
-                <div v-for="upload in this.user_uploads_audio" > 
+
+                <div v-if="this.error != 'None'" class="ml-2">
+                    <b><span class="text-red-800">ERROR: </span></b><span class="text-red-700"> {{ this.error }}</span>
+                </div>
+
+                <div v-for="audio_upload in this.user_uploads_audio" > 
                     <div v-for="(file, index) in selected_music" :key="index"> 
-                        <div v-if="file == upload.id"> 
+                        <div v-if="file == audio_upload.id"> 
                             <div class="flex mt-2">
                                 <div class="relative">
-                                    <img  class="cursor-pointer w-40 h-40 z-0" src="/assets/img/play_audio.png"/>
+                                    <img :id="'coverImage'+index" class="cursor-pointer w-40 h-40 z-0" src="/assets/img/play_audio.png"/>
                                 </div>
                                 <div class="bg-gray-100 text-black rounded-b p-1 w-full truncate">
                                     <div>
                                         <BreezeLabel for="excerpt" value="Track Title" class="block mb-2 uppercase font-bold text-xs text-gray-700 w-full" />
-                                        <input type="text" :id="`title_id${index}`" class="border-0 rounded-full w-1/2" :placeholder="upload['original_name']" />
+                                        <input type="text" :id="`title_id${index}`" class="border-0 rounded-full w-1/2" :placeholder="audio_upload['original_name']" />
                                     </div>
-                                    <button class="bg-black  text-white rounded-full p-4 mt-2 mb-2" v-if="!showUploader" type="button" @click="showUploader = true; openUploader(index)">Change Cover Picture</button>  
+                                    <button class="bg-black  text-white rounded-full p-4 mt-2 mb-2" v-if="showUploader == 999" type="button" @click="showUploader = index; openUploader(index)">Change Cover Picture</button>  
                                 </div>
                                 <div class="min-h-full flex items-center justify-center flex-col mt-2">     
-                                    <div :id="index" style="display:none">
-                                        <Uploads class=" uploader min-h-full min-w-full absolute w-full left-0 top-0 z-10" v-if="showUploader" @close="this.showUploader = false;" @add_files="processFiles" :user_uploads="user_uploads_images" :index="index" />
-                                    </div>
+                             
+                                        <Uploads v-if="showUploader == index" @close="this.showUploader = 999;" @add_files="processFiles" :user_uploads="user_uploads_images" class="uploader min-h-full min-w-full left-0 top-0 z-10 absolute" />
+                                
                                     <div id="selectedFiles"></div>
                                 </div>
                             </div>
@@ -81,6 +83,10 @@
                                 </svg>
                             </button> -->
 
+                            <a :href="'/music/edit/'+ track.id" class="hover:scale-110 text-white opacity-0 transform translate-y-3 group-hover:translate-y-0 group-hover:opacity-100 transition">
+                              Edit
+                            </a>
+
                             <button
                                 class="hover:scale-110 text-white opacity-0 transform translate-y-3 group-hover:translate-y-0 group-hover:opacity-100 transition">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor"
@@ -90,14 +96,9 @@
                                 </svg>
                             </button>
 
-                            <!-- <button
-                                class="hover:scale-110 text-white opacity-0 transform translate-y-3 group-hover:translate-y-0 group-hover:opacity-100 transition">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
-                                    class="bi bi-three-dots" viewBox="0 0 16 16">
-                                    <path
-                                        d="M3 9.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3z" />
-                                </svg>
-                            </button> -->
+                            <a :href="'/music/delete/'+ track.id" class="hover:scale-110 text-white opacity-0 transform translate-y-3 group-hover:translate-y-0 group-hover:opacity-100 transition">
+                              Delete
+                            </a>
                         </div>
                     </div>
                     <div class="p-5">
@@ -107,35 +108,24 @@
                 </div>
             </div>
         </section>  
-
- 
-
-
-
-
-
     </Dashboard>
-
 </template>
 
-
-
 <script>
-
     export default {
             props: ['user', 'user_uploads_audio', 'selected_uploads', 'user_uploads_images', 'music'],
             data (){
                 return {
-                    showUploader: false,
+                    showUploader: 999,
                     current_uploader: 100,
                     uploadsPreview: [],
-                    uploads: [],
-                    csrf: document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
+                    music_uploads: [],
+                    error: 'None',
                 }
             },
             mounted() {
                  if(sessionStorage.getItem('UPLOADS') == 'OPEN') {
-                     this.showUploader = true;
+                     this.showUploader = 999;
                  } 
                 for (let i = 0; i < 6; i++) {
                     if(document.getElementById(`${i}`)) { 
@@ -151,27 +141,29 @@
                 processFiles(files) {
 
                     if(this.current_uploader == 100) {
-                        this.uploads = [];
+                        this.music_uploads = [];
                         this.selected_music = '';
                         files.forEach(id => {
-
                             let trackTitle = '';
-                            
                             let track = {'track_title': trackTitle, 'audio_id': id, 'image_id': 0};
-                            this.uploads.push(track);
+                            this.music_uploads.push(track);
                         });
                         this.selected_music = files; 
                     } else {
                         this.selected_images = '';
                         files.forEach(file => {
-                            this.uploads[this.current_uploader]['image_id'] = file;
+                            this.music_uploads[this.current_uploader]['image_id'] = file;
+                            this.user_uploads_images.forEach(upload => {
+                                if(upload.id == file) {
+                                    document.querySelector('#coverImage' + this.current_uploader).src = `/uploads/${upload.name}`;
+                                }
+                            });
                         });
                     }
 
                     if(this.selected_music) {
                         document.querySelector('#publishButton_Container').style.display = 'block';
                     }
-                   
                    
                 },
                 openUploader(index) {  
@@ -181,39 +173,46 @@
                             document.getElementById(`${i}`).style.display = 'none'; 
                         }    
                     }
-
-                    if(document.getElementById(`100`)) { 
-                        document.getElementById(`100`).style.display = 'none'; 
-                    }   
-
                     this.current_uploader = parseInt(index);
-                    console.log(this.current_uploader);
-
-                    document.getElementById(`${index}`).style.display  = 'block';
                     sessionStorage.setItem("UPLOADS", "OPEN");
                 },
                 publishForm(e) {
 
-                    for (let i = 0; i < 6; i++) {
+                    this.error = 'None';
+
+                    console.log(this.selected_music.length)
+                    let length = this.selected_music.length;
+                    for (let i = 0; i < length; i++) {
+                      
                         let titleInput = document.querySelector('#title_id' + i);
                         if(titleInput) {
-                            this.uploads[i]['track_title'] = titleInput.value;
+                            if(titleInput.value != '') {
+                                this.music_uploads[i]['track_title'] = titleInput.value;
+                            } else {
+                            this.error = ('The input field track title cannot be empty !');
+                            }
                         }
                     }
            
                     e.preventDefault();
-                    let currentObj = this;
-                    axios.post('/music/create', {
-                       uploads: this.uploads,
-                    })
-                    .then(function (response) {
-                        document.querySelector('#tracks').style.display = 'none';
-                     window.location.href = "/music/create"
-                    })
-                    .catch(function (error) {
-                        currentObj.output = error;
-                        console.log(error)
-                    });
+
+                    console.log(this.error)
+
+                    if(this.error == 'None') {
+                        let currentObj = this;
+                        axios.post('/music/create', {
+                        uploads: this.music_uploads,
+                        })
+                        .then(function (response) {
+                            document.querySelector('#tracks').style.display = 'none';
+                            window.location.href = "/music/create"
+                        })
+                        .catch(function (error) {
+                            currentObj.output = error;
+                            console.log(error)
+                        });
+                    }
+
                 },
             }
         }

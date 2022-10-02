@@ -43,7 +43,7 @@
 
                                         <button type="button"
                                             class="font-momentum inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-full text-gray-500 bg-white hover:text-gray-700 focus:outline-none transition ease-in-out duration-150">
-                                            <img class="h-7 w-7 m-1 rounded-full"
+                                            <img id="headerProfilePicture" class="h-7 w-7 m-1 rounded-full"
                                                 src="../../assets/images/waterloop.gif" alt="">
                                                 {{ user.name}}
                                             <svg class="ml-2 -mr-0.5 h-4 w-4" xmlns="http://www.w3.org/2000/svg"
@@ -64,9 +64,9 @@
                                     <BreezeDropdownLink :href="`/profile/${user.slug}`" :class="{ 'active': $page.url === '/profile' }">
                                         Profile
                                     </BreezeDropdownLink>
-                                    <BreezeDropdownLink :href="route('likes')"
-                                        :class="{ 'active': $page.url === '/likes' }">
-                                        Likes
+                                    <BreezeDropdownLink :href="route('inbox')"
+                                        :class="{ 'active': $page.url === '/inbox' }">
+                                        Inbox
                                     </BreezeDropdownLink>
                                     <BreezeDropdownLink :href="route('following')"
                                         :class="{ 'active': $page.url === '/following' }">
@@ -109,7 +109,7 @@
 
                 </div>
 
-              
+
 
 
         <div :class="{'block': showingNavigationDropdown, 'hidden': ! showingNavigationDropdown}" class="sm:hidden">
@@ -135,7 +135,7 @@
     </nav>
 
 
-  
+
 
 </template>
 <script setup>
@@ -160,17 +160,15 @@ export default {
     data() {
         return {
             user: [],
+            profile: [],
             showingNavigationDropdown: false,
         }
     },
-    mounted() {
-        axios.get('/user_data').then((response) => {
-            this.user = response.data.user;
-        })
-            .catch(function (error) {
+    methods() {
 
-                console.log(error);
-            });
+    },
+    mounted() {
+
         typeWriter();
         function typeWriter() {
             if (i < txt.length) {
@@ -183,6 +181,20 @@ export default {
             }
         }
     },
+    beforeMount() {
+        axios.get('/user_data').then((response) => {
+            this.user = response.data.user;
+            this.profile = response.data.profile;
+
+            if(this.profile != 0) {
+                document.querySelector('#headerProfilePicture').src = '/uploads/'+this.profile;
+            }
+            
+        })
+        .catch(function (error) {
+            console.log(error);
+        });
+}
 }
 </script>
 

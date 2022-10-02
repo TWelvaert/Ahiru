@@ -10,7 +10,7 @@
 </div>
 <div class="m-auto" v-if="flashtype === 'success'">
     <div class="m-auto" v-if="message && showNotification">
-        <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative" role="alert">
+        <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative mt-10 z-50" role="alert">
             <strong class="font-bold">SUCCESS! </strong>
             <span class="block sm:inline">{{ message }}</span>
         </div>

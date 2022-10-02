@@ -58,12 +58,22 @@ class User extends Authenticatable
 
     public function profile()
     {
-        return $this->hasMany(Profile::class);
+        return $this->hasOne(Profile::class);
     }
 
     public function music()
     {
         return $this->hasMany(MusicUpload::class);
+    }
+
+    public function messages()
+    {
+        return $this->hasMany(PrivateMessage::class);
+    }
+
+    public function uploads()
+    {
+        return $this->hasMany(Upload::class);
     }
 
 }

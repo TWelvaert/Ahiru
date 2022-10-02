@@ -1,6 +1,7 @@
 <script setup>
     import Dashboard from '@/Pages/Dashboard.vue';
     import BreezeButton from "@/Components/Button.vue";
+    import { Link } from '@inertiajs/inertia-vue3';
     let data = defineProps({
         music: Array,
     });
@@ -16,7 +17,7 @@
             </span>
 
             <BreezeButton name="form1" class="ml-4 mt-4">
-                <a href="/music/create">Music Manager</a>
+                <Link class="cursor-pointer" v-bind:href="'/music/create'"> Music Manager</Link>
             </BreezeButton>
         </div>
 

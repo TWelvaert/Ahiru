@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\NewsArticle;
 use App\Models\NewsCategories;
 use App\Models\User;
+use App\Models\Profile;
 use App\Models\Upload;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Validator;
@@ -20,20 +21,32 @@ class NewsController extends Controller
     public function admin_index()
     {
         $newsArticles = NewsArticle::latest()
-        ->paginate(8);
-                    
+            ->paginate(8);
+
         return Inertia::render('Admin/News/Articles', [
             'news_articles' => $newsArticles,
         ]);
     }
 
     public function show(NewsArticle $news_article)
-    {   
-        $user = Auth::user();
+    {
+
+        $comments = [];
+        foreach ($news_article->comments as $comment) {
+            $user = User::where('id', '=', $comment->user_id)->get();
+            $profile = $user[0]->profile()->get();
+            $commentsArray = ['comment' => $comment, 'profile' => $profile[0], 'user' => $user[0]];
+
+            array_push($comments, $commentsArray);
+        }
+
+
+        $auth = Auth::user();
         return Inertia::render('Article', [
             'news_article' => $news_article,
-            'news_comments' => $news_article->comments,
+            'news_comments' => $comments,
             'news_author' => $news_article->user,
+            'auth' => $auth
         ]);
     }
 
@@ -77,7 +90,7 @@ class NewsController extends Controller
             'excerpt' => ['required', 'string'],
             'description' => ['required', 'string'],
         ])->validate();
- 
+
         Session::flash('message', 'News article has been created!');
         Session::flash('flashtype', 'success');
 
@@ -117,7 +130,7 @@ class NewsController extends Controller
             }
         }
 
-        return Inertia::render('Admin/Update', [
+        return Inertia::render('Admin/News/Update', [
             'title' => $news_article->title,
             'slug' => $news_article->slug,
             'excerpt' => $news_article->excerpt,
@@ -131,7 +144,7 @@ class NewsController extends Controller
         $user = Auth::user();
         $categories_checked = [];
         $categories = $request->categories;
-        
+
         foreach ($categories as $category) {
             if ($category['checked'] == true) {
                 array_push($categories_checked, $category['id']);
