@@ -23,7 +23,7 @@ let data = defineProps({
             <div class="flex flex-col ml-16 mb-2 leading-tight">
                 <span class="font-monument text-4xl">Advertisements</span>
                 <span class="mt-3">These advertisements are the latest added to the Ahiru platform</span>
-                <small class="mt-8">8 Advertisements available</small>
+                <!-- <small class="mt-8">8 Advertisements available</small> -->
             </div>
 
             <!-- Card -->
@@ -72,7 +72,7 @@ let data = defineProps({
             <div class="flex flex-col ml-16 mb-2 leading-tight">
                 <span class="font-monument text-4xl">The Upload</span>
                 <span class="mt-3">Newly posted tracks. Just for you</span>
-                <small class="mt-8">3 Tracks available</small>
+                <!-- <small class="mt-8">3 Tracks available</small> -->
             </div>
 
 
@@ -204,9 +204,9 @@ let data = defineProps({
 
 
             <div class="flex flex-col ml-16 mb-2 leading-tight">
-                <span class="font-monument text-4xl">Popular Artists</span>
-                <span class="mt-3">Most streamed artists of the moment </span>
-                <small class="mt-8">8 Artists available</small>
+                <span class="font-monument text-4xl">Recent Artists</span>
+                <span class="mt-3">Most new artists of the moment </span>
+                <!-- <small class="mt-8">8 Artists available</small> -->
             </div>
 
             <div class="grid grid-cols-4 gap-6 m-16 md:grid-cols-2 lg:grid-cols-4">

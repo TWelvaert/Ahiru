@@ -30,10 +30,23 @@ import { Link, Head } from '@inertiajs/inertia-vue3';
                 <!-- Buttons -->
 
                 <div class="mt-4 space-x-4 z-40 ">
-                    <a href=""
-                        class="bg-green-300 z-30 hover:bg-white text-black py-3 px-5 rounded-full font-light tracking-widest  transition ease-in-out delay-50 hover:-translate-y-0.5 hover:scale-60 duration-50 antialiased">
-                        START BUILDING
-                    </a>
+                    <BreezeButton class="
+                        bg-green-300
+                        hover:bg-white
+                        hover:text-black
+                        text-black
+                        py-3
+                        px-8
+                        rounded-full
+                        font-light
+                        tracking-widest
+                        transition ease-in-out delay-50
+                        hover:-translate-y-0.5 hover:scale-60 duration-50
+                        antialiased
+                        text-center
+                        ">
+                            <Link :href="route('register')">START BUILDING</Link>
+                        </BreezeButton>
                     <a href="#community-page" v-smooth-scroll
                         class="hover:bg-white text-white z-30 hover:text-black border-2 border-solid border-white py-3 px-5 rounded-full font-light tracking-widest  transition ease-in-out delay-50 hover:-translate-y-0.5 hover:scale-60 duration-50 antialiased">
                         WHY AHIRU?
