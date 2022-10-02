@@ -93,7 +93,7 @@ watch(search, (value) => {
                         <small>{{ dateTime(collaboration.created_at) }}</small>
                         <div class="mt-4">
                             <BreezeButton name="form1" class="">
-                                <a href="advertisement/create">Read more</a>
+                                <a v-bind:href="'/advertisement/' + advertisement.collab.slug">Read more</a>
                             </BreezeButton>
                         </div>
 
