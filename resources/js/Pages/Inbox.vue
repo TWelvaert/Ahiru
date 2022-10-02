@@ -113,7 +113,9 @@
         mounted() {
 
             if(this.user2 != 0) {
-                document.querySelector('#user2_profile_image').src = '/uploads/'+this.user2_profile_img;
+                if(this.user2_profile_img != 0) {
+                    document.querySelector('#user2_profile_image').src = '/uploads/'+this.user2_profile_img;
+                }
                 this.conversationStarted = true;
             }
 
