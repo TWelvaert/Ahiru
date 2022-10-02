@@ -22,8 +22,8 @@ class HomeController extends Controller
 
         foreach ($users as $user) {
             $profile = $user->profile()->get();
-            $userProfileArray = ['user' => $user, 'profile' => $profile[0]];
-            array_push($userProfileData, $userProfileArray);
+          //  $userProfileArray = ['user' => $user, 'profile' => $profile[0]];
+          //  array_push($userProfileData, $userProfileArray);
         }
 
         return Inertia::render('Home', [
