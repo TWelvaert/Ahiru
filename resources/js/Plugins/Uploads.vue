@@ -57,7 +57,7 @@
                     <div v-for="upload in this.user_uploads" class="mt-4">
                         <div v-if="upload.type == 'audio'" class="w-40 ml-1" @click="e => select(e)" :id="upload.id" :class="{active: isActive}">
                             <header class="bg-gray-100 text-black rounded-t p-1 w-40 truncate text-center flex justify-between">
-                                <span id="play" v-on:click="$callMusicPlayer(upload.name)">Play</span> 
+                                <span id="play" v-on:click="$callMusicPlayer(upload.name, upload.original_name)">Play</span> 
                                 <Link class="cursor-pointer" v-bind:href="`/settings/uploads/delete/${upload.id}`">Delete</Link> 
                             </header>
                             <main class="relative">
