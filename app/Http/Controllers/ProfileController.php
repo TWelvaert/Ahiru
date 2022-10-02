@@ -54,9 +54,9 @@ class ProfileController extends Controller
             array_push($collabs, $collab); 
         }
     
-        $musicUploads = MusicUpload::where('user_id', '=', $user->id)->get();
+        $latest_music = MusicUpload::where('user_id', '=', $user->id)->get();
         
-        foreach ($musicUploads as $key => $track) {
+        foreach ($latest_music as $key => $track) {
             $audio_file = Upload::Where('id', '=', $track->audio_id)->first();
             $image_file = Upload::Where('id', '=', $track->image_id)->first();
             $latest_music[$key] = collect($track)->merge(['image' => $image_file, 'audio' => $audio_file]);
