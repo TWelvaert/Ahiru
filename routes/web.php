@@ -74,6 +74,7 @@ Route::get('/likes', [HomeController::class, 'index_likes'])->middleware(['auth'
 Route::get('/inbox', [InboxController::class, 'index'])->middleware(['auth', 'verified'])->name('inbox');
 Route::get('/inbox/message/{user:slug}', [InboxController::class, 'load_conversation'])->middleware(['auth', 'verified']);
 Route::post('/inbox/message/{user:slug}', [InboxController::class, 'send_message'])->middleware(['auth', 'verified']);
+Route::get('/inbox/message/{user:slug}/delete', [InboxController::class, 'soft_delete_message'])->middleware(['auth', 'verified']);
 
 Route::get('/following', [HomeController::class, 'index_following'])->middleware(['auth', 'verified'])->name('following');
 
