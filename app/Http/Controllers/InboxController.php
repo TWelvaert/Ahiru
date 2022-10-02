@@ -116,7 +116,7 @@ class InboxController extends Controller
         $user_auth_messages = PrivateMessage::Where([['user_id', '=',  $user_auth->id],['to_user', '=', $user->id]])->get();
         $user2_messages = PrivateMessage::Where([['user_id', '=',  $user->id],['to_user', '=', $user_auth->id]])->get();
         $messages = $user_auth_messages->merge($user2_messages);
-        $messages = $messages->sortByDesc('created_at');
+        $messages = $messages->sortBy('created_at');
         $messages = $messages->toArray();
 
         $messages_final = [];
