@@ -119,11 +119,17 @@ class InboxController extends Controller
         $messages = $messages->sortByDesc('created_at');
         $messages = $messages->toArray();
 
+        $messages_final = [];
+
+        foreach ($messages as $key => $message) {
+            array_push($messages_final, $message);
+        }
+
         return Inertia::render('Inbox', [
             'user_auth' => $user_auth,
             'user2' => $user,
             'user2_profile_img' => $user2_profile_img[0]->name,
-            'messages' => $messages,
+            'messages' => $messages_final,
             'all_messages' => $all_messages,
         ]); 
     }
@@ -140,7 +146,6 @@ class InboxController extends Controller
             'user_id' => $user->id,
             'to_user' => $to_user['id'],
             'message' => $message,
-            'all_messages' => $messages,
         ]);
 
         return $request;
