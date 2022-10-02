@@ -34,27 +34,26 @@ class HomeController extends Controller
                     $uploadsResult = $result;
                 }
             }
-           
-            $collab = ['collab' => $collaboration, 'uploads' => $uploadsResult]; 
-            array_push($collabs, $collab);
-           
+
+            $profile = Profile::Where('user_id', '=',$collaboration->user_id)->first();
+            $user = User::Where('id', '=',$collaboration->user_id)->first();
+            $collab = ['user' => $user, 'collab' => $collaboration, 'uploads' => $uploadsResult, 'profile' => $profile]; 
+
+            array_push($collabs, $collab); 
         }
-       // dd($collabs);
-        $userProfileData = [];
+
+        $latestUsers = [];
         foreach ($users as $user) {
             $profile = $user->profile()->get();
-            $userProfileArray = ['user' => $user, 'profile' => $profile, 'collabs' => $collabs];
-            array_push($userProfileData, $userProfileArray);
+            $latestUser = ['user' => $user, 'profile' => $profile];
+            array_push($latestUsers, $latestUser);
         }
-        
-        //dd($userProfileData);
-        
 
         return Inertia::render('Home', [
             'artists' => $users,
-            'userProfileData' => $userProfileData
+            'collabs' => $collabs,
+            'latestUsers' => $latestUsers
         ]);
-
     }
 
     public function index_following()
