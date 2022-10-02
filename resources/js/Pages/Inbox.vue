@@ -1,5 +1,6 @@
 <script setup>
     import Dashboard from "@/Pages/Dashboard.vue";
+    import { Link } from '@inertiajs/inertia-vue3';
 </script>
 
 <template>
@@ -13,17 +14,25 @@
                     <input class="rounded-lg p-4 bg-gray-100 transition duration-200 focus:outline-none focus:ring-2 w-full" placeholder="Search..." />
                 </label>
                 <ul v-if="all_messages" v-for="message in all_messages" class="mt-6">
-                    <a :href="'/inbox/message/' + message.to_user.slug">
-                        <li class="py-5 border-b px-3 transition hover:bg-indigo-100">
-                            <div class="flex justify-between items-center">
-                                <h3 class="text-lg font-semibold">{{ message.to_user.name}}</h3>
+                    <Link id="user2_profile_link"  class="cursor-pointer" v-bind:href="'/inbox/message/' + message.to_user.slug"> 
+                   
+                        <li class="flex gap-2 py-5 border-b px-3 transition hover:bg-indigo-100">
+                            <div class="h-12 w-12 mt-1 rounded-full overflow-hidden">
+                                
+                                <img :src="'/uploads/'+message.to_user.profile_picture" loading="lazy" class="h-full w-full object-cover" />
+                            </div>
+                            <div>
+                                <div class="flex justify-between items-center">
+                                    <h3 class="text-lg font-semibold">{{ message.to_user.name}}</h3>
                                 <!-- <p class="text-md text-gray-400">23m ago</p> -->
+                                </div>
+                                <div class="text-md italic text-gray-400">
+                                    {{ message.message}}
+                                </div>
                             </div>
-                            <div class="text-md italic text-gray-400">
-                                {{ message.message}}
-                            </div>
+
                         </li>
-                    </a>
+                    </Link>
                 </ul>
             </section>
 
@@ -34,7 +43,9 @@
                             <img id="user2_profile_image" src="https://bit.ly/2KfKgdy" loading="lazy" class="h-full w-full object-cover" />
                         </div>
                         <div class="flex flex-col">
-                            <h3 id="user2_name" class="font-semibold text-lg">Akhil Gautam</h3>
+                            <Link id="user2_profile_link"  class="cursor-pointer" v-bind:href="'/profile/'+user2.slug"> 
+                                <h3 id="user2_name" class="font-semibold text-lg">{{ user2.name }}</h3>
+                            </Link> 
                         </div>
                     </div>
                     <div>
@@ -102,7 +113,6 @@
         mounted() {
 
             if(this.user2 != 0) {
-                document.querySelector('#user2_name').innerHTML = this.user2.name;
                 document.querySelector('#user2_profile_image').src = '/uploads/'+this.user2_profile_img;
             }
 
