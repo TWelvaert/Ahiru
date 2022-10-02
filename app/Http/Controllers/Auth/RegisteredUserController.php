@@ -83,9 +83,10 @@ class RegisteredUserController extends Controller
         $profile = $user->profile()->get();
         $profile_image_id = $profile[0]->profile_image;
         $profile_image = 0;
-
+  
         if($profile_image_id > 0) {
             $profile_image = Upload::where('id', '=', $profile_image_id)->get();
+         
             $profile_image = $profile_image[0]->name;
         }
 
