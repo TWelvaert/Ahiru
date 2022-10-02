@@ -17,29 +17,21 @@ class HomeController extends Controller
     {
         $advertisements = FreelanceAdvertisement::orderBy('created_at', 'desc')->take(8)->get();
         $users = User::orderBy('created_at', 'desc')->take(8)->get();
-        
+
         $userProfileData = [];
-        
+
         foreach ($users as $user) {
             $profile = $user->profile()->get();
             $userProfileArray = ['user' => $user, 'profile' => $profile[0]];
             array_push($userProfileData, $userProfileArray);
         }
-        
+
         return Inertia::render('Home', [
             'advertisements' => $advertisements,
             'artists' => $users,
             'userProfileData' => $userProfileData
         ]);
-        
-    }
 
-    public function index_likes()
-    {
-        $user = Auth::user();
-        return Inertia::render('Likes', [
-            'user' => $user
-        ]);
     }
 
     public function index_following()
