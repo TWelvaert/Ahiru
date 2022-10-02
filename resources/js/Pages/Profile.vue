@@ -30,8 +30,10 @@ const submit = () => {
 // console.log(data['user']['slug']);
 </script>
 <template>
+
     <Head title="Profile" />
     <Dashboard>
+
         <div class="container mx-auto my-3 p-3">
             <div class="md:flex no-wrap md:-mx-2">
                 <!-- Left Side -->
@@ -80,25 +82,19 @@ const submit = () => {
                             {{ user.name }}
                         </h3>
 
+
                         <div v-if="auth.id == user.id && auth">
                             <form @submit.prevent="submit">
                                 <div>
-                                    <BreezeLabel
-                                        for="bio"
-                                        value="Bio"
-                                        class="block mb-2 uppercase font-bold text-xs text-gray-700 w-full"
-                                    />
-                                    <TextareaVue
-                                        id="bio"
-                                        type="textarea"
-                                        class="border border-gray-200 p-2 w-full rounded"
-                                        rows="6"
-                                        v-model="form.profile[0]['bio']"
-                                        required
-                                    />
+                                    <BreezeLabel for="bio" value="Bio"
+                                        class="block mb-2 uppercase font-bold text-xs text-gray-700 w-full" />
+                                    <TextareaVue id="bio" type="textarea"
+                                        class="border border-gray-200 p-2 w-full rounded" rows="6"
+                                        v-model="form.profile[0]['bio']" required />
                                     <BreezeInputError class="mt-2" />
                                 </div>
                                 <Button
+
                                     class="inline-flex border-spacing-1 border-1 border-color border-gray-400 shadow-sm items-center bg-green-300 hover:bg-black hover:text-white text-black px-3 rounded-full font-light tracking-widest transition ease-in-out delay-50 hover:-translate-y-0.5 hover:scale-60 duration-50 antialiased ml-4"
                                     name="form"
                                     :class="{ 'opacity-25': form.processing }"
@@ -312,6 +308,7 @@ const submit = () => {
                                 </ul>
                             </div>
                            
+
                         </div>
                         <!-- End of Uploads and Something grid -->
                     </div>
@@ -319,6 +316,7 @@ const submit = () => {
                 </div>
             </div>
         </div>
+
     </Dashboard>
 </template>
 <script>

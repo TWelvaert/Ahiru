@@ -45,28 +45,57 @@
 </template>
 
 <script>
+    import { inject } from 'vue';
 export default {
+    inject:['playMusic'],
     data (){
             return {
                 volume: Number,
                 isShuffle: Boolean,
             }
     },
+    mounted() {
+
+        // if(sessionStorage.getItem("MUSIC_PLAYER") == "OPEN") {
+        //     document.querySelector('#musicPlayer').style.display = 'block';
+
+        //     document.querySelector('#musicPlayer_pauseButton').style.display = 'block';
+        //     document.querySelector('#musicPlayer_playButton').style.display = 'none'; 
+
+        //     let fileName = sessionStorage.getItem("MUSIC_PLAYER_SRC");
+        //     let track_title = sessionStorage.getItem("MUSIC_PLAYER_TITLE");
+        //     let track_img = sessionStorage.getItem("MUSIC_PLAYER_IMG");
+        //     let startTime = sessionStorage.getItem("MUSIC_PLAYER_TIME");
+        //     this.playMusic(fileName, track_title, track_img, startTime)
+        // }
+            
+       
+   
+    },
     install: (app, options) => {
 
-      let isPlaying = false;
-      let audio;
-      let progressBar;
-      let currentTimeTxt;
-      let currentDurationTxt;
-      let currentTime = 0;
+        let isPlaying = false;
+        let audio;
+        let progressBar;
+        let currentTimeTxt;
+        let currentDurationTxt;
+        let currentTime = 0;
 
-      app.config.globalProperties.$callMusicPlayer = (fileName) => 
-      {
-        playMusic(fileName);
-      }
 
-      function playMusic(fileName) {
+    app.config.globalProperties.$callMusicPlayer = (fileName, track_title, track_img, currentTime) => 
+    {
+        playMusic(fileName, track_title, track_img, currentTime);
+    }
+
+    function playMusic(fileName, track_title, track_img, currentTime) 
+    {
+        
+
+
+        if(audio) {
+            audio.src = null;
+        }
+
         let path = `/uploads/${fileName}`;
         console.log(`Audio playing: ${path}`);
 
@@ -90,27 +119,38 @@ export default {
 
         let songs = [
           {
-            title: fileName,
+            title: track_title,
             src: path,
-            img: 'https://www.yardbarker.com/media/b/8/b8601cf5a1ce6be0421f710c8cdf89f05db3dd97/thumb_16x9/GettyImages-74290244.jpg'
+            img: track_img,
+            startTime: currentTime,
           }
         ];
+
+        sessionStorage.setItem("MUSIC_PLAYER", "OPEN");
+
+          
 
         let currentDuration = 0;
         currentTimeTxt = '0:00';
         currentDurationTxt ='0:00';
         let currentSong = songs[0];
         let audio_source = currentSong.src;
+    
         progressBar = document.querySelector("#song-slider")
         progressBar.value = 0;
         audio = new Audio(audio_source);
 
         initProgress()
         audio.play()
-        
+
+        sessionStorage.setItem("MUSIC_PLAYER_TITLE", currentSong.title);
+        sessionStorage.setItem("MUSIC_PLAYER_IMG", currentSong.img);
+        sessionStorage.setItem("MUSIC_PLAYER_SRC", currentSong.src);
+        sessionStorage.setItem("MUSIC_PLAYER_TIME", audio.currentTime);
+
         document.querySelector('#musicPlayer').style.display = 'block';
-        document.querySelector('#songTitle').innerHTML = currentSong.title;
-        document.querySelector('#songCover').src = currentSong.img;
+        document.querySelector('#songTitle').innerHTML = track_title;
+        document.querySelector('#songCover').src = '/uploads/'+currentSong.img;
         document.querySelector('#musicPlayer_pauseButton').style.display = 'block';
         document.querySelector('#musicPlayer_playButton').style.display = 'none';
 
@@ -179,7 +219,7 @@ export default {
 
       app.config.globalProperties.$playMusic = playMusic;
       
-      app.provide("playMusic", {playMusic});  
+      app.provide("playMusic", playMusic);  
      // app.provide('musicPlayerPlugin', options)
       
     }

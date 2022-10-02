@@ -10,11 +10,11 @@
 <template>
     <Dashboard>
         <div class="flex items-center justify-center flex-col">
-            <span class="text-center bg-black text-white w-full py-4">
+            <!-- <span class="text-center bg-black text-white w-full py-4">
                 Welcome on the Music Page !<br>
                 On this page you can find all the latest releases.<br><br>
                 To release and manage your own music, you can use the music manager by clicking on the button below.
-            </span>
+            </span> -->
 
             <BreezeButton name="form1" class="ml-4 mt-4">
                 <Link class="cursor-pointer" v-bind:href="'/music/create'"> Music Manager</Link>
@@ -22,7 +22,7 @@
         </div>
 
         <section class="flex flex-row flex-wrap justify-center gap-4 m-14">
-            <div v-for="track in music">
+            <div v-for="track in music">      
                 <div class="bg-gray-900 shadow-lg rounded p-3">
                     <div class="group relative">
                         <img class="w-full md:w-72  h-52 block rounded" :src="'/uploads/'+track.image_id" alt="" />
@@ -37,8 +37,7 @@
                                 </svg>
                             </button> -->
 
-                            <button
-                                class="hover:scale-110 text-white opacity-0 transform translate-y-3 group-hover:translate-y-0 group-hover:opacity-100 transition">
+                            <button v-on:click="$callMusicPlayer(track.audio_file, track.track_title, track.image_id, 0)" class="hover:scale-110 text-white opacity-0 transform translate-y-3 group-hover:translate-y-0 group-hover:opacity-100 transition">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor"
                                     class="bi bi-play-circle-fill" viewBox="0 0 16 16">
                                     <path
@@ -62,7 +61,7 @@
                     </div>
                 </div>
             </div>
-        </section>  
+        </section>
 
 
 
