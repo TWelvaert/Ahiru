@@ -17,17 +17,13 @@ class HomeController extends Controller
     public function index()
     {
         $collaborations = FreelanceAdvertisement::orderBy('created_at', 'desc')->take(8)->get();
-        $users = User::orderBy('created_at', 'desc')->take(8)->get();
-
         $collabs = [];
         
-       
         foreach ($collaborations as $collaboration) {
 
             $uploads = explode(",", $collaboration->uploads);
             $uploadsResult = [];
             
-
             foreach ($uploads as $upload) {
                 if (strlen($upload) > 0) {
                     $result = Upload::where('id', '=', $upload)->first();
@@ -42,17 +38,8 @@ class HomeController extends Controller
             array_push($collabs, $collab); 
         }
 
-        $latestUsers = [];
-        foreach ($users as $user) {
-            $profile = $user->profile()->get();
-            $latestUser = ['user' => $user, 'profile' => $profile];
-            array_push($latestUsers, $latestUser);
-        }
-
         return Inertia::render('Home', [
-            'artists' => $users,
-            'collabs' => $collabs,
-            'latestUsers' => $latestUsers
+            'collabs' => $collabs, 
         ]);
     }
 

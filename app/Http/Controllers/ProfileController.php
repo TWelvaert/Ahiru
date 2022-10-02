@@ -25,15 +25,13 @@ class ProfileController extends Controller
 
         foreach ($followers as $follow) {
             $profile = $follow->profile()->get();
-
             $followProfileArray = ['follow' => $follow, 'profile' => $profile];
             array_push($followProfileData, $followProfileArray);
         }
         
         $profile = $user->profile()->get();
-
         $auth = Auth::user();
-
+        
         return Inertia::render('Profile',[
             'user' => $user,
             'collaborations' => $collaborations,
