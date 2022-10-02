@@ -4,7 +4,7 @@ import BreezeLabel from "@/Components/Label.vue";
 import TextareaVue from "@/Components/textarea.vue";
 import BreezeInputError from "@/Components/InputError.vue";
 import BreezeButton from "@/Components/Button.vue";
-
+import { Link } from '@inertiajs/inertia-vue3';
 import { Head, useForm } from "@inertiajs/inertia-vue3";
 import Dashboard from "@/Pages/Dashboard.vue";
 import moment from "moment";
@@ -76,12 +76,15 @@ const submit = () => {
                         >
                             Artist
                         </h1>
-                        <h3
-                            class="text-gray-900 font-bold text-xl leading-8 my-1"
-                        >
-                            {{ user.name }}
-                        </h3>
 
+                        <div class="flex justify-between p-2">
+                            <h3 class="text-gray-900 font-bold text-xl leading-8 my-1" >
+                                {{ user.name }}  
+                            </h3>
+                            <Link class="cursor-pointer mt-1" v-bind:href="'/inbox/message/'+user.slug">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-envelope" viewBox="0 0 16 16"> <path d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4Zm2-1a1 1 0 0 0-1 1v.217l7 4.2 7-4.2V4a1 1 0 0 0-1-1H2Zm13 2.383-4.708 2.825L15 11.105V5.383Zm-.034 6.876-5.64-3.471L8 9.583l-1.326-.795-5.64 3.47A1 1 0 0 0 2 13h12a1 1 0 0 0 .966-.741ZM1 11.105l4.708-2.897L1 5.383v5.722Z"/> </svg>
+                            </Link> 
+                        </div>
 
                         <div v-if="auth.id == user.id && auth">
                             <form @submit.prevent="submit">
@@ -137,13 +140,13 @@ const submit = () => {
                         <!-- <span>Following</span> -->
                     </div>
                     <!-- Following card -->
-                    <div
+                    <!-- <div
                         class="block p-6 max-w-sm bg-white rounded-lg border border-gray-200 shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700"
                     >
                         <div
                             class="flex items-center space-x-3 font-semibold text-gray-900 text-xl leading-8"
                         ></div>
-                        <!-- <div class="grid grid-cols-3">
+                      <div class="grid grid-cols-3">
                             <div
                                 v-for="followProfile in followProfileData"
                                 class="text-center my-2"
@@ -163,8 +166,8 @@ const submit = () => {
                                     >{{ followProfile.follow.name }}</a
                                 >
                             </div>
-                        </div> -->
-                    </div>
+                        </div> 
+                    </div>-->
 
                     <!-- End of following card -->
                 </div>
@@ -286,33 +289,35 @@ const submit = () => {
                             >Uploads</span
                         >
                     </div>
-                    <div
-                        class="bg-white block p-6 max-w-sm rounded-lg border border-gray-200 shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700 w-full"
-                    >
-                        <div class="grid grid-cols-2">
-                            <div>
-                                <div
-                                    class="flex items-center space-x-2 font-semibold text-gray-900 leading-8 mb-3"
-                                ></div>
-                                <ul class="list-inside space-y-2">
-                                    
-                                    <li v-for="music in latest_music">
-                                        <div class="text-teal-600">{{ music.track_title }}</div>
-                                        <div class="text-gray-500 text-xs">
-                                           {{ dateTime(music.created_at) }}
-                                        </div>
-                                        <div>
-                                        <button v-on:click="$callMusicPlayer(music.audio.name, music.track_title, music.image.name, 0)">Play</button>
-                                        </div>
-                                    </li>
-                                </ul>
+          
+        
+                    <section class="flex flex-row flex-wrap justify-start gap-4 m-14">
+                        <div v-for="track in latest_music">
+                            <div class="bg-gray-900 shadow-lg rounded p-3">
+                                <div class="group relative">
+                                    <img class="w-full md:w-72  h-52 block rounded" :src="'/uploads/'+track.image.name" alt="" />
+                                    <div class="absolute bg-black rounded bg-opacity-0 group-hover:bg-opacity-60 w-full h-full top-0 flex items-center group-hover:opacity-100 transition justify-evenly">
+                                        <button v-on:click="$callMusicPlayer(track.audio.name, track.track_title, track.image.name, 0)" class="hover:scale-110 text-white opacity-0 transform translate-y-3 group-hover:translate-y-0 group-hover:opacity-100 transition">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor"
+                                                class="bi bi-play-circle-fill" viewBox="0 0 16 16">
+                                                <path
+                                                    d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM6.79 5.093A.5.5 0 0 0 6 5.5v5a.5.5 0 0 0 .79.407l3.5-2.5a.5.5 0 0 0 0-.814l-3.5-2.5z" />
+                                            </svg>
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="p-5">
+                                    <h3 class="text-white text-lg">{{ track.track_title }}</h3>
+                                    <!-- <p class="text-gray-400">Tycho</p> -->
+                                </div>
                             </div>
-                           
-
                         </div>
-                        <!-- End of Uploads and Something grid -->
-                    </div>
-                    <!-- End of profile tab -->
+                    </section>  
+
+
+                              
+                          
+
                 </div>
             </div>
         </div>
