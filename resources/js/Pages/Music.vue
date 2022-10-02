@@ -22,7 +22,7 @@
         </div>
 
         <section class="flex flex-row flex-wrap justify-center gap-4 m-14">
-            <div v-for="track in music">
+            <div v-for="track in music">      
                 <div class="bg-gray-900 shadow-lg rounded p-3">
                     <div class="group relative">
                         <img class="w-full md:w-72  h-52 block rounded" :src="'/uploads/'+track.image_id" alt="" />
@@ -37,8 +37,7 @@
                                 </svg>
                             </button> -->
 
-                            <button
-                                class="hover:scale-110 text-white opacity-0 transform translate-y-3 group-hover:translate-y-0 group-hover:opacity-100 transition">
+                            <button v-on:click="$callMusicPlayer(track.audio_file, track.track_title, track.image_id, 0)" class="hover:scale-110 text-white opacity-0 transform translate-y-3 group-hover:translate-y-0 group-hover:opacity-100 transition">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor"
                                     class="bi bi-play-circle-fill" viewBox="0 0 16 16">
                                     <path
