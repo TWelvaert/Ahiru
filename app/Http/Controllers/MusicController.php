@@ -26,6 +26,9 @@ class MusicController extends Controller
             }
            
             $track->image_id = $image[0]['name'];
+
+            $audio = Upload::where('id', '=', $track->audio_id)->first();
+            $music[$key] = collect($track)->merge(['audio_file' => $audio->name]);
         }
 
         return Inertia::render('Music', [
@@ -60,9 +63,11 @@ class MusicController extends Controller
             if($track->image_id == '0') {
                 $image = Upload::where('id', '=', 90)->get();
             } else {
-                $image = Upload::where('id', '=', $track->image_id)->get();
+                $image = Upload::where('id', '=', $track->image_id)->first();
             }
-            $track->image_id = $image[0]['name'];
+            $track->image_id = $image->name;
+            $audio = Upload::where('id', '=', $track->audio_id)->first();
+            $music[$key] = collect($track)->merge(['audio_file' => $audio->name]);
         }
        
         return Inertia::render('Music/Manager', [
@@ -98,7 +103,6 @@ class MusicController extends Controller
 
         $image = Upload::where('id', '=', $track->image_id)->get();
   
-
         foreach ($user_uploads as $upload) {
             if($upload['type'] == 'image') {
                 array_push($uploads_images, $upload);
