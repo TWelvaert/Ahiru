@@ -32,33 +32,20 @@ class FreelanceAdsController extends Controller
 
     public function advertisements()
     {
-        // $collaborations = FreelanceAdvertisement::all();
-
-        // $uploadsResult = [];
-        // foreach ($collaborations as $collaboration) {
-        //     $uploads = explode(",", $collaboration->uploads);
-
-        //     foreach ($uploads as $upload) {
-        //         if (strlen($upload) > 0) {
-        //             $result = Upload::where('id', '=', $upload)->get();
-        //             array_push($uploadsResult, $result);
-        //         }
-        //     }
-        // }
         $collaborations = FreelanceAdvertisement::query()
-                    ->when(FacadesRequest::input('search'), function ($query, $search) {
-                        $query->where('title', 'like', '%' . $search . '%')
-                            ->OrWhere('description', 'like', '%' . $search . '%');
-                    })->paginate(10)
-                    ->withQueryString();
+            ->when(FacadesRequest::input('search'), function ($query, $search) {
+                $query->where('title', 'like', '%' . $search . '%')
+                    ->OrWhere('description', 'like', '%' . $search . '%');
+            })->paginate(30)
+            ->withQueryString();
 
         $collabs = [];
-       
+
         foreach ($collaborations as $collaboration) {
 
             $uploads = explode(",", $collaboration->uploads);
             $uploadsResult = [];
-            
+
 
             foreach ($uploads as $upload) {
                 if (strlen($upload) > 0) {
@@ -66,16 +53,12 @@ class FreelanceAdsController extends Controller
                     $uploadsResult = $result;
                 }
             }
-           
+
             $collab = ['collab' => $collaboration, 'uploads' => $uploadsResult];
-            
+
             array_push($collabs, $collab);
-
         }
-        //dd($collabs);
 
-
-        $collaborations = $collaborations->sortByDesc('created_at');
         $categories = FreelanceCategory::all();
         $user = Auth::user();
         return Inertia::render(
@@ -84,12 +67,6 @@ class FreelanceAdsController extends Controller
                 'user' => $user,
                 'collabs' => $collabs,
                 'categories' => $categories,
-                'freelance_advertisements' => FreelanceAdvertisement::query()
-                    ->when(FacadesRequest::input('search'), function ($query, $search) {
-                        $query->where('title', 'like', '%' . $search . '%')
-                            ->OrWhere('description', 'like', '%' . $search . '%');
-                    })->paginate(20)
-                    ->withQueryString(),
             ]
         );
     }
@@ -97,10 +74,24 @@ class FreelanceAdsController extends Controller
 
     public function show(FreelanceAdvertisement $freelanceAdvertisement)
     {
+        $uploads = explode(",", $freelanceAdvertisement->uploads);
+        $uploadsResult = [];
+
+
+        foreach ($uploads as $upload) {
+            if (strlen($upload) > 0) {
+                $result = Upload::where('id', '=', $upload)->first();
+                $uploadsResult = $result;
+            }
+        }
+
+        $collab = ['collab' => $freelanceAdvertisement, 'uploads' => $uploadsResult];
+
         $user = Auth::user();
+      
         return
             Inertia::render('Advertisement', [
-                'advertisement' => $freelanceAdvertisement,
+                'advertisement' => $collab,
                 'user' => $user,
                 // 'uploads' => $uploads_matched,
             ]);

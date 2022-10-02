@@ -15,7 +15,6 @@ import { watch } from "vue";
 let data = defineProps({
     user: Array,
     categories: Array,
-    freelance_advertisements: Array,
     collabs: Object
 });
 
