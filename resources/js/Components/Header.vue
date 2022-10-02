@@ -68,10 +68,10 @@
                                         :class="{ 'active': $page.url === '/inbox' }">
                                         Inbox
                                     </BreezeDropdownLink>
-                                    <BreezeDropdownLink :href="route('following')"
+                                    <!-- <BreezeDropdownLink :href="route('following')"
                                         :class="{ 'active': $page.url === '/following' }">
                                         Following
-                                    </BreezeDropdownLink>
+                                    </BreezeDropdownLink> -->
                                     <BreezeDropdownLink :href="route('settings/uploads')"
                                         :class="{ 'active': $page.url === '/settings/uploads' }">
                                         Uploads
