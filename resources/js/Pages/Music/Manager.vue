@@ -87,8 +87,7 @@
                               Edit
                             </a>
 
-                            <button
-                                class="hover:scale-110 text-white opacity-0 transform translate-y-3 group-hover:translate-y-0 group-hover:opacity-100 transition">
+                            <button v-on:click="$callMusicPlayer(track.audio_file, track.track_title, track.image_id, 0)" class="hover:scale-110 text-white opacity-0 transform translate-y-3 group-hover:translate-y-0 group-hover:opacity-100 transition">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor"
                                     class="bi bi-play-circle-fill" viewBox="0 0 16 16">
                                     <path
