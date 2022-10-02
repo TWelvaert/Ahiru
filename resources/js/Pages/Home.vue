@@ -6,12 +6,9 @@ import BreezeButton from "@/Components/Button.vue";
 
 
 let data = defineProps({
-    user: Array,
-    artists: String,
-    userProfileData: Array
+    collabs: Array, 
 });
 
-console.log(data['userProfileData']);
 </script>
 
 <template>
@@ -32,12 +29,12 @@ console.log(data['userProfileData']);
             <!-- Card -->
 
             <div class="grid grid-cols-4 gap-6 m-16 md:grid-cols-2 lg:grid-cols-4 ">
-                <a v-for="advertisement in userProfileData" v-bind:href="'/advertisement/' + advertisement.collabs.collab.slug"
-                    class="block p-6 max-w-sm bg-white rounded-lg border border-gray-200 shadow-md hover:bg-gray-10 ">
+                 <a v-for="advertisement in collabs" v-bind:href="'/advertisement/' + advertisement.collab.slug"
+                    class="block p-6 max-w-sm bg-white rounded-lg border border-gray-200 shadow-md hover:bg-gray-10 "> 
                     <div class="rounded-lg md:flex-row md:max-w-xl">
-                        <img class="max-w- mb-3 mx-auto" v-bind:src="'uploads/'+ advertisement.collabs.uploads.name"
+                        <img class="max-w- mb-3 mx-auto" v-bind:src="'uploads/'+ advertisement.uploads.name"
                             alt="">
-                           {{ advertisement.collabs }}
+                           {{ advertisement.collab.title }}
                         <!-- Make dynamic -->
                         <button type="button"
                         
@@ -47,20 +44,20 @@ console.log(data['userProfileData']);
                             {{ advertisement.user.name }}
                             </a>
                            
-                            <!-- Make dynamic -->
+                            Make dynamic
                         </button>
                         <h5 class="text-2xl pb-6 text-gray-900 dark:text-white">
-                            {{ advertisement.collabs.collab.title }}
+                            {{ advertisement.collab.title }}
                         </h5>
                         <p class="line-clamp-5 mb-5 text-gray-500">
-                            {{ advertisement.collabs.collab.description }}
+                            {{ advertisement.collab.description }}
 
                         </p>
                         <hr>
                         <div class="mt-4">
                             <BreezeButton name="form1" class="">
 
-                                <a v-bind:href="'/advertisement/' + advertisement.collabs.collab.slug">Read more</a>
+                                <a v-bind:href="'/advertisement/' + advertisement.collab.slug">Read more</a>
 
                             </BreezeButton>
                         </div>
@@ -215,7 +212,7 @@ console.log(data['userProfileData']);
             </div>
 
             <div class="grid grid-cols-4 gap-6 m-16 md:grid-cols-2 lg:grid-cols-4">
-                <a v-for="userProfile in userProfileData" v-bind:href="
+                <a v-for="userProfile in collabs" v-bind:href="
                     '/profile/' +
                     userProfile.user.slug
                 ">
@@ -242,20 +239,6 @@ console.log(data['userProfileData']);
                             </p>
                         </div>
                     </div>
-                    <!-- <div class="flex justify-center items-center gap-2 my-3">
-                        <div class="font-semibold text-center mx-4">
-                            <p class="text-black">102</p>
-                            <span class="text-gray-400">Posts</span>
-                        </div>
-                        <div class="font-semibold text-center mx-4">
-                            <p class="text-black">102</p>
-                            <span class="text-gray-400">Followers</span>
-                        </div>
-                        <div class="font-semibold text-center mx-4">
-                            <p class="text-black">102</p>
-                            <span class="text-gray-400">Folowing</span>
-                        </div>
-                    </div> -->
             </div>
         </a>
         </div>
