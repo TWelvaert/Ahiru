@@ -114,45 +114,37 @@
 
             if(this.user2 != 0) {
                 document.querySelector('#user2_profile_image').src = '/uploads/'+this.user2_profile_img;
+                this.conversationStarted = true;
             }
 
-
             document.querySelector('#sendButton').addEventListener('click', () => {
-                    let message = document.querySelector('#textArea').value;
-                    let messageField =  document.querySelector('#messageField');
+                let message = document.querySelector('#textArea').value;
+                let messageField =  document.querySelector('#messageField');
 
-                    if(this.conversationStarted == false) {
-                        this.conversationStarted = true;
-                        messageField.innerHTML = '';
-                    }
-  
-                    messageField.innerHTML += `
-                        <div class="flex justify-end">
-                            <p class="bg-green-300 rounded-full w-fit max-w-3/5 p-1 px-2 right-0">
-                                ${message}
-                            </p>
-                        </div>
-                    `;
+                if(this.conversationStarted == false) {
+                    this.conversationStarted = true;
+                    messageField.innerHTML = '';
+                }
 
-                    // messageField.innerHTML += `
-                    //     <div class="flex justify-end">
-                    //         <p class="bg-green-300 rounded-full w-fit max-w-3/5 p-1 px-2 right-0">
-                    //             ${message}
-                    //         </p>
-                    //     </div>
-                    // `;
+                messageField.innerHTML += `
+                    <div class="flex justify-end">
+                        <p class="bg-green-300 rounded-full w-fit max-w-3/5 p-1 px-2 right-0">
+                            ${message}
+                        </p>
+                    </div>
+                `;
 
-                    let currentObj = this;
-                    axios.post(`/inbox/message/${this.user2.slug}`, {
-                        message: message,
-                        to: this.user2,
-                    })
-                    .then(function (response) {
-                    })
-                    .catch(function (error) {
-                        currentObj.output = error;
-                        console.log(error)
-                    });
+                let currentObj = this;
+                axios.post(`/inbox/message/${this.user2.slug}`, {
+                    message: message,
+                    to: this.user2,
+                })
+                .then(function (response) {
+                })
+                .catch(function (error) {
+                    currentObj.output = error;
+                    console.log(error)
+                });
             });
         }
     }
