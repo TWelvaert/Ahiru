@@ -1,11 +1,11 @@
 <script setup>
-import AdminPanelLayout from "@/Layouts/AdminPanelLayout.vue";  
+import AdminPanelLayout from "@/Layouts/AdminPanelLayout.vue";
 import BreezeButton from "@/Components/Button.vue";
 import BreezeInput from "@/Components/Input.vue";
 import BreezeInputError from "@/Components/InputError.vue";
 import BreezeLabel from "@/Components/Label.vue";
 import BreezeCheckbox from "@/Components/Checkbox.vue";
-import TextareaVue from "@/Components/textarea.vue";
+import TextareaVue from "@/Components/Textarea.vue";
 import Uploads from "@/Plugins/Uploads.vue";
 import { Head, useForm } from "@inertiajs/inertia-vue3";
 
@@ -48,7 +48,7 @@ function processFiles(files) {
         selected_files.forEach(file => {
             if(file == upload.id) {
                 uploadsPreview.push(upload);
-            }  
+            }
         });
     });
 
@@ -123,7 +123,7 @@ function processFiles(files) {
             mounted() {
                 if(sessionStorage.getItem('UPLOADS') == 'OPEN') {
                     this.showing = true;
-                } 
+                }
             },
         }
     </script>
